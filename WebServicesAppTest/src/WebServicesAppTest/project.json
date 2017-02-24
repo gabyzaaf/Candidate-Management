@@ -8,7 +8,8 @@
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
-    }
+    },
+    "MySql.Data.Core": "7.0.4-IR-191"
   },
 
   "frameworks": {
