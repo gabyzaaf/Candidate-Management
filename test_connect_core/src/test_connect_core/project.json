@@ -1,0 +1,30 @@
+﻿{
+    "version": "1.0.0-*",
+    "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": true,
+    "copyToOutput": {
+    "include": "appsettings.json"
+    }
+},
+"dependencies": {
+     "Microsoft.Extensions.Configuration": "1.0.0",
+     "Microsoft.Extensions.Configuration.Json": "1.0.0",
+     "Microsoft.EntityFrameworkCore": "1.0.0",
+     "MySql.Data.Core": "7.0.4-IR-191",
+     "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191"
+   },
+"frameworks": {
+     "netcoreapp1.0": {
+     "dependencies": {
+     "Microsoft.NETCore.App": {
+     "type": "platform",
+     "version": "1.0.0"
+  }
+},
+   "imports": [
+      "dnxcore50",
+      "portable-net452+win81"]
+  }
+ }
+}
