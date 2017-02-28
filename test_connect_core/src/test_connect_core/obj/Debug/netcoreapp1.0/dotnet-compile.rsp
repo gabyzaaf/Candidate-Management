@@ -1,5 +1,5 @@
---temp-output:c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\obj\Debug\netcoreapp1.0\
---out:c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\bin\Debug\netcoreapp1.0\test_connect_core.dll
+--temp-output:C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\obj\Debug\netcoreapp1.0\
+--out:C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\bin\Debug\netcoreapp1.0\test_connect_core.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -122,8 +122,11 @@
 --reference:C:\Users\gamelinf\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\gamelinf\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\gamelinf\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
-c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Program.cs
-c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Utilisateur.cs
-c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\UtilisateurContext.cs
-c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\UtilisateurContextFactory.cs
-c:\users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Properties\AssemblyInfo.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Program.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\CandidatLib\Candidat.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\CandidatLib\CandidatContext.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\CandidatLib\CandidatContextFactory.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Properties\AssemblyInfo.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Utilisateur\Utilisateur.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Utilisateur\UtilisateurContext.cs
+C:\Users\gamelinf\documents\visual studio 2015\Projects\test_connect_core\src\test_connect_core\Utilisateur\UtilisateurContextFactory.cs
