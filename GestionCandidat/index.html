@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html ng-app="authentificationApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gestion Candidat - Authentification</title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8" />
+</head>
+<body>
+    <section ng-controller="headerCtrl">
+        <h2>Authentification</h2>
+    </section>
+    <section ng-controller="contentCtrl">
+        <br />
+        <div>
+            <form ng-submit="sendEntry(utilisateur)">
+                <table align="center">
+                    <tr>
+                        <td>Email : </td>
+                        <td><input type="email" name="email" ng-model="utilisateur.email" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Mot de passe : </td>
+                        <td><input type="password" name="mdp" ng-model="utilisateur.password" required /></td>
+                    </tr>
+                </table>
+                <br />
+                <center><input type="submit" value="connexion" /></center>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
