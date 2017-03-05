@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "SampleConnection": "server=localhost;userid=ODBC;pwd=;port=3306;database=test;sslmode=none"
+  }
+}

@@ -12,6 +12,7 @@ namespace TodoApi
     {
         public static void Main(string[] args)
         {
+            
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -20,6 +21,10 @@ namespace TodoApi
                 .Build();
 
             host.Run();
+            // ToDO -> Gerer les packages, trouver solution authorization
+            //      -> Gérer candidat
+           //       -> Compléter au maximum les fonctionnaité et les unirversaliser
+            
         }
     }
 }
