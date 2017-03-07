@@ -4,11 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.Models;
+using System.Security.Cryptography;
+using MySql.Data.MySqlClient.Framework.NetCore10;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TodoApi.Controllers
 {
+   // [Authorize]
     [Route("api/[controller]")]
    // [ApiAuthentificationFilter(true)]  --> filters
+   // [AutoValidateAntiforgeryToken]
     public class UtilisateurController : Controller
     {
         // GET api/Utilisateur
@@ -38,7 +43,7 @@ namespace TodoApi.Controllers
         {
             UtilisateurContextFactory u = new UtilisateurContextFactory();
             var user = new Utilisateur() { Name = name, Mail = mail, Mdp = mdp };
-          //  user.Name = name; user.Mail = mail; user.Mdp = mdp;
+
             u.Add(user);
             return user.Mdp + " a été ajouté";
         }

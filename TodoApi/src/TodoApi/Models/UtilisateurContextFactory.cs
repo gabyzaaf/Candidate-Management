@@ -41,9 +41,9 @@ namespace TodoApi.Models
             return _context.utilisateurs.FirstOrDefault(u => u.Name == name);
         }
 
-        public Utilisateur Get(string name, string pass)
+        public Utilisateur Get(string mail, string pass)
         {
-            return _context.utilisateurs.FirstOrDefault(u => u.Name == name && u.Mdp == pass);
+            return _context.utilisateurs.FirstOrDefault(u => u.Mail == mail && u.Mdp == pass);
         }
 
         public Utilisateur FindById(int _id)
@@ -63,5 +63,20 @@ namespace TodoApi.Models
             _context.utilisateurs.Update(utilisateur);
             _context.SaveChanges();
         }
+
+        public string Authentificate(string mail, string password)
+        {
+            var user = Get(mail, password);
+            if (user != null && user.Id > 0)
+            {
+                Random token = new Random (); 
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                user.TokenId = new string(Enumerable.Repeat(chars, 10).Select(s => s[token.Next(s.Length)]).ToArray());
+                Update(user);
+                return user.TokenId;
+            }
+            return "Couple mail eronné";
+        }
+
     }
 }

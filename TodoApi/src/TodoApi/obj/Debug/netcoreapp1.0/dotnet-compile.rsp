@@ -190,9 +190,9 @@
 --resource:"C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\obj\Debug\netcoreapp1.0\TodoApidotnet-compile.deps.json",TodoApi.deps.json
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Program.cs
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Startup.cs
+C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Controllers\AuthentificateController.cs
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Controllers\CandidatController.cs
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Controllers\UtilisateurController.cs
-C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Controllers\ValuesController.cs
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Models\Candidat.cs
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Models\MyDbContext.cs
 C:\Users\gamelinf\Documents\Visual Studio 2015\Dotnetcore\TodoApi\src\TodoApi\Models\Utilisateur.cs

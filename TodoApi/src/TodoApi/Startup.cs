@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TodoApi.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace TodoApi
 {
@@ -37,7 +39,6 @@ namespace TodoApi
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-
             services.AddMvc();
         }
 
