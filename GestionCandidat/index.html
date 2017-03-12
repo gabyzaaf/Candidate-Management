@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="authentificationApp">
+<html ng-app="gestionCandidatApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gestion Candidat - Authentification</title>
@@ -10,12 +10,11 @@
     <meta charset="utf-8" />
 </head>
 <body>
-    <section ng-controller="headerCtrl">
-        <h2>Authentification</h2>
-    </section>
-    <section ng-controller="contentCtrl">
+    <h2>Authentification</h2>
+    <section ng-controller="verifAuth">
         <br />
         <div>
+            <div ng-view></div>
             <form ng-submit="sendEntry(utilisateur)">
                 <table align="center">
                     <tr>

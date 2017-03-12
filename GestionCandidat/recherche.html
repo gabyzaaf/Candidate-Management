@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html ng-app="gestionCandidatApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gestion Candidat - Recherche</title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8" />
+</head>
+<body>
+    <br/>
+        <h2>Recherche</h2>
+        <br />
+        <div ng-include="'barreMenu.html'"></div>
+        <br />
+        <h3>Recherche Candidat</h3>
+        <br />
+    <section ng-controller="verifRecherche">
+        <div>
+            <form ng-submit="sendCandidat(candidat)">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <strong>
+                                Nom : <input type="text" name="nom" ng-model="candidat.nom" required />
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                Prenom : <input type="text" name="prenom" ng-model="candidat.prenom" required />
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                Telephone : <input type="text" name="telephone" ng-model="candidat.telephone" required />
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                Email : <input type="email" name="email" ng-model="candidat.email" required />
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <center><input type="submit" value="Recherche candidat" /></center>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

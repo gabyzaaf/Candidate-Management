@@ -31,5 +31,13 @@ namespace GestionCandidat
             Authentification auth = new Authentification(email, password);
             return (auth);
         }
+
+        [WebMethod]
+        public Recherche rechercheValue(string nom, string prenom, string telephone, string email, string token)
+        {
+
+            Recherche rech = new Recherche(nom, prenom, telephone, email, token);
+            return (rech);
+        }
     }
 }

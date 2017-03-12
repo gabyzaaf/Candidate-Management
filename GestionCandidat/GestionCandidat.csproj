@@ -112,13 +112,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="authentificationWebService.asmx" />
+    <Content Include="barreMenu.html" />
+    <Content Include="candidat.html" />
     <Content Include="css\style.css" />
     <Content Include="index.html" />
+    <Content Include="menu.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="js\script.js" />
+    <Content Include="recherche.html" />
     <Content Include="scripts\version.json" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\angular.min.js.map" />
@@ -908,6 +912,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recherche.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
