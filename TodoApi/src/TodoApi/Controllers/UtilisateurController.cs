@@ -16,6 +16,7 @@ namespace TodoApi.Controllers
    // [AutoValidateAntiforgeryToken]
     public class UtilisateurController : Controller
     {
+        #region ws utils
         // GET api/Utilisateur
         [HttpGet]
         public IEnumerable<Utilisateur> GetAll()
@@ -37,23 +38,6 @@ namespace TodoApi.Controllers
                 return "Utilisateur introuvable";
         }
 
-        // POST api/utilisateur/add?name=untel&mail=jjjj&mdp=ddddd
-        [HttpPost("add")]
-        public string Post(string name, string mail, string mdp)
-        {
-            UtilisateurContextFactory u = new UtilisateurContextFactory();
-            var user = new Utilisateur() { Name = name, Mail = mail, Mdp = mdp };
-
-            u.Add(user);
-            return user.Mdp + " a été ajouté";
-        }
-
-        // PUT api/utilisateur/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         // DELETE api/utilisateur/delete?name=
         [HttpDelete("delete")]
         public string Delete(string name)
@@ -66,7 +50,41 @@ namespace TodoApi.Controllers
                 return name + " supprimé ";
             }
             else
-                return name + "name est null";
+                return name + "L'utilisateur n'existe pas";
         }
+
+        // GET api/utilisateur/testmdp?mdp=secret
+        [HttpGet("testmdp")]
+        public string TestMDP(string mdp)
+        {
+            UtilisateurContextFactory u = new UtilisateurContextFactory();
+            return u.GetPwdHash(mdp);
+        }
+
+        #endregion
+
+        #region Gestion user
+        // AUTHENTIFICATION  
+        // GET api/utilisateur/Auth?mail=gamelinfabien@gail.com&mdp=kojceoleo8KFKJFEfeE       (attention mdp crypté en entrée)
+        [HttpGet("Auth")]
+        public string Autentification(string mail, string mdp)
+        {
+            UtilisateurContextFactory u = new UtilisateurContextFactory();
+            return u.Authentificate(mail, mdp);
+        }
+
+        //INSCRIPTION
+        // POST api/utilisateur/inscription?name=untel&lastname=truc&mail=jjjj&mdp=ddddd
+        [HttpPost("inscription")]
+        public string Inscription(string name, string mail, string mdp)
+        {
+            UtilisateurContextFactory u = new UtilisateurContextFactory();
+
+            var user = new Utilisateur() { Name = name, Mail = mail, Mdp = mdp };
+
+            u.Add(user);
+            return " User : " + user.Name + " mot de passe : " + mdp;
+        }
+        #endregion
     }
 }
