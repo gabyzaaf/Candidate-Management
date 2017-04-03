@@ -64,7 +64,7 @@ gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', f
         $http(req).then(function (response) {
             $scope.email = response.data.d.email;
             $scope.password = response.data.d.password;
-            $window.location.href = 'candidat.html';
+            $window.location.href = 'coordonnee.html';
         }, (err) => {
             console.log(err);
         });

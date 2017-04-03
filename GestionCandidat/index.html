@@ -6,28 +6,29 @@
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/styleAuth.css">
     <meta charset="utf-8" />
 </head>
 <body>
-    <h2>Authentification</h2>
     <section ng-controller="verifAuth">
         <br />
-        <div>
-            <div ng-view></div>
+        <div class="logo"></div>
+        <div class="login-block">
+            <h1>Authentification</h1>
             <form ng-submit="sendEntry(utilisateur)">
                 <table align="center">
                     <tr>
                         <td>Email : </td>
-                        <td><input type="email" name="email" ng-model="utilisateur.email" required /></td>
+                        <td><input type="email" name="email" ng-model="utilisateur.email" placeholder="Username" id="username" required /></td>
                     </tr>
                     <tr>
                         <td>Mot de passe : </td>
-                        <td><input type="password" name="mdp" ng-model="utilisateur.password" required /></td>
+                        <td><input type="password" name="mdp" ng-model="utilisateur.password" placeholder="Password" id="password" required /></td>
                     </tr>
                 </table>
                 <br />
-                <center><input type="submit" value="connexion" /></center>
+                <button>CONNEXION</button>
             </form>
         </div>
     </section>

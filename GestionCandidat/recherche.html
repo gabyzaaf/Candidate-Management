@@ -6,6 +6,7 @@
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
+    <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
 </head>
@@ -18,34 +19,34 @@
         <h3>Recherche Candidat</h3>
         <br />
     <section ng-controller="verifRecherche">
-        <div>
+        <div class="form-style">
             <form ng-submit="sendCandidat(candidat)">
                 <table align="center">
                     <tr>
                         <td>
                             <strong>
-                                Nom : <input type="text" name="nom" ng-model="candidat.nom" required />
+                                Nom : <input type="text" name="nom" ng-model="candidat.nom" placeholder="Nom.."/>
                             </strong>
                         </td>
                         <td>
                             <strong>
-                                Prenom : <input type="text" name="prenom" ng-model="candidat.prenom" required />
+                                Prénom : <input type="text" name="prenom" ng-model="candidat.prenom" placeholder="Prénom.." />
                             </strong>
                         </td>
                         <td>
                             <strong>
-                                Telephone : <input type="text" name="telephone" ng-model="candidat.telephone" required />
+                                Téléphone : <input type="text" name="telephone" ng-model="candidat.telephone" placeholder="Téléphone.." />
                             </strong>
                         </td>
                         <td>
                             <strong>
-                                Email : <input type="email" name="email" ng-model="candidat.email" required />
+                                Email : <input type="email" name="email" ng-model="candidat.email" placeholder="Email.." />
                             </strong>
                         </td>
                     </tr>
                 </table>
                 <br />
-                <center><input type="submit" value="Recherche candidat" /></center>
+                <center><input type="submit" class="btn" value="Recherche candidat" /></center>
             </form>
         </div>
     </section>

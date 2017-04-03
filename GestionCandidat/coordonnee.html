@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html ng-app="gestionCandidatApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gestion Candidat - Coordonnée</title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8" />
+    <script>
+        function myFunction() {
+            var myWindow = window.open("agenda.html", "", "width=700,height=800");
+        }
+    </script>
+</head>
+<body>
+    <br />
+    <h2>Recherche</h2>
+    <br />
+    <div ng-include="'barreMenu.html'"></div>
+    <br />
+    <table align="center">
+        <tbody>
+            <tr>
+                <td><a href="coordonnee.html">Coordonnée</a></td>
+                <td>|</td>
+                <td><a href="entretien.html">Entretien</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <form ng-submit="">
+        <div class="form-style">
+            <table align="center">
+                <tbody>
+                    <tr>
+                        <td>*Nom : </td>
+                        <td><input type="text" name="nom" /></td>
+                        <td>*Prenom : </td>
+                        <td><input type="text" name="prenom" /></td>
+                    </tr>
+                    <tr>
+                        <td>*Email : </td>
+                        <td><input type="email" name="email" /></td>
+                        <td>*Sexe : </td>
+                        <td>
+                            <select name="sexe">
+                                <option value="Homme" selected>Homme</option>
+                                <option value="Femme">Femme</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>*Téléphone :</td>
+                        <td><input type="tel" name="telephone" /></td>
+                        <td>*Code postal : </td>
+                        <td><input type="number" size="5" name="cp" /></td>
+                    </tr>
+                    <tr>
+                        <td>*Action : </td>
+                        <td>
+                            <select name="action">
+                                <option value="interne" selected>Interne</option>
+                                <option value="encours">En cours</option>
+                                <option value="rn">RN</option>
+                                <option value="troprelance">Trop relancé</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="etranger">Etranger</option>
+                                <option value="aappeler">A appeler</option>
+                                <option value="arelancerlkd">A relancer LKD</option>
+                                <option value="arelancermail">A relancer MAIL</option>
+                                <option value="pae">PAE</option>
+                                <option value="pi">PI</option>
+                                <option value="hcjunior">HC junior</option>
+                                <option value="hcsenior">HC senior</option>
+                                <option value="hclangue">HC Langue</option>
+                                <option value="hcpasdev">HC pas Dev</option>
+                                <option value="hcpasmsft">HC pas MSFT</option>
+                                <option value="hcgeo">HC Géo</option>
+                                <option value="hcbacmoins5">HC BAC-5</option>
+                            </select>
+                        </td>
+                        <td>Source : </td>
+                        <td><input type="url" name="url" /></td>
+                    </tr>
+                    <tr>
+                        <td>Année de diplôme : </td>
+                        <td><input type="number" size="4" name="anneedisplome" /></td>
+                        <td>NS : </td>
+                        <td><input type="text" name="ns" /></td>
+                    </tr>
+                    <tr>
+                        <td>Note : </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><textarea name="note" cols="100" rows="4" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Compte Rendu (CR) : </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><textarea name="cr" cols="100" rows="4" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Date : </td>
+                        <td><input type="date" name="date" /></td>
+                        <td>Heure : </td>
+                        <td><input type="time" name="heure" /></td>
+                        <td>
+                            <select name="template">
+                                <option value="approcheLinkedIn" selected>Approche LinkedIn</option>
+                                <option value="rdv">Rendez-vous</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><textarea name="templatemsg" cols="100" rows="4" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="left"><input type="file" value="CV" name="cv" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</form>
+        <br />
+        <!--
+        <div ng-controller="verifRecherche">
+            <p>{{/nom}}</p>
+            <p>{{/prenom}}</p>
+            <p>{{/telephone}}</p>
+            <p>{{/email}}</p>
+        </div>
+        -->
+</body>
+</html>

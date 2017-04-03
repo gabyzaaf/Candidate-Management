@@ -111,12 +111,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="agenda.html" />
+    <Content Include="agendaajouter.html" />
+    <Content Include="agendamodifier.html" />
     <Content Include="authentificationWebService.asmx" />
     <Content Include="barreMenu.html" />
-    <Content Include="candidat.html" />
+    <Content Include="coordonnee.html" />
     <Content Include="css\style.css" />
+    <Content Include="css\styleAgenda.css" />
+    <Content Include="css\styleAuth.css" />
+    <Content Include="entretien.html" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\fond_1.jpg" />
+    <Content Include="images\logoGC.png" />
+    <Content Include="images\logoGCpetit.png" />
     <Content Include="index.html" />
     <Content Include="menu.html" />
+    <Content Include="message.html" />
+    <Content Include="messagemodifier.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -914,6 +926,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recherche.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
