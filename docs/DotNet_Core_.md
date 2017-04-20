@@ -1,1 +1,29 @@
 # This is the DotNet Core documentation
+
+1. Configuration File.
+
+
+## Configuration File.
+For configure your application you need to configure the appsettings.json file : 
+
+``` json
+{   
+  "logPath":"/Users/zaafranigabriel/Documents/5A/Projet Annuel/realisation/WS/logs/test2.log",
+  "pluginPath":"/Users/zaafranigabriel/Documents/5A/Projet Annuel/plugin/",
+  "ErrorCode": {
+      "FR":{
+        "1":"Le token de l'utilisateur existe deja",
+        "2":"L'utilisateur existe deja"
+      },
+      "EN":{
+        "1":"The token already exist",
+        "2":"User already exist"
+      }
+  },
+  "email":"juliec17@gmail.com",
+  "SQL":{
+    "connection":"server=localhost;user id=root;password=pwd;persistsecurityinfo=True;port=3306;database=candidate_management;SslMode=None"
+  }
+}
+```
+
