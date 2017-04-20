@@ -16,7 +16,7 @@ namespace API.wsUser
     [Route("api/[controller]")]
     public class UserController : Controller{
 
-        [HttpPost("Candidates/sql/")]
+        [HttpPost("admin/auth/")]
         public IActionResult  GetAuthentification([FromBody]User user){
             try{
                 checkUser(user);
