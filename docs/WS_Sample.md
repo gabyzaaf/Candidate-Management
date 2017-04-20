@@ -9,5 +9,9 @@ The webservice is a ***POST***
 
 3. The parameters are : 
 
+|  email | password   |
+|---|---| 
+|  string |  string |
+
 
 
