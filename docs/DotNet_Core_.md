@@ -8,8 +8,8 @@ For configure your application you need to configure the appsettings.json file :
 
 ``` json
 {   
-  "logPath":"/Users/zaafranigabriel/Documents/5A/Projet Annuel/realisation/WS/logs/test2.log",
-  "pluginPath":"/Users/zaafranigabriel/Documents/5A/Projet Annuel/plugin/",
+  "logPath":"the file path for your log",
+  "pluginPath":"the file path for your plugin",
   "ErrorCode": {
       "FR":{
         "1":"Le token de l'utilisateur existe deja",
@@ -20,9 +20,9 @@ For configure your application you need to configure the appsettings.json file :
         "2":"User already exist"
       }
   },
-  "email":"juliec17@gmail.com",
+  "email":"email where will be send the notification",
   "SQL":{
-    "connection":"server=localhost;user id=root;password=pwd;persistsecurityinfo=True;port=3306;database=candidate_management;SslMode=None"
+    "connection":"server=localhost;user id=database_user;password=pwd_database;persistsecurityinfo=True;port=3306;database=database_name;SslMode=None"
   }
 }
 ```
