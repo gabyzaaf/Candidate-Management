@@ -13,5 +13,14 @@ The webservice is a ***POST***
 |---|---| 
 |  string |  string |
 
+4. Sample Result : 
 
+``` json
+{   
+  "sessionId": "27",
+  "name": null, 
+  "email": "juliec17@gmail.com",
+  "password": null
+}
+```
 
