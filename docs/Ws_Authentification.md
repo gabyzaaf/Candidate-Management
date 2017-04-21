@@ -24,3 +24,11 @@ The webservice is a ***POST***
 }
 ```
 
+5. If the error is about credentials : 
+
+``` json
+{
+  "code":1,
+  "content":"email ou password incorrect",
+  "success":false	
+}
