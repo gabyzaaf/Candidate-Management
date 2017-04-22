@@ -11,15 +11,12 @@ namespace GestionCandidat
         public string prenom { get; set; }
         public string telephone { get; set; }
         public string email { get; set; }
-        public string token { get; set; }
 
-        public Recherche(string rnom, string rprenom, string rtelephone, string remail, string rtoken)
+        public Recherche(string rnom, string rprenom, string rtelephone, string remail)
         {
             nom = rnom;
             prenom = rprenom;
             telephone = rtelephone;
-            email = remail;
-            token = rtoken;
         }
     }
 }

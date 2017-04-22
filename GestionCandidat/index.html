@@ -4,13 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gestion Candidat - Authentification</title>
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/styleAuth.css">
     <meta charset="utf-8" />
 </head>
-<body>
+<body ng-controller="app">
+    {{ myCookieVal }}
+    <input type="text" ng-model="cookieVal" />
+    <button ng-click="setCookie(cookieVal)">test connection</button>
     <section ng-controller="verifAuth">
         <br />
         <div class="logo"></div>
@@ -25,6 +29,9 @@
                     <tr>
                         <td>Mot de passe : </td>
                         <td><input type="password" name="mdp" ng-model="utilisateur.password" placeholder="Password" id="password" required /></td>
+                    </tr>
+                    <tr>
+                        <td>{{errtxt}}</td>
                     </tr>
                 </table>
                 <br />

@@ -33,10 +33,10 @@ namespace GestionCandidat
         }
 
         [WebMethod]
-        public Recherche rechercheValue(string nom, string prenom, string telephone, string email, string token)
+        public Recherche rechercheValue(string nom, string prenom, string telephone, string email)
         {
 
-            Recherche rech = new Recherche(nom, prenom, telephone, email, token);
+            Recherche rech = new Recherche(nom, prenom, telephone, email);
             return (rech);
         }
     }
