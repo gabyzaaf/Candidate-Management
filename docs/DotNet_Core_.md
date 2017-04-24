@@ -28,5 +28,5 @@ For configure your application you need to configure the appsettings.json file :
 ```
 
 ## Mandatory
-You need to add the *** file path for the logPath ***, if the file is not created he will be created.  
+You need to add the ***file path for the logPath***, if the file is not created he will be created.  
 
