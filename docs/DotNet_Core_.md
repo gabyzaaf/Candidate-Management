@@ -1,7 +1,7 @@
 # This is the DotNet Core documentation
 
 1. Configuration File.
-
+2. Mandatory
 
 ## Configuration File.
 For configure your application you need to configure the appsettings.json file : 
@@ -26,4 +26,7 @@ For configure your application you need to configure the appsettings.json file :
   }
 }
 ```
+
+## Mandatory
+You need to add the *** file path for the logPath ***, if the file is not created he will be created.  
 
