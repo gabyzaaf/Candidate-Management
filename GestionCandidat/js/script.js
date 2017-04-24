@@ -63,11 +63,22 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
         }, (err) => {
             console.log("ceci est une erreur" + err);
         });
-
-        
-
     }
 }]);
+
+
+gestionCandidatApp.controller('rechercheJson', function ($scope, $http) {
+    $http.get('json/responseRecherche.json')
+         .then(function (response) {
+             $scope.todos = response.data;
+             if (response.data !== null) {
+                 $scope.todos = response.data;
+             } else {
+                 console.log("In the error");
+             }
+         });
+});
+
 
 gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
