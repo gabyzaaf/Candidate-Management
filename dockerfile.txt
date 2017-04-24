@@ -1,0 +1,52 @@
+ #installer docker
+ #lancer cette ligne cmd : 
+ #docker run microsoft/dotnet-samples
+ #pour créer le dockerfile : le créer sous linux SANS extension
+ #vous le nommez 'dockerfile' tout simplement (un dockerfile par projet et donc par repertoire)
+ 
+ #récupère ton environnement (ici dotnet)
+ FROM microsoft/dotnet:runtime
+
+ #le propriètaire du container
+ MAINTAINER gamelinfabien@gmail.com
+ 
+ #créer le fichier de récupération jusqu'au prochain RUN (votr chemin)
+ WORKDIR /git/imagedocker
+ 
+ #récupèration des fichiers nécéssaires au build
+ COPY /git/imagedocker/src/MailSender/MailSender.xproj .
+ RUN dotnet restore
+
+ 
+ COPY . .
+ RUN dotnet publish -c Release -o MailSender
+
+ #ensuite dans la console Build l'image de ton projet 
+ $ docker build -t /git/imagedocker/dockerfile 
+
+ #ensuite dans la console pour run l'application dans docker
+ docker run -it --rm MailSender
+
+ 
+ #Créer un container avec ton image dedans
+ $ docker create --gestioncandidat build-cont build-image
+ $ docker cp build-cont:/out ./bin/Release/le nom de ton PublishOutput
+
+ #########################################################################################################
+ # Partie cron :  
+ #EDIT : http://www.cyber-neurones.org/2016/04/docker-le-quinzieme-pas/ cette doc explique que crontab
+ peut être utilisé indépendamment du dockerfile et être appelé par la suite tout simplement 
+ #installer cron dans l'image
+ RUN apt-get update && apt-get -y install cron
+
+ # Ajouter son fichier cron dans le repertoire
+ ADD files/crontab /app/crontab
+
+ RUN crontab /app/crontab
+ ADD files/bin/start-cron.sh /usr/bin/start-cron.sh
+ RUN chmod +x /usr/bin/start-cron.sh
+ RUN touch /var/log/cron.log
+ CMD /usr/bin/start-cron.sh
+ 
+# Run the command on container startup
+CMD cron && tail -f /var/log/cron.log

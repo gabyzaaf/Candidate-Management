@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/utilisateur",
+      "launchUrl": "api/utilisateur/Auth?mail=gamelinfabien@gmail.com&mdp=5EBE2294ECD0E0F08EAB7690D2A6EE69",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "TodoApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/api/utilisateur",
+      "launchUrl": "api/utilisateur/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

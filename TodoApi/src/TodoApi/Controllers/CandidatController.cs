@@ -37,7 +37,7 @@ namespace TodoApi.Controllers
 
         }
 
-        // POST api/candidat/add?name=untel&lastname=jean&mail=jjjj@gmail.com
+        // POST api/candidat/add?name=zaafrani&lastname=Gabriel&mail=gabyzaf@gmail.com     //A voir pour le reste des champs en base
         [HttpPost("add")]
         public string Post(string name, string mail, string lastname)
         {

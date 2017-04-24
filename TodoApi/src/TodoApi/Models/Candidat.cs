@@ -14,5 +14,7 @@ namespace TodoApi.Models
         public string LastName { get; set; }
         public string Mail { get; set; }
 
+        // A voir pour le reste des champs en basex
+
     }
 }

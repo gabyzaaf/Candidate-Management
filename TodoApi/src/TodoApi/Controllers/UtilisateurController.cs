@@ -64,8 +64,9 @@ namespace TodoApi.Controllers
         #endregion
 
         #region Gestion user
+
         // AUTHENTIFICATION  
-        // GET api/utilisateur/Auth?mail=gamelinfabien@gail.com&mdp=kojceoleo8KFKJFEfeE       (attention mdp crypté en entrée)
+        // GET api/utilisateur/Auth?mail=gamelinfabien@gmail.com&mdp=5EBE2294ECD0E0F08EAB7690D2A6EE69      (attention mdp crypté en entrée)
         [HttpGet("Auth")]
         public string Autentification(string mail, string mdp)
         {
