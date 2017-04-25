@@ -2,13 +2,16 @@
  #lancer cette ligne cmd : 
  #docker run microsoft/dotnet-samples
  #pour créer le dockerfile : le créer sous linux SANS extension
- #vous le nommez 'dockerfile' tout simplement (un dockerfile par projet et donc par repertoire)
+ #vous pouvez le nommer 'dockerfile' tout simplement (un dockerfile par projet et donc par document)
  
  #récupère ton environnement (ici dotnet)
  FROM microsoft/dotnet:runtime
-
- #le propriètaire du container
+ 
+  #le propriètaire du container
  MAINTAINER gamelinfabien@gmail.com
+ 
+ #NE pas oublier d'installer les packages nécessaires
+ RUN apt-get update && apt-get install -y *nompackage*
  
  #créer le fichier de récupération jusqu'au prochain RUN (votr chemin)
  WORKDIR /git/imagedocker
@@ -22,10 +25,10 @@
  RUN dotnet publish -c Release -o MailSender
 
  #ensuite dans la console Build l'image de ton projet 
- $ docker build -t /git/imagedocker/dockerfile 
+ $ docker build -t /git/imagedocker/MailSender
 
  #ensuite dans la console pour run l'application dans docker
- docker run -it --rm MailSender
+ docker run -it --rm /git/imagedocker/MailSender
 
  #########################################################################################################
  #Créer un container avec ton image dedans
@@ -36,17 +39,20 @@
  # Partie cron :  
  #EDIT : http://www.cyber-neurones.org/2016/04/docker-le-quinzieme-pas/ cette doc explique que crontab
  peut être utilisé indépendamment du dockerfile et être appelé par la suite tout simplement 
- #installer cron dans l'image
- RUN apt-get update && apt-get -y install cron
-
- # Ajouter son fichier cron dans le repertoire
- ADD files/crontab /app/crontab
-
- RUN crontab /app/crontab
- ADD files/bin/start-cron.sh /usr/bin/start-cron.sh
- RUN chmod +x /usr/bin/start-cron.sh
- RUN touch /var/log/cron.log
- CMD /usr/bin/start-cron.sh
+ DONC pour utiliser crontab en console :
  
-# Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
+ #modifie ton fichier cron présent dans /etc/ et qui contient la liste de tes jobs cron qui tournent
+ sudo nano /etc/crontab
+ 
+ #rajoute la ligne de ton choix par exemple :
+ 00 12,16 * * * fabien /home/fabien/git/imagedocker/MailSender
+ 
+ #--> cette commande va lancer l'image docker tout les jours à midi et à 16h
+ 
+ #dans un tuto il est proposé de lancer la commande CRON lors du startup du container
+ #donc dans le dockerfile :
+ CMD cron && tail -f /var/log/cron.log (avant le build évidemment)
+ 
+ 
+
+
