@@ -30,16 +30,15 @@
  #ensuite dans la console pour run l'application dans docker
  docker run -it --rm /git/imagedocker/MailSender
 
- #########################################################################################################
- #Créer un container avec ton image dedans
- $ docker create --gestioncandidat build-cont build-image
- $ docker cp build-cont:/out ./bin/Release/le nom de ton PublishOutput
+
 
  #########################################################################################################
  # Partie cron :  
  #EDIT : http://www.cyber-neurones.org/2016/04/docker-le-quinzieme-pas/ cette doc explique que crontab
  peut être utilisé indépendamment du dockerfile et être appelé par la suite tout simplement 
- DONC pour utiliser crontab en console :
+ DONC pour utiliser crontab en console 
+ #CAR pour lancer CRON dans le dockerfile il faudrait être dans l'environnement linux OR on est dans l'environnement 
+ dotnet et je ne sais pas encore si l'on peut faire tourner deux env en même temsp (ça m'étonnerait)
  
  #modifie ton fichier cron présent dans /etc/ et qui contient la liste de tes jobs cron qui tournent
  sudo nano /etc/crontab
@@ -49,10 +48,18 @@
  
  #--> cette commande va lancer l'image docker tout les jours à midi et à 16h
  
- #dans un tuto il est proposé de lancer la commande CRON lors du startup du container
- #donc dans le dockerfile :
- CMD cron && tail -f /var/log/cron.log (avant le build évidemment)
+ #solution permettant d'ajouter le fichier cron (préalablement créee en ligne de commande) au container
+ #(non testé)
+ ADD /etc/crontab /home/fabien/git/imagedocker/crontab
+ RUN crontab /home/fabien/git/imagedocker/crontab
+ ADD files/bin/start-cron.sh /usr/bin/start-cron.sh
+ RUN chmod +x /usr/bin/start-cron.sh
+ RUN touch /var/log/cron.log
  
- 
+  #########################################################################################################
+ # PARTIE DIVERS
+ #Créer un container avec ton image dedans
+ $ docker create --gestioncandidat build-cont build-image
+ $ docker cp build-cont:/out ./bin/Release/le nom de ton PublishOutput
 
 
