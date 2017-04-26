@@ -68,15 +68,23 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
 
 
 gestionCandidatApp.controller('rechercheJson', function ($scope, $http) {
-    $http.get('json/responseRecherche.json')
-         .then(function (response) {
-             $scope.todos = response.data;
-             if (response.data !== null) {
+    $scope.sendCandidat = function (candidat) {
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:55404/authentificationWebService.asmx/rechercheValue',
+            responseType: "json",
+            data: { nom: candidat.nom, prenom: candidat.prenom, telephone: candidat.telephone, email: candidat.email }
+        }
+        $http.get('json/responseRecherche.json')
+             .then(function (response) {
                  $scope.todos = response.data;
-             } else {
-                 console.log("In the error");
-             }
-         });
+                 if (response.data !== null) {
+                     $scope.todos = response.data;
+                 } else {
+                     console.log("In the error");
+                 }
+             });
+    }
 });
 
 
