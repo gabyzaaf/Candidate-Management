@@ -4,20 +4,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gestion Candidat - Recherche</title>
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
+    <script>
+        function trinfo(){
+
+        };
+    </script>
 </head>
-<body>
-    <br/>
-        <h2>Recherche</h2>
-        <br />
-        <div ng-include="'barreMenu.html'"></div>
-        <br />
-        <h3>Recherche Candidat</h3>
-        <br />
+
+<body ng-controller="rechercheJson">
+    <br />
+    <h2>Recherche</h2>
+    <br />
+    <div ng-include="'barreMenu.html'"></div>
+    <br />
+    <h3>Recherche Candidat</h3>
+    <br />
     <section ng-controller="verifRecherche">
         <div class="form-style">
             <form ng-submit="sendCandidat(candidat)">
@@ -25,7 +32,7 @@
                     <tr>
                         <td>
                             <strong>
-                                Nom : <input type="text" name="nom" ng-model="candidat.nom" placeholder="Nom.."/>
+                                Nom : <input type="text" name="nom" ng-model="candidat.nom" placeholder="Nom.." />
                             </strong>
                         </td>
                         <td>
@@ -44,14 +51,28 @@
                             </strong>
                         </td>
                     </tr>
-                    <tr>
-                        <td>{{errtxt}}</td>
-                    </tr>
                 </table>
                 <br />
                 <center><input type="submit" class="btn" value="Recherche candidat" /></center>
             </form>
         </div>
     </section>
+    <br />
+    <form ng-submit="sendCandidat(candidat)">
+        <table align="center" border="1" width="500">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="todo in todos">
+                <td>{{todo.nom}}</td>
+                <td>{{todo.prenom}}</td>
+                <td>{{todo.phone}}</td>
+                <td><input type="button" value="Afficher" onclick=""/></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
