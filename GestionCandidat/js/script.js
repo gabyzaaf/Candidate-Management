@@ -58,8 +58,8 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
                 $scope.password = response.data.password;
                 $window.location.href = 'menu.html';
             }
-            
-            
+
+
         }, (err) => {
             console.log("ceci est une erreur" + err);
         });
@@ -67,26 +67,50 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
 }]);
 
 
-gestionCandidatApp.controller('rechercheJson', function ($scope, $http) {
-    $scope.sendCandidat = function (candidat) {
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:55404/authentificationWebService.asmx/rechercheValue',
-            responseType: "json",
-            data: { nom: candidat.nom, prenom: candidat.prenom, telephone: candidat.telephone, email: candidat.email }
-        }
-        $http.get('json/responseRecherche.json')
-             .then(function (response) {
+gestionCandidatApp.controller('rechercheJson', function ($scope, $http, $cookies, $window) {
+    $http.get('json/responseRecherche.json')
+         .then(function (response) {
+             $scope.selectedCar = $cookies.get('emailCandidat');
+             $scope.todos = response.data;
+             if (response.data != null) {
                  $scope.todos = response.data;
-                 if (response.data !== null) {
-                     $scope.todos = response.data;
-                 } else {
-                     console.log("In the error");
-                 }
-             });
+             } else {
+                 console.log("In the error");
+             }
+         });
+    $scope.sendCoordonnee = function () {
+        console.log("allo");
+        var nbSelect = 0;
+        for (var i = 0; i < $scope.todos.length; i++) {
+            if ($scope.todos[i].email == $scope.selectedCar) {
+                nbSelect = i;
+            }
+        }
+        $scope.nomCoor = $scope.todos[nbSelect].nom;
+        $scope.prenomCoor = $scope.todos[nbSelect].prenom;
+        $scope.phoneCoor = $scope.todos[nbSelect].phone;
+        $scope.emailCoor = $scope.todos[nbSelect].email;
+        $scope.cpCoor = $scope.todos[nbSelect].cp;
+        $scope.actionsCoor = $scope.todos[nbSelect].actions;
+        $scope.anneeCoor = $scope.todos[nbSelect].annee;
+        $scope.lienCoor = $scope.todos[nbSelect].lien;
+        $scope.crCallCoor = $scope.todos[nbSelect].crCall;
+        $scope.NSCoor = $scope.todos[nbSelect].NS;
+        $scope.approche_emailCoor = $scope.todos[nbSelect].approche_email;
+        $scope.noteCoor = $scope.todos[nbSelect].note;
+        $scope.linkCoor = $scope.todos[nbSelect].link;
+        $scope.xpNoteCoor = $scope.todos[nbSelect].xpNote;
+        $scope.nsNoteCoor = $scope.todos[nbSelect].nsNote;
+        $scope.jobIdealNoteCoor = $scope.todos[nbSelect].jobIdealNote;
+        $scope.pisteNoteCoor = $scope.todos[nbSelect].pisteNote;
+        $scope.pieCouteNoteCoor = $scope.todos[nbSelect].pieCouteNote;
+        $scope.locationNoteCoor = $scope.todos[nbSelect].locationNote;
+        $scope.EnglishNoteCoor = $scope.todos[nbSelect].EnglishNote;
+        $scope.nationalityNoteCoor = $scope.todos[nbSelect].nationalityNote;
+        $scope.competencesCoor = $scope.todos[nbSelect].competences;
+      
     }
 });
-
 
 gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
@@ -95,7 +119,7 @@ gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', f
             method: 'POST',
             url: 'http://localhost:55404/authentificationWebService.asmx/rechercheValue',
             responseType: "json",
-            data: { nom: candidat.nom, prenom: candidat.prenom, telephone: candidat.telephone, email: candidat.email}
+            data: { nom: candidat.nom, prenom: candidat.prenom, telephone: candidat.telephone, email: candidat.email }
         }
 
         $http(req).then(function (response) {
@@ -103,7 +127,16 @@ gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', f
                 console.log("In the error");
                 $scope.errtxt = response.data.content;
             } else {
+
                 console.log("En attente du cookie");
+                if (candidat.email == $scope.selectedCar) {
+                    console.log("c'est ok")
+                    console.log($scope.selectedCar)
+                    console.log($scope.todos.length)
+                } else {
+                    console.log($scope.selectedCar)
+                    console.log("c'est pas ok")
+                }
                 $scope.sessionId = response.data.sessionId;
                 $scope.name = response.data.name;
                 $scope.email = response.data.email;
@@ -129,7 +162,6 @@ gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', f
                 $scope.EnglishNote = response.data.EnglishNote;
                 $scope.nationalityNote = response.data.nationalityNote;
                 $scope.competences = response.data.competences;
-                $window.location.href = 'coordonnee.html';
             }
         }, (err) => {
             console.log(err);
@@ -137,3 +169,28 @@ gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', f
 
     }
 }]);
+
+/*
+gestionCandidatApp.controller("afficherCoordonnee", ['$scope', '$http', '$window', $cookies, function ($scope, $http, $window, $cookies) {
+    
+    for (var i = 0; $scope.todos.length < i; i++)
+    {
+        if ($scope.todos[i].email == $scope.selectedCar)
+        {
+            $scope.nomCoor = $scope.todos[i].nom;
+            console.log(i)
+            console.log($scope.todos[i].nom)
+        }
+        
+    }
+    console.log("En attente du cookie");
+    
+    if (candidat.nom == $scope.selectedCar) {
+        console.log("c'est ok")
+        console.log($scope.selectedCar)
+    } else {
+        console.log($scope.selectedCar)
+        console.log("c'est pas ok")
+    }
+    //$window.location.href = 'coordonnee.html';
+}]);*/

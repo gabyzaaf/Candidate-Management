@@ -11,9 +11,28 @@
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
     <script>
-        function trinfo(){
+        function toggleTableCoord() {
+            var lTable = document.getElementById("loginTableCoord");
+            lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+        }
 
-        };
+        function toggleTableEntr() {
+            var lTable = document.getElementById("loginTableEntr");
+            lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+        }
+
+        function disableBtn() {
+            document.getElementById("myBtn").disabled = true;
+        }
+
+        function undisableBtn() {
+            document.getElementById("myBtn").disabled = false;
+        }
+
+        function myFunction() {
+            var myWindow = window.open("agenda.html", "", "width=700,height=800");
+        }
+
     </script>
 </head>
 
@@ -58,21 +77,249 @@
         </div>
     </section>
     <br />
-    <form ng-submit="sendCandidat(candidat)">
+    <form ng-submit="sendCoordonnee()">
         <table align="center" border="1" width="500">
             <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Phone</th>
-                <th>Action</th>
+                <th>Candidat</th>
+                <th>Coordonnée</th>
+                <th>Entretien</th>
             </tr>
-            <tr ng-repeat="todo in todos">
-                <td>{{todo.nom}}</td>
-                <td>{{todo.prenom}}</td>
-                <td>{{todo.phone}}</td>
-                <td><input type="button" value="Afficher" onclick=""/></td>
+            <tr>
+                <td>
+                    <select ng-model="selectedCar" id="selectCandidat">
+                        <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}}</option>
+                    </select>
+                </td>
+                <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableCoord()" /></td>
+                <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableEntr()" /></td>
             </tr>
         </table>
     </form>
+    <br />
+
+    <h1><b>Coordonnée</b></h1>
+
+    <br />
+
+    <table align="center" id="loginTableCoord" hidden="hidden">
+        <tbody>
+            <tr>
+                <td>*Nom : </td>
+                <td><input type="text" name="prenom" value="{{nomCoor}}" /></td>
+                <td>*Prenom : </td>
+                <td><input type="text" name="prenom" value="{{prenomCoor}}" /></td>
+            </tr>
+            <tr>
+                <td>*Email : </td>
+                <td><input type="email" name="email" value="{{emailCoor}}" /></td>
+                <td>*Sexe : </td>
+                <td>
+                    <select name="sexe">
+                        <option value="Homme" selected>Homme</option>
+                        <option value="Femme">Femme</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>*Téléphone :</td>
+                <td><input type="tel" name="telephone" value="{{phoneCoor}}" /></td>
+                <td>*Code postal : </td>
+                <td><input type="number" size="5" name="cp" value="{{cpCoor}}"/></td>
+            </tr>
+            <tr>
+                <td>*Action : </td>
+                <td>
+                    <select name="action">
+                        <option value="interne" selected>Interne</option>
+                        <option value="encours">En cours</option>
+                        <option value="rn">RN</option>
+                        <option value="troprelance">Trop relancé</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="etranger">Etranger</option>
+                        <option value="aappeler">A appeler</option>
+                        <option value="arelancerlkd">A relancer LKD</option>
+                        <option value="arelancermail">A relancer MAIL</option>
+                        <option value="pae">PAE</option>
+                        <option value="pi">PI</option>
+                        <option value="hcjunior">HC junior</option>
+                        <option value="hcsenior">HC senior</option>
+                        <option value="hclangue">HC Langue</option>
+                        <option value="hcpasdev">HC pas Dev</option>
+                        <option value="hcpasmsft">HC pas MSFT</option>
+                        <option value="hcgeo">HC Géo</option>
+                        <option value="hcbacmoins5">HC BAC-5</option>
+                    </select>
+                </td>
+                <td>Source : </td>
+                <td><input type="url" name="url" value="{{lienCoor}}" /></td>
+            </tr>
+            <tr>
+                <td>Année de diplôme : </td>
+                <td><input type="number" size="4" name="anneedisplome" value="{{anneeCoor}}"/></td>
+                <td>NS : </td>
+                <td><input type="text" name="ns" value="{{nsNoteCoor}}" /></td>
+            </tr>
+            <tr>
+                <td>Note : </td>
+            </tr>
+            <tr>
+                <td colspan="5"><textarea name="note" cols="100" rows="4" required>{{noteCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Compte Rendu (CR) : </td>
+            </tr>
+            <tr>
+                <td colspan="5"><textarea name="cr" cols="100" rows="4" required></textarea></td>
+            </tr>
+            <tr>
+                <td>Date : </td>
+                <td><input type="date" name="date" /></td>
+                <td>Heure : </td>
+                <td><input type="time" name="heure" /></td>
+                <td>
+                    <select name="template">
+                        <option value="approcheLinkedIn" selected>Approche LinkedIn</option>
+                        <option value="rdv">Rendez-vous</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"><textarea name="templatemsg" cols="100" rows="4" required></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="5" align="left"><input type="file" value="CV" name="cv" /></td>
+            </tr>
+            <tr>
+                <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
+            </tr>
+            <tr>
+                <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnRouge" value="Modifier" onclick="undisableBtn()"/></td>
+                <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Valider" onclick="disableBtn()"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+
+    <h1><b>Entretien</b></h1>
+
+    <br />
+
+    <table align="center" id="loginTableEntr" hidden="hidden">
+        <tbody>
+            <tr>
+                <td>Date : </td>
+                <td><input type="date" name="date" /></td>
+                <td>Heure : </td>
+                <td><input type="time" name="heure" /></td>
+            </tr>
+            <tr>
+                <td>Test technique : </td>
+                <td><input type="url" name="testtech" /></td>
+            </tr>
+            <tr>
+                <td>XP note :</td>
+                <td><input type="text" name="xpnote" value="{{xpNoteCoor}}"/></td>
+                <td>PS note : </td>
+                <td><input type="text" name="psnote" value=""/></td>
+            </tr>
+            <tr>
+                <td>Note test technique : </td>
+            </tr>
+            <tr>
+                <td><input type="number" size="3" name="test1" /></td>
+                <td><input type="number" size="2" name="test2" /></td>
+                <td><input type="number" size="2" name="test3" /></td>
+                <td><input type="number" size="1" name="test4" /></td>
+            </tr>
+            <tr>
+                <td>Compte Rendu entretien RH : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="crrh" cols="100" rows="4" required>{{}}</textarea></td>
+            </tr>
+            <tr>
+                <td>NS note : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="nsnote" cols="100" rows="4" required>{{}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Job idéal : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="jobideal" cols="100" rows="4" required>{{jobIdealNoteCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Piste : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="piste" cols="100" rows="4" required>{{pisteNoteCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Dispo : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="dispo" cols="100" rows="4" required>{{}}</textarea></td>
+            </tr>
+            <tr>
+                <td>PK à l'écoute : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="pkecoute" cols="100" rows="4" required>{{pieCouteNoteCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Anglais : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="anglais" cols="100" rows="4" required>{{EnglishNoteCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Nationalité : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="nationalite" cols="100" rows="4" required>{{nationalityNoteCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Compétences : </td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="competence" cols="100" rows="4" required>{{competencesCoor}}</textarea></td>
+            </tr>
+            <tr>
+                <td>CR technique : </td>
+            </tr>
+            <tr>
+                <td><input type="date" name="datecrtech" /></td>
+                <td>Heure : </td>
+                <td><input type="time" name="heurecrtech" /></td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="crtech" cols="100" rows="5" required></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><input type="submit" value="Enregistrer CR technique" class="btnVert" name="enrcrtech"></td>
+            </tr>
+            <tr>
+                <td>CR entretien commercial : </td>
+            </tr>
+            <tr>
+                <td><input type="date" name="datecrcom" /></td>
+                <td>Heure : </td>
+                <td><input type="time" name="heurecrcom" /></td>
+            </tr>
+            <tr>
+                <td colspan="4"><textarea name="crcom" cols="100" rows="4" required></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><input type="submit" value="Enregistrer CR commercial" class="btnVert" name="enrcrcom"></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+
 </body>
 </html>

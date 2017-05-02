@@ -149,6 +149,9 @@
     <Content Include="scripts\angular-cookies.min.js.map" />
     <Content Include="scripts\angular-aria.min.js.map" />
     <Content Include="scripts\angular-animate.min.js.map" />
+    <Content Include="json\responseConnect.json" />
+    <Content Include="json\responseNotConnect.json" />
+    <Content Include="json\responseRecherche.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
