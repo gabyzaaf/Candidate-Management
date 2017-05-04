@@ -1,65 +1,21 @@
- #installer docker
- #lancer cette ligne cmd : 
- #docker run microsoft/dotnet-samples
- #pour créer le dockerfile : le créer sous linux SANS extension
- #vous pouvez le nommer 'dockerfile' tout simplement (un dockerfile par projet et donc par document)
+FROM microsoft/dotnet
  
- #récupère ton environnement (ici dotnet)
- FROM microsoft/dotnet:runtime
- 
-  #le propriètaire du container
  MAINTAINER gamelinfabien@gmail.com
  
- #NE pas oublier d'installer les packages nécessaires
- RUN apt-get update && apt-get install -y *nompackage*
+ WORKDIR /app
  
- #créer le fichier de récupération jusqu'au prochain RUN (votr chemin)
- WORKDIR /git/imagedocker
- 
- #récupèration des fichiers nécéssaires au build
- COPY /git/imagedocker/src/MailSender/MailSender.xproj .
+ COPY /Candidate-Management/src/
  RUN dotnet restore
-
- 
  COPY . .
- RUN dotnet publish -c Release -o MailSender
+ RUN dotnet publish -c Release -o Candidate-Management 
 
- #ensuite dans la console Build l'image de ton projet 
- $ docker build -t /git/imagedocker/MailSender
-
- #ensuite dans la console pour run l'application dans docker
- docker run -it --rm /git/imagedocker/MailSender
-
-
-
- #########################################################################################################
- # Partie cron :  
- #EDIT : http://www.cyber-neurones.org/2016/04/docker-le-quinzieme-pas/ cette doc explique que crontab
- peut être utilisé indépendamment du dockerfile et être appelé par la suite tout simplement 
- DONC pour utiliser crontab en console 
- #CAR pour lancer CRON dans le dockerfile il faudrait être dans l'environnement linux OR on est dans l'environnement 
- dotnet et je ne sais pas encore si l'on peut faire tourner deux env en même temsp (ça m'étonnerait)
+ RUN sudo nano /etc/crontab
  
- #modifie ton fichier cron présent dans /etc/ et qui contient la liste de tes jobs cron qui tournent
- sudo nano /etc/crontab
+ RUN 00.2,16 * * * /app/Candidate-Management 
  
- #rajoute la ligne de ton choix par exemple :
- 00 12,16 * * * fabien /home/fabien/git/imagedocker/MailSender
- 
- #--> cette commande va lancer l'image docker tout les jours à midi et à 16h
- 
- #solution permettant d'ajouter le fichier cron (préalablement créee en ligne de commande) au container
- #(non testé)
- ADD /etc/crontab /home/fabien/git/imagedocker/crontab
- RUN crontab /home/fabien/git/imagedocker/crontab
- ADD files/bin/start-cron.sh /usr/bin/start-cron.sh
+ ADD /etc/crontab /app/Candidate-Management 
+ RUN crontab /app/Candidate-ManagementCandidate-Management/crontab
+ ADD files/bin/start-cron.sh /usr/bin/start-cron.sstart-cron.s 
  RUN chmod +x /usr/bin/start-cron.sh
  RUN touch /var/log/cron.log
  
-  #########################################################################################################
- # PARTIE DIVERS
- #Créer un container avec ton image dedans
- $ docker create --gestioncandidat build-cont build-image
- $ docker cp build-cont:/out ./bin/Release/le nom de ton PublishOutput
-
-
