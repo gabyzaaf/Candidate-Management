@@ -12,26 +12,47 @@
     <meta charset="utf-8" />
     <script>
         function toggleTableCoord() {
-            var lTable = document.getElementById("loginTableCoord");
-            lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            
+            var lSelect = document.getElementById("selectCandidat").value;
+            if (lSelect == "? undefined:undefined ?") {
+                alert("Selectionner un candidat !")
+            } else {
+                var lTable = document.getElementById("loginTableCoord");
+                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            }
         }
 
         function toggleTableEntr() {
-            var lTable = document.getElementById("loginTableEntr");
-            lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            
+            var lSelect = document.getElementById("selectCandidat").value;
+            if (lSelect == "? undefined:undefined ?") {
+                alert("Selectionner un candidat !")
+            } else {
+                var lTable = document.getElementById("loginTableEntr");
+                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            }
+        }
+
+        function toggleSelectCoordEntr() {
+            var lTable = document.getElementById("loginTableCoord");
+            var lTable2 = document.getElementById("loginTableEntr");
+            lTable.style.display = (lTable.style.display == "table") ? "none" : "none";
+            lTable2.style.display = (lTable.style.display == "table") ? "none" : "none";
         }
 
         function disableBtn() {
-            document.getElementById("myBtn").disabled = true;
+            document.getElementById("loginTableCoord"), 'disabled'
         }
 
         function undisableBtn() {
-            document.getElementById("myBtn").disabled = false;
+            document.getElementById("loginTableCoord").find("input,button,textarea,select").attr("enabled", "enabled")
         }
 
         function myFunction() {
             var myWindow = window.open("agenda.html", "", "width=700,height=800");
         }
+
+
 
     </script>
 </head>
@@ -86,7 +107,7 @@
             </tr>
             <tr>
                 <td>
-                    <select ng-model="selectedCar" id="selectCandidat">
+                    <select ng-model="selectedCar" id="selectCandidat" onclick="toggleSelectCoordEntr()">
                         <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}}</option>
                     </select>
                 </td>
