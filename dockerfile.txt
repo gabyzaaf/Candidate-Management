@@ -1,21 +1,42 @@
-FROM microsoft/dotnet
+ #Pré requis :
+ #Installer docker sur une machine linux
+ #Créer ce Dockerfile dans les sources de la solution 
+ #Le nommer Dockerfile sans extensions
+ #Editer le fichier crontab pour la solution
  
+ #image de base net core
+ FROM microsoft/aspnetcore
+ 
+ #infos sur le propriètaire du container
  MAINTAINER gamelinfabien@gmail.com
  
+ #emplacement du container
  WORKDIR /app
  
- COPY /Candidate-Management/src/
+ #copie du projet dans le container
+ COPY /Candidate-Management
+ 
+ #cmd dotnet vérifiant les packages
  RUN dotnet restore
- COPY . .
- RUN dotnet publish -c Release -o Candidate-Management 
-
- RUN sudo nano /etc/crontab
+ #set le port 5000 pour les APIs
+ EXPOSE 5000
+ #Build la solution dotnet
+ RUN dotnet publish --framework netcoreapp1.1 /src/Candidate-Management/Candidate-Management -o /Candidate-Management/build
  
- RUN 00.2,16 * * * /app/Candidate-Management 
- 
+ #ajouter le fichier crontab au container
  ADD /etc/crontab /app/Candidate-Management 
- RUN crontab /app/Candidate-ManagementCandidate-Management/crontab
+ #commandes crontab
+ RUN crontab /app/Candidate-Management/crontab
  ADD files/bin/start-cron.sh /usr/bin/start-cron.sstart-cron.s 
  RUN chmod +x /usr/bin/start-cron.sh
  RUN touch /var/log/cron.log
  
+ #commandes à éxecuter lorsdu démarrage du container
+ ENTRYPOINT["dotnet", "build/Candidate-Management.dll"]
+ 
+ #La suite :
+ #En console à l'emplacement du container
+ #Build le dockerfile pour créer son image :
+ #docker build -t app/Candidate-Management .
+ #Run l'image dans un container :
+ #docker run -p 5000:80 --name Candidate-Management app/CandidateManagement
