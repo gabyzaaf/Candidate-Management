@@ -1,0 +1,58 @@
+26/04/2017 15:06:17 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+26/04/2017 15:06:17 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+27/04/2017 13:04:07 - [Error] - SqlCustomException - MysqlDb - Veuillez vous reconnecter
+29/04/2017 11:01:28 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+29/04/2017 11:01:28 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+29/04/2017 11:02:19 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:02:19 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:05:33 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:05:33 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:08:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:08:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:14:05 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:14:05 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:25:30 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 11:25:30 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 16:29:59 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 6 existe veuillez vous identifier
+29/04/2017 16:29:59 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 6 existe veuillez vous identifier
+29/04/2017 16:30:16 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+29/04/2017 16:30:16 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/04/2017 14:57:18 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/04/2017 14:57:18 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/04/2017 15:24:17 - [Error] - SqlCustomException - MysqlDb - Could not find specified column in results: email
+30/04/2017 15:24:17 - [Error] - SqlCustomException - MysqlDb - Could not find specified column in results: email
+30/04/2017 15:24:17 - [Error] - WsCustomeException - UserController - Could not find specified column in results: email
+01/05/2017 13:50:36 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+01/05/2017 13:50:36 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+01/05/2017 13:50:36 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+01/05/2017 13:50:36 - [Error] - WsCustomeException - UserController - Unable to connect to any of the specified MySQL hosts.
+01/05/2017 14:10:02 - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+01/05/2017 14:11:03 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 44 existe veuillez vous identifier
+01/05/2017 14:11:03 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 44 existe veuillez vous identifier
+01/05/2017 14:11:35 - [Error] - WsCustomeException - UserController - Le report est deja existant dans votre systeme, si vous souhaitez le changer vous devez le modifier
+01/05/2017 14:18:05 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+01/05/2017 14:18:05 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+01/05/2017 14:36:03 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+01/05/2017 14:36:03 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+02/05/2017 21:47:12 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+02/05/2017 21:47:12 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/05/2017 21:22:36 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+03/05/2017 21:22:36 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+03/05/2017 21:41:18 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+03/05/2017 21:41:18 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+06/05/2017 15:26:07 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:26:07 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:26:18 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:26:18 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:27:36 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:27:36 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:28:24 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:28:24 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:30:03 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:30:03 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:30:23 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:30:23 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:30:23 - [Error] - SqlCustomException - MysqlDb - L'email n'est pas conforme
+06/05/2017 15:30:23 - [Error] - WsCustomeException - UserController - L'email n'est pas conforme
+06/05/2017 15:39:03 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 33 existe veuillez vous identifier
+06/05/2017 15:39:03 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 33 existe veuillez vous identifier
