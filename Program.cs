@@ -25,7 +25,11 @@ namespace ConsoleApplication
             // ici nous allons ouvrire le fichier de configuration
            
             try{
+<<<<<<< HEAD
                jsonConf = JsonConfiguration.getInstance();
+=======
+               jsonConf = new JsonConfiguration();
+>>>>>>> 4e792f0adc8b15be180bec111212b62923beb282
               
             }catch(Exception exc){
                 Console.WriteLine(exc.Message);

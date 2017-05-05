@@ -610,7 +610,6 @@ namespace Core.Adapter{
 
         public ArrayList searchCandidateMobile(string nom, string token)
         {
-            // 
             ArrayList output=null;
             try{
                 if(String.IsNullOrEmpty(nom)){
