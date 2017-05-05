@@ -20,8 +20,8 @@
  RUN dotnet restore
  #set le port 5000 pour les APIs
  EXPOSE 5000
- #Build la solution dotnet
- RUN dotnet publish --framework netcoreapp1.1 /src/Candidate-Management/Candidate-Management -o /Candidate-Management/build
+ #Build la solution dotnet (http://kalapos.net/Blog/ShowPost/csproj-settings-in-aspnet-core)
+ RUN dotnet publish --framework netcoreapp1.1 Candidate-Management/src/Candidate-Management/Candidate-Management -o /Candidate-Management/publish
  
  #ajouter le fichier crontab au container
  ADD /etc/crontab /app/Candidate-Management 
@@ -32,7 +32,7 @@
  RUN touch /var/log/cron.log
  
  #commandes à éxecuter lorsdu démarrage du container
- ENTRYPOINT["dotnet", "build/Candidate-Management.dll"]
+ ENTRYPOINT["dotnet", "publish/Candidate-Management.dll"]
  
  #La suite :
  #En console à l'emplacement du container
