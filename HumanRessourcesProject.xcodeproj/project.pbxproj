@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		49389DCA1E6B17FF00A3436A /* ThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49389DC91E6B17FF00A3436A /* ThirdView.swift */; };
 		49389DCC1E6C69F300A3436A /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49389DCB1E6C69F300A3436A /* Candidate.swift */; };
+		4990C85F1E6CC25700A26A49 /* TableViewCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990C85E1E6CC25700A26A49 /* TableViewCustom.swift */; };
+		49A2D87D1EB4CC6D0063EB8B /* DisplayCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2D87C1EB4CC6D0063EB8B /* DisplayCandidate.swift */; };
+		49B23F711EBFB67000D45AEF /* DisplayView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B23F701EBFB67000D45AEF /* DisplayView2.swift */; };
+		49B23F731EBFBFD500D45AEF /* DisplayView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B23F721EBFBFD500D45AEF /* DisplayView3.swift */; };
 		49C48F161E64B950001186E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48F151E64B950001186E4 /* AppDelegate.swift */; };
 		49C48F181E64B950001186E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48F171E64B950001186E4 /* ViewController.swift */; };
 		49C48F1B1E64B950001186E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C48F191E64B950001186E4 /* Main.storyboard */; };
@@ -41,6 +45,10 @@
 /* Begin PBXFileReference section */
 		49389DC91E6B17FF00A3436A /* ThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdView.swift; sourceTree = "<group>"; };
 		49389DCB1E6C69F300A3436A /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		4990C85E1E6CC25700A26A49 /* TableViewCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCustom.swift; sourceTree = "<group>"; };
+		49A2D87C1EB4CC6D0063EB8B /* DisplayCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCandidate.swift; sourceTree = "<group>"; };
+		49B23F701EBFB67000D45AEF /* DisplayView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayView2.swift; sourceTree = "<group>"; };
+		49B23F721EBFBFD500D45AEF /* DisplayView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayView3.swift; sourceTree = "<group>"; };
 		49C48F121E64B950001186E4 /* HumanRessourcesProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HumanRessourcesProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C48F151E64B950001186E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C48F171E64B950001186E4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +125,11 @@
 				49C48F451E64B9CF001186E4 /* User.swift */,
 				49C48F471E64C89C001186E4 /* SecondView.swift */,
 				49389DC91E6B17FF00A3436A /* ThirdView.swift */,
+				4990C85E1E6CC25700A26A49 /* TableViewCustom.swift */,
 				49389DCB1E6C69F300A3436A /* Candidate.swift */,
+				49A2D87C1EB4CC6D0063EB8B /* DisplayCandidate.swift */,
+				49B23F701EBFB67000D45AEF /* DisplayView2.swift */,
+				49B23F721EBFBFD500D45AEF /* DisplayView3.swift */,
 			);
 			path = HumanRessourcesProject;
 			sourceTree = "<group>";
@@ -271,12 +283,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49B23F731EBFBFD500D45AEF /* DisplayView3.swift in Sources */,
+				49B23F711EBFB67000D45AEF /* DisplayView2.swift in Sources */,
 				49C48F461E64B9CF001186E4 /* User.swift in Sources */,
 				49C48F481E64C89C001186E4 /* SecondView.swift in Sources */,
 				49C48F181E64B950001186E4 /* ViewController.swift in Sources */,
+				49A2D87D1EB4CC6D0063EB8B /* DisplayCandidate.swift in Sources */,
 				49C48F161E64B950001186E4 /* AppDelegate.swift in Sources */,
 				49389DCC1E6C69F300A3436A /* Candidate.swift in Sources */,
 				49389DCA1E6B17FF00A3436A /* ThirdView.swift in Sources */,
+				4990C85F1E6CC25700A26A49 /* TableViewCustom.swift in Sources */,
 				49C48F441E64B964001186E4 /* functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

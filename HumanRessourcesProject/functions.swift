@@ -57,19 +57,13 @@ func displayResult(request:NSMutableURLRequest,json:String,array:NSArray,complet
         
         let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
         print("response data is --> \(responseString)");
-        
-        var err: NSError?
+     
         do{
-            let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
-            
-            if let parseJson = json {
-                for element in array as! [String]{
-                    dico[element]=parseJson[element] as? String
-                    print("value is \(parseJson[element])");
-                }
-                completion(result: dico)
+            let jsonArr = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+            print(jsonArr.count)
+            completion(result: jsonArr)
                 
-            }
+            
         }catch{
             print(error)
         }
@@ -94,7 +88,9 @@ func displayResultGet(request:NSMutableURLRequest,array:NSArray,completion:(resu
             print("error = \(error)")
             return
         }
-        
+        if(data?.length==0){
+            // completion(result: nil)
+        }
         let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
         print("response data is --> \(responseString)");
         
