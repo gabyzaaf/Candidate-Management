@@ -1,0 +1,17 @@
+﻿[
+  {
+    "id": "01",
+    "titre": "Bienvenue",
+    "contenu": "Bonjour, Nous sommes très heureux de vous avoir dans notre groupe ! Nous croyons que vous pouvez utiliser vos compétences et vos talents pour aider notre entreprise à atteindre de nouveaux sommets. Bienvenue à bord !"
+  },
+  {
+    "id": "02",
+    "titre": "Approche LinkedIn",
+    "contenu": "Bonjour, votre profil LinkedIn nous a impressionné, pourrions-nous avoir un entretien ensemble ? Merci et bonne journée."
+  },
+   {
+    "id": "03",
+    "titre": "Rendez-vous",
+    "contenu": "Je vous remercie de l'intérêt que vous portez à notre entreprise. Après étude de votre candidature, je souhaiterai m'entretenir avec vous lundi 24 juin à 14h afin de discuter de votre éventuelle collaboration dans nos services. Merci de me confirmer votre présence. Cordialement. "
+  }
+]

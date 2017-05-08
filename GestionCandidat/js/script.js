@@ -66,6 +66,30 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
     }
 }]);
 
+gestionCandidatApp.controller('rechercheJsonMessage', function ($scope, $http, $cookies, $window) {
+    $http.get('json/responseMessage.json')
+         .then(function (response) {
+             //$scope.selectedCar = $cookies.get('emailCandidat');
+             $scope.todos = response.data;
+             if (response.data != null) {
+                 $scope.todos = response.data;
+             } else {
+                 console.log("In the error");
+             }
+         });
+    $scope.sendMessage = function () {
+        console.log("alloMessage");
+        var nbSelect = 0;
+        for (var i = 0; i < $scope.todos.length; i++) {
+            if ($scope.todos[i].id == $scope.selectMessage) {
+                nbSelect = i;
+            }
+        }
+        $scope.idMsg = $scope.todos[nbSelect].id;
+        $scope.titreMsg = $scope.todos[nbSelect].titre;
+        $scope.contenuMsg = $scope.todos[nbSelect].contenu;
+    }
+});
 
 gestionCandidatApp.controller('rechercheJson', function ($scope, $http, $cookies, $window) {
     $http.get('json/responseRecherche.json')
@@ -79,7 +103,7 @@ gestionCandidatApp.controller('rechercheJson', function ($scope, $http, $cookies
              }
          });
     $scope.sendCoordonnee = function () {
-        console.log("allo");
+        console.log("alloRecherche");
         var nbSelect = 0;
         for (var i = 0; i < $scope.todos.length; i++) {
             if ($scope.todos[i].email == $scope.selectedCar) {

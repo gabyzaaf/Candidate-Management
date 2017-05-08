@@ -4,13 +4,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gestion Candidat - Message</title>
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
+    <script>
+        function toggleSelectMsg() {
+            var lTextarea = document.getElementById("ContenuMessage");
+            lTextarea.style.display = (lTable.style.display == "textarea") ? "none" : "none";
+        }
+    </script>
 </head>
-<body>
+<body ng-controller="rechercheJsonMessage">
     <br />
     <h2>Message</h2>
     <br />
@@ -26,18 +33,14 @@
         </tbody>
     </table>
     <br />
-    <form ng-submit="">
+    <form ng-submit="sendMessage()">
         <div class="form-style">
             <table align="center">
                 <tbody>
                     <tr>
                         <td>Nom template : </td>
                         <td>
-                            <select name="templatemsg">
-                                <option value="title" disabled>template message</option>
-                                <option value="1">Bienvenu </option>
-                                <option value="1">Rendez-vous </option>
-                                <option value="1">Approche LinkedIn </option>
+                            <select ng-model="selectedMsg" ng-options="todo.titre for todo in todos" id="selectMessage" onclick="reload();">
                             </select>
                         </td>
                     </tr>
@@ -45,11 +48,12 @@
                         <td>Texte du message : </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><textarea name="note" cols="70" rows="7" required></textarea></td>
+                        <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" disabled="disabled">{{selectedMsg.contenu}}</textarea></td>
                     </tr>
                     <tr>
                     <tr>
-                        <td align="center"><input type="submit" name="modifiermsg" class="btnVert" value="Modifier" /></td>
+                        <td align="center"><input type="submit" name="modifiermsg" class="btnVert" value="Modifier" onclick=""/></td>
+                        <td align="center"><input type="submit" name="validermsg" class="btnVert" value="Valider" hidden="hidden" onclick=""/></td>
                         <td align="center"><input type="submit" name="supprimermsg" class="btnRouge" value="Supprimer" /></td>
                     </tr>
                 </tbody>

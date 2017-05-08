@@ -152,6 +152,7 @@
     <Content Include="json\responseConnect.json" />
     <Content Include="json\responseNotConnect.json" />
     <Content Include="json\responseRecherche.json" />
+    <Content Include="json\responseMessage.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
