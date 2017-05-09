@@ -1,0 +1,8 @@
+/training/training/bin/Debug/netcoreapp1.1/training.deps.json
+/training/training/bin/Debug/netcoreapp1.1/training.runtimeconfig.json
+/training/training/bin/Debug/netcoreapp1.1/training.runtimeconfig.dev.json
+/training/training/obj/Debug/netcoreapp1.1/training.AssemblyInfo.cs
+/training/training/bin/Debug/netcoreapp1.1/training.dll
+/training/training/bin/Debug/netcoreapp1.1/training.pdb
+/training/training/obj/Debug/netcoreapp1.1/training.dll
+/training/training/obj/Debug/netcoreapp1.1/training.pdb

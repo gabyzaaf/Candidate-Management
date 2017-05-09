@@ -1,0 +1,18 @@
+version: '2'
+services:
+	candidate-management:
+	build: .
+	ports:
+		- "5000:80"
+	depends_on:
+		-candidate-management-mysql
+	candidate-management-mysql:
+	   image: "mysql"
+	   container_name:"mysql"
+	   volumes:
+              -../data:/var/lib/mysql/data/candidates
+	   environment:
+		- MYSQL_USER=
+		- MYSQL_PASSWORD=
+		- MYSQL_DB=
+		- 
