@@ -1,0 +1,5 @@
+my-db:
+	image: mysql
+	environment:
+	-MYSQL_ROOT_PASSWWORD=fabien
+	volumes:var/lib/mysql
