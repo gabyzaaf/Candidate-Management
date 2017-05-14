@@ -1,4 +1,4 @@
-#lancer la bdd dans un container : sudo docker run --name mysql  -v /storage/docker/mysql-datadir:/var/lib/mysql \
+#lancer la bdd dans un container : sudo docker run --name mysql  -v /storage/docker/mysql-datadir:/var/lib/mysql/CandidateManagement \
 #                -e MYSQL_ROOT_PASSWORD=fabien \
 #                -e MYSQL_DB=CandidateManagement -d -p 6604:3306 mysql
 
