@@ -6,14 +6,17 @@
 #Création de l'image du server applicatif
 FROM microsoft/dotnet
 MAINTAINER gamelinfabien@gmail.com
-WORKDIR /app
+ENV ASPNETCORE_URLS="0.0.0.0:5000"
+WORKDIR /dotnetapp
 COPY . .
 EXPOSE 5000
-ENTRYPOINT ["dotnet", "training.dll"]
+RUN dotnet restore
+ENTRYPOINT ["dotnet", "run", "--server.urls", "http://*:5000"]
 
 
 #en ligne de cmd : docker build -t candidatemanagement
-#                  docker run --name candidatemanagement --link mysql -p 5000:80 -d candidatemanagement
+#                 docker run -it -d --name plugincm -p 5000:5000 plugincm
+
 #pb :
 #le container de s'arrête tout seul (pour l'app)
 #manager la bdd
