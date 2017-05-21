@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 using System;
 using System.IO;
 using ConsoleApplication;
-=======
-using System.IO;
->>>>>>> 4e792f0adc8b15be180bec111212b62923beb282
 using core.configuration;
 using CORE.LogManager;
 
