@@ -36,11 +36,14 @@ gestionCandidatApp.config(function ($routeProvider) {
 });
 
 
+
+/********************   Authentification   ********************/
+
 gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $scope.sendEntry = function (utilisateur) {
         var req = {
             method: 'POST',
-            url: 'http://192.168.1.31:5000/api/user/Candidates/sql/',
+            url: 'http://192.168.0.14:5000/api/user/admin/auth/',
             responseType: "json",
             data: { email: utilisateur.email, password: utilisateur.password }
         }
@@ -65,6 +68,85 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
         });
     }
 }]);
+
+/****************************************************************/
+
+/*********************  Ajouter un candidat  ********************/
+
+gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $scope.sendEntry = function (candidat) {
+        var req = {
+            method: 'POST',
+            url: 'http://192.168.0.14:5000/api/user/add/candidat/',
+            responseType: "json",
+            data: {
+                session_id: $cookies.get('cookie'),
+                Name: candidat.Name,
+                Firstname: candidat.Firstname,
+                emailAdress: candidat.emailAdress,
+                phone: candidat.phone,
+                sexe: "M",
+                actions: candidat.actions,
+                year: candidat.year,
+                link: candidat.link,
+                crCall: candidat.crCall,
+                ns: candidat.ns
+            }
+        }
+
+        $http(req).then(function (response) {
+            $scope.contentResponse = response.data.content;
+            if (response.data.content != "Le candidat a ete ajoute à votre systeme") {
+                console.log("In the error");
+                
+            } else {
+                console.log("En attente du cookie baby");
+                console.log(response.data.content);
+            }
+
+
+        }, (err) => {
+            console.log("ceci est une erreur" + err);
+        });
+    }
+}]);
+
+/****************************************************************/
+
+/*********************  Ajouter un message  ********************/
+
+gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $scope.sendEntry = function (message) {
+        var req = {
+            method: 'POST',
+            url: 'http://192.168.0.14:5000/api/user/add/message/',
+            responseType: "json",
+            data: {
+                session_id: $cookies.get('cookie'),
+                titre: message.titre,
+                contenu: message.contenu,
+            }
+        }
+
+        $http(req).then(function (response) {
+            $scope.contentResponse = response.data.content;
+            if (response.data.content != "Le message a ete ajoute à votre systeme") {
+                console.log("In the error");
+
+            } else {
+                console.log("En attente du cookie baby");
+                console.log(response.data.content);
+            }
+
+
+        }, (err) => {
+            console.log("ceci est une erreur" + err);
+        });
+    }
+}]);
+
+/****************************************************************/
+
 
 gestionCandidatApp.controller('rechercheJsonMessage', function ($scope, $http, $cookies, $window) {
     $http.get('json/responseMessage.json')
