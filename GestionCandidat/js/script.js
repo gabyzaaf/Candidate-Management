@@ -90,36 +90,38 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
 /****************************************************************/
 
-/*********************  Ajouter un entrtien  ********************/
+/*********************  Ajouter un entretien  ********************/
 
-gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
-    $scope.sendEntry = function (candidat) {
+gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $scope.sendEntry = function (entretien) {
+        console.log($scope.selectedCar);
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/add/candidat/',
+            url: 'http://192.168.0.14:5000/api/user/add/candidat/report',
             responseType: "json",
             data: {
-                session_id: $cookies.get('cookie'),
-                Name: candidat.Name,
-                Firstname: candidat.Firstname,
-                emailAdress: candidat.emailAdress,
-                phone: candidat.phone,
-                sexe: "M",
-                actions: candidat.actions,
-                year: candidat.year,
-                link: candidat.link,
-                crCall: candidat.crCall,
-                ns: candidat.ns
+                sessionId: $cookies.get('cookie'),
+                emailCandidat : $scope.selectedCar,
+                note: entretien.test1,
+                link : entretien.testtech,
+                xpNote : entretien.xpnote,
+                nsNote : entretien.psnote,
+                jobIdealNote : entretien.jobideal,
+                pisteNote : entretien.piste,
+                pieCouteNote : entretien.pkecoute,
+                locationNote : entretien.dispo,
+                EnglishNote : entretien.anglais,
+                nationalityNote: entretien.nationalite,
+                competences: entretien.competence
             }
         }
 
         $http(req).then(function (response) {
             $scope.contentResponse = response.data.content;
-            if (response.data.content != "Le candidat a ete ajoute à votre systeme") {
+            if (response.data.content != "Le report a ete ajoute parfaitement à votre system") {
                 console.log("In the error");
 
             } else {
-                console.log("En attente du cookie baby");
                 console.log(response.data.content);
             }
 

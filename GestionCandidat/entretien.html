@@ -10,6 +10,18 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
+    <script>
+        function colorResponse() {
+
+            setTimeout(function () {
+                if (document.getElementById("rep").innerHTML != "Le report a ete ajoute parfaitement à votre system") {
+                    document.getElementById("rep").style.color = "#DC0B0B";
+                } else {
+                    document.getElementById("rep").style.color = "#2CAC3D";
+                }
+            }, 50);
+        }
+    </script>
 </head>
 <body ng-controller="rechercheAllCandidat">
     <br />
@@ -27,139 +39,148 @@
         </tbody>
     </table>
     <br />
-    <form ng-submit="">
-        <div class="form-style">
-            <table align="center">
-                <tbody>
-                    <tr>
-                        <td colspan="4">
-                            <select ng-model="selectedCar" id="selectCandidat">
-                                <option ng-repeat="todo in todos" value="{{todo.id}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}} </option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Date : </td>
-                        <td><input type="date" name="date" /></td>
-                        <td>Heure : </td>
-                        <td><input type="time" name="heure" /></td>
-                    </tr>
-                    <tr>
-                        <td>Test technique : </td>
-                        <td><input type="url" name="testtech" /></td>
-                    </tr>
-                    <tr>
-                        <td>XP note :</td>
-                        <td><input type="text" name="xpnote" /></td>
-                        <td>PS note : </td>
-                        <td><input type="text" name="psnote" /></td>
-                    </tr>
-                    <tr>
-                        <td>Note test technique : </td>
-                    </tr>
-                    <tr>
-                        <td><input type="number" size="3" name="test1" /></td>
-                        <td><input type="number" size="2" name="test2" /></td>
-                        <td><input type="number" size="2" name="test3" /></td>
-                        <td><input type="number" size="1" name="test4" /></td>
-                    </tr>
-                    <tr>
-                        <td>Compte Rendu entretien RH : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="crrh" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>NS note : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="nsnote" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Job idéal : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="jobideal" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Piste : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="piste" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Dispo : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="dispo" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>PK à l'écoute : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="pkecoute" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Anglais : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="anglais" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Nationalité : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="nationalite" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Compétences : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="competence" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>CR technique : </td>
-                    </tr>
-                    <tr>
-                        <td><input type="date" name="datecrtech" /></td>
-                        <td>Heure : </td>
-                        <td><input type="time" name="heurecrtech" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="crtech" cols="100" rows="5" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="right"><input type="submit" value="Enregistrer CR technique" class="btnVert" name="enrcrtech"></td>
-                    </tr>
-                    <tr>
-                        <td>CR entretien commercial : </td>
-                    </tr>
-                    <tr>
-                        <td><input type="date" name="datecrcom" /></td>
-                        <td>Heure : </td>
-                        <td><input type="time" name="heurecrcom" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="crcom" cols="100" rows="4" required></textarea></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="right"><input type="submit" value="Enregistrer CR commercial" class="btnVert" name="enrcrcom"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </form>
-    <br />
-    <!--
-    <div ng-controller="verifRecherche">
-        <p>{{/nom}}</p>
-        <p>{{/prenom}}</p>
-        <p>{{/telephone}}</p>
-        <p>{{/email}}</p>
-    </div>
-    -->
+    <table align="center">
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    <select ng-model="selectedCar" id="selectCandidat">
+                        <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}} </option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <section ng-controller="addEntretien">
+        <form ng-submit="sendEntry(entretien)">
+            <div class="form-style">
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
+                        </tr>
+                        <tr>
+                            <td>Date : </td>
+                            <td><input type="date" name="date" /></td>
+                            <td>Heure : </td>
+                            <td><input type="time" name="heure" /></td>
+                        </tr>
+                        <tr>
+                            <td>Test technique : </td>
+                            <td><input type="url" name="testtech" ng-model="entretien.testtech" /></td>
+                        </tr>
+                        <tr>
+                            <td>XP note :</td>
+                            <td><input type="text" name="xpnote" ng-model="entretien.xpnote" /></td>
+                            <td>PS note : </td>
+                            <td><input type="text" name="psnote" ng-model="entretien.psnote" /></td>
+                        </tr>
+                        <tr>
+                            <td>Note test technique : </td>
+                        </tr>
+                        <tr>
+                            <td><input type="number" size="3" name="test1" ng-model="entretien.test1"/></td>
+                            <td><input type="number" size="2" name="test2" /></td>
+                            <td><input type="number" size="2" name="test3" /></td>
+                            <td><input type="number" size="1" name="test4" /></td>
+                        </tr>
+                        <tr>
+                            <td>Compte Rendu entretien RH : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="crrh" cols="100" rows="4" ng-model="entretien.crrh" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>NS note : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="nsnote" cols="100" rows="4" ng-model="entretien.nsnote" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Job idéal : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="jobideal" cols="100" rows="4" ng-model="entretien.jobideal" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Piste : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="piste" cols="100" rows="4" ng-model="entretien.piste" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Dispo : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="dispo" cols="100" rows="4" ng-model="entretien.dispo" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>PK à l'écoute : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="pkecoute" cols="100" rows="4" ng-model="entretien.pkecoute" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Anglais : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="anglais" cols="100" rows="4" ng-model="entretien.anglais" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Nationalité : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="nationalite" cols="100" rows="4" ng-model="entretien.nationalite" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Compétences : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="competence" cols="100" rows="4" ng-model="entretien.competence" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>CR technique : </td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" name="datecrtech" /></td>
+                            <td>Heure : </td>
+                            <td><input type="time" name="heurecrtech" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="crtech" cols="100" rows="5" ng-model="entretien.crtech" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right"><input type="submit" value="Enregistrer CR technique" class="btnVert" name="enrcrtech"></td>
+                        </tr>
+                        <tr>
+                            <td>CR entretien commercial : </td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" name="datecrcom" /></td>
+                            <td>Heure : </td>
+                            <td><input type="time" name="heurecrcom" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="crcom" cols="100" rows="4" ng-model="entretien.crcom" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right"><input type="submit" value="Enregistrer CR commercial" class="btnVert" name="enrcrcom"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </section>
+            <br />
+            <!--
+            <div ng-controller="verifRecherche">
+                <p>{{/nom}}</p>
+                <p>{{/prenom}}</p>
+                <p>{{/telephone}}</p>
+                <p>{{/email}}</p>
+            </div>
+            -->
 </body>
 </html>
