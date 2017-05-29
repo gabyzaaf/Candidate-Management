@@ -4,13 +4,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Gestion Candidat - Entretien</title>
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
 </head>
-<body>
+<body ng-controller="rechercheAllCandidat">
     <br />
     <h2>Recherche</h2>
     <br />
@@ -30,6 +31,13 @@
         <div class="form-style">
             <table align="center">
                 <tbody>
+                    <tr>
+                        <td colspan="4">
+                            <select ng-model="selectedCar" id="selectCandidat">
+                                <option ng-repeat="todo in todos" value="{{todo.id}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}} </option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Date : </td>
                         <td><input type="date" name="date" /></td>
@@ -143,15 +151,15 @@
                 </tbody>
             </table>
         </div>
-</form>
-        <br />
-        <!--
-        <div ng-controller="verifRecherche">
-            <p>{{/nom}}</p>
-            <p>{{/prenom}}</p>
-            <p>{{/telephone}}</p>
-            <p>{{/email}}</p>
-        </div>
-        -->
+    </form>
+    <br />
+    <!--
+    <div ng-controller="verifRecherche">
+        <p>{{/nom}}</p>
+        <p>{{/prenom}}</p>
+        <p>{{/telephone}}</p>
+        <p>{{/email}}</p>
+    </div>
+    -->
 </body>
 </html>

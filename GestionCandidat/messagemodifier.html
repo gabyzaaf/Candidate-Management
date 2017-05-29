@@ -17,7 +17,7 @@
         }
     </script>
 </head>
-<body ng-controller="rechercheJsonMessage">
+<body ng-controller="rechercheAllMessage">
     <br />
     <h2>Message</h2>
     <br />
@@ -33,32 +33,45 @@
         </tbody>
     </table>
     <br />
-    <form ng-submit="sendMessage()">
-        <div class="form-style">
-            <table align="center">
-                <tbody>
-                    <tr>
-                        <td>Nom template : </td>
-                        <td>
-                            <select ng-model="selectedMsg" ng-options="todo.titre for todo in todos" id="selectMessage" onclick="reload();">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Texte du message : </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" disabled="disabled">{{selectedMsg.contenu}}</textarea></td>
-                    </tr>
-                    <tr>
-                    <tr>
-                        <td align="center"><input type="submit" name="modifiermsg" class="btnVert" value="Modifier" onclick=""/></td>
-                        <td align="center"><input type="submit" name="validermsg" class="btnVert" value="Valider" hidden="hidden" onclick=""/></td>
-                        <td align="center"><input type="submit" name="supprimermsg" class="btnRouge" value="Supprimer" /></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-</form>
+    <div class="form-style">
+        <table align="center">
+            <tbody>
+                <tr>
+                    <td colspan="3" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
+                </tr>
+                <tr>
+                    <td>Selectionner template : </td>
+                    <td>
+                        <select ng-model="selectedMsg" ng-options="todo.titre_message for todo in todos" id="selectMessage"></select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <section ng-controller="updateMessage">
+            <form ng-submit="sendEntry(updateMessage)">
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td>Titre du template : </td>
+                            <td colspan="2">
+                                <input ng-model="updateMessage.titre" ng-value="titreMsgUpdate" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Contenu du message : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-value="contenueMsgUpdate" ng-model="updateMessage.contenu"></textarea></td>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnVert" value="Modifier" onclick="" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </section>
+    </div>
 </body>
 </html>
