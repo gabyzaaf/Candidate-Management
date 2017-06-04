@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
+using System.IO;
 using core.configuration;
+using core.plugin.engine;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using scheduler;
 
 namespace ConsoleApplication
 {
@@ -67,17 +69,14 @@ namespace ConsoleApplication
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask();   
             */
+            
                 var host = new WebHostBuilder()
                             .UseKestrel()
                             //.UseUrls("http://192.168.1.31:5000")
                             .UseStartup<Startup>()
                             .Build();
                 host.Run();
-
-           
-        
         }
-        
-    }
+}
 }
 
