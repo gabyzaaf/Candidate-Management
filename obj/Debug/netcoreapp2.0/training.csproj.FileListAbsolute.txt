@@ -1,0 +1,10 @@
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/bin/Debug/netcoreapp2.0/training.deps.json
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/bin/Debug/netcoreapp2.0/training.runtimeconfig.json
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/bin/Debug/netcoreapp2.0/training.runtimeconfig.dev.json
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/obj/Debug/netcoreapp2.0/training.csproj.CoreCompileInputs.cache
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/obj/Debug/netcoreapp2.0/training.AssemblyInfo.cs
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/bin/Debug/netcoreapp2.0/training.dll
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/bin/Debug/netcoreapp2.0/training.pdb
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/obj/Debug/netcoreapp2.0/training.dll
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/obj/Debug/netcoreapp2.0/training.pdb
+/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/bin/Debug/netcoreapp2.0/xunit.execution.desktop.dll

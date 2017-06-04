@@ -1,0 +1,145 @@
+21/05/2017 10:39:43 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+21/05/2017 10:39:43 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+21/05/2017 10:41:45 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 46 existe veuillez vous identifier
+21/05/2017 10:41:45 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 46 existe veuillez vous identifier
+21/05/2017 10:42:17 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+21/05/2017 10:42:17 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 15:17:29 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 38 existe veuillez vous identifier
+30/05/2017 15:17:29 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 38 existe veuillez vous identifier
+30/05/2017 16:48:00 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 91 existe veuillez vous identifier
+30/05/2017 16:48:00 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 91 existe veuillez vous identifier
+30/05/2017 21:09:00 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:09:00 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:25:43 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:25:43 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:30:13 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:30:13 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:31:21 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:31:21 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:32:16 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:32:16 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:38:59 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:38:59 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:39:21 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:39:21 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:10 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:10 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:19 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:19 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:19 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:19 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:19 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:44:19 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:45:25 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+30/05/2017 21:45:25 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 07:38:22 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:38:22 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:38:22 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:38:22 - [Error] - WsCustomeException - UserController - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:41:24 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:41:24 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:41:25 - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:41:25 - [Error] - WsCustomeException - UserController - Unable to connect to any of the specified MySQL hosts.
+31/05/2017 07:47:21 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 7 existe veuillez vous identifier
+31/05/2017 07:47:21 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 7 existe veuillez vous identifier
+31/05/2017 08:00:46 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:46 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:47 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:47 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:47 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:47 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:47 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:00:47 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:04:02 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:04:02 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:07:42 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:07:42 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:09:15 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:09:15 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:10:59 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:10:59 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:12:03 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:12:03 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:14:30 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:14:30 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:14:34 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:14:34 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:15:09 - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 7 existe veuillez vous identifier
+31/05/2017 08:15:09 - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 7 existe veuillez vous identifier
+31/05/2017 08:16:05 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:05 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:16:07 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:20:55 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:20:55 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:22:32 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:22:32 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:31:13 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:31:13 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:32:54 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:32:54 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:35:15 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:35:15 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:37:56 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 08:37:56 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 12:28:23 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+31/05/2017 12:28:23 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 10:52:56 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 10:52:56 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 16:42:41 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 16:42:41 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:08:35 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:08:35 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:09:31 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:09:31 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:11:54 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:11:54 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:12:13 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 18:12:13 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 18:12:43 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 18:12:43 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 18:20:48 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:20:49 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:20:50 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:20:50 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:32:54 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:32:54 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:35:21 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:35:21 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 18:35:31 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 18:35:31 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+03/06/2017 18:36:54 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 18:36:54 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 23:41:09 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 23:41:09 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 23:45:23 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 23:45:23 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 23:45:51 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 23:45:51 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+03/06/2017 23:46:04 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+03/06/2017 23:46:04 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+04/06/2017 00:01:57 - [Error] - WsCustomeException - UserController - Le token de l'utilisateur existe deja
+04/06/2017 00:02:32 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:02:32 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:38:03 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:38:03 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:41:17 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:41:17 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:41:28 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:41:28 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:50:12 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 00:50:12 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 09:50:59 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+04/06/2017 09:50:59 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+04/06/2017 09:51:11 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 09:51:11 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche

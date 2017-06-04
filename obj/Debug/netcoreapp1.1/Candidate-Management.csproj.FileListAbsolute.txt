@@ -1,0 +1,4 @@
+/training/Candidate-Management/bin/Debug/netcoreapp1.1/Candidate-Management.deps.json
+/training/Candidate-Management/bin/Debug/netcoreapp1.1/Candidate-Management.runtimeconfig.json
+/training/Candidate-Management/bin/Debug/netcoreapp1.1/Candidate-Management.runtimeconfig.dev.json
+/training/Candidate-Management/obj/Debug/netcoreapp1.1/Candidate-Management.AssemblyInfo.cs
