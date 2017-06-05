@@ -20,7 +20,7 @@ public class Candidate{
     private var englishNote:String
     private var NS:String
     private var action:String
-    private var annee:String
+    private var annee:Int
     private var approcheEmail:Bool
     private var competence:String
     private var crCall:String
@@ -38,7 +38,7 @@ public class Candidate{
     
    
     
-    public init(_id:String="",_nom:String="",_prenom:String="",_email:String="",_englishNote:String,_ns:String,_action:String,_annee:String,_approcheEmail:Bool,_competence:String,_crCall:String,_jobIdealNote:String,_lien:String,_link:String,_locationNote:String,_nationalityNote:String,_nsNote:String,_phone:String,_pieCouteNote:String,_pisteNote:String,_sexe:Character,_xpNote:String){
+    public init(_id:String="",_nom:String="",_prenom:String="",_email:String="",_englishNote:String="",_ns:String="",_action:String="",_annee:Int=0,_approcheEmail:Bool=false,_competence:String="",_crCall:String="",_jobIdealNote:String="",_lien:String="",_link:String="",_locationNote:String="",_nationalityNote:String="",_nsNote:String="",_phone:String="",_pieCouteNote:String="",_pisteNote:String="",_sexe:Character="e",_xpNote:String=""){
         self.id = _id
         self.name = _nom
         self.firstname = _prenom
@@ -93,7 +93,7 @@ public class Candidate{
         return self.action
     }
 
-    public func getAnnee()->String{
+    public func getAnnee()->Int{
         return self.annee
     }
 
@@ -101,6 +101,58 @@ public class Candidate{
         return self.approcheEmail
     }
 
+    public func getCompetence()->String{
+        return self.competence
+    }
     
+    public func getCrCall()->String{
+        return self.crCall
+    }
+
+    public func getJobIdealNote()->String{
+        return self.jobIdealNote
+    }
+
+    public func getLien()->String{
+        return self.lien
+    }
+    
+    public func getLink()->String{
+        return self.link
+    }
+    
+    
+    public func getLocationNote()->String{
+        return self.locationNote
+    }
+
+    public func getNationalityNote()->String{
+        return self.nationalityNote
+    }
+
+    public func getNsNote()->String{
+        return self.nsNote
+    }
+
+    public func getPhone()->String{
+        return self.phone
+    }
+
+    public func getPieCoutNote()->String{
+        return self.pieCouteNote
+    }
+    
+    public func getPisteNote()->String{
+        return self.crCall
+    }
+
+    public func getSexe()->Character{
+        return self.sexe
+    }
+
+    public func getXpNote()->String{
+        return self.xpNote
+    }
+
 
 }

@@ -53,19 +53,36 @@ class DisplayCandidate:  UIViewController,UITableViewDataSource,UITableViewDeleg
     
     func getCandidate() ->Void{
         
-        
+        var candidat = Candidate()
         let url = createURLrequest(url: "http://localhost:5000/api/User/Candidates/search/"+array[index].getEmail()+"/"+user.getToken())
         
         webServiceGet(request: url){(result)->() in
-            print("the candidat numbers is -----> \(result.count)")
+            
             if result.count == 0 {
                 print("ko")
             }else{
-                print(result)
+                for i in 0...(result.count-1) {
+                    let dico = result[i] as! NSDictionary
+                   
+                    
+                    var sexe = (dico["sexe"] as! String)
+                   
+                    
+                    
+                    candidat = Candidate(_id: "", _nom: dico["nom"] as! String, _prenom: dico["prenom"] as! String, _email: dico["email"] as! String, _englishNote: dico["EnglishNote"] as! String, _ns: dico["NS"] as! String, _action: dico["actions"] as! String, _annee: Int(dico["annee"] as! String)!, _approcheEmail: self.transformStringToBool(text: (dico["approche_email"] as! String)), _competence: dico["competences"] as! String, _crCall: dico["crCall"] as! String, _jobIdealNote: dico["jobIdealNote"] as! String, _lien: dico["lien"] as! String, _link: dico["link"] as! String, _locationNote: dico["locationNote"] as! String, _nationalityNote: dico["nationalityNote"] as! String, _nsNote: dico["nsNote"] as! String, _phone: dico["phone"] as! String, _pieCouteNote: dico["pieCouteNote"] as! String, _pisteNote: dico["pisteNote"] as! String, _sexe: sexe.characters[sexe.characters.startIndex] , _xpNote: dico["xpNote"] as! String)
+                
+                }
             }
             
         }
         
+    }
+    
+    func transformStringToBool(text:String)->Bool {
+        if("True".caseInsensitiveCompare(text) == ComparisonResult.orderedSame){
+            return true
+        }
+        return false
     }
     
     /*
