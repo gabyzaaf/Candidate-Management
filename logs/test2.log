@@ -143,3 +143,9 @@
 04/06/2017 09:50:59 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
 04/06/2017 09:51:11 - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
 04/06/2017 09:51:11 - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+04/06/2017 18:13:29 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+04/06/2017 18:13:29 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+04/06/2017 18:13:29 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+04/06/2017 18:13:29 - [Error] - WsCustomeException - UserController - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+05/06/2017 14:30:31 - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+05/06/2017 14:30:31 - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
