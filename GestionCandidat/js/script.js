@@ -61,6 +61,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 Name: candidat.Name,
                 Firstname: candidat.Firstname,
                 emailAdress: candidat.emailAdress,
+                cp: candidat.cp,
                 phone: candidat.phone,
                 sexe: "M",
                 actions: candidat.actions,
@@ -178,6 +179,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 Name: updateCandidate.nom,
                 Firstname: updateCandidate.prenom,
                 emailAdress: updateCandidate.email,
+                cp: updateCandidate.cp,
                 phone: updateCandidate.telephone,
                 sexe: updateCandidate.sexe,
                 actions: updateCandidate.actions,
@@ -192,11 +194,96 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
             $scope.contentResponse = response.data.content;
             if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
                 console.log("In the error");
+                console.log(response.data.content);
+            } else {
+                console.log("En attente du cookie");
                 console.log(updateCandidate.nom);
                 console.log(updateCandidate.prenom);
                 console.log(updateCandidate.email);
+                console.log(updateCandidate.cp);
                 console.log(updateCandidate.telephone);
                 console.log(updateCandidate.sexe);
+                console.log(updateCandidate.actions);
+                console.log(updateCandidate.anneediplome);
+                console.log(updateCandidate.url);
+                console.log(updateCandidate.cr);
+                console.log(updateCandidate.note);
+                console.log(response.data.content);
+            }
+
+
+        }, (err) => {
+            console.log("ceci est une erreur" + err);
+        });
+    }
+}]);
+
+/****************************************************************/
+
+/*********************  Modifier un entretien  ********************/
+
+gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+
+    $scope.sendEntry = function (updateEntretien) {
+        if ($scope.updateEntretien.approche_email == null) {
+            $scope.updateEntretien.approche_email = $scope.approche_emailCoor;
+        }
+        if ($scope.updateEntretien.note == null) {
+            $scope.updateEntretien.note = $scope.noteCoor;
+        }
+        if ($scope.updateEntretien.link == null) {
+            $scope.updateEntretien.link = $scope.linkCoor;
+        }
+        if ($scope.updateEntretien.xpNote == null) {
+            $scope.updateEntretien.xpNote = $scope.xpNoteCoor;
+        }
+        if ($scope.updateEntretien.jobIdealNote == null) {
+            $scope.updateEntretien.jobIdealNote = $scope.jobIdealNoteCoor;
+        }
+        if ($scope.updateEntretien.pisteNote == null) {
+            $scope.updateEntretien.pisteNote = $scope.pisteNoteCoor;
+        }
+        if ($scope.updateEntretien.pieCouteNoter == null) {
+            $scope.updateEntretien.pieCouteNoter = $scope.pieCouteNoteCoor;
+        }
+        if ($scope.updateEntretien.locationNote == null) {
+            $scope.updateEntretien.locationNote = $scope.locationNoteCoor;
+        }
+        if ($scope.updateEntretien.EnglishNote == null) {
+            $scope.updateEntretien.EnglishNote = $scope.EnglishNoteCoor;
+        }
+        if ($scope.updateEntretien.nationalityNote == null) {
+            $scope.updateEntretien.nationalityNote = $scope.nationalityNoteCoor;
+        }
+        if ($scope.updateEntretien.competences == null) {
+            $scope.updateEntretien.competences = $scope.competencesCoor;
+        }
+
+        var req = {
+            method: 'POST',
+            url: 'http://192.168.0.14:5000/api/user/update/candidat/report',
+            responseType: "json",
+            data: {
+                sessionId: $cookies.get('cookie'),
+                emailCandidat: $scope.selectedCar,
+                note: updateEntretien.note,
+                link: updateEntretien.link,
+                xpNote: updateEntretien.xpNote,
+                nsNote: updateEntretien.psnote,
+                jobIdealNote: updateEntretien.jobIdealNote,
+                pisteNote: updateEntretien.pisteNote,
+                pieCouteNote: updateEntretien.pieCouteNoter,
+                locationNote: updateEntretien.dispo,
+                EnglishNote: updateEntretien.EnglishNote,
+                nationalityNote: updateEntretien.nationalityNote,
+                competences: updateEntretien.competences
+            }
+        }
+
+        $http(req).then(function (response) {
+            $scope.contentResponseEntretien = response.data.content;
+            if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
+                console.log("In the error");
                 console.log(response.data.content);
             } else {
                 console.log("En attente du cookie");
@@ -297,7 +384,6 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
     $scope.sendCandidat = function (candidat) {
         $http.get('http://192.168.0.14:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
             $scope.todos = response.data;
-            $scope.selectedCar = $cookies.get('email');
             if ($scope.todos != null) {
                 if ($scope.todos[0].content != null) {
                     $scope.contentResponse = $scope.todos[0].content;
@@ -306,19 +392,19 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                 } else {
                     var nbSelect = 0;
                     for (var i = 0; i < $scope.todos.length; i++) {
-                        if ($scope.todos[i].phone == $scope.selectedCar) {
+                        if ($scope.todos[i].email == $scope.selectedCar) {
                             nbSelect = i;
-                            console.log($scope.todos[i].phone);
+                            //console.log($scope.todos[i].email);
                         }
-                        console.log($scope.todos[i].phone);
+                        //console.log($scope.todos[i].email);
                     }
                     $scope.nomCoor = $scope.todos[nbSelect].nom;
                     $scope.prenomCoor = $scope.todos[nbSelect].prenom;
                     $scope.phoneCoor = $scope.todos[nbSelect].phone;
                     $scope.emailCoor = $scope.todos[nbSelect].email;
+                    console.log($scope.selectedCar);
                     $scope.sexeCoor = $scope.todos[nbSelect].sexe;
-                    console.log($scope.todos[nbSelect].sexe);
-                    $scope.cpCoor = $scope.todos[nbSelect].cp;
+                    $scope.cp = $scope.todos[nbSelect].cp;
                     $scope.actionsCoor = $scope.todos[nbSelect].actions;
                     $scope.anneeCoor = $scope.todos[nbSelect].annee;
                     $scope.lienCoor = $scope.todos[nbSelect].lien;
