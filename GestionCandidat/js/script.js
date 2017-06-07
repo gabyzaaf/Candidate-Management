@@ -336,38 +336,69 @@ gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$wi
 /*********************  modifier un message  ********************/
 
 gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+
     $scope.sendEntry = function (updateMessage) {
-        if ($scope.updateMessage.titre == null) {
-            $scope.updateMessage.titre = $scope.titreMsgUpdate;
+        if ($scope.updateMessage.titre_message == null) {
+            $scope.updateMessage.titre_message = $scope.titreMsg;
         }
-        if ($scope.updateMessage.contenu == null) {
-            $scope.updateMessage.contenu = $scope.contenuMsgUpdate;
+        if ($scope.updateMessage.contenu_message == null) {
+            $scope.updateMessage.contenu_message = $scope.contenuMsg;
         }
+
+
         var req = {
             method: 'POST',
             url: 'http://192.168.0.14:5000/api/user/update/message/',
             responseType: "json",
             data: {
                 session_id: $cookies.get('cookie'),
-                titre: updateMessage.titre,
-                contenu: updateMessage.contenu,
+                titre: updateMessage.titre_message,
+                contenu: updateMessage.contenu_message,
             }
         }
 
         $http(req).then(function (response) {
-            $scope.contentResponse = response.data.content;
-            if (response.data.content != "Le message a ete ajoute à votre systeme") {
+            $scope.contentResponseMessage = response.data.content;
+            if (response.data.content != "Le message a ete modifie dans votre systeme") {
                 console.log("In the error");
                 console.log(response.data.content);
-                console.log($scope.titre);
-                console.log($scope.titreMsgUpdate);
             } else {
-                console.log("En attente du cookie baby");
+                console.log("En attente du cookie");
                 console.log(response.data.content);
-                console.log($scope.titre);
-                console.log($scope.titreMsgUpdate);
             }
 
+        }, (err) => {
+            console.log("ceci est une erreur" + err);
+        });
+    }
+}]);
+
+/****************************************************************/
+
+/*********************  supprimer un message  ********************/
+
+gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+
+    $scope.sendMessageDel = function (deleteMessage) {
+        var req = {
+            method: 'POST',
+            url: 'http://192.168.0.14:5000/api/user/delete/message/',
+            responseType: "json",
+            data: {
+                session_id: $cookies.get('cookie'),
+                titre: $scope.selectedMsg,
+            }
+        }
+
+        $http(req).then(function (response) {
+            $scope.contentResponseMessage = response.data.content;
+            if (response.data.content != "Le message a ete supprimer dans votre systeme") {
+                console.log("In the error");
+                console.log(response.data.content);
+            } else {
+                console.log("En attente du cookie");
+                console.log(response.data.content);
+            }
 
         }, (err) => {
             console.log("ceci est une erreur" + err);
@@ -473,31 +504,35 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
 /*********************  Recherche tous les messages  ********************/
 
 gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
-
-    $http.get('http://192.168.0.14:5000/api/user/searchAllMessage/message/').then(function (response) {
-        $scope.todos = response.data;
-
-        if ($scope.todos != null) {
-            if ($scope.todos[0].content != null) {
-                $scope.contentResponse = $scope.todos[0].content;
-                console.log($scope.todos[0].content);
-
-            } else {
-                var nbSelect = 0;
-                for (var i = 0; i < $scope.todos.length; i++) {
-                    if ($scope.todos[i].titre == $scope.selectedMsg) {
-                        nbSelect = i;
+        $http.get('http://192.168.0.14:5000/api/user/searchAllMessage/message/').then(function (response) {
+            $scope.todos = response.data;
+            $scope.sendMessage = function (message) {
+                $http.get('http://192.168.0.14:5000/api/user/searchAllMessage/message/').then(function (response) {
+                    $scope.todos = response.data;
+                    if ($scope.todos != null) {
+                        if ($scope.todos[0].content != null) {
+                            console.log($scope.todos[0].content);
+                        } else {
+                            var nbSelect = 0;
+                            for (var i = 0; i < $scope.todos.length; i++) {
+                                if ($scope.todos[i].titre_message == $scope.selectedMsg) {
+                                    nbSelect = i;
+                                    //console.log($scope.todos[i].email);
+                                }
+                                //console.log($scope.todos[i].email);
+                            }
+                            $scope.titreMsg = $scope.todos[nbSelect].titre_message;
+                            $scope.contenuMsg = $scope.todos[nbSelect].contenu_message;
+                        }
+                    } else {
+                        console.log("In the error");
                     }
-                }
-                $scope.titreMsgUpdate = $scope.todos[nbSelect].titre;
-                $scope.contenueMsgUpdate = $scope.todos[nbSelect].contenu;
-            }
-        } else {
-            console.log("In the error");
-        }
-    }, (err) => {
-        console.log(err);
-    });
+                }, (err) => {
+                    console.log(err);
+                });
+            }}, (err) => {
+            console.log(err);
+        });
 }]);
 
 /*************************************************************************/

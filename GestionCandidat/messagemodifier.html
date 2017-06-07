@@ -15,6 +15,36 @@
             var lTextarea = document.getElementById("ContenuMessage");
             lTextarea.style.display = (lTable.style.display == "textarea") ? "none" : "none";
         }
+
+        function toggleTableMod() {
+
+            var lSelect = document.getElementById("selectMessage").value;
+            if (lSelect == "? undefined:undefined ?") {
+                alert("Selectionner un message !")
+            } else {
+                var lTable = document.getElementById("loginTableMod");
+                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            }
+        }
+
+        function toggleTableSupp() {
+
+            var lSelect = document.getElementById("selectMessage").value;
+            if (lSelect == "? undefined:undefined ?") {
+                alert("Selectionner un message !")
+            } else {
+                var lTable = document.getElementById("loginTableSupp");
+                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            }
+        }
+
+        function toggleSelectModSupp() {
+            var lTable = document.getElementById("loginTableMod");
+            var lTable2 = document.getElementById("loginTableSupp");
+            lTable.style.display = (lTable.style.display == "table") ? "none" : "none";
+            lTable2.style.display = (lTable.style.display == "table") ? "none" : "none";
+        }
+
     </script>
 </head>
 <body ng-controller="rechercheAllMessage">
@@ -23,55 +53,95 @@
     <br />
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <table align="center">
-        <tbody>
-            <tr>
-                <td><a href="message.html">Nouveau template</a></td>
-                <td>|</td>
-                <td><a href="messagemodifier.html">Modifier template</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <br />
-    <div class="form-style">
         <table align="center">
             <tbody>
                 <tr>
-                    <td colspan="3" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
-                </tr>
-                <tr>
-                    <td>Selectionner template : </td>
-                    <td>
-                        <select ng-model="selectedMsg" ng-options="todo.titre_message for todo in todos" id="selectMessage"></select>
-                    </td>
+                    <td><a href="message.html">Nouveau template</a></td>
+                    <td>|</td>
+                    <td><a href="messagemodifier.html">Modifier template</a></td>
                 </tr>
             </tbody>
         </table>
-        <br />
+    <br />
+    <form ng-submit="sendMessage(message)">
+        <div class="form-style">
+            <table align="center" border="1" width="500">
+                <tr>
+                    <th>Message</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select ng-model="selectedMsg" id="selectMessage" style="width:500px;" onclick="toggleSelectModSupp()">
+                            <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
+                        </select>
+                    </td>
+                    <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableMod()" /></td>
+                    <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableSupp()" /></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <br />
         <section ng-controller="updateMessage">
-            <form ng-submit="sendEntry(updateMessage)">
-                <table align="center">
-                    <tbody>
-                        <tr>
-                            <td>Titre du template : </td>
-                            <td colspan="2">
-                                <input ng-model="updateMessage.titre" ng-value="titreMsgUpdate" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">Contenu du message : </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-value="contenueMsgUpdate" ng-model="updateMessage.contenu"></textarea></td>
-                        </tr>
-                        <tr>
-                        <tr>
-                            <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnVert" value="Modifier" onclick="" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+                <form ng-submit="sendEntry(updateMessage)">
+                    <div class="form-style">
+                        <table align="center" id="loginTableMod" hidden="hidden">
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
+                                </tr>
+                                <tr>
+                                    <td>Titre du template : </td>
+                                    <td colspan="2">
+                                        <input ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Contenu du message : </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
+                                </tr>
+                                <tr>
+                                <tr>
+                                    <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Modifier" onclick="" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </section>
+            <br />
+            <section ng-controller="deleteMessage">
+                <form ng-submit="sendMessageDel(deleteMessage)">
+                    <div class="form-style">
+                        <table align="center" id="loginTableSupp" hidden="hidden">
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
+                                </tr>
+                                <tr>
+                                    <td>Titre du template : </td>
+                                    <td colspan="2">
+                                        <input ng-model="deleteMessage.titre_message" ng-value="titreMsg" disabled />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Contenu du message : </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-value="contenuMsg" disabled></textarea></td>
+                                </tr>
+                                <tr>
+                                <tr>
+                                    <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Supprimer" onClick="return confirm('êtes-bous sûre de vouloir supprimer le message template ' + document.getElementById('selectMessage').value + '?')" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
         </section>
-    </div>
 </body>
 </html>
