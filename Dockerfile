@@ -15,5 +15,5 @@ RUN curl -SL $DOTNET_DOWNLOAD_URL --output dotnet.tar.gz \
     && rm dotnet.tar.gz \
     && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 
-RUN mkdir /home/candidate && cd /home/candidate && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git && apt-get update -y && apt-get install vim -y \
+RUN apt-get install git -y && mkdir /home/candidate && cd /home/candidate && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git && apt-get update -y && apt-get install vim -y \
  && mkdir -p /var/candidate/logs/ && mkdir -p /var/candidate/plugins/
