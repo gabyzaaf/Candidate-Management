@@ -1,19 +1,15 @@
-FROM microsoft/dotnet:2.0-runtime-deps
+FROM microsoft/dotnet:2.0.0-preview1-runtime
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        curl \
-    && rm -rf /var/lib/apt/lists/*
+# set up network
+ENV ASPNETCORE_URLS http://+:80
 
-# Install .NET Core
-ENV DOTNET_VERSION 2.0.0-preview1-002111-00
-ENV DOTNET_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/release/2.0.0/Binaries/$DOTNET_VERSION/dotnet-linux-x64.$DOTNET_VERSION-portable.tar.gz
-
-RUN curl -SL $DOTNET_DOWNLOAD_URL --output dotnet.tar.gz \
-    && mkdir -p /usr/share/dotnet \
-    && tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
-    && rm dotnet.tar.gz \
-    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
-
+# set up the runtime store
+ENV ASPNETCORE_RUNTIME_STORE_VERSION 2.0.0-preview1
+RUN curl -o /tmp/runtimestore.tar.gz \
+    https://dist.asp.net/packagecache/${ASPNETCORE_RUNTIME_STORE_VERSION}/linux-x64/aspnetcore.runtimestore.tar.gz \
+    && export DOTNET_HOME=$(dirname $(readlink $(which dotnet))) \
+    && tar -x -C $DOTNET_HOME -f /tmp/runtimestore.tar.gz \
+    && rm /tmp/runtimestore.tar.gz
+    
 RUN  mkdir /home/candidate && cd /home/candidate  && apt-get update -y && apt-get install git-core -y && apt-get install vim -y \
  && mkdir -p /var/candidate/logs/ && mkdir -p /var/candidate/plugins/ && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git
