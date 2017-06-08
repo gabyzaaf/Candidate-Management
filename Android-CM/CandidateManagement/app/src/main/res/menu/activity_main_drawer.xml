@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_search" android:icon="@android:drawable/ic_menu_search"
+            android:title="Rechercher un candidat" />
+        <item android:id="@+id/nav_add" android:icon="@android:drawable/ic_input_add"
+            android:title="Ajouter un candidat" />
+        <item android:id="@+id/nav_calendar" android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Consulter l'agenda" />
+        <item android:id="@+id/nav_close" android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="Déconnexion" />
+    </group>
+</menu>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Candidate Management</string>
+    <string name="title_activity_main">Acceuil </string>
+    <string name="title_activity_add">Ajouter un candidat</string>
+    <string name="title_activity_search">Rechercher un candidat</string>
+    <string name="title_activity_calendar">Agenda</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="actions_array">
+        <item>interne</item>
+        <item>enCours</item>
+        <item>RN</item>
+        <item>trop_relance</item>
+        <item>freelance</item>
+        <item>etranger</item>
+        <item>appelerRemind</item>
+        <item>aRelancerMail</item>
+        <item>aRelancerLKD</item>
+        <item>PAERemind</item>
+        <item>HcJunior</item>
+        <item>HcLangue</item>
+        <item>HCGeo</item>
+        <item>HCSenior</item>
+        <item>HCPasDev</item>
+        <item>HCMFST</item>
+        <item>HCBacMoins5</item>
+    </string-array>
+</resources>
