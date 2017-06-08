@@ -19,7 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.Requests.LoginRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        etMail = (EditText) findViewById(R.id.etMail);
+        etMail = (EditText) findViewById(R.id.etMailAdd);
         etPassword = (EditText) findViewById(R.id.etPassword);
         final Button bLogin = (Button) findViewById(R.id.bLogin);
 

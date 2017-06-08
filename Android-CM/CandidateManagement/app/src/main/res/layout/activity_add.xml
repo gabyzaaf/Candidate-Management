@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom : "
+            android:text="Nom :  *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prenom : "
+            android:text="Prenom :  *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -47,13 +47,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mail : "
+            android:text="Mail :  *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
             />
         <EditText
-            android:id="@+id/etMail"
+            android:id="@+id/etMailAdd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Mail"
@@ -68,7 +68,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N°tel : "
+            android:text="N°tel :  *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -93,12 +93,20 @@
             android:checkedButton="@+id/radio2"
             android:orientation="horizontal"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sexe :  *"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                android:gravity="center"
+                />
             <RadioButton
                 android:id="@+id/rbMasculin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Masculin"
-                />
+                android:text="Masculin "
+                android:checked="false" />
             <RadioButton
                 android:id="@+id/rbFeminin"
                 android:layout_width="wrap_content"
@@ -112,6 +120,14 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Action :  *"
+           android:textStyle="bold"
+           android:textColor="#4899F6"
+           android:gravity="center"
+           />
        <Spinner
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -125,7 +141,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Année : "
+            android:text="Année :  *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -150,7 +166,7 @@
             android:id="@+id/etLink"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Lien (http://monsite.com)"
+            android:hint="Lien"
             android:layout_weight="1"
             />
     </LinearLayout>
@@ -171,7 +187,7 @@
             android:id="@+id/etcrCall"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="crCall (callSpeedly)"
+            android:hint="crCall"
             android:layout_weight="1"
             />
         <TextView
@@ -198,7 +214,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email : "
+            android:text="Approche Email : "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -215,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Oui"
-                />
+                android:checked="false" />
             <RadioButton
                 android:id="@+id/rbFalse"
                 android:layout_width="wrap_content"

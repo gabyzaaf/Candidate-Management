@@ -118,18 +118,11 @@ public class MainActivity extends AppCompatActivity
     private void InitContent() {
         User user = new User();
         user = User.getCurrentUser();
-
         tvWelcome.setText("Bonjour " + user.email);
-        //tvCandidates.append("Voici la liste des candidats : ");
-        //Init spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spActions.setAdapter(adapter);
-
-        //créer fonction récupération des candidats à relancer
-        //ajouter bouton d'envoi des mails
-        //créer fonction envoi mail en fonction du statut d'envoi
     }
 
     @Override
