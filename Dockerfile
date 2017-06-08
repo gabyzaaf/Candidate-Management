@@ -1,15 +1,39 @@
-FROM microsoft/dotnet:2.0.0-preview1-runtime
+FROM buildpack-deps:jessie-scm
 
-# set up network
-ENV ASPNETCORE_URLS http://+:80
+# Install .NET CLI dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libc6 \
+        libcurl3 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu52 \
+        liblttng-ust0 \
+        libssl1.0.0 \
+        libstdc++6 \
+        libunwind8 \
+        libuuid1 \
+        zlib1g \
+    && rm -rf /var/lib/apt/lists/*
 
-# set up the runtime store
-ENV ASPNETCORE_RUNTIME_STORE_VERSION 2.0.0-preview1
-RUN curl -o /tmp/runtimestore.tar.gz \
-    https://dist.asp.net/packagecache/${ASPNETCORE_RUNTIME_STORE_VERSION}/linux-x64/aspnetcore.runtimestore.tar.gz \
-    && export DOTNET_HOME=$(dirname $(readlink $(which dotnet))) \
-    && tar -x -C $DOTNET_HOME -f /tmp/runtimestore.tar.gz \
-    && rm /tmp/runtimestore.tar.gz
-    
-RUN  mkdir /home/candidate && cd /home/candidate  && apt-get update -y && apt-get install git-core -y && apt-get install vim -y \
- && mkdir -p /var/candidate/logs/ && mkdir -p /var/candidate/plugins/ && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git
+# Install .NET Core SDK
+ENV DOTNET_SDK_VERSION 1.0.4
+ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-debian-x64.$DOTNET_SDK_VERSION.tar.gz
+
+RUN curl -SL $DOTNET_SDK_DOWNLOAD_URL --output dotnet.tar.gz \
+    && mkdir -p /usr/share/dotnet \
+    && tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
+    && rm dotnet.tar.gz \
+    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+# Trigger the population of the local package cache
+ENV NUGET_XMLDOC_MODE skip
+RUN mkdir warmup \
+    && cd warmup \
+    && dotnet new \
+    && cd .. \
+    && rm -rf warmup \
+    && rm -rf /tmp/NuGetScratch
+
+RUN mkdir /home/candidate && cd /home/candidate && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git && apt-get update -y && apt-get install vim -y \
+ && mkdir -p /var/candidate/logs/ && mkdir -p /var/candidate/plugins/
