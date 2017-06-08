@@ -3,6 +3,8 @@ using actions;
 using actionUser;
 using exceptions;
 using System.IO;
+using conf;
+using System.Collections.Generic;
 namespace email
 {
     class Program
@@ -27,6 +29,7 @@ namespace email
                 Candidate Firstname [3].
                 Meetings Optionnal [4].
              */
+             
             try{
                 
                 Program.writeLogs("/Users/zaafranigabriel/Documents/logs/log.txt",string.Format($"the date is {DateTime.Now.ToString()} BEGIN PROGRAM"));
@@ -39,6 +42,19 @@ namespace email
                 // /Users/zaafranigabriel/Documents/logs/log.txt
                 new EmailCustomException(exc.Message).writeLog("/Users/zaafranigabriel/Documents/logs/log.txt");
             }
+            
+           
         }
+
+/*
+        public void LoadJson()
+        {
+            using (StreamReader r = new StreamReader("configuration.json"))
+            {
+                string json = r.ReadToEnd();
+                List<ConfigurationData> items = JsonConvert.DeserializeObject<List<ConfigurationData>>(json);
+            }
+        }
+ */
     }
 }
