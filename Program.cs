@@ -69,13 +69,17 @@ namespace ConsoleApplication
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask();   
             */
-            
+            try{
                 var host = new WebHostBuilder()
                             .UseKestrel()
                             //.UseUrls("http://192.168.1.31:5000")
                             .UseStartup<Startup>()
                             .Build();
                 host.Run();
+            }catch(Exception exc){
+                Console.WriteLine("The launch exception is ----> "+exc.Message);
+            }
+                
         }
 }
 }

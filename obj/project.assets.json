@@ -10284,10 +10284,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/training.csproj",
+      "projectUniqueName": "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/training.csproj",
       "projectName": "training",
-      "projectPath": "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/training.csproj",
-      "outputPath": "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/obj/",
+      "projectPath": "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/training.csproj",
+      "outputPath": "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/obj/",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp2.0"

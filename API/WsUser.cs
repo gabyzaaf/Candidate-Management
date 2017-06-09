@@ -19,6 +19,7 @@ namespace API.wsUser
         [HttpPost("admin/auth/")]
         public IActionResult  GetAuthentification([FromBody]User user){
             try{
+                Console.WriteLine("in the function");
                 checkUser(user);
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 isql.Authentification(user.email,user.password);
@@ -37,6 +38,19 @@ namespace API.wsUser
                 
             }  
         }
+        /*
+        [HttpGet("Candidates/actions/{action}")]
+        public IActionResult actionFromUser(string action){
+                try{
+                    Console.WriteLine("zaa");
+                    return new ObjectResult(action);
+                }catch(Exception exc){
+                    return new ObjectResult(exc.Message);
+                }
+          }
+          */
+
+
         [HttpGet("{error}", Name = "GetNote")]
         public IActionResult GetById(State error)
         {
@@ -238,10 +252,6 @@ namespace API.wsUser
             }
             
         }
-        
-
-
-        
 
         
     }
