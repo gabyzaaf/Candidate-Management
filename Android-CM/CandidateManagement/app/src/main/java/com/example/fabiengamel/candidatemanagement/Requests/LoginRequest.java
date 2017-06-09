@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class LoginRequest extends JsonObjectRequest {
 
-    private static final String LOGIN_REQUEST_URL = "http://10.0.2.2:5000/api/user/admin/auth/";
+    private static final String LOGIN_REQUEST_URL ="http://192.168.1.17:5000/api/user/admin/auth/";
     Map<String, String> headers;
     JSONObject jsonBody;
     String requestBody;

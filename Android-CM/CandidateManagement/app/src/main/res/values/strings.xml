@@ -1,4 +1,5 @@
 <resources>
+    <string name="server_adress">http://192.168.1.17:5000</string>
     <string name="app_name">Candidate Management</string>
     <string name="title_activity_main">Acceuil </string>
     <string name="title_activity_add">Ajouter un candidat</string>

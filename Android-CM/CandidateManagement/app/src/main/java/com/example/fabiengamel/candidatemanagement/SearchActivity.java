@@ -2,6 +2,7 @@ package com.example.fabiengamel.candidatemanagement;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.Candidate;
 import com.example.fabiengamel.candidatemanagement.Models.User;
@@ -39,6 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         etNom = (EditText)findViewById(R.id.etName);
         bRecherche = (Button)findViewById(R.id.bSearchSingle);
         tvResult = (TextView)findViewById(R.id.tvSingleCand);
+        tvResult.setMovementMethod(new ScrollingMovementMethod());
 
         bRecherche.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,9 +57,9 @@ public class SearchActivity extends AppCompatActivity {
 
         String nom = etNom.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://localhost:5000/api/User/Candidates/recherche/" + nom +"/"+user.sessionId ;
+        String url ="http://192.168.1.17:5000/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
 
-        JsonArrayRequest getCandidatesRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+        JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
                 {
                     public static final String TAG ="Recherche action : " ;
@@ -64,9 +67,58 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("Response", response.toString());
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonOBject = response.getJSONObject(i);
+                                    if(jsonOBject.has("success"))
+                                    {
+                                        tvResult.setText("Erreur : " + jsonOBject.getString("content"));
+                                    }
+                                else {
+                                        tvResult.setText("Informations sur le candidat: ");
+                                        tvResult.append("\n");
+                                        tvResult.append("\n");
+                                        tvResult.append("Nom    : " + jsonOBject.getString("nom"));
+                                        tvResult.append("\n");
+                                        tvResult.append("Prénom : " + jsonOBject.getString("prenom"));
+                                        tvResult.append("\n");
+                                        tvResult.append("N°Phone: " + jsonOBject.getString("phone"));
+                                        tvResult.append("\n");
+                                        tvResult.append(" Lien  : " + jsonOBject.getString("lien"));
+                                        tvResult.append("\n");
+                                        tvResult.append("Action : " + jsonOBject.getString("actions"));
+                                        tvResult.append("\n");
+                                        tvResult.append("crCall : " + jsonOBject.getString("crCall"));
+                                        tvResult.append("\n");
+                                        tvResult.append("\n");
+                                        tvResult.append("Entretien du candidat : ");
+                                        tvResult.append("\n");
+                                        tvResult.append("\n");
+                                        tvResult.append("Note            : " + jsonOBject.getString("note"));
+                                        tvResult.append("\n");
+                                        tvResult.append("XpNote          : " + jsonOBject.getString("xpNote"));
+                                        tvResult.append("\n");
+                                        tvResult.append("PisteNote       : " + jsonOBject.getString("pisteNote"));
+                                        tvResult.append("\n");
+                                        tvResult.append("PieCouteNote    : " + jsonOBject.getString("pieCouteNote"));
+                                        tvResult.append("\n");
+                                        tvResult.append("LocationNote    : " + jsonOBject.getString("locationNote"));
+                                        tvResult.append("\n");
+                                        tvResult.append(" EnglishNote    : " + jsonOBject.getString("EnglishNote"));
+                                        tvResult.append("\n");
+                                        tvResult.append("NationalityNote : " + jsonOBject.getString("nationalityNote"));
+                                        tvResult.append("\n");
+                                        tvResult.append(" Competences    : " + jsonOBject.getString("competences"));
+                                    }
 
-                            tvResult.append("coucou");
-                        } 
+                                }
+                            }catch(JSONException e){
+                                tvResult.append("Erreur de lecture : ");
+                                tvResult.append("\n");
+                                tvResult.append(""+e);
+                                e.printStackTrace();
+                            }
+                    }
 
                 },
                 new Response.ErrorListener()
@@ -85,5 +137,6 @@ public class SearchActivity extends AppCompatActivity {
                 return params;
             }
         };
+        queue.add(searchRequest);
     }
 }

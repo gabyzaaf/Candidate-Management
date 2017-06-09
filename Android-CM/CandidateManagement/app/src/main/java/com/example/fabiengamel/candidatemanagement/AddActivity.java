@@ -19,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.User;
+import com.example.fabiengamel.candidatemanagement.Requests.AddReportRequest;
+import com.example.fabiengamel.candidatemanagement.Requests.AddRequest;
 import com.example.fabiengamel.candidatemanagement.Requests.LoginRequest;
 
 import org.json.JSONException;
@@ -62,7 +64,6 @@ public class AddActivity extends AppCompatActivity {
         rdEmailyes = (RadioButton)findViewById(R.id.rbTrue);
         rdEmailNo = (RadioButton)findViewById(R.id.rbFalse);
         bAdd = (Button)findViewById(R.id.bAdd);
-        bRefresh = (Button)findViewById(R.id.bRefresh);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, android.R.layout.simple_spinner_item);
@@ -76,13 +77,6 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-        bRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RefreshAll();
-            }
-        });
-
     }
 
     public boolean CheckEmptyField() {
@@ -92,44 +86,38 @@ public class AddActivity extends AppCompatActivity {
         {
             return false;
         }
-        else if(!rdFemme.isActivated() || !rdHomme.isActivated()) {
-            return false;
-        }
+
         return true;
     }
+
+
     public void AddCandidat() {
 
         if(!CheckEmptyField()) {
             Toast.makeText(this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
         }
-        else if(rdFemme.isActivated() && rdHomme.isActivated()){
-            Toast.makeText(this, "Choisissez un seul sexe", Toast.LENGTH_LONG).show();
-        }
+
         else{
-
-            Toast.makeText(this, "C'est parti", Toast.LENGTH_LONG).show();
-            //Récupérer toutes les valeurs des champs
-
-            //Faire la requête
-         /*   Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
-
+               Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Log.d("LOGIN :", response.toString());
+                    Log.d("ADD :", response.toString());
 
                     // JSONArray results = null;
                     try {
                         User u = new User();
-                        u.email = response.getString("email");
-                        u.sessionId = response.getString("sessionId");
-                        User.setCurrentUser(u);
+                        if(response.getBoolean("success")) {
+                            //ajout report
+                        AddReport();
+                        }
+                        else {
+                            //erreur
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    LoginActivity.this.startActivity(intent);
                 }
 
             };
@@ -137,30 +125,127 @@ public class AddActivity extends AppCompatActivity {
             Response.ErrorListener errorListener = new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                    Log.d("log2=", error.toString());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    builder.setMessage(error.toString())
-                            .setNegativeButton("Réessayer", null)
-                            .create()
-                            .show();
+                    //Gestion error
                 }
             };
 
-            LoginRequest loginRequest = null;
+            AddRequest addRequest = null;
             try {
-                loginRequest = new LoginRequest(mail, password, responseListener, errorListener);
+                User user = new User();
+                String sessionId = user.sessionId;
+
+                //valeurs champs
+                String mail = etMail.getText().toString();
+                String name = etName.getText().toString();
+                String firstname = etFirstname.getText().toString();
+                String phone = etPhone.getText().toString();
+                String sexe = "";
+                if(rdHomme.isChecked()) {
+                    sexe = "M";
+                } else if(rdFemme.isChecked()){
+                    sexe = "F";
+                }
+                String action = spAction.getSelectedItem().toString();
+                int year = Integer.parseInt(etYear.getText().toString());
+
+                //champs facultatifs
+                String link = etLink.getText().toString();
+                String crCall = etCrCall.getText().toString();
+                String ns = etNs.getText().toString();
+                boolean email = false;
+                if(rdEmailyes.isChecked()) {
+                    email = true;
+                } else if(rdEmailNo.isChecked()){
+                    email = false;
+                }
+
+                addRequest = new AddRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,
+                        crCall, ns, email,responseListener, errorListener);
+
             } catch (JSONException e) {
+                Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
-            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-            queue.add(loginRequest);
-        }*/
+            RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
+            queue.add(addRequest);
+        }
         }
 
+    public void AddReport() {
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("REPORT :", response.toString());
+
+                // JSONArray results = null;
+                try {
+                    User u = new User();
+                    if(response.getBoolean("success")) {
+                        //Afficher success
+                    }
+                    else {
+                        //erreur
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                //Gestion error
+            }
+        };
+
+        AddReportRequest addReportRequest = null;
+        try {
+            User user = new User();
+            String sessionId = user.sessionId;
+
+            //valeurs champs -------------------------------------> à modifier pour cette requête
+            String mail = etMail.getText().toString();
+            String name = etName.getText().toString();
+            String firstname = etFirstname.getText().toString();
+            String phone = etPhone.getText().toString();
+            String sexe = "";
+            if(rdHomme.isChecked()) {
+                sexe = "M";
+            } else if(rdFemme.isChecked()){
+                sexe = "F";
+            }
+            String action = spAction.getSelectedItem().toString();
+            int year = Integer.parseInt(etYear.getText().toString());
+
+            //champs facultatifs
+            String link = etLink.getText().toString();
+            String crCall = etCrCall.getText().toString();
+            String ns = etNs.getText().toString();
+            boolean email = false;
+            if(rdEmailyes.isChecked()) {
+                email = true;
+            } else if(rdEmailNo.isChecked()){
+                email = false;
+            }
+            //---------------------------> requête à construire
+             addReportRequest = new AddReportRequest(sessionId,mail,firstname, mail, phone, sexe, action, link,
+                    crCall, ns,"","", responseListener, errorListener);
+
+        } catch (JSONException e) {
+            Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
+        queue.add(addReportRequest);
+
     }
 
-    public void RefreshAll() {
-        //vider tout les champs
-    }
 }
+

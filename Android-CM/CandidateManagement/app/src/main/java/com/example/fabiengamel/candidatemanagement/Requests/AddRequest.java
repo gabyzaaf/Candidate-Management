@@ -22,90 +22,8 @@ public class AddRequest extends JsonObjectRequest {
     JSONObject jsonBody;
     String requestBody;
 
-    public AddRequest(String sessionId, String Name, String Firstname, String mail, String password,String phone, String sexe, String action,
-                      int year,Response.Listener<JSONObject> listener,Response.ErrorListener errorListener) throws JSONException {
-        super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
 
-        jsonBody = new JSONObject();
-        jsonBody = new JSONObject();
-        jsonBody.put("session_id", sessionId);
-        jsonBody.put("Name", Name);
-        jsonBody.put("Firstname", Firstname);
-        jsonBody.put("emailAdress", mail);
-        jsonBody.put("phone", phone);
-        jsonBody.put("sexe", sexe);
-        jsonBody.put("actions", action);
-        jsonBody.put("year", year);
-        requestBody = jsonBody.toString();
-
-        headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-    }
-
-    public AddRequest(String sessionId, String Name, String Firstname, String mail, String password,String phone, String sexe, String action,
-                      int year, String link, Response.Listener<JSONObject> listener,Response.ErrorListener errorListener) throws JSONException {
-        super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
-
-        jsonBody = new JSONObject();
-        jsonBody.put("session_id", sessionId);
-        jsonBody.put("Name", Name);
-        jsonBody.put("Firstname", Firstname);
-        jsonBody.put("emailAdress", mail);
-        jsonBody.put("phone", phone);
-        jsonBody.put("sexe", sexe);
-        jsonBody.put("actions", action);
-        jsonBody.put("year", year);
-        jsonBody.put("link", link);
-        requestBody = jsonBody.toString();
-
-        headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-    }
-
-    public AddRequest(String sessionId, String Name, String Firstname, String mail, String password,String phone, String sexe, String action,
-                      int year, String link, String crCall, Response.Listener<JSONObject> listener,Response.ErrorListener errorListener) throws JSONException {
-        super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
-
-        jsonBody = new JSONObject();
-        jsonBody.put("session_id", sessionId);
-        jsonBody.put("Name", Name);
-        jsonBody.put("Firstname", Firstname);
-        jsonBody.put("emailAdress", mail);
-        jsonBody.put("phone", phone);
-        jsonBody.put("sexe", sexe);
-        jsonBody.put("actions", action);
-        jsonBody.put("year", year);
-        jsonBody.put("link", link);
-        jsonBody.put("crCall", crCall);
-        requestBody = jsonBody.toString();
-
-        headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-    }
-
-    public AddRequest(String sessionId, String Name, String Firstname, String mail, String password,String phone, String sexe, String action,
-                      int year, String link, String crCall, String ns, Response.Listener<JSONObject> listener,Response.ErrorListener errorListener) throws JSONException {
-        super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
-
-        jsonBody = new JSONObject();
-        jsonBody.put("session_id", sessionId);
-        jsonBody.put("Name", Name);
-        jsonBody.put("Firstname", Firstname);
-        jsonBody.put("emailAdress", mail);
-        jsonBody.put("phone", phone);
-        jsonBody.put("sexe", sexe);
-        jsonBody.put("actions", action);
-        jsonBody.put("year", year);
-        jsonBody.put("link", link);
-        jsonBody.put("crCall", crCall);
-        jsonBody.put("ns", ns);
-        requestBody = jsonBody.toString();
-
-        headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-    }
-
-    public AddRequest(String sessionId, String Name, String Firstname, String mail, String password,String phone, String sexe, String action,
+    public AddRequest(String sessionId, String Name, String Firstname, String mail,String phone, String sexe, String action,
                       int year, String link, String crCall, String ns, Boolean email, Response.Listener<JSONObject> listener,
                       Response.ErrorListener errorListener) throws JSONException {
         super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
@@ -122,7 +40,7 @@ public class AddRequest extends JsonObjectRequest {
         jsonBody.put("link", link);
         jsonBody.put("crCall", crCall);
         jsonBody.put("ns", ns);
-        jsonBody.put("email", email.toString());
+        jsonBody.put("email", email);
         requestBody = jsonBody.toString();
 
         headers = new HashMap<>();
