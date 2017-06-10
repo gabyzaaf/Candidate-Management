@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by Fabien gamel on 07/06/2017.
  */
 public class AddRequest extends JsonObjectRequest {
-    private static final String ADD_REQUEST_URL = "http://10.0.2.2:5000/api/user/add/candidat/";
+    private static final String ADD_REQUEST_URL = "http://192.168.1.17:5000/api/user/add/candidat/";
     Map<String, String> headers;
     JSONObject jsonBody;
     String requestBody;

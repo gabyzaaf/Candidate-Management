@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity
         bMail = (Button)findViewById(R.id.bMail);
         spActions = (Spinner)findViewById(R.id.spActions);
 
+        tvCandidates.setMovementMethod(new ScrollingMovementMethod());
 
         InitContent();
         setMenu();
@@ -184,9 +186,12 @@ public class MainActivity extends AppCompatActivity
         }
         //requete get de recup
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://localhost:5000/api/User/Candidates/recherchebyaction/" + action +"/"+user.sessionId ;
+        String url ="http://192.168.1.17:5000/api/candidate/actions/" + action +"/"+user.sessionId ;
 
-        JsonArrayRequest getCandidatesRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+        tvCandidates.setText("Liste des candidats "+action+"(s) :");
+        tvCandidates.append("\n");
+        tvCandidates.append("\n");
+                JsonArrayRequest getCandidatesRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
                 {
                     public static final String TAG ="Recherche action : " ;
@@ -199,15 +204,25 @@ public class MainActivity extends AppCompatActivity
                                 JSONObject jsonOBject = response.getJSONObject(i);
                                 Log.d(TAG, "json (" + i + ") = " + jsonOBject.toString()) ;
 
-                                Candidate candidate = new Candidate();
-                                candidate.firstname = jsonOBject.getString("Firstname");
-                                candidate.lastname  = jsonOBject.getString("Name");
-                                candidate.email = jsonOBject.getString("email");
-                                //Instancier champs nécessaires
+                                if(jsonOBject.has("content"))
+                                {
+                                    tvCandidates.append(jsonOBject.getString("content"));
+                                }
+                                else {
+                                    Candidate candidate = new Candidate();
+                                    candidate.firstname = jsonOBject.getString("prenom");
+                                    candidate.lastname = jsonOBject.getString("nom");
+                                    candidate.email = jsonOBject.getString("email");
+                                    //candidate.action = jsonOBject.getString("actions");
 
-                                candidates.add(candidate);
+                                    candidates.add(candidate);
 
-                                tvCandidates.append(candidate.firstname+" "+candidate.lastname);
+                                    tvCandidates.append(candidate.firstname + " " + candidate.lastname);
+                                    tvCandidates.append("\n");
+                                    tvCandidates.append(candidate.email);
+                                    tvCandidates.append("\n");
+                                    tvCandidates.append("\n");
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

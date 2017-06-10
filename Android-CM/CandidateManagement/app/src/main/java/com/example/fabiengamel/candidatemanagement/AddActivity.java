@@ -41,8 +41,17 @@ public class AddActivity extends AppCompatActivity {
     EditText etNs;
     RadioButton rdEmailyes;
     RadioButton rdEmailNo;
+    EditText etJobIdeal;
+    EditText etPiste;
+    EditText etPisteCoute;
+    EditText etLocation;
+    EditText etEnglish;
+    EditText etNational;
+    EditText etCompetences;
+    EditText etNote;
+    EditText etXpNote;
+    EditText etNsNote;
     Button bAdd;
-    Button bRefresh;
 
 
     @Override
@@ -63,6 +72,17 @@ public class AddActivity extends AppCompatActivity {
         rdFemme = (RadioButton)findViewById(R.id.rbFeminin);
         rdEmailyes = (RadioButton)findViewById(R.id.rbTrue);
         rdEmailNo = (RadioButton)findViewById(R.id.rbFalse);
+        etJobIdeal = (EditText)findViewById(R.id.etLocationNoteAdd);
+        etPisteCoute = (EditText)findViewById(R.id.etPicouteNoteAdd);
+        etPiste = (EditText)findViewById(R.id.etPisteNoteAdd);
+        etLocation = (EditText)findViewById(R.id.etLocationNoteAdd);
+        etEnglish = (EditText)findViewById(R.id.etEnglishNoteAdd);
+        etNational = (EditText)findViewById(R.id.etNationalityNoteAdd);
+        etCompetences = (EditText)findViewById(R.id.etCompetencesAdd);
+        etXpNote = (EditText)findViewById(R.id.etXpNoteAdd);
+        etNsNote = (EditText)findViewById(R.id.etNsNoteAdd);
+        etNote = (EditText)findViewById(R.id.etNoteAdd);
+
         bAdd = (Button)findViewById(R.id.bAdd);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -102,16 +122,20 @@ public class AddActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("ADD :", response.toString());
-
-                    // JSONArray results = null;
                     try {
                         User u = new User();
+
                         if(response.getBoolean("success")) {
-                            //ajout report
                         AddReport();
                         }
                         else {
                             //erreur
+                            String erreur = response.getString("content");
+                            AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                            builder.setMessage(erreur)
+                                    .setNegativeButton("Réessayer", null)
+                                    .create()
+                                    .show();
                         }
 
                     } catch (JSONException e) {
@@ -126,6 +150,11 @@ public class AddActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //Gestion error
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                    builder.setMessage("ERREUR SERVEUR : "+error.toString())
+                            .setNegativeButton("Réessayer", null)
+                            .create()
+                            .show();
                 }
             };
 
@@ -163,7 +192,12 @@ public class AddActivity extends AppCompatActivity {
                         crCall, ns, email,responseListener, errorListener);
 
             } catch (JSONException e) {
-                Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                builder.setMessage(e.toString())
+                        .setNegativeButton("Réessayer", null)
+                        .create()
+                        .show();
+                e.printStackTrace();
                 e.printStackTrace();
             }
             RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
@@ -182,25 +216,42 @@ public class AddActivity extends AppCompatActivity {
                 try {
                     User u = new User();
                     if(response.getBoolean("success")) {
-                        //Afficher success
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                        builder.setMessage("Le candidat a bien été ajouté")
+                                .setNeutralButton("Ok", null)
+                                .create()
+                                .show();
                     }
                     else {
                         //erreur
+                        String erreur = response.getString("content");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                        builder.setMessage(erreur)
+                                .setNegativeButton("Réessayer", null)
+                                .create()
+                                .show();
                     }
 
                 } catch (JSONException e) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                    builder.setMessage(e.toString())
+                            .setNegativeButton("Réessayer", null)
+                            .create()
+                            .show();
                     e.printStackTrace();
                 }
-
             }
-
         };
 
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 //Gestion error
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                builder.setMessage("ERREUR SERVEUR : "+error.toString())
+                        .setNegativeButton("Réessayer", null)
+                        .create()
+                        .show();
             }
         };
 
@@ -208,34 +259,25 @@ public class AddActivity extends AppCompatActivity {
         try {
             User user = new User();
             String sessionId = user.sessionId;
-
-            //valeurs champs -------------------------------------> à modifier pour cette requête
             String mail = etMail.getText().toString();
-            String name = etName.getText().toString();
-            String firstname = etFirstname.getText().toString();
-            String phone = etPhone.getText().toString();
-            String sexe = "";
-            if(rdHomme.isChecked()) {
-                sexe = "M";
-            } else if(rdFemme.isChecked()){
-                sexe = "F";
-            }
-            String action = spAction.getSelectedItem().toString();
-            int year = Integer.parseInt(etYear.getText().toString());
 
             //champs facultatifs
             String link = etLink.getText().toString();
             String crCall = etCrCall.getText().toString();
-            String ns = etNs.getText().toString();
-            boolean email = false;
-            if(rdEmailyes.isChecked()) {
-                email = true;
-            } else if(rdEmailNo.isChecked()){
-                email = false;
-            }
-            //---------------------------> requête à construire
-             addReportRequest = new AddReportRequest(sessionId,mail,firstname, mail, phone, sexe, action, link,
-                    crCall, ns,"","", responseListener, errorListener);
+
+            String jobIdeal = etJobIdeal.getText().toString() ;
+            String pisteNote = etPiste.getText().toString();
+            String pieCoute = etPisteCoute.getText().toString();
+            String locationNote = etLocation.getText().toString();
+            String englishNote = etEnglish.getText().toString();
+            String national = etNational.getText().toString();
+            String competences = etCompetences.getText().toString();
+            String note = etNote.getText().toString();
+            String xpnote = etXpNote.getText().toString();
+            String nsnote = etNsNote.getText().toString();
+
+             addReportRequest = new AddReportRequest(sessionId,mail, note,link,xpnote,nsnote, jobIdeal, pisteNote,
+                     pieCoute, locationNote, englishNote, national, competences, responseListener, errorListener);
 
         } catch (JSONException e) {
             Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
