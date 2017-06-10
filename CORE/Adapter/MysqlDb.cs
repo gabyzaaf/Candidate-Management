@@ -780,6 +780,36 @@ namespace Core.Adapter{
             }
             return output;
         }
+
+        public ArrayList searchCandidateByAction(string actions,string token){
+            ArrayList output;
+            try{
+                if(String.IsNullOrEmpty(actions)){
+                    throw new Exception("L'action de l'utilisateur est vide ");
+                }
+                string sql = "select * from candidate where actions = @actions";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@actions",actions);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nom");
+                results.AddLast("prenom");
+                results.AddLast("phone");
+                results.AddLast("email");
+                results.AddLast("actions");
+                results.AddLast("annee");
+                results.AddLast("lien");
+                results.AddLast("crCall");
+                results.AddLast("NS");
+                output = queryExecute(sql,dico,results);
+                if(output == null || output.Count==0){
+                    throw new Exception($"Aucun candidat ne possede vos criteres d'action : {actions}");
+                }
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            return output;
+        }
+
     }
 
 }

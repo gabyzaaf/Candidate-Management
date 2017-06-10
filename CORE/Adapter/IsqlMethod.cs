@@ -53,6 +53,8 @@ namespace Core.Adapter.Inteface
           void updateReport(Report report,int idCandidat);
 
           ArrayList searchCandidateFromEmail(string email,string token);
+
+          ArrayList searchCandidateByAction(string actions,string token);
     }
 
 } 
