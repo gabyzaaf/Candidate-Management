@@ -1,0 +1,8 @@
+6/10/17 11:50:18 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/10/17 11:50:18 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/10/17 11:50:18 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/10/17 11:50:18 AM - [Error] - WsCustomeException - CandidateController - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/10/17 11:50:44 AM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 72 existe veuillez vous identifier
+6/10/17 11:50:44 AM - [Error] - WsCustomeException - CandidateController - Aucun token ayant ce numero 72 existe veuillez vous identifier
+6/10/17 11:52:33 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres d'action : el
+6/10/17 11:52:33 AM - [Error] - WsCustomeException - CandidateController - Aucun candidat ne possede vos criteres d'action : el
