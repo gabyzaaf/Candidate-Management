@@ -52,5 +52,17 @@
 ]
 ```
 
-6. If it's action error :
+6. If the error is about the action : 
+``` json
+[
+  {
+    "code": 4,
+    "content": "Aucun candidat ne possede vos criteres d'action : el",
+    "success": false
+  }
+]
+```
+
+7. For know the action type you need to read the specification.
+
 
