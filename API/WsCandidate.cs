@@ -14,7 +14,7 @@ namespace Candidate_Management.API
         
  
         [HttpGet("actions/{candidateaction}/{token}")]
-        public IActionResult loadLibrary(string candidateaction,string token){
+        public IActionResult UserActionFromCandidate(string candidateaction,string token){
             ArrayList candidatListe = null;
             try{
                 if(String.IsNullOrEmpty(token)){
