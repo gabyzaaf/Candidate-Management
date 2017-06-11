@@ -113,7 +113,7 @@
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="Action :  *"
+           android:text="Action  *"
            android:textStyle="bold"
            android:textColor="#4899F6"
            android:gravity="center"
@@ -127,7 +127,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Année :  *"
+            android:text="Année *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lien : "
+            android:text="Lien  "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -162,7 +162,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="crCall : "
+            android:text="crCall  "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -230,7 +230,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Note : "
+            android:text="Note *"
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -240,6 +240,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Note"
+            android:inputType="number"
             android:layout_weight="1"
             />
     </TableRow>
@@ -247,7 +248,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XpNote : "
+            android:text="XpNote  "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -264,7 +265,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NsNote : "
+            android:text="NsNote "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -281,7 +282,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="JobIdealNote : "
+            android:text="JobIdealNote "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -298,7 +299,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PisteNote : "
+            android:text="PisteNote "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -315,7 +316,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PieCOuteNote : "
+            android:text="PieCOuteNote "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -332,7 +333,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NationalityNote : "
+            android:text="NationalityNote "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -349,7 +350,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Competences : "
+            android:text="Competences  "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"
@@ -383,7 +384,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EnglishNote : "
+            android:text="EnglishNote  "
             android:textStyle="bold"
             android:textColor="#4899F6"
             android:gravity="center"

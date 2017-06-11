@@ -2,6 +2,7 @@ package com.example.fabiengamel.candidatemanagement;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         bMail = (Button)findViewById(R.id.bMail);
         spActions = (Spinner)findViewById(R.id.spActions);
 
-        tvCandidates.setMovementMethod(new ScrollingMovementMethod());
 
         InitContent();
         setMenu();
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-
+                action = "aRelancerMail";
             }
         });
 
@@ -118,13 +119,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void InitContent() {
-        User user = new User();
-        user = User.getCurrentUser();
+        User user = User.getCurrentUser();
         tvWelcome.setText("Bonjour " + user.email);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spActions.setAdapter(adapter);
+        tvCandidates.setMovementMethod(new ScrollingMovementMethod());
     }
 
     @Override
@@ -177,8 +178,7 @@ public class MainActivity extends AppCompatActivity
 
     public void GetCandidatesByActions(String action) {
 
-        User user = new User();
-        user = User.getCurrentUser();
+        User user = User.getCurrentUser();
         candidates = new ArrayList<Candidate>();
 
         if(action.matches("aRelancerMail")){
@@ -250,11 +250,37 @@ public class MainActivity extends AppCompatActivity
     }
     public void SendMail() {
 
+        //ALert dialog : êtes vous sûr de vouloir envoyer uun mail de relance à :
+        //- machun ..
+
         for (Candidate candidate : candidates) {
             //récupérer email
             //envoiemail
-        }
+            Log.i("Send email", "");
+            String[] TO = {"gamelinfabien@gmail.com"};
+            String[] CC = {""};
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
-        Toast.makeText(this, "Aucun mail à envoyer", Toast.LENGTH_LONG).show();
+            emailIntent.setData(Uri.parse("mailto:"));
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+            emailIntent.putExtra(Intent.EXTRA_CC, CC);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Test");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, " Salut," +
+                    "ça va ?" +
+                    "au revoir");
+
+            try {
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                finish();
+                Log.i("Finished sending email", "");
+                Toast.makeText(MainActivity.this, "Le mail a bien été envoyé", Toast.LENGTH_SHORT).show();
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(MainActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+            }
+            //update statut / Règles ?
+        }
     }
+
+
 }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +53,7 @@ public class AddActivity extends AppCompatActivity {
     EditText etXpNote;
     EditText etNsNote;
     Button bAdd;
+    String action = "";
 
 
     @Override
@@ -90,6 +92,20 @@ public class AddActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spAction.setAdapter(adapter);
 
+        spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                action = spAction.getSelectedItem().toString();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                builder.setMessage("action = "+action)
+                        .setNegativeButton("Réessayer", null)
+                        .create()
+                        .show();
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                action = "interne";
+            }
+        });
+
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +118,7 @@ public class AddActivity extends AppCompatActivity {
     public boolean CheckEmptyField() {
         if(etName.getText().toString().matches("") || etFirstname.getText().toString().matches("") ||
                 etMail.getText().toString().matches("") || etPhone.getText().toString().matches("") ||
-                etYear.getText().toString().matches(""))
+                etYear.getText().toString().matches("") || etNote.getText().toString().matches(""))
         {
             return false;
         }
@@ -123,8 +139,6 @@ public class AddActivity extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     Log.d("ADD :", response.toString());
                     try {
-                        User u = new User();
-
                         if(response.getBoolean("success")) {
                         AddReport();
                         }
@@ -132,7 +146,7 @@ public class AddActivity extends AppCompatActivity {
                             //erreur
                             String erreur = response.getString("content");
                             AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
-                            builder.setMessage(erreur)
+                            builder.setMessage("json_add"+erreur)
                                     .setNegativeButton("Réessayer", null)
                                     .create()
                                     .show();
@@ -160,7 +174,7 @@ public class AddActivity extends AppCompatActivity {
 
             AddRequest addRequest = null;
             try {
-                User user = new User();
+                User user = User.getCurrentUser();
                 String sessionId = user.sessionId;
 
                 //valeurs champs
@@ -174,7 +188,6 @@ public class AddActivity extends AppCompatActivity {
                 } else if(rdFemme.isChecked()){
                     sexe = "F";
                 }
-                String action = spAction.getSelectedItem().toString();
                 int year = Integer.parseInt(etYear.getText().toString());
 
                 //champs facultatifs
@@ -198,7 +211,6 @@ public class AddActivity extends AppCompatActivity {
                         .create()
                         .show();
                 e.printStackTrace();
-                e.printStackTrace();
             }
             RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
             queue.add(addRequest);
@@ -214,7 +226,6 @@ public class AddActivity extends AppCompatActivity {
 
                 // JSONArray results = null;
                 try {
-                    User u = new User();
                     if(response.getBoolean("success")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
                         builder.setMessage("Le candidat a bien été ajouté")
@@ -226,7 +237,7 @@ public class AddActivity extends AppCompatActivity {
                         //erreur
                         String erreur = response.getString("content");
                         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
-                        builder.setMessage(erreur)
+                        builder.setMessage("json_report"+erreur)
                                 .setNegativeButton("Réessayer", null)
                                 .create()
                                 .show();
@@ -257,14 +268,13 @@ public class AddActivity extends AppCompatActivity {
 
         AddReportRequest addReportRequest = null;
         try {
-            User user = new User();
+            User user = User.getCurrentUser();
             String sessionId = user.sessionId;
             String mail = etMail.getText().toString();
 
             //champs facultatifs
             String link = etLink.getText().toString();
             String crCall = etCrCall.getText().toString();
-
             String jobIdeal = etJobIdeal.getText().toString() ;
             String pisteNote = etPiste.getText().toString();
             String pieCoute = etPisteCoute.getText().toString();
@@ -272,11 +282,11 @@ public class AddActivity extends AppCompatActivity {
             String englishNote = etEnglish.getText().toString();
             String national = etNational.getText().toString();
             String competences = etCompetences.getText().toString();
-            String note = etNote.getText().toString();
-            String xpnote = etXpNote.getText().toString();
             String nsnote = etNsNote.getText().toString();
+            String xpnote = etXpNote.getText().toString();
+            int note = Integer.parseInt(etNote.getText().toString());
 
-             addReportRequest = new AddReportRequest(sessionId,mail, note,link,xpnote,nsnote, jobIdeal, pisteNote,
+             addReportRequest = new AddReportRequest(mail,sessionId, note,link,xpnote,nsnote, jobIdeal, pisteNote,
                      pieCoute, locationNote, englishNote, national, competences, responseListener, errorListener);
 
         } catch (JSONException e) {
