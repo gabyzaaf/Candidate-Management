@@ -1,7 +1,7 @@
 # This page is for describe what can be the actions associate to the Candidate : 
 
-..* interne
-..* enCours
+..* interne.
+..* enCours.
 ..* RN
 ..* trop relance
 ..* freelance
