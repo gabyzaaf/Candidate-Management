@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".Activties.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,24 +20,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activties.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".AgendaActivity"
+            android:name=".Activties.AgendaActivity"
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".Activties.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name=".AddActivity"
+            android:name=".Activties.AddActivity"
             android:label="@string/title_activity_add" >
         </activity>
-        <activity android:name=".UpdateActivity" >
+        <activity android:name=".Activties.UpdateActivity" >
         </activity>
     </application>
 

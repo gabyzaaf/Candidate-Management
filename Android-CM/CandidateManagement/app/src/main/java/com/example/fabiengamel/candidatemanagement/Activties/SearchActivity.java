@@ -1,4 +1,4 @@
-package com.example.fabiengamel.candidatemanagement;
+package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +18,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.Candidate;
 import com.example.fabiengamel.candidatemanagement.Models.Meeting;
 import com.example.fabiengamel.candidatemanagement.Models.User;
+import com.example.fabiengamel.candidatemanagement.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

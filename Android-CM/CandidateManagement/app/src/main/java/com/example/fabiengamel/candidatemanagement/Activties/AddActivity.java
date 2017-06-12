@@ -1,9 +1,8 @@
-package com.example.fabiengamel.candidatemanagement;
+package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,9 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.User;
+import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.AddReportRequest;
 import com.example.fabiengamel.candidatemanagement.Requests.AddRequest;
-import com.example.fabiengamel.candidatemanagement.Requests.LoginRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;

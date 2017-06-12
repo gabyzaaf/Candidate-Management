@@ -1,4 +1,4 @@
-package com.example.fabiengamel.candidatemanagement;
+package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.User;
+import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.LoginRequest;
 
 import org.json.JSONException;
