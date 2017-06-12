@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -95,11 +96,6 @@ public class AddActivity extends AppCompatActivity {
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 action = spAction.getSelectedItem().toString();
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
-                builder.setMessage("action = "+action)
-                        .setNegativeButton("Réessayer", null)
-                        .create()
-                        .show();
             }
             public void onNothingSelected(AdapterView<?> parent) {
                 action = "interne";
@@ -109,7 +105,27 @@ public class AddActivity extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddCandidat();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                builder.setTitle("Ajouter le candidat ?");
+                builder.setPositiveButton("Oui",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                AddCandidat();
+                            }
+                        });
+                builder.setNegativeButton("Annuler",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
 
@@ -228,10 +244,16 @@ public class AddActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
-                        builder.setMessage("Le candidat a bien été ajouté")
-                                .setNeutralButton("Ok", null)
-                                .create()
-                                .show();
+                        builder.setTitle("Le candidat a bien été ajouté");
+                        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                startActivity(new Intent(AddActivity.this, MainActivity.class));
+                            }
+                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
                     else {
                         //erreur

@@ -11,15 +11,31 @@ public class Candidate {
     public String phone;
     public String email;
     public String sexe;
-    public enum actions {interne, enCours, RN,trop_relance, freelance, etranger,
+   /* public enum actions {interne, enCours, RN,trop_relance, freelance, etranger,
     appelerRemind, aRelancerMail, aRelancerLKD, PAERemind, HcJunior, HcLangue,
-    HCGeo, HCSenior, HCPasDev, HCMFST, HCBacMoins5}
+    HCGeo, HCSenior, HCPasDev, HCMFST, HCBacMoins5}*/
+    public String actions;
     public int annee;
     public String lien;
     public String crCall;
     public String NS;
-    public int approche_email;
+    public boolean approche_email;
     public int fid_user_candidate;
 
+    private  static Candidate currentCandidate = null;
+
+    public static Candidate getCurrentCandidate()
+    {
+        if(currentCandidate == null)
+        {
+            currentCandidate = new Candidate();
+        }
+        return currentCandidate;
+    }
+
+    public static void setCurrentCandidate(Candidate candidate)
+    {
+        currentCandidate = candidate;
+    }
 
 }

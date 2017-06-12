@@ -5,6 +5,7 @@
     <string name="title_activity_add">Ajouter un candidat</string>
     <string name="title_activity_search">Rechercher un candidat</string>
     <string name="title_activity_calendar">Agenda</string>
+    <string name="title_activity_update">Modifier Candidat</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>

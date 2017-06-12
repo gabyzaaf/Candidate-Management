@@ -8,6 +8,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.fabiengamel.candidatemanagement.Models.MyDbContext;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +21,9 @@ import java.util.Map;
  * Created by Fabien gamel on 06/06/2017.
  */
 public class LoginRequest extends JsonObjectRequest {
+
+ /*   MyDbContext myDb = new MyDbContext();
+    String serverAdress = myDb.getServerAdress();*/
 
     private static final String LOGIN_REQUEST_URL ="http://192.168.1.17:5000/api/user/admin/auth/";
     Map<String, String> headers;
