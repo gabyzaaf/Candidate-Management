@@ -25,6 +25,7 @@
 
 3. Information : 
 The ***emailCandidat***  need to be already present inside the system.
+The note need to be an integer.
 
 4. The result : 
 
