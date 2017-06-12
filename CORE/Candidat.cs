@@ -22,7 +22,7 @@ namespace core.candidat{
         public string ns{get;set;}
 
         public bool email {get;set;}
-
+        
         public string meetingNote{get;set;}
 
         public string linkMeeting {get;set;}
@@ -45,6 +45,8 @@ namespace core.candidat{
 
         public string competences{get;set;}
 
+
+        public string crEntretien{get;set;}
 
         public int independant {get;set;}
 

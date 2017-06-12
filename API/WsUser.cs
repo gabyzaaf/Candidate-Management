@@ -106,9 +106,9 @@ namespace API.wsUser
             2) Verifier si le candidat existe deja.
             3) Recuperer l'id de l'utilisateur afilié au candidat
             4) Ajouter le candidat
-            5) Ajoute le type d'action
+            5) Ajoute le type d'action [FromBody]
           */
-        public IActionResult addCandidat([FromBody]Candidat candidat){
+        public IActionResult addCandidat([FromBody] Candidat candidat){
             try{
                 checkCandidat(candidat);
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");

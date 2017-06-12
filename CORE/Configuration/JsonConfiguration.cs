@@ -32,7 +32,7 @@ namespace core.configuration{
              }
              return conf;
         }
-        public JsonConfiguration(){
+        private JsonConfiguration(){
                 try{
                      var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
