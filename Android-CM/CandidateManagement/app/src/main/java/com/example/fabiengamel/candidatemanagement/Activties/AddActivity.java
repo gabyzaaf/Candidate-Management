@@ -54,6 +54,7 @@ public class AddActivity extends AppCompatActivity {
     EditText etNsNote;
     Button bAdd;
     String action = "";
+    EditText etPRix;
 
 
     @Override
@@ -84,6 +85,7 @@ public class AddActivity extends AppCompatActivity {
         etXpNote = (EditText)findViewById(R.id.etXpNoteAdd);
         etNsNote = (EditText)findViewById(R.id.etNsNoteAdd);
         etNote = (EditText)findViewById(R.id.etNoteAdd);
+        etPRix = (EditText)findViewById(R.id.etPrixAdd);
 
         bAdd = (Button)findViewById(R.id.bAdd);
 
@@ -95,6 +97,10 @@ public class AddActivity extends AppCompatActivity {
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 action = spAction.getSelectedItem().toString();
+                if(action.matches("freelance"))
+                {
+                    etPRix.setVisibility(View.VISIBLE);
+                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
                 action = "interne";
@@ -216,8 +222,15 @@ public class AddActivity extends AppCompatActivity {
                     email = false;
                 }
 
+                int prix;
+                if(action.matches("freelance")) {
+                    prix = Integer.parseInt(etPRix.getText().toString());
+                }
+                else {
+                    prix = 0;
+                }
                 addRequest = new AddRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,
-                        crCall, ns, email,responseListener, errorListener);
+                        crCall, ns, email, prix, responseListener, errorListener);
 
             } catch (JSONException e) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
@@ -307,8 +320,9 @@ public class AddActivity extends AppCompatActivity {
             String xpnote = etXpNote.getText().toString();
             int note = Integer.parseInt(etNote.getText().toString());
 
+
              addReportRequest = new AddReportRequest(mail,sessionId, note,link,xpnote,nsnote, jobIdeal, pisteNote,
-                     pieCoute, locationNote, englishNote, national, competences, responseListener, errorListener);
+                     pieCoute, locationNote, englishNote, national, competences,  responseListener, errorListener);
 
         } catch (JSONException e) {
             Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();

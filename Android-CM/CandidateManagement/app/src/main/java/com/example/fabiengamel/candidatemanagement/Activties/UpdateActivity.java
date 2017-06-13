@@ -61,6 +61,7 @@ public class UpdateActivity extends AppCompatActivity {
     Button bUpdate;
     RadioGroup sexes;
     RadioGroup approche_emaill;
+    EditText etPRix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class UpdateActivity extends AppCompatActivity {
         bUpdate = (Button)findViewById(R.id.bUpdate);
         sexes = (RadioGroup)findViewById(R.id.rgSexeUpdate);
         approche_emaill = (RadioGroup)findViewById(R.id.rgEmailUpdate);
+        etPRix = (EditText)findViewById(R.id.etPrixUpdate);
 
         bCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +107,9 @@ public class UpdateActivity extends AppCompatActivity {
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
-                    builder.setTitle("Modifier le candidat ?");
-                    builder.setPositiveButton("Oui",
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                builder.setTitle("Modifier le candidat ?");
+                builder.setPositiveButton("Oui",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
@@ -123,8 +125,8 @@ public class UpdateActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                AlertDialog alert = builder.create();
+                alert.show();
 
             }
         });
@@ -147,6 +149,10 @@ public class UpdateActivity extends AppCompatActivity {
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 action = spAction.getSelectedItem().toString();
+                if(action.matches("freelance"))
+                {
+                    etPRix.setVisibility(View.VISIBLE);
+                }
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -257,9 +263,16 @@ public class UpdateActivity extends AppCompatActivity {
             } else if(rdEmailNo.isChecked()){
                 email = false;
             }
+            int prix;
+            if(action.matches("freelance")) {
+                prix = Integer.parseInt(etPRix.getText().toString());
+            }
+            else {
+                prix = 0;
+            }
 
             updateRequest = new UpdateRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,
-                    crCall, ns, email,responseListener, errorListener);
+                    crCall, ns, email, prix, responseListener, errorListener);
 
         } catch (JSONException e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);

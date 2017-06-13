@@ -21,6 +21,7 @@ public class Candidate {
     public String NS;
     public boolean approche_email;
     public int fid_user_candidate;
+    public int prix;
 
     private  static Candidate currentCandidate = null;
 

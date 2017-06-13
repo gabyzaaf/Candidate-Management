@@ -52,9 +52,17 @@
         android:visibility="invisible"
         android:id="@+id/bModify"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Envoyer un SMS"
+        android:id="@+id/bSMS"
+        android:layout_below="@+id/tvSingleCand"
+        android:layout_toRightOf="@+id/bModify"
+        android:layout_alignRight="@+id/tvSingleCand"
+        android:layout_alignEnd="@+id/tvSingleCand" />
 
 </RelativeLayout>

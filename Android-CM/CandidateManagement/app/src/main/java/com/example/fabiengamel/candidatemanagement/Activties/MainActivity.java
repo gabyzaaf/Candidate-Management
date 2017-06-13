@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity
     TextView tvCandidates;
     TextView tvWelcome;
     ImageView ivLogo;
-    Button bMail;
     Spinner spActions;
     String action ="";
     List<Candidate> candidates;
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity
         tvWelcome = (EditText)findViewById(R.id.tvWelcome);
         tvCandidates = (EditText)findViewById(R.id.tvCandidates);
         ivLogo = (ImageView)findViewById(R.id.imageView);
-        bMail = (Button)findViewById(R.id.bMail);
         spActions = (Spinner)findViewById(R.id.spActions);
 
 
@@ -94,12 +92,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        bMail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SendMail();
-            }
-        });
     }
 
     private void setMenu() {
@@ -177,9 +169,6 @@ public class MainActivity extends AppCompatActivity
         User user = User.getCurrentUser();
         candidates = new ArrayList<Candidate>();
 
-        if(action.matches("aRelancerMail")){
-            bMail.setVisibility(View.VISIBLE);
-        }
         //requete get de recup
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://192.168.1.17:5000/api/candidate/actions/" + action +"/"+user.sessionId ;

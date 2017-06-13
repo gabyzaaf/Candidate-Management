@@ -32,7 +32,6 @@
         android:layout_alignEnd="@+id/tvWelcome"
         android:maxLines = "50"
         android:scrollbars = "vertical"
-        android:layout_above="@+id/bMail"
         android:layout_below="@+id/spActions" />
     <Spinner
         android:layout_width="wrap_content"
@@ -41,17 +40,6 @@
         android:layout_below="@+id/tvWelcome"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/bMail"
-        android:layout_alignEnd="@+id/bMail" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Envoi des mails"
-        android:id="@+id/bMail"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:visibility="invisible"/>
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

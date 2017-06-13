@@ -39,6 +39,11 @@
         </activity>
         <activity android:name=".Activties.UpdateActivity" >
         </activity>
+        <activity
+            android:name=".PredictionActivity"
+            android:label="@string/title_activity_prediction"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

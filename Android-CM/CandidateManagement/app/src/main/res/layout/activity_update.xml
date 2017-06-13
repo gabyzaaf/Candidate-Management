@@ -398,6 +398,25 @@
                 />
         </TableRow>
         <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prix * "
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                android:gravity="center"
+                />
+            <EditText
+                android:id="@+id/etPrixUpdate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Prix"
+                android:inputType="number"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                />
+        </TableRow>
+        <TableRow>
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

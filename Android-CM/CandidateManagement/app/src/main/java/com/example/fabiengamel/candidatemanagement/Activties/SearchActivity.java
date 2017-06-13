@@ -111,6 +111,7 @@ public class SearchActivity extends AppCompatActivity {
                                         report.nationalityNote = jsonOBject.getString("nationalityNote");
                                         report.EnglishNote = jsonOBject.getString("EnglishNote");
                                         report.competences = jsonOBject.getString("competences");
+
                                         tvResult.setText("Informations sur le candidat: ");
 
                                         Candidate.setCurrentCandidate(candidate);

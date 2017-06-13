@@ -28,4 +28,5 @@
         <item>HCMFST</item>
         <item>HCBacMoins5</item>
     </string-array>
+    <string name="title_activity_prediction">PredictionActivity</string>
 </resources>
