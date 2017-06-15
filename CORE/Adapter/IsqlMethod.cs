@@ -5,6 +5,7 @@ using core.candidat;
 using core.report;
 using core.success;
 using core.user;
+using Candidate_Management.CORE.LoadingTemplates;
 
 namespace Core.Adapter.Inteface
 {
@@ -56,7 +57,7 @@ namespace Core.Adapter.Inteface
 
           ArrayList searchCandidateByAction(string actions,string token);
 
-          void addEmailTemplates(string title,string content);
+          void addEmailTemplates(Template emailTemplate);
 
           ArrayList emailTemplateExist(string title);
     }

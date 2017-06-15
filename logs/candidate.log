@@ -4,3 +4,6 @@
 6/15/17 5:48:32 PM - [Information] -  NotFileContentFolderException - c01 - Aucun template n'existe actuellement, veuillez en créer
 6/15/17 10:41:35 PM - [Information] -  NotFileContentFolderException - c01 - Aucun template d'email n'existe actuellement, veuillez en créer
 6/15/17 10:42:30 PM - [Information] -  NotFileContentFolderException - c01 - Aucun template d'email n'existe actuellement, veuillez en créer
+6/15/17 11:38:21 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/15/17 11:38:21 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/15/17 11:38:21 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.

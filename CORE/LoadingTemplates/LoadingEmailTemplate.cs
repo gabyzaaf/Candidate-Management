@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Core.Adapter;
 using Core.Adapter.Inteface;
 using System.Collections;
+using Candidate_Management.CORE.LoadingTemplates;
 
 namespace Candidate_Management.CORE.LoadingTemplates
 {
@@ -26,23 +27,43 @@ namespace Candidate_Management.CORE.LoadingTemplates
             }
         }
 
-        private void injectFolderInsideTheSystem(){
-            try{
+        private bool messageExists(Template message){
+              try{
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
-                ArrayList liste = isql.emailTemplateExist("file1.txt");
+                ArrayList liste = isql.emailTemplateExist(message.title);
                 Dictionary<String,String> dico = (Dictionary<String,String>)liste[0];
-                Console.WriteLine($"After liste the element {dico["nb"]}");
+                bool existe = Convert.ToBoolean(Int32.Parse(dico["nb"]));
+                return existe;
+              }catch(Exception exc){
+                Console.WriteLine($" exception : {exc.Message}");
+                return false;
+              }   
+        }
+
+        private void addMessage(ArrayList emailListe){
+            foreach (Template email in emailListe)
+            {
+                if(!messageExists(email)){
+                   IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                   isql.addEmailTemplates(email);
+                }
+            }
+        }
+
+        private void injectFolderInsideTheSystem(){
+            ArrayList liste = new ArrayList();
+            try{
+                getFilesFromTheFolder();
+                foreach(var pathWithFile in contents){
+                    liste.Add(new Template(pathWithFile));
+                }
+                addMessage(liste);
             }catch(Exception exc){
                 Console.WriteLine(exc.Message);
             }
         }
 
-        private void display(){
-            foreach (var item in contents)
-            {
-                Console.WriteLine($"the file is {item}");
-            }
-        }
+        
 
         public void loadFiles(){
             try{

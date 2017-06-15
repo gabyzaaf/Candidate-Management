@@ -10,6 +10,8 @@ using core.user;
 using Core.Adapter.Inteface;
 using exception.sql;
 using MySql.Data.MySqlClient;
+using Candidate_Management.CORE.LoadingTemplates;
+
 
 namespace Core.Adapter{
 
@@ -675,7 +677,6 @@ namespace Core.Adapter{
         public void addReport(Report report,int idCandidat)
         {
          try{
-            
             checkReport(report);
             string sql = "insert into meeting (note,link,xpNote,nsNote,jobIdealNote,pisteNote,pieCouteNote,locationNote,EnglishNote,nationalityNote,competences,fid_candidate_meeting) values (@note,@link,@xpNote,@nsNote,@jobIdealNote,@pisteNote,@pieCouteNote,@locationNote,@EnglishNote,@nationalityNote,@competences,@fid_candidate_meeting)";
             Dictionary<String,Object> dico = new Dictionary<String,Object>();
@@ -811,15 +812,18 @@ namespace Core.Adapter{
             return output;
         }
 
-        public void addEmailTemplates(string title,string content){
-            ArrayList output;
-            /*
+        public void addEmailTemplates(Template emailTemplate){
+          
             try{
-
+                string sql = "insert into message (titre_message,contenu_message) VALUES (@title,@content)";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@title",emailTemplate.title);
+                dico.Add("@content",emailTemplate.getContent());
+                queryExecute(sql,dico,null);
             }catch(Exception exc){
-
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
-             */
+             
         }
 
         public ArrayList emailTemplateExist(string title){
