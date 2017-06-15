@@ -1,4 +1,11 @@
 # Candidate Management
 This project is for the human resources.
 
-The server is coded in .NetCore and is [here](docs/DotNet_Core_.md)
+- [X] Feature Loading the template in the system + doc
+- [ ] Webservice for add template + doc
+- [ ] Webservice for update template + doc
+- [ ] Webservice for update template  + doc
+- [ ] Add remind in database + cron.
+- [ ] Disable a remind in database + cron .
+
+
