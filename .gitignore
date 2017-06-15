@@ -4,6 +4,10 @@ project.lock.json
 .DS_Store
 *.pyc
 
+# Inside the project
+CORE/LoadingTemplates/*
+logs/*
+
 # Visual Studio Code
 .vscode
 
