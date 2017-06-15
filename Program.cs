@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Candidate_Management.CORE.LoadingTemplates;
 
 namespace ConsoleApplication
 {
@@ -24,12 +25,7 @@ namespace ConsoleApplication
           {
             // ici nous allons ouvrire le fichier de configuration
            
-            try{
-               jsonConf = JsonConfiguration.getInstance();
-              
-            }catch(Exception exc){
-                Console.WriteLine(exc.Message);
-            }
+           
             
             app.UseMvcWithDefaultRoute();
              // ********************
@@ -70,6 +66,8 @@ namespace ConsoleApplication
             schedule.executeTask();   
             */
             try{
+                Context contexte = new Context(new LoadingEmailTemplate());
+                contexte.executeLoading();
                 var host = new WebHostBuilder()
                             .UseKestrel()
                             //.UseUrls("http://192.168.1.31:5000")
@@ -77,7 +75,7 @@ namespace ConsoleApplication
                             .Build();
                 host.Run();
             }catch(Exception exc){
-                Console.WriteLine("The launch exception is ----> "+exc.Message);
+                Console.WriteLine("Une erreur c'est produit, veuillez consulter vos logs");
             }
                 
         }

@@ -245,6 +245,7 @@ namespace Core.Adapter{
                 results.AddLast("crCall");
                 results.AddLast("NS");
                 results.AddLast("approche_email");
+                results.AddLast("email");
                 results.AddLast("note");
                 results.AddLast("link");
                 results.AddLast("xpNote");
@@ -803,6 +804,38 @@ namespace Core.Adapter{
                 output = queryExecute(sql,dico,results);
                 if(output == null || output.Count==0){
                     throw new Exception($"Aucun candidat ne possede vos criteres d'action : {actions}");
+                }
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            return output;
+        }
+
+        public void addEmailTemplates(string title,string content){
+            ArrayList output;
+            /*
+            try{
+
+            }catch(Exception exc){
+
+            }
+             */
+        }
+
+        public ArrayList emailTemplateExist(string title){
+            ArrayList output;
+            try{
+                if(String.IsNullOrEmpty(title)){
+                    throw new Exception("Le titre du template d'email est vide");
+                }
+                string sql = "select count(*) as nb from message where titre_message = @title";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@title",title);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nb");
+                output = queryExecute(sql,dico,results);
+                if(output == null || output.Count==0){
+                    throw new Exception($"Aucun template d'email ne possede ce titre : {title}");
                 }
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);

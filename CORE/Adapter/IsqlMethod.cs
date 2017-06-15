@@ -55,6 +55,10 @@ namespace Core.Adapter.Inteface
           ArrayList searchCandidateFromEmail(string email,string token);
 
           ArrayList searchCandidateByAction(string actions,string token);
+
+          void addEmailTemplates(string title,string content);
+
+          ArrayList emailTemplateExist(string title);
     }
 
 } 

@@ -21,6 +21,8 @@ namespace core.configuration{
         private static string configurationEmail="email";
 
         private static string configurationSql="SQL";
+       
+        private static string emailTemplate = "emailTemplate";
 
         private static IConfigurationRoot configuration = null ;
 
@@ -141,6 +143,28 @@ namespace core.configuration{
                 throw new ConfigurationCustomException(this.GetType().Name,$"{exception.Message}");
             }
          }
+
+
+         public string[] getEmailTemplate(){ 
+             try{
+                settingsExist();
+                if(String.IsNullOrEmpty(configuration[emailTemplate])){
+                    throw new Exception("Votre fichier appsettings n'est pas conforme avec vos template d email");
+                }
+                string emailTemplates = configuration[emailTemplate];
+                if(!Directory.Exists(configuration[emailTemplate])){
+                    throw new Exception("Le dossier n'existe pas veuillez creer le dossier de email template");
+                }
+                string[] filesInsideTheDirectory =  Directory.GetFiles(emailTemplates);
+                return filesInsideTheDirectory;
+             }catch(NotFileContentFolderException ex){
+                throw ex;
+             }catch(Exception exception){
+                 throw new ConfigurationCustomException(this.GetType().Name,$"{exception.Message}");
+             }
+             
+         }
+
         private void settingsExist(){
             if(configuration==null){
                 throw new ConfigurationCustomException();
