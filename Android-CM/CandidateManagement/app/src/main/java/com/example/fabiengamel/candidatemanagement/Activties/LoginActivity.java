@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.LoginRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.Tools;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,10 +34,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(Build.VERSION.SDK_INT > 9){
+     /*   if(Build.VERSION.SDK_INT > 9){
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
-        }
+        }*/
 
         etMail = (EditText) findViewById(R.id.etMailAdd);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -55,14 +56,18 @@ public class LoginActivity extends AppCompatActivity {
 
         final String mail = etMail.getText().toString();
         final String password = etPassword.getText().toString();
+        Tools tool = new Tools();
 
         if(mail.matches(""))
         {
             Toast.makeText(this, "Renseignez votre email", Toast.LENGTH_LONG).show();
         }
-        if(password.matches(""))
+        else if(password.matches(""))
         {
             Toast.makeText(this, "Renseignez votre mot de passe", Toast.LENGTH_LONG).show();
+        }
+        else if(!tool.isEmailValid(mail)){
+            Toast.makeText(this, "Email non valide", Toast.LENGTH_LONG).show();
         }
 
         else {
@@ -74,17 +79,28 @@ public class LoginActivity extends AppCompatActivity {
 
                    // JSONArray results = null;
                     try {
-                        User u = new User();
-                        u.email = response.getString("email");
-                        u.sessionId = response.getString("sessionId");
-                        User.setCurrentUser(u);
+
+                        if(response.has("content"))
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Mauvais identifiants")
+                                    .setNeutralButton("Réessayer", null)
+                                    .create()
+                                    .show();
+                        }
+                        else {
+                            User u = new User();
+                            u.email = response.getString("email");
+                            u.sessionId = response.getString("sessionId");
+                            User.setCurrentUser(u);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            LoginActivity.this.startActivity(intent);
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    LoginActivity.this.startActivity(intent);
                 }
 
             };

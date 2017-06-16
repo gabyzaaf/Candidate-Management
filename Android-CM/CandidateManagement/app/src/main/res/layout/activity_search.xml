@@ -48,21 +48,35 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Modifier candidat"
         android:visibility="invisible"
         android:id="@+id/bModify"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toStartOf="@+id/bLocateSearch"
+        android:layout_toLeftOf="@+id/bLocateSearch" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Envoyer un SMS"
         android:id="@+id/bSMS"
-        android:layout_below="@+id/tvSingleCand"
-        android:layout_toRightOf="@+id/bModify"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/tvSingleCand"
-        android:layout_alignEnd="@+id/tvSingleCand" />
+        android:layout_alignEnd="@+id/tvSingleCand"
+        android:layout_below="@+id/tvSingleCand"
+        android:layout_toRightOf="@+id/bLocateSearch"
+        android:layout_toEndOf="@+id/bLocateSearch" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Localiser"
+        android:id="@+id/bLocateSearch"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvSingleCand" />
 
 </RelativeLayout>

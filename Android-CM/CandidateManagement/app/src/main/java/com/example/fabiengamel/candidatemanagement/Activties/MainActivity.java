@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity
 
         MenuItem nav_calendar = (MenuItem)  navigationView.getMenu().findItem(R.id.nav_calendar);
         nav_calendar.setVisible(true);
+
+        MenuItem nav_map = (MenuItem)  navigationView.getMenu().findItem(R.id.nav_map);
+        nav_calendar.setVisible(true);
     }
 
     private void InitContent() {
@@ -157,6 +160,9 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_close) {
             startActivity(new Intent(this, LoginActivity.class));
+        }
+        else if (id == R.id.nav_map) {
+            startActivity(new Intent(this, MapActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

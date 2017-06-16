@@ -22,6 +22,7 @@ public class Candidate {
     public boolean approche_email;
     public int fid_user_candidate;
     public int prix;
+    public String zipcode;
 
     private  static Candidate currentCandidate = null;
 

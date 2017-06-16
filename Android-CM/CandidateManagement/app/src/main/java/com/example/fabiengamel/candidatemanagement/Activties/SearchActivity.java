@@ -37,17 +37,51 @@ public class SearchActivity extends AppCompatActivity {
     Button bRecherche;
     TextView tvResult;
     Button bModify;
+    Button bLocate;
+    Button bSMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
+        InitContent();
+
+        String candidateName;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                candidateName= null;
+            } else {
+                candidateName= extras.getString("candidateName");
+                SearchCandidate(candidateName);
+            }
+        } else {
+            candidateName= (String) savedInstanceState.getSerializable("candidateName");
+        }
+        etNom.setText(candidateName);
+    }
+
+    public void InitContent(){
         etNom = (EditText)findViewById(R.id.etName);
         bRecherche = (Button)findViewById(R.id.bSearchSingle);
         bModify = (Button)findViewById(R.id.bModify);
         tvResult = (TextView)findViewById(R.id.tvSingleCand);
         tvResult.setMovementMethod(new ScrollingMovementMethod());
+        bLocate = (Button)findViewById(R.id.bLocateSearch);
+        bSMS = (Button)findViewById(R.id.bSMS);
+
+
+        bLocate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SearchActivity.this, MapActivity.class);
+                Candidate c = Candidate.getCurrentCandidate();
+                i.putExtra("candidateName", c.lastname);
+                startActivity(i);
+            }
+        });
 
         bModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,24 +98,26 @@ public class SearchActivity extends AppCompatActivity {
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-                SearchCandidate();
+                String nom = etNom.getText().toString();
+                SearchCandidate(nom);
+
             }
         });
     }
 
-    public void SearchCandidate() {
+    public void SearchCandidate(String nom) {
         User user = User.getCurrentUser();
         final Candidate candidate = new Candidate();
         final Meeting report = new Meeting();
 
-        String nom = etNom.getText().toString();
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://192.168.1.17:5000/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
 
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
                 {
-                    public static final String TAG ="Recherche action : " ;
+                    public static final String TAG ="Recherche candidat : " ;
 
                     @Override
                     public void onResponse(JSONArray response) {
@@ -161,6 +197,8 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.append("\n");
                                         tvResult.append("Competences : " + report.competences);
                                         bModify.setVisibility(View.VISIBLE);
+                                        bLocate.setVisibility(View.VISIBLE);
+                                        bSMS.setVisibility(View.VISIBLE);
                                     }
 
                                 }

@@ -23,6 +23,7 @@ import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.AddReportRequest;
 import com.example.fabiengamel.candidatemanagement.Requests.AddRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.Tools;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,7 +111,14 @@ public class AddActivity extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                Tools tool = new Tools();
+                if (!tool.isEmailValid(etMail.getText())) {
+                    Toast.makeText(AddActivity.this, "Email non valide", Toast.LENGTH_LONG).show();
+                } else if(!CheckEmptyField()) {
+                    Toast.makeText(AddActivity.this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
                 builder.setTitle("Ajouter le candidat ?");
                 builder.setPositiveButton("Oui",
                         new DialogInterface.OnClickListener() {
@@ -130,7 +138,7 @@ public class AddActivity extends AppCompatActivity {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-
+            }
             }
         });
 
@@ -139,8 +147,7 @@ public class AddActivity extends AppCompatActivity {
     public boolean CheckEmptyField() {
         if(etName.getText().toString().matches("") || etFirstname.getText().toString().matches("") ||
                 etMail.getText().toString().matches("") || etPhone.getText().toString().matches("") ||
-                etYear.getText().toString().matches("") || etNote.getText().toString().matches(""))
-        {
+                etYear.getText().toString().matches("") || etNote.getText().toString().matches("")) {
             return false;
         }
 
@@ -150,11 +157,7 @@ public class AddActivity extends AppCompatActivity {
 
     public void AddCandidat() {
 
-        if(!CheckEmptyField()) {
-            Toast.makeText(this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
-        }
 
-        else{
                Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -242,8 +245,8 @@ public class AddActivity extends AppCompatActivity {
             }
             RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
             queue.add(addRequest);
-        }
-        }
+
+    }
 
     public void AddReport() {
 

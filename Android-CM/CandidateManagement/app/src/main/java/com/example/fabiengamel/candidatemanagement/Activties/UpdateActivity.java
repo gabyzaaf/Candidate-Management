@@ -26,6 +26,7 @@ import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.UpdateReportRequest;
 import com.example.fabiengamel.candidatemanagement.Requests.UpdateRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.Tools;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,26 +108,31 @@ public class UpdateActivity extends AppCompatActivity {
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
-                builder.setTitle("Modifier le candidat ?");
-                builder.setPositiveButton("Oui",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                UpdateCandidate();
-                            }
-                        });
-                builder.setNegativeButton("Annuler",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                Tools tool = new Tools();
+                if (!tool.isEmailValid(etMail.getText())) {
+                    Toast.makeText(UpdateActivity.this, "Email non valide", Toast.LENGTH_LONG).show();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                    builder.setTitle("Modifier le candidat ?");
+                    builder.setPositiveButton("Oui",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    UpdateCandidate();
+                                }
+                            });
+                    builder.setNegativeButton("Annuler",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
 
             }
         });
@@ -191,8 +197,6 @@ public class UpdateActivity extends AppCompatActivity {
         etEnglish.setText(report.EnglishNote);
         etNational.setText(report.nationalityNote);
         etCompetences.setText((report.competences));
-
-
     }
 
     public void UpdateCandidate(){
