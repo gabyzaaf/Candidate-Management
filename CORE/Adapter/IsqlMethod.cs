@@ -60,6 +60,11 @@ namespace Core.Adapter.Inteface
           void addEmailTemplates(Template emailTemplate);
 
           ArrayList emailTemplateExist(string title);
+
+          ArrayList emailTemplateTiltes(int limite1,int limite2);
+          
+          ArrayList emailTemplateContentFromTitle(string title);
+    
     }
 
 } 

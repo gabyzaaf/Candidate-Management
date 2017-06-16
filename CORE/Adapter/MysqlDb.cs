@@ -847,6 +847,43 @@ namespace Core.Adapter{
             return output;
         }
 
+        public ArrayList emailTemplateTiltes(int limite1,int limite2){
+            ArrayList output;
+            try{
+                string sql = "select titre_message from message limit @lim1, @lim2";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@lim1",limite1);
+                dico.Add("@lim2",limite2);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("titre_message");
+                output = queryExecute(sql,dico,results);
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            return output;
+        }
+       
+        public ArrayList emailTemplateContentFromTitle(string title){
+             ArrayList output;
+             try{
+                if(String.IsNullOrEmpty(title)){
+                    throw new Exception("Le titre de votre email est vide");
+                }
+                string sql = "select contenu_message from message where titre_message=@title";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@title",title);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("contenu_message");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                     throw new Exception($"Vous ne possédez aucun contenu d'email ayant ce titre : {title}");
+                }
+             }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+             }
+             return output;
+        }
+
     }
 
 }

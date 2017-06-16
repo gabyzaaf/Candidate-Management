@@ -5,8 +5,8 @@ namespace Candidate_Management.CORE.LoadingTemplates
     public class Template
     {
         private string path;
-        public string title{get;}
-        private string content;
+        public string title{get;set;}
+        public string content{private get;set;}
 
         public Template(string _path){
             try{
@@ -37,6 +37,7 @@ namespace Candidate_Management.CORE.LoadingTemplates
                 throw argumentNull;
             }   
         }
+
 
         public override string ToString()
         {

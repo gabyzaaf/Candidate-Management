@@ -7,3 +7,19 @@
 6/15/17 11:38:21 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
 6/15/17 11:38:21 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
 6/15/17 11:38:21 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/16/17 4:05:22 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/16/17 4:05:22 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/16/17 4:05:22 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/16/17 4:05:22 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/16/17 4:05:22 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/16/17 4:05:22 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/16/17 4:10:22 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 11 existe veuillez vous identifier
+6/16/17 4:10:22 PM - [Error] - WsCustomeException - CandidateController - Aucun token ayant ce numero 11 existe veuillez vous identifier
+6/16/17 5:37:23 PM - [Error] - SqlCustomException - MysqlDb - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+6/16/17 5:37:23 PM - [Error] - WsCustomeException - CandidateController - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+6/16/17 5:40:26 PM - [Error] - SqlCustomException - MysqlDb - Vous ne possédez aucun contenu d'email ayant ce titre : toto
+6/16/17 5:40:26 PM - [Error] - WsCustomeException - CandidateController - Vous ne possédez aucun contenu d'email ayant ce titre : toto
+6/16/17 5:46:54 PM - [Error] - SqlCustomException - MysqlDb - Vous ne possédez aucun contenu d'email ayant ce titre : f3
+6/16/17 5:46:54 PM - [Error] - WsCustomeException - CandidateController - Vous ne possédez aucun contenu d'email ayant ce titre : f3
