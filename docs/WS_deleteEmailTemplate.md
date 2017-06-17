@@ -35,7 +35,7 @@ The URL type is ***POST***
 |---|---|
 |  string |  string |
 
-Title represent the file title of your email template *** WITHOUT the extension ***
+Title represent the file title of your email template ***WITHOUT the extension***
 
 5. Json success result is : 
 
