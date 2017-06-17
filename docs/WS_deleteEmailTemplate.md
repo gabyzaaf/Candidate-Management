@@ -32,7 +32,7 @@ The URL type is ***POST***
 ```
 
 |  token | title   |
-|---|---|---| 
+|---|---|
 |  string |  string |
 
 Title represent the file title of your email template *** WITHOUT the extension ***
