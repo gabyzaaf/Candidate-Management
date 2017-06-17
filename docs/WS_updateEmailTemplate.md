@@ -34,7 +34,7 @@ The title need to be reference for the name file.
 }
 ```
 
-6. The fail result is : 
+6. The title fail result is : 
 
 ```json
 [
@@ -45,4 +45,16 @@ The title need to be reference for the name file.
     }
 ]
 ```
+
+7. The content fail result (if content is empty) : 
+```json
+[
+    {
+        "code": 5,
+        "content": "Le chemin du fichier est vide",
+        "success": false
+    }
+]
+```
+The reason of this erreur is because of the Lazy Loading pattern when we call the getContent function he will read the file content present in the path.
 

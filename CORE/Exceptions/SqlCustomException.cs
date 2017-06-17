@@ -13,8 +13,7 @@ namespace exception.sql
         LogManager log = new LogManager(JsonConfiguration.conf.getLogPath());
 
         public SqlCustomException(string code,string message):base(message){            
-                 
-         log.Write("[Error]",this.GetType().Name+" - "+code+" - "+message);       
+            log.Write("[Error]",this.GetType().Name+" - "+code+" - "+message);       
         }
 
     }

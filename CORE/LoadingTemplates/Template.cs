@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using exception.loading;
 namespace Candidate_Management.CORE.LoadingTemplates
 {
     public class Template
@@ -15,6 +16,7 @@ namespace Candidate_Management.CORE.LoadingTemplates
 
         public Template(string _path){
             try{
+                checkPath(_path);
                 path = _path;
                 if(path.Contains("/")){
                     string[] containsThePath = path.Split("/");
@@ -24,29 +26,28 @@ namespace Candidate_Management.CORE.LoadingTemplates
                 title = title.Replace(".txt","");
                 
             }catch(Exception exc){
-                // create specific exception for Loading
-                Console.WriteLine(exc.Message);
+                throw new LoadingCustomException("L01",exc.Message);
             }
             
         }
 
         public string getContent(){
             try{
+                checkPath(path);
                 if(String.IsNullOrEmpty(content)){
                     content = File.ReadAllText(path);
                 }
                 return content;
-            }catch(ArgumentNullException argumentNull){
-                // create specific exception for Loading
-                Console.WriteLine($"le champ est vide, veuillez creer le contenu");
-                throw argumentNull;
+            }catch(Exception exc){
+               throw new LoadingCustomException("L02",exc.Message);
             }   
         }
 
-
-        public override string ToString()
-        {
-            return $"the path is {path} - the title is {title} - the content is {content} ";
+        private void checkPath(string _path){
+             if(String.IsNullOrEmpty(_path)){
+                    throw new Exception("Le chemin du fichier est vide");
+            }
         }
+
     }
 }
