@@ -64,6 +64,8 @@ namespace Core.Adapter.Inteface
           ArrayList emailTemplateTiltes(int limite1,int limite2);
           
           ArrayList emailTemplateContentFromTitle(string title);
+
+          void updateTemplateEmailFromTitle(string title,string content);
     
     }
 

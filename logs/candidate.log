@@ -23,3 +23,23 @@ Parameter name: index
 6/16/17 5:40:26 PM - [Error] - WsCustomeException - CandidateController - Vous ne possédez aucun contenu d'email ayant ce titre : toto
 6/16/17 5:46:54 PM - [Error] - SqlCustomException - MysqlDb - Vous ne possédez aucun contenu d'email ayant ce titre : f3
 6/16/17 5:46:54 PM - [Error] - WsCustomeException - CandidateController - Vous ne possédez aucun contenu d'email ayant ce titre : f3
+6/17/17 2:44:32 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/17/17 2:44:32 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/17/17 2:44:32 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/17/17 2:44:33 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/17/17 2:44:33 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/17/17 2:44:33 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/17/17 3:21:52 PM - [Error] - WsCustomeException - CandidateController - String was not recognized as a valid Boolean.
+6/17/17 3:23:30 PM - [Error] - WsCustomeException - CandidateController - String was not recognized as a valid Boolean.
+6/17/17 3:27:51 PM - [Error] - WsCustomeException - CandidateController - Aucun template existe avec votre titre : f9
+6/17/17 3:28:02 PM - [Error] - WsCustomeException - CandidateController - Le titre du fichier template email n'existe pas 
+6/17/17 3:28:19 PM - [Error] - WsCustomeException - CandidateController - Value cannot be null.
+Parameter name: path
+6/17/17 3:33:58 PM - [Error] - WsCustomeException - CandidateController - Aucun template existe avec votre titre : f22
+6/17/17 3:42:00 PM - [Error] - WsCustomeException - CandidateController - Aucun template existe avec votre titre : f22
+6/17/17 3:42:10 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 26 existe veuillez vous identifier
+6/17/17 3:42:10 PM - [Error] - WsCustomeException - CandidateController - Aucun token ayant ce numero 26 existe veuillez vous identifier
+6/17/17 3:42:21 PM - [Error] - WsCustomeException - CandidateController - Aucun template existe avec votre titre : f22
+6/17/17 3:43:11 PM - [Error] - SqlCustomException - MysqlDb -  Vous n'avez pas les droits necessaire pour effectuer un ajout ou une modification sur un candidat
+6/17/17 3:43:11 PM - [Error] - WsCustomeException - CandidateController -  Vous n'avez pas les droits necessaire pour effectuer un ajout ou une modification sur un candidat
+6/17/17 3:43:39 PM - [Error] - WsCustomeException - CandidateController - Aucun template existe avec votre titre : f22

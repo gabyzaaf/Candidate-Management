@@ -4,9 +4,14 @@ namespace Candidate_Management.CORE.LoadingTemplates
 {
     public class Template
     {
+        public string token{get;set;}
         private string path;
         public string title{get;set;}
         public string content{private get;set;}
+
+        public Template(){
+
+        }
 
         public Template(string _path){
             try{
@@ -33,7 +38,7 @@ namespace Candidate_Management.CORE.LoadingTemplates
                 return content;
             }catch(ArgumentNullException argumentNull){
                 // create specific exception for Loading
-                Console.WriteLine($"The exception is inside about the file path :  {argumentNull.Message}");
+                Console.WriteLine($"le champ est vide, veuillez creer le contenu");
                 throw argumentNull;
             }   
         }

@@ -884,6 +884,25 @@ namespace Core.Adapter{
              return output;
         }
 
+        public void updateTemplateEmailFromTitle(string title,string content){
+             try{
+                if(String.IsNullOrEmpty(title)){
+                    throw new Exception("Le titre de votre email est vide");
+                }
+                if(String.IsNullOrEmpty(content)){
+                    throw new Exception("Le contenu de votre email est vide");
+                }
+                string sql = "update message set contenu_message=@content where titre_message=@title";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@content",content);
+                dico.Add("@title",title);
+                queryExecute(sql,dico,null);
+             }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+             }
+        }
+        
+
     }
 
 }
