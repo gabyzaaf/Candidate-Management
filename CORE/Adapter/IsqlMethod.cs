@@ -16,6 +16,9 @@ namespace Core.Adapter.Inteface
          
          bool UserCanUpdate(string token);
 
+         bool UserCanDelete(string token);
+
+
          void Authentification(string email,string password);
 
     
@@ -66,6 +69,8 @@ namespace Core.Adapter.Inteface
           ArrayList emailTemplateContentFromTitle(string title);
 
           void updateTemplateEmailFromTitle(string title,string content);
+
+          void deleteTemplateEmailFromTitle(string title);
     
     }
 

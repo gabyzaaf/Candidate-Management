@@ -191,7 +191,34 @@ namespace Core.Adapter{
             return bool.Parse(element["regle_modification"]);
         }
 
-       
+       public bool UserCanDelete(string token){
+        Dictionary<String,String> element;
+            try{
+                if(String.IsNullOrEmpty(token)){
+                    throw new Exception("Le token n'existe pas ");
+                }
+                Dictionary<String,Object> input = new Dictionary<String,Object>();
+                input.Add("@token",token);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("regle_suppression");
+                ArrayList dicos =  queryExecute("SELECT regle_suppression from user where session_id=@token",input,results);
+                if(dicos.Count==0){
+                        throw new Exception("Aucun token ayant ce numero "+token+" existe veuillez vous identifier");
+                }
+                element = (Dictionary<String,String>) dicos[0];
+                if(!element.ContainsKey("regle_suppression")){
+                    throw new Exception("Votre token ne vous permet pas de supprimer");
+                }
+                if(!bool.Parse(element["regle_suppression"])){
+                    throw new Exception(" Vous n'avez pas les droits necessaire pour effectuer une suppression");
+                }
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            return bool.Parse(element["regle_suppression"]);
+       }
+
+
         public User GenerateToken()
         {
             Random rnd = new Random();
@@ -900,6 +927,20 @@ namespace Core.Adapter{
              }catch(Exception exc){
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
              }
+        }
+
+        public void deleteTemplateEmailFromTitle(string title){
+            try{
+                if(String.IsNullOrEmpty(title)){
+                    throw new Exception("Le titre de votre email est vide");
+                }
+                string sql = "delete from message where titre_message=@title";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@title",title);
+                queryExecute(sql,dico,null);
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
         }
         
 
