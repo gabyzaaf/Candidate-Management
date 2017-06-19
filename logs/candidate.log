@@ -77,3 +77,20 @@ Parameter name: path
 6/17/17 4:46:31 PM - [Error] - SqlCustomException - MysqlDb -  Vous n'avez pas les droits necessaire pour effectuer une suppression
 6/17/17 4:46:31 PM - [Error] - WsCustomeException - CandidateController -  Vous n'avez pas les droits necessaire pour effectuer une suppression
 6/17/17 4:48:39 PM - [Error] - WsCustomeException - CandidateController - Aucun template existe avec votre titre : wrongNameTemplate
+6/19/17 10:29:11 AM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/19/17 10:29:11 AM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/19/17 10:29:11 AM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/19/17 10:29:11 AM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/19/17 10:29:11 AM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/19/17 10:29:11 AM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/19/17 10:48:41 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/19/17 10:48:41 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/19/17 10:48:41 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/19/17 10:48:41 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/19/17 10:48:41 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/19/17 10:48:41 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/19/17 6:41:54 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+6/19/17 6:42:50 PM - [Error] - SqlCustomException - MysqlDb - Le token n'existe pas 
+6/19/17 6:42:50 PM - [Error] - WsCustomeException - UserController - Le token n'existe pas 
+6/19/17 7:31:14 PM - [Error] - WsCustomeException - UserController - Le candidat n'est pas existant dans votre systeme, veuillez le creer
+6/19/17 7:34:55 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme

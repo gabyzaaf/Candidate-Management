@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Candidate_Management.CORE.LoadingTemplates;
+using Candidate_Management.CORE.Remind;
+
 
 namespace ConsoleApplication
 {
@@ -63,9 +65,12 @@ namespace ConsoleApplication
             string cmd = $"script.sh {date}";
             Console.WriteLine(cmd);
             Schedule schedule = new Schedule(cmd);
-            schedule.executeTask();   
+            schedule.executeTask();  
             */
+
             try{
+                //Iremind remind = FactoryRemind.createRemind("Candidate_Management.CORE.Remind.enCours");
+                //remind.add(2,DateTime.Now);
                 Context contexte = new Context(new LoadingEmailTemplate());
                 contexte.executeLoading();
                 var host = new WebHostBuilder()
@@ -75,7 +80,7 @@ namespace ConsoleApplication
                             .Build();
                 host.Run();
             }catch(Exception exc){
-                Console.WriteLine("Une erreur c'est produit, veuillez consulter vos logs");
+                Console.WriteLine($"Une erreur {exc.Message} c'est produit, veuillez consulter vos logs");
             }
                 
         }

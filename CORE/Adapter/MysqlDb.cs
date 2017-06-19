@@ -500,7 +500,6 @@ namespace Core.Adapter{
             try{
                 checkId(id);
                 checkDate(date);
-                
                 Dictionary<String,Object> param = new Dictionary<String,Object>();
                 param.Add("@date",date.Date);
                 param.Add("@fid",id);
@@ -529,9 +528,9 @@ namespace Core.Adapter{
 
 
         public void typeAction(string actionType,int prix,DateTime date,int id,string type){
-          
+          Console.WriteLine("in the type action function");
             switch (actionType)
-            {
+            {  
                 case "freelance":
                 // Ajoute dans la table internNumeric
                     if("ADD".Equals(type)){
