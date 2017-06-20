@@ -11,6 +11,7 @@ using Core.Adapter.Inteface;
 using exception.sql;
 using MySql.Data.MySqlClient;
 using Candidate_Management.CORE.LoadingTemplates;
+using Candidate_Management.CORE.Remind;
 
 
 namespace Core.Adapter{
@@ -528,78 +529,28 @@ namespace Core.Adapter{
 
 
         public void typeAction(string actionType,int prix,DateTime date,int id,string type){
-          Console.WriteLine("in the type action function");
-            switch (actionType)
-            {  
-                case "freelance":
-                // Ajoute dans la table internNumeric
-                    if("ADD".Equals(type)){
-                        addFreeLance(prix,id);
-                    }else if("UPDATE".Equals(type)){
-                        updateFreeLance(prix,id);
-                    }      
-                    break;
-                case "enCours":
-                // remind toutes les 2 semaines
-                    if("ADD".Equals(type)){
-                        remindType(id,date.AddDays(2*7));
-                    }else if("UPDATE".Equals(type)){
-                        updateRemindType(id,date.AddYears(1));
-                    }
-                    
-                    break;
-                case "appellerRemind":
-                 // remind tous les jous à 18h
-                    if("ADD".Equals(type)){
-                        remindType(id,date.AddDays(1));
-                    }else if("UPDATE".Equals(type)){
-                            updateRemindType(id,date.AddYears(1));
-                    }
-                   
-                    break;
-                case "aRelancerLKD":
-                    // remind tous les 2 jours
-                    if("ADD".Equals(type)){
-                        remindType(id,date.AddDays(2));
-                    }else if("UPDATE".Equals(type)){
-                            updateRemindType(id,date.AddYears(1));
-                    }
-                    break;
-                case "aRelancerMail":
-                    // remind tous les 2 jours
-                     if("ADD".Equals(type)){
-                        remindType(id,date.AddDays(2));
-                    }else if("UPDATE".Equals(type)){
-                        updateRemindType(id,date.AddYears(1));
-                    }
-                    break;
-                case "PAERemind":
-                    // remind tous les 6 mois
-                     if("ADD".Equals(type)){
-                        remindType(id,date.AddMonths(6));
-                    }else if("UPDATE".Equals(type)){
-                        remindType(id,date.AddMonths(6));
-                    }
-                    
-                    break;
-                case "HcLangue":
-                    // remind tous les 6 mois
-                     if("ADD".Equals(type)){
-                        remindType(id,date.AddMonths(6));
-                    }else if("UPDATE".Equals(type)){
-                        updateRemindType(id,date.AddMonths(6));
-                    }
-                    break;
-                case "HCGeo":
-                    // remind tous les 6 mois
-                    if("ADD".Equals(type)){
-                        remindType(id,date.AddMonths(6));
-                    }else if("UPDATE".Equals(type)){
-                        updateRemindType(id,date.AddMonths(6));
-                    }
-                    break;
+                try{
+                    Console.WriteLine("in the type action function"); 
+                        if ("freelance".Equals(actionType)){
+                        // Ajoute dans la table internNumeric
+                            if("ADD".Equals(type)){
+                                addFreeLance(prix,id);
+                            }else if("UPDATE".Equals(type)){
+                                updateFreeLance(prix,id);
+                            }      
+                        }else{
+                            ContextRemindExecution remindExecution = new ContextRemindExecution(FactoryRemind.createRemind(actionType));
+                            if("ADD".Equals(type)){
+                                remindExecution.executeAdd(id,date);
+                            }else if("UPDATE".Equals(type)){
+                                remindExecution.executeUpdate(id,date);
+                            }    
+                        }
+                }catch(Exception exc){
+                    throw new SqlCustomException(this.GetType().Name,exc.Message);
+                }
             }
-        }
+        
 
             private void checkCandidateExist(Candidat candidat){
                 if(candidat==null){
@@ -941,8 +892,5 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
-        
-
     }
-
 }

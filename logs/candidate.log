@@ -94,3 +94,11 @@ Parameter name: path
 6/19/17 6:42:50 PM - [Error] - WsCustomeException - UserController - Le token n'existe pas 
 6/19/17 7:31:14 PM - [Error] - WsCustomeException - UserController - Le candidat n'est pas existant dans votre systeme, veuillez le creer
 6/19/17 7:34:55 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+6/20/17 12:22:31 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 25 existe veuillez vous identifier
+6/20/17 12:22:31 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 25 existe veuillez vous identifier
+6/20/17 12:22:52 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/20/17 12:22:52 PM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/20/17 12:24:03 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/20/17 12:24:03 PM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/20/17 12:25:09 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/20/17 12:25:09 PM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
