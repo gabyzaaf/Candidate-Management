@@ -13,6 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvWelcome"
+        android:textColor="#4899F6"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -32,14 +37,24 @@
         android:layout_alignEnd="@+id/tvWelcome"
         android:maxLines = "50"
         android:scrollbars = "vertical"
-        android:layout_below="@+id/spActions" />
-    <Spinner
+        android:textColor="#4899F6"
+        android:layout_below="@+id/LinearLayoutMain" />
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spActions"
-        android:layout_below="@+id/tvWelcome"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true" />
-
+        android:id="@+id/LinearLayoutMain"
+        android:layout_below="@+id/tvWelcome">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Choisir une catégorie :  "
+            android:textColor="#4899F6"
+            android:textStyle="bold"/>
+        <Spinner
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spActions"
+            android:textColor="#4899F6"
+             />
+    </LinearLayout>
 </RelativeLayout>

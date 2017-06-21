@@ -25,6 +25,7 @@ import com.example.fabiengamel.candidatemanagement.Models.Candidate;
 import com.example.fabiengamel.candidatemanagement.Models.Meeting;
 import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
+import com.example.fabiengamel.candidatemanagement.Utils.APIConstants;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -143,7 +144,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         final Candidate candidate = new Candidate();
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.1.17:5000/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
+        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
 
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()

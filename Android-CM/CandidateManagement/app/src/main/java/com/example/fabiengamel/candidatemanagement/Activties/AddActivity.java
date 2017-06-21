@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -56,6 +57,7 @@ public class AddActivity extends AppCompatActivity {
     Button bAdd;
     String action = "";
     EditText etPRix;
+    TextView tvPrix;
 
 
     @Override
@@ -63,6 +65,11 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        InitContent();
+
+    }
+
+    public void InitContent() {
         etName = (EditText)findViewById(R.id.etNom);
         etFirstname = (EditText)findViewById(R.id.etPrenom);
         etPhone = (EditText)findViewById(R.id.etPhone);
@@ -87,8 +94,8 @@ public class AddActivity extends AppCompatActivity {
         etNsNote = (EditText)findViewById(R.id.etNsNoteAdd);
         etNote = (EditText)findViewById(R.id.etNoteAdd);
         etPRix = (EditText)findViewById(R.id.etPrixAdd);
-
         bAdd = (Button)findViewById(R.id.bAdd);
+        tvPrix = (TextView)findViewById(R.id.tvPrixAdd);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, android.R.layout.simple_spinner_item);
@@ -101,6 +108,11 @@ public class AddActivity extends AppCompatActivity {
                 if(action.matches("freelance"))
                 {
                     etPRix.setVisibility(View.VISIBLE);
+                    tvPrix.setVisibility(View.VISIBLE);
+                }
+                else {
+                    etPRix.setVisibility(View.INVISIBLE);
+                    tvPrix.setVisibility(View.INVISIBLE);
                 }
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -119,29 +131,28 @@ public class AddActivity extends AppCompatActivity {
                 }
                 else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
-                builder.setTitle("Ajouter le candidat ?");
-                builder.setPositiveButton("Oui",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                AddCandidat();
-                            }
-                        });
-                builder.setNegativeButton("Annuler",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+                    builder.setTitle("Ajouter le candidat ?");
+                    builder.setPositiveButton("Oui",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    AddCandidat();
+                                }
+                            });
+                    builder.setNegativeButton("Annuler",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
         });
-
     }
 
     public boolean CheckEmptyField() {
@@ -225,12 +236,12 @@ public class AddActivity extends AppCompatActivity {
                     email = false;
                 }
 
-                int prix;
+                String prix;
                 if(action.matches("freelance")) {
-                    prix = Integer.parseInt(etPRix.getText().toString());
+                    prix = etPRix.getText().toString();
                 }
                 else {
-                    prix = 0;
+                    prix = "0";
                 }
                 addRequest = new AddRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,
                         crCall, ns, email, prix, responseListener, errorListener);

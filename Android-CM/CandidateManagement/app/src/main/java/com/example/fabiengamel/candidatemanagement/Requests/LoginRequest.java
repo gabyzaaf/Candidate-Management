@@ -9,6 +9,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.fabiengamel.candidatemanagement.Models.MyDbContext;
+import com.example.fabiengamel.candidatemanagement.Utils.APIConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +26,7 @@ public class LoginRequest extends JsonObjectRequest {
  /*   MyDbContext myDb = new MyDbContext();
     String serverAdress = myDb.getServerAdress();*/
 
-    private static final String LOGIN_REQUEST_URL ="http://192.168.1.17:5000/api/user/admin/auth/";
+    private static final String LOGIN_REQUEST_URL = APIConstants.BASE_URL+"/api/user/admin/auth/";
     Map<String, String> headers;
     JSONObject jsonBody;
     String requestBody;
@@ -58,14 +59,5 @@ public class LoginRequest extends JsonObjectRequest {
         }
     }
 
-  /*  @Override
-    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-        String responseString = "";
-        if (response != null) {
-            responseString = String.valueOf(response.statusCode);
-            // can get more details such as response.headers
-        }
-        return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-    }*/
 }
 

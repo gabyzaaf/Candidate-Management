@@ -25,12 +25,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Nom"
+            android:textColor="#4899F6"
             android:layout_weight="1"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Localiser"
+            android:textColor="#4899F6"
             android:id="@+id/bLocateMap" />
 
     </LinearLayout>

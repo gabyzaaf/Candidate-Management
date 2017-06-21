@@ -44,17 +44,16 @@
         </activity>
         <activity
             android:name=".Activties.AddActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_add" >
+            android:label="@string/title_activity_add"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity android:name=".Activties.UpdateActivity" >
         </activity>
-        <activity
-            android:name=".Activties.PredictionActivity"
-            android:label="@string/title_activity_prediction"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
         <activity android:name=".Activties.MapActivity" >
+        </activity>
+        <activity android:name=".Activties.PredictSalaryActivity"
+            android:label="@string/title_activity_salary"
+            android:windowSoftInputMode="stateHidden">
         </activity>
     </application>
 

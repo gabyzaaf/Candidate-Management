@@ -5,6 +5,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.APIConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 public class AddReportRequest extends JsonObjectRequest {
 
-    private static final String ADD_REPORT_REQUEST_URL ="http://192.168.1.17:5000/api/user/add/candidat/report";
+    private static final String ADD_REPORT_REQUEST_URL = APIConstants.BASE_URL+"/api/user/add/candidat/report";
     Map<String, String> headers;
     JSONObject jsonBody;
     String requestBody;

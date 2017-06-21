@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -63,12 +64,21 @@ public class UpdateActivity extends AppCompatActivity {
     RadioGroup sexes;
     RadioGroup approche_emaill;
     EditText etPRix;
+    TextView tvPrix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
+        InitContent();
+
+    }
+
+    public void InitContent()
+    {
+        Candidate candidate = Candidate.getCurrentCandidate();
+        Meeting report = Meeting.getCurrentMeeting();
         etName = (EditText)findViewById(R.id.etNomUpdate);
         etFirstname = (EditText)findViewById(R.id.etPrenomUpdate);
         etPhone = (EditText)findViewById(R.id.etPhoneUpdate);
@@ -97,6 +107,7 @@ public class UpdateActivity extends AppCompatActivity {
         sexes = (RadioGroup)findViewById(R.id.rgSexeUpdate);
         approche_emaill = (RadioGroup)findViewById(R.id.rgEmailUpdate);
         etPRix = (EditText)findViewById(R.id.etPrixUpdate);
+        tvPrix = (TextView)findViewById(R.id.tvPrixUpdate);
 
         bCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,15 +148,6 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
-        InitContent();
-
-    }
-
-    public void InitContent()
-    {
-        Candidate candidate = Candidate.getCurrentCandidate();
-        Meeting report = Meeting.getCurrentMeeting();
-
         //set spinner values
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, android.R.layout.simple_spinner_item);
@@ -158,6 +160,11 @@ public class UpdateActivity extends AppCompatActivity {
                 if(action.matches("freelance"))
                 {
                     etPRix.setVisibility(View.VISIBLE);
+                    tvPrix.setVisibility(View.VISIBLE);
+                }
+                else {
+                    etPRix.setVisibility(View.INVISIBLE);
+                    tvPrix.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -267,12 +274,12 @@ public class UpdateActivity extends AppCompatActivity {
             } else if(rdEmailNo.isChecked()){
                 email = false;
             }
-            int prix;
+            String prix;
             if(action.matches("freelance")) {
-                prix = Integer.parseInt(etPRix.getText().toString());
+                prix = etPRix.getText().toString();
             }
             else {
-                prix = 0;
+                prix = "0";
             }
 
             updateRequest = new UpdateRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,

@@ -24,12 +24,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Nom"
+            android:textColor="#4899F6"
             android:layout_weight="1"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rechercher"
+            android:textColor="#4899F6"
             android:id="@+id/bSearchSingle" />
     </LinearLayout>
     <TextView
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/tvSingleCand"
+        android:textColor="#4899F6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_below="@+id/linearLayout"
@@ -52,6 +55,7 @@
         android:text="Modifier candidat"
         android:visibility="invisible"
         android:id="@+id/bModify"
+        android:textColor="#4899F6"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/bLocateSearch"
         android:layout_toLeftOf="@+id/bLocateSearch" />
@@ -62,6 +66,7 @@
         android:layout_weight="1"
         android:text="Envoyer un SMS"
         android:id="@+id/bSMS"
+        android:textColor="#4899F6"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/tvSingleCand"
@@ -73,6 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Localiser"
+        android:textColor="#4899F6"
         android:id="@+id/bLocateSearch"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"

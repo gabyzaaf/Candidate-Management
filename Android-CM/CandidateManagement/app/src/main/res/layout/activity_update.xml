@@ -12,7 +12,6 @@
                 android:text="  Nom *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etNomUpdate"
@@ -30,7 +29,6 @@
                 android:text="  Prenom *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etPrenomUpdate"
@@ -49,7 +47,6 @@
                 android:text="  Mail *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etMailUpdate"
@@ -68,7 +65,6 @@
                 android:text="  N°tel *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etPhoneUpdate"
@@ -96,21 +92,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="  Sexe *"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:textStyle="bold"
                     android:textColor="#4899F6"
-                    android:gravity="center"
                     />
                 <RadioButton
                     android:id="@+id/rbMasculinUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Masculin "
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:textColor="#4899F6"
                     android:checked="false" />
                 <RadioButton
                     android:id="@+id/rbFemininUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Féminin"
+                    android:textColor="#4899F6"
                     />
             </RadioGroup>
         </LinearLayout>
@@ -118,10 +117,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Action  *"
+                android:text="  Action *"
+                android:paddingTop="20dp"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <Spinner
                 android:layout_width="wrap_content"
@@ -133,10 +132,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Année *"
+                android:text="  Année *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etYearUpdate"
@@ -152,10 +150,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lien  "
+                android:text="  Lien  "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etLinkUpdate"
@@ -170,10 +167,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="crCall  "
+                android:text="  crCall "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etcrCallUpdate"
@@ -188,10 +184,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NS : "
+                android:text="  NS "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etNsUpdate"
@@ -210,10 +205,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Approche Email : "
+                android:text="  Approche Email "
                 android:textStyle="bold"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="9dp"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <RadioGroup
                 android:id="@+id/rgEmailUpdate"
@@ -227,12 +223,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Oui"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:textColor="#4899F6"
                     android:checked="false" />
                 <RadioButton
                     android:id="@+id/rbFalseUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Non"
+                    android:textColor="#4899F6"
                     />
             </RadioGroup>
         </LinearLayout>
@@ -240,10 +239,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Note *"
+                android:text="  Note *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etNoteUpdate"
@@ -259,10 +257,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="XpNote  "
+                android:text="  XpNote  "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etXpNoteUpdate"
@@ -277,10 +274,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NsNote "
+                android:text="  NsNote "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etNsNoteUpdate"
@@ -295,10 +291,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JobIdealNote "
+                android:text="  JobIdealNote "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etJobIdealNoteUpdate"
@@ -313,10 +308,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PisteNote "
+                android:text="  PisteNote "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 android:singleLine="true"
                 />
             <EditText
@@ -332,10 +326,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PieCOuteNote "
+                android:text="  PieCOuteNote "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etPicouteNoteUpdate"
@@ -350,10 +343,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NationalityNote "
+                android:text="  NationalityNote "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etNationalityNoteUpdate"
@@ -368,10 +360,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Competences  "
+                android:text="  Competences "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etCompetencesUpdate"
@@ -386,10 +377,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LocationNote : "
+                android:text="  LocationNote "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etLocationNoteUpdate"
@@ -404,10 +394,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EnglishNote  "
+                android:text="  EnglishNote  "
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
                 />
             <EditText
                 android:id="@+id/etEnglishNoteUpdate"
@@ -422,10 +411,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prix * "
+                android:id="@+id/tvPrixUpdate"
+                android:text="  Prix *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:gravity="center"
+                android:visibility="invisible"
                 />
             <EditText
                 android:id="@+id/etPrixUpdate"
@@ -443,12 +433,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Modifier"
+                android:textColor="#4899F6"
                 android:id="@+id/bUpdate" />
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Annuler"
+                android:textColor="#4899F6"
                 android:id="@+id/bAnnulUpdate" />
         </TableRow>
     </TableLayout>

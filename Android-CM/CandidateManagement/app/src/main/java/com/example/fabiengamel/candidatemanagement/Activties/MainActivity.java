@@ -33,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.Models.Candidate;
 import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
+import com.example.fabiengamel.candidatemanagement.Utils.APIConstants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,30 +68,9 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        tvWelcome = (EditText)findViewById(R.id.tvWelcome);
-        tvCandidates = (EditText)findViewById(R.id.tvCandidates);
-        ivLogo = (ImageView)findViewById(R.id.imageView);
-        spActions = (Spinner)findViewById(R.id.spActions);
-
 
         InitContent();
         setMenu();
-
-        spActions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                action = spActions.getSelectedItem().toString();
-                GetCandidatesByActions(action);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                action = "aRelancerMail";
-            }
-        });
 
     }
 
@@ -111,12 +91,34 @@ public class MainActivity extends AppCompatActivity
 
     private void InitContent() {
         User user = User.getCurrentUser();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        tvWelcome = (EditText)findViewById(R.id.tvWelcome);
+        tvCandidates = (EditText)findViewById(R.id.tvCandidates);
+        ivLogo = (ImageView)findViewById(R.id.imageView);
+        spActions = (Spinner)findViewById(R.id.spActions);
+
         tvWelcome.setText("Bonjour " + user.email);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spActions.setAdapter(adapter);
         tvCandidates.setMovementMethod(new ScrollingMovementMethod());
+
+        spActions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                action = spActions.getSelectedItem().toString();
+                GetCandidatesByActions(action);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                action = "aRelancerMail";
+            }
+        });
     }
 
     @Override
@@ -164,6 +166,9 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_map) {
             startActivity(new Intent(this, MapActivity.class));
         }
+        else if (id == R.id.nav_salary) {
+            startActivity(new Intent(this, PredictSalaryActivity.class));
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -177,7 +182,7 @@ public class MainActivity extends AppCompatActivity
 
         //requete get de recup
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://192.168.1.17:5000/api/candidate/actions/" + action +"/"+user.sessionId ;
+        String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.sessionId ;
 
         tvCandidates.setText("Liste des candidats "+action+"(s) :");
         tvCandidates.append("\n");

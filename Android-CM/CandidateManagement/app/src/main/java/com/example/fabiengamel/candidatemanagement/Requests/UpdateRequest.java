@@ -6,6 +6,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.APIConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,14 +20,14 @@ import java.util.Map;
  */
 public class UpdateRequest extends JsonObjectRequest {
 
-    private static final String UPDATE_REQUEST_URL = "http://192.168.1.17:5000/api/user/update/candidat/";
+    private static final String UPDATE_REQUEST_URL = APIConstants.BASE_URL+"/api/user/update/candidat/";
     Map<String, String> headers;
     JSONObject jsonBody;
     String requestBody;
 
 
     public UpdateRequest(String sessionId, String Name, String Firstname, String mail,String phone, String sexe, String action,
-                      int year, String link, String crCall, String ns, Boolean email, int prix, Response.Listener<JSONObject> listener,
+                      int year, String link, String crCall, String ns, Boolean email, String prix, Response.Listener<JSONObject> listener,
                       Response.ErrorListener errorListener) throws JSONException {
         super(Request.Method.POST, UPDATE_REQUEST_URL, null, listener, errorListener);
 

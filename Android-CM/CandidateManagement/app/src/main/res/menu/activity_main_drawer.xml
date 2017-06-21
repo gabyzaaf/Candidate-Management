@@ -9,7 +9,13 @@
             android:title="Localisation" />
         <item android:id="@+id/nav_calendar" android:icon="@android:drawable/ic_menu_agenda"
             android:title="Consulter l'agenda" />
-        <item android:id="@+id/nav_close" android:icon="@android:drawable/ic_menu_close_clear_cancel"
-            android:title="Déconnexion" />
     </group>
+
+    <item android:title="Machine Learning">
+        <item android:id="@+id/nav_salary" android:icon="@android:drawable/ic_menu_zoom"
+            android:title="Prédiction salariale" />
+    </item>
+
+    <item android:id="@+id/nav_close" android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="Déconnexion" />
 </menu>

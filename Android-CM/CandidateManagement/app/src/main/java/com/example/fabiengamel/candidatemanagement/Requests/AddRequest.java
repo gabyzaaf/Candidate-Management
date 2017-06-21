@@ -5,6 +5,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.APIConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,14 +18,14 @@ import java.util.Map;
  * Created by Fabien gamel on 07/06/2017.
  */
 public class AddRequest extends JsonObjectRequest {
-    private static final String ADD_REQUEST_URL = "http://192.168.1.17:5000/api/user/add/candidat/";
+    private static final String ADD_REQUEST_URL = APIConstants.BASE_URL+"/api/user/add/candidat/";
     Map<String, String> headers;
     JSONObject jsonBody;
     String requestBody;
 
 
     public AddRequest(String sessionId, String Name, String Firstname, String mail,String phone, String sexe, String action,
-                      int year, String link, String crCall, String ns, Boolean email,int prix, Response.Listener<JSONObject> listener,
+                      int year, String link, String crCall, String ns, Boolean email,String prix, Response.Listener<JSONObject> listener,
                       Response.ErrorListener errorListener) throws JSONException {
         super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
 
