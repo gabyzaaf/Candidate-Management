@@ -18,8 +18,14 @@ namespace scheduler{
                 _processStartInfo.FileName         = @"sh";
                 _processStartInfo.Arguments        = cmd;
                 _processStartInfo.CreateNoWindow   = true;
+                
                 Process myProcess = Process.Start(_processStartInfo);
-                myProcess.WaitForExit(); 
+                myProcess.StartInfo.RedirectStandardOutput = true;
+                string stdout = myProcess.StandardOutput.ReadToEnd();
+                myProcess.WaitForExit();
+                int result = myProcess.ExitCode;
+                Console.WriteLine($"The process code result is --> {result} -- standart exit {stdout} ");
+                
             }catch(Exception exc){
                 Console.WriteLine(exc.Message);
             }

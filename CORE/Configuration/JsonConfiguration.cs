@@ -59,10 +59,14 @@ namespace core.configuration{
         public string getPluginFolder(){
             settingsExist();
             if(String.IsNullOrEmpty(configuration[configurationPluginFolder])){
-                throw new Exception("Ne contiens aucun dossier de plugin");
+                throw new ConfigurationCustomException(this.GetType().Name,"Ne contiens aucun dossier de plugin");
             }
             if(!Directory.Exists(configuration[configurationPluginFolder])){
-                 throw new Exception("Le dossier n'existe pas veuillez creer le dossier de plugin");
+                 throw new ConfigurationCustomException(this.GetType().Name,"Le dossier n'existe pas veuillez creer le dossier de plugin");
+            }
+            string pluginFolder = configuration[configurationPluginFolder];
+            if(!Directory.Exists(pluginFolder)){
+                throw new ConfigurationCustomException(this.GetType().Name,$"Le repertoire spécifié à cette adresse {pluginFolder} n'existe ");
             }
             return configuration[configurationPluginFolder];
         }

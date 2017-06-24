@@ -1,5 +1,5 @@
 
 #!/bin/bash
 
-ls -l | at 00:00 $1
+ls -zazaz | at 00:00 $1
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Globalization;
 using core.configuration;
 using core.plugin.engine;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Candidate_Management.CORE.LoadingTemplates;
 using Candidate_Management.CORE.Remind;
-
+using scheduler;
+using Candidate_Management.CORE.LoadingPlugin;
 
 namespace ConsoleApplication
 {
@@ -66,11 +68,14 @@ namespace ConsoleApplication
             Console.WriteLine(cmd);
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask();  
-            */
+             */
 
             try{
-                //Iremind remind = FactoryRemind.createRemind("Candidate_Management.CORE.Remind.enCours");
-                //remind.add(2,DateTime.Now);
+                JsonConfiguration conf = JsonConfiguration.getInstance();
+                string folder = conf.getPluginFolder();
+                LoadPlugins load = new LoadPlugins(folder);
+                load.getPluginFromFolders();
+                Console.WriteLine($"The folder is {folder}");
                 Context contexte = new Context(new LoadingEmailTemplate());
                 contexte.executeLoading();
                 var host = new WebHostBuilder()
