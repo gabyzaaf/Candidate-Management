@@ -63,6 +63,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
 
+
         InitContent();
 
         //Récupération du nom lors de l'activity recherche
@@ -109,7 +110,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     }
 
     public void addMarker(Double lat, Double lng){
-        LatLng latLng = new LatLng(lat, lng);
+        LatLng latLng = new LatLng(lat,lng);
         Candidate candidate = Candidate.getCurrentCandidate();
 
         //mMap.clear();
@@ -169,12 +170,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     candidate.phone =  jsonOBject.getString("phone");
                                     candidate.lien = jsonOBject.getString("lien");
                                     candidate.actions = jsonOBject.getString("actions");
-                                    candidate.zipcode = "93100";
+                                    candidate.zipcode = "94300";
                                     Candidate.setCurrentCandidate(candidate);
 
                                     if(candidate.zipcode != null) {
+                                        Toast.makeText(MapActivity.this, "zipcode : " +candidate.zipcode, Toast.LENGTH_LONG).show();
                                         GetCandidatePosition(candidate.zipcode);
-                                       // Toast.makeText(MapActivity.this, "zipcode : " +candidate.zipcode, Toast.LENGTH_LONG).show();
 
                                     } else {
                                         Toast.makeText(MapActivity.this, "Code postal inexistant pour ce candidat", Toast.LENGTH_LONG).show();
@@ -224,8 +225,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                             JSONArray  results = response.getJSONArray("results");
                             JSONObject item = results.getJSONObject(0);
-                            JSONObject location = item.getJSONObject("geometry")
-                                    .getJSONObject("location");
+                            JSONObject location = item.getJSONObject("geometry").getJSONObject("location");
 
                             Double lat = location.getDouble("lat");
                             Double lng = location.getDouble("lng");

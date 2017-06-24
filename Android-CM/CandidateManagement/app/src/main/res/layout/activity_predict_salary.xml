@@ -39,7 +39,6 @@
                 android:text="  Nombre de projets *"
                 android:textStyle="bold"
                 android:textColor="#4899F6"
-                android:inputType="number"
                 />
             <EditText
                 android:id="@+id/etNbProjectSalary"
@@ -48,6 +47,7 @@
                 android:hint=""
                 android:layout_weight="1"
                 android:inputType="number"
+                android:maxLength="1"
                 android:singleLine="true"
                 />
         </TableRow>
@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:hint=""
                 android:layout_weight="1"
+                android:maxLength="3"
                 android:singleLine="true"
                 android:inputType="number"
                 />
@@ -87,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:hint=""
                 android:layout_weight="1"
+                android:maxLength="1"
                 android:singleLine="true"
                 android:inputType="number"
                 />

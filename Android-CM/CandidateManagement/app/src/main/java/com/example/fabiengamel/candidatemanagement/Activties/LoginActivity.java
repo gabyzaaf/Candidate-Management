@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                  Login();
                // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-               // LoginActivity.this.startActivity(intent);
+                //LoginActivity.this.startActivity(intent);
             }
         });
     }
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(response.has("content"))
                         {
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                            builder.setMessage("Mauvais identifiants")
+                            builder.setMessage(""+response.getString("content"))
                                     .setNeutralButton("Réessayer", null)
                                     .create()
                                     .show();
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                     error.printStackTrace();
                     Log.d("log2=", error.toString());
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    builder.setMessage(error.toString())
+                    builder.setMessage("Erreur de connexion au serveur")
                             .setNegativeButton("Réessayer", null)
                             .create()
                             .show();

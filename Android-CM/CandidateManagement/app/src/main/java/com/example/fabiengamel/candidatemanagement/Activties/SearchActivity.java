@@ -1,16 +1,25 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
+import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,11 +41,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class SearchActivity extends AppCompatActivity {
 
     EditText etNom;
     Button bRecherche;
     TextView tvResult;
+    TextView tvInfo;
     Button bModify;
     Button bLocate;
     Button bSMS;
@@ -45,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         InitContent();
 
@@ -72,6 +83,7 @@ public class SearchActivity extends AppCompatActivity {
         tvResult.setMovementMethod(new ScrollingMovementMethod());
         bLocate = (Button)findViewById(R.id.bLocateSearch);
         bSMS = (Button)findViewById(R.id.bSMS);
+        tvInfo = (TextView)findViewById(R.id.textView2);
 
 
         bLocate.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +116,34 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
+
+        bSMS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SearchActivity.this, SMSActivity.class);
+                Candidate c = Candidate.getCurrentCandidate();
+                i.putExtra("candidatePhone", c.phone);
+                i.putExtra("candidateName", c.lastname);
+                i.putExtra("candidateFirstname", c.firstname);
+                i.putExtra("candidateAction", c.actions);
+                startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 
     public void SearchCandidate(String nom) {
@@ -148,8 +188,6 @@ public class SearchActivity extends AppCompatActivity {
                                         report.nationalityNote = jsonOBject.getString("nationalityNote");
                                         report.EnglishNote = jsonOBject.getString("EnglishNote");
                                         report.competences = jsonOBject.getString("competences");
-
-                                        tvResult.setText("Informations sur le candidat: ");
 
                                         Candidate.setCurrentCandidate(candidate);
                                         Meeting.setCurrentMeeting(report);
@@ -200,6 +238,7 @@ public class SearchActivity extends AppCompatActivity {
                                         bModify.setVisibility(View.VISIBLE);
                                         bLocate.setVisibility(View.VISIBLE);
                                         bSMS.setVisibility(View.VISIBLE);
+                                        tvInfo.setVisibility(View.VISIBLE);
                                     }
 
                                 }
@@ -230,4 +269,5 @@ public class SearchActivity extends AppCompatActivity {
         };
         queue.add(searchRequest);
     }
+
 }

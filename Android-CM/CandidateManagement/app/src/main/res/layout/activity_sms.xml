@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.fabiengamel.candidatemanagement.Activties.SMSActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Informations sur le candidat : "
+        android:textStyle="bold"
+        android:textColor="#4899F6"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true" />
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:id="@+id/tableLayoutSMS">
+        <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="  Nom "
+            android:textStyle="bold"
+            android:textColor="#4899F6"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/tvNomSMS"
+            android:textStyle="bold"
+            android:textColor="#4899F6"
+            />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="  Prenom "
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvPrenomSMS"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  N°Tel "
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvPhoneSMS"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Action "
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvActionSMS"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+        </TableRow>
+    </TableLayout>
+
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="250dp"
+       android:layout_below="@id/tableLayoutSMS"
+       android:gravity="top"
+       android:layout_marginTop="@dimen/activity_vertical_margin"
+       android:id="@+id/etContentSMS" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Envoyer"
+        android:textStyle="bold"
+        android:textColor="#4899F6"
+        android:id="@+id/bSendSMS"
+        android:layout_below="@+id/etContentSMS"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
