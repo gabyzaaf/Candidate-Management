@@ -35,7 +35,7 @@ RUN mkdir warmup \
     && rm -rf warmup \
     && rm -rf /tmp/NuGetScratch
 
-RUN mkdir /home/candidate && cd /home/candidate && git clone https://github.com/gabyzaaf/Candidate-Management.git && apt-get update -y && apt-get install vim -y \
+RUN mkdir /home/candidate && cd /home/candidate && git clone -b Server https://github.com/gabyzaaf/Candidate-Management.git && apt-get update -y && apt-get install vim -y \
  && mkdir -p /var/candidate/logs/ \
  && mkdir -p /var/candidate/plugins/ \
  && mkdir -p /home/candidate/emailPlugins/ \
