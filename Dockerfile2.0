@@ -40,4 +40,4 @@ RUN mkdir /home/candidate && cd /home/candidate && git clone -b Server https://g
  && mkdir -p /var/candidate/plugins/ \
  && mkdir -p /home/candidate/emailPlugins/ \
  && cd /home/candidate/emailPlugins \
- && touch /var/candidate/logs/emailPlugins.txt && atq
+ && touch /var/candidate/logs/emailPlugins.txt

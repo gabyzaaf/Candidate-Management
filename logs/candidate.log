@@ -102,3 +102,9 @@ Parameter name: path
 6/20/17 12:24:03 PM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
 6/20/17 12:25:09 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
 6/20/17 12:25:09 PM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/24/17 2:11:36 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/24/17 2:11:36 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/24/17 2:11:36 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/24/17 2:11:36 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/24/17 2:11:36 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+6/24/17 2:11:36 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.

@@ -8,6 +8,7 @@ namespace Candidate_Management.CORE.Remind
                 string remindToLoad = $"Candidate_Management.CORE.Remind.{remindString}";
                 
                 return (Iremind)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(remindToLoad);
+                
             }catch(TypeLoadException type){
                 throw new Exception($"Il est impossible de charger votre type de remind : {remindString} - {type.Message}");
             }catch(Exception exc){
