@@ -17,8 +17,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install .NET Core SDK
-ENV DOTNET_SDK_VERSION 1.0.4
-ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-debian-x64.$DOTNET_SDK_VERSION.tar.gz
+ENV DOTNET_SDK_VERSION 2.0.0-preview1-005977
+ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-linux-x64.$DOTNET_SDK_VERSION.tar.gz
 
 RUN curl -SL $DOTNET_SDK_DOWNLOAD_URL --output dotnet.tar.gz \
     && mkdir -p /usr/share/dotnet \
@@ -40,4 +40,6 @@ RUN mkdir /home/candidate && cd /home/candidate && git clone -b Server https://g
  && mkdir -p /var/candidate/plugins/ \
  && mkdir -p /home/candidate/emailPlugins/ \
  && cd /home/candidate/emailPlugins \
- && touch /var/candidate/logs/emailPlugins.txt
+ && touch /var/candidate/logs/emailPlugins.txt \
+ && mkdir -p /var/candidate/emailTemplates/ \
+ && apt-get install at -y
