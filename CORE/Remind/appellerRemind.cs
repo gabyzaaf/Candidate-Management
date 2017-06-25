@@ -22,7 +22,7 @@ namespace Candidate_Management.CORE.Remind
 
         public void exec(int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
             
-            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year} {fileName} {idJob}";
+            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year} {fileName} {idJob} {fileName} {candidateName} {Candidatefirstname} {meeting}";
             Console.WriteLine(cmd);
         }
     }
