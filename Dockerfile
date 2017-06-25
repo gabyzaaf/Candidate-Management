@@ -37,10 +37,11 @@ RUN mkdir warmup \
 
 RUN mkdir /home/candidate && cd /home/candidate && git clone -b Server https://github.com/gabyzaaf/Candidate-Management.git && apt-get update -y && apt-get install vim -y \
  && mkdir -p /var/candidate/logs/ \
- && mkdir -p /var/candidate/logs/plugins/ \
  && mkdir -p /var/candidate/plugins/ \
  && cd /var/candidate/plugins/ \
  && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git \
+ && cd /var/candidate/plugins/ && dotnet restore \
+ && cp sample.txt bin/Debug/netcoreapp2.0 \
  && touch /var/candidate/logs/plugins/emailPlugins.txt \
  && mkdir -p /var/candidate/emailTemplates/ \
  && apt-get install at -y
