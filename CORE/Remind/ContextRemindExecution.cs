@@ -18,8 +18,8 @@ namespace Candidate_Management.CORE.Remind
             iremind.update(id,date);
         }
 
-        public void execTheAtCommand(string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
-            iremind.exec(fileName,candidateName,Candidatefirstname,meeting);
+        public void execTheAtCommand(int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
+            iremind.exec(idJob,fileName,candidateName,Candidatefirstname,meeting);
         }
     }
 }

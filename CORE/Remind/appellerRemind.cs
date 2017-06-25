@@ -20,11 +20,9 @@ namespace Candidate_Management.CORE.Remind
            isql.updateRemindType(id,date);
         }
 
-        public void exec(string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
-            if(date == null){
-                throw new Exception("La date doit etre rempli prehalablement");
-            }
-            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}";
+        public void exec(int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
+            
+            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year} {fileName} {idJob}";
             Console.WriteLine(cmd);
         }
     }

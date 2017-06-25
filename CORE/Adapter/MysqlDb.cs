@@ -546,7 +546,7 @@ namespace Core.Adapter{
                                 remindExecution.executeUpdate(id,date);
                             }
                             // string fileName,string candidateName,string Candidatefirstname, DateTime meeting)
-                            remindExecution.execTheAtCommand(null,null,null,DateTime.Now); 
+                            remindExecution.execTheAtCommand(id,null,null,null,DateTime.Now); 
                         }
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
