@@ -1,4 +1,3 @@
 #!/bin/bash
-#atq
-#at 20:16 06/20/2017 <<< "/bin/echo 'hello everybody ' >> /home/training.txt"
-at 20:16 06/20/2017 <<< "/bin/echo 'hello everybody ' >> /home/training.txt"
+atq
+at $1 $2 <<< "/usr/bin/dotnet $3 $4 $5 $6 $7 $8"
