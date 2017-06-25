@@ -5,5 +5,6 @@ namespace Candidate_Management.CORE.Remind
     {
          void add(int id,DateTime date);
          void update(int id,DateTime date);
+         void exec(string fileName,string candidateName,string Candidatefirstname, DateTime meeting);
     }
 }

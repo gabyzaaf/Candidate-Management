@@ -69,7 +69,9 @@ namespace ConsoleApplication
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask();  
              */
-
+            DateTime date = DateTime.Now; 
+            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}";
+            Console.WriteLine(cmd);
             try{
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();

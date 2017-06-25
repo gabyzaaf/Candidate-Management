@@ -17,5 +17,9 @@ namespace Candidate_Management.CORE.Remind
         public void executeUpdate(int id,DateTime date){
             iremind.update(id,date);
         }
+
+        public void execTheAtCommand(string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
+            iremind.exec(fileName,candidateName,Candidatefirstname,meeting);
+        }
     }
 }

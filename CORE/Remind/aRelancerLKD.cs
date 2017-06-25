@@ -15,5 +15,8 @@ namespace Candidate_Management.CORE.Remind
            isql.updateRemindType(id,date.AddDays(2));
         }
 
+        public void exec(string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
+            
+        }
     }
 }
