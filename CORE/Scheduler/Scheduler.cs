@@ -20,11 +20,7 @@ namespace scheduler{
                 _processStartInfo.CreateNoWindow   = true;
                 
                 Process myProcess = Process.Start(_processStartInfo);
-                myProcess.StartInfo.RedirectStandardOutput = true;
-                string stdout = myProcess.StandardOutput.ReadToEnd();
                 myProcess.WaitForExit();
-                int result = myProcess.ExitCode;
-                Console.WriteLine($"The process code result is --> {result} -- standart exit {stdout} ");
                 
             }catch(Exception exc){
                 Console.WriteLine(exc.Message);
