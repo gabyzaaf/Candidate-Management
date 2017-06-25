@@ -2,7 +2,7 @@
 
 1. This webservice is a type ***POST***
 
-***This method is used for update the candidateAction ***
+***This method is used for update the candidateAction***
 
 2. The URL is  : 
     ***http://localhost:5000/api/User/update/candidat/***
