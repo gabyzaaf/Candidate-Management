@@ -10,7 +10,7 @@ namespace Candidate_Management.CORE.Remind
         private DateTime date = new DateTime();
         public int id {get;set;}
         private string propertie = "appellerRemind"; 
-        private string extension = ".txt"; 
+         
 
         public void add(int id,DateTime date){
             this.id = id;
@@ -26,12 +26,10 @@ namespace Candidate_Management.CORE.Remind
            isql.updateRemindType(id,date);
         }
 
-        public void exec(int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
+        public void exec(string token,DateTime meeting){
             Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
-            JsonConfiguration json = JsonConfiguration.getInstance();
-            
-            string pathAndFile = $"{json.getEmailTemplatePath()}{propertie}{extension}";
-            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year} {pathAndFile} {idJob} {fileName} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
+            string pathAndFile = getPathNameAndFileFromTemplate(propertie);
+            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}  {token} {pathAndFile} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
             Console.WriteLine(cmd);
         }
     }

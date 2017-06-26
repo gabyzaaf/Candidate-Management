@@ -528,7 +528,7 @@ namespace Core.Adapter{
         }
 
 
-        public void typeAction(string actionType,int prix,DateTime date,int id,string type){
+        public void typeAction(string actionType,int prix,DateTime date,int id,string type,string token){
                 try{
                     Console.WriteLine("in the type action function"); 
                         if ("freelance".Equals(actionType)){
@@ -545,8 +545,8 @@ namespace Core.Adapter{
                             }else if("UPDATE".Equals(type)){
                                 remindExecution.executeUpdate(id,date);
                             }
-                            // string fileName,string candidateName,string Candidatefirstname, DateTime meeting)
-                            remindExecution.execTheAtCommand(id,"sample.txt","zaafrani","Gabriel",DateTime.Now); 
+                            // (token,DateTime.Now)
+                            remindExecution.execTheAtCommand(token,DateTime.Now); 
                         }
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);

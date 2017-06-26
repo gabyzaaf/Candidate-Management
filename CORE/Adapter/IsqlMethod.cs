@@ -47,7 +47,7 @@ namespace Core.Adapter.Inteface
 
          void updateRemindType(int id,DateTime date);
 
-         void typeAction(string actionType,int prix,DateTime date,int id,string type);
+         void typeAction(string actionType,int prix,DateTime date,int id,string type,string token);
 
          void updateCandidate(Candidat candidat,int id);
 

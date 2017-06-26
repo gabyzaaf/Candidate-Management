@@ -15,7 +15,7 @@ namespace Candidate_Management.CORE.Remind
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
             isql.updateRemindType(id,date.AddDays(2*7));
          }
-         public void exec(int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
+         public void exec(string token,DateTime meeting){
 
          }
     }

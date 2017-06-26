@@ -119,7 +119,7 @@ namespace API.wsUser
                 int idUser = isql.getIdFromToken(candidat.session_id);
                 isql.addCandidate(candidat,idUser);
                 int idCandidat = isql.getIdFromCandidateEmail(candidat.emailAdress);
-                isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"ADD");
+                isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"ADD",candidat.session_id);
                 return new ObjectResult(new State(){code=3,content="Le candidat a ete ajoute à votre systeme",success=true});
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
@@ -140,7 +140,7 @@ namespace API.wsUser
                 int idUser = isql.getIdFromToken(candidat.session_id);
                 int idCandidat = isql.getIdFromCandidateEmail(candidat.emailAdress);
                 isql.updateCandidate(candidat,idUser);
-                isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"UPDATE");
+                isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"UPDATE",candidat.session_id);
                 return new ObjectResult(new State(){code=4,content="Le candidat a ete modifie dans votre systeme",success=true});
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
