@@ -168,3 +168,4 @@ Parameter name: path
 6/25/17 6:19:39 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
 6/25/17 6:19:39 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
 6/25/17 6:19:39 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/26/17 10:09:02 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat n'existe avec l'identifiant : 10

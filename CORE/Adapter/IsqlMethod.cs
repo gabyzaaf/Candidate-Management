@@ -21,7 +21,8 @@ namespace Core.Adapter.Inteface
 
          void Authentification(string email,string password);
 
-    
+         ArrayList searchCandidateById(int id);
+
          ArrayList searchCandidate(string nom,string token);
 
          User GenerateToken();

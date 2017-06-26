@@ -15,6 +15,8 @@ using Candidate_Management.CORE.Remind;
 using scheduler;
 using Candidate_Management.CORE.LoadingPlugin;
 
+using Candidate_Management.CORE.Remind;
+
 namespace ConsoleApplication
 {
     public class Program
@@ -69,10 +71,12 @@ namespace ConsoleApplication
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask();  
              */
-            DateTime date = DateTime.Now; 
-            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}";
-            Console.WriteLine(cmd);
+            
             try{
+                appellerRemind remind = new appellerRemind();
+                // (int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting)
+                remind.id = 2;
+                remind.exec(1,"sample.txt","zaafrani","Gabriel",DateTime.Now);
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();
                 LoadPlugins load = new LoadPlugins(folder);

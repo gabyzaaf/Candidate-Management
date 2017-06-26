@@ -894,5 +894,27 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
+
+        public ArrayList searchCandidateById(int id){
+            ArrayList output = null;
+            try{
+                if(id == 0){
+                    throw new Exception("L'id du candidate ne peut pas etre egale à 0");
+                }
+                string sql = "select nom,prenom from candidate where id=@id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",id);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nom");
+                results.AddLast("prenom");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                     throw new Exception($"Aucun candidat n'existe avec l'identifiant : {id}");
+                }
+                return output;
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
     }
 }
