@@ -9,11 +9,18 @@ namespace Candidate_Management.CORE.Remind
     {
         private DateTime date = new DateTime();
         public int id {get;set;}
-        private string propertie = "appellerRemind"; 
+        private string fileName = null; 
          
+
+        private void checkFileNameIsNull(){
+            if(fileName == null){
+                fileName = this.GetType().Name;
+            }
+        }
 
         public void add(int id,DateTime date){
             this.id = id;
+            checkFileNameIsNull();
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
             date = date.AddDays(1);
             isql.remindType(id,date);
@@ -21,16 +28,21 @@ namespace Candidate_Management.CORE.Remind
         
         public void update(int id,DateTime date){
            this.id = id;
+           checkFileNameIsNull();
            IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
            date = date.AddDays(1);
            isql.updateRemindType(id,date);
         }
 
         public void exec(string token,DateTime meeting){
+            checkFileNameIsNull();
             Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
-            string pathAndFile = getPathNameAndFileFromTemplate(propertie);
+            string pathAndFile = getPathNameAndFileFromTemplate(fileName);
             string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}  {token} {pathAndFile} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
             Console.WriteLine(cmd);
+            
+            //Schedule schedule = new Schedule(cmd);
+            //schedule.executeTask(); 
         }
     }
 }
