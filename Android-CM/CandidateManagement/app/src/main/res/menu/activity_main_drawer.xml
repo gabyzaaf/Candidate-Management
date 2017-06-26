@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <item android:title="Gestion">
+        <menu>
         <item android:id="@+id/nav_search" android:icon="@android:drawable/ic_menu_search"
             android:title="Rechercher un candidat" />
         <item android:id="@+id/nav_add" android:icon="@android:drawable/ic_input_add"
@@ -9,13 +10,21 @@
             android:title="Localisation" />
         <item android:id="@+id/nav_calendar" android:icon="@android:drawable/ic_menu_agenda"
             android:title="Consulter l'agenda" />
-    </group>
-
-    <item android:title="Machine Learning">
-        <item android:id="@+id/nav_salary" android:icon="@android:drawable/ic_menu_zoom"
-            android:title="Prédiction salariale" />
+        </menu>
     </item>
 
-    <item android:id="@+id/nav_close" android:icon="@android:drawable/ic_menu_close_clear_cancel"
+    <item android:title="Machine Learning">
+        <menu>
+        <item android:id="@+id/nav_salary" android:icon="@android:drawable/ic_menu_zoom"
+            android:title="Prédiction salariale" />
+            <item android:id="@+id/nav_satisfaction" android:icon="@android:drawable/ic_menu_zoom"
+                android:title="Prédiction satisfaction" />
+            <item android:id="@+id/nav_time" android:icon="@android:drawable/ic_menu_zoom"
+                android:title="Prédiction temporelle" />
+        </menu>
+    </item>
+    <group android:checkableBehavior="single">
+         <item android:id="@+id/nav_close" android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="Déconnexion" />
+    </group>
 </menu>

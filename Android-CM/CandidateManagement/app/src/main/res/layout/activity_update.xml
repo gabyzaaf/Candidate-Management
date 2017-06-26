@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_color_gradient">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Veuillez remplir les champs suivants "
+        android:textStyle="bold"
+        android:textColor="#4899F6"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true" />
     <TableLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2">
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
@@ -435,14 +453,8 @@
                 android:text="Modifier"
                 android:textColor="#4899F6"
                 android:id="@+id/bUpdate" />
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Annuler"
-                android:textColor="#4899F6"
-                android:id="@+id/bAnnulUpdate" />
         </TableRow>
     </TableLayout>
+    </RelativeLayout>
 </ScrollView>
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.PredictSalaryRequest;
 import com.example.fabiengamel.candidatemanagement.Requests.SalaryRequest;
+import com.example.fabiengamel.candidatemanagement.Utils.InputFilterMinMax;
 import com.example.fabiengamel.candidatemanagement.Utils.Tools;
 
 import org.json.JSONArray;
@@ -68,6 +70,10 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
         radioGroupAccident.check(R.id.rbaccidentFalseSalary);
         radioGroupPromo.check(R.id.rbPromoFalseSalary);
+
+        etNbNbHours.setFilters(new InputFilter[]{new InputFilterMinMax("100", "999")});
+        etNbProject.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "9")});
+        etNbYears.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "9")});
 
         bPredict.setOnClickListener(new View.OnClickListener() {
             @Override

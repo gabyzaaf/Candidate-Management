@@ -105,19 +105,12 @@ public class UpdateActivity extends AppCompatActivity {
         etXpNote = (EditText)findViewById(R.id.etXpNoteUpdate);
         etNsNote = (EditText)findViewById(R.id.etNsNoteUpdate);
         etNote = (EditText)findViewById(R.id.etNoteUpdate);
-        bCancel = (Button)findViewById((R.id.bAnnulUpdate));
         bUpdate = (Button)findViewById(R.id.bUpdate);
         sexes = (RadioGroup)findViewById(R.id.rgSexeUpdate);
         approche_emaill = (RadioGroup)findViewById(R.id.rgEmailUpdate);
         etPRix = (EditText)findViewById(R.id.etPrixUpdate);
         tvPrix = (TextView)findViewById(R.id.tvPrixUpdate);
 
-        bCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(UpdateActivity.this, SearchActivity.class));
-            }
-        });
 
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,19 +12,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/linearLayoutMap">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nom : "
-            android:textStyle="bold"
-            android:textColor="#4899F6"
-            android:gravity="center"
-            />
         <EditText
             android:id="@+id/etNameMap"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom"
+            android:hint="Nom "
+            android:textColorHint="#4899F6"
             android:textColor="#4899F6"
             android:layout_weight="1"
             />

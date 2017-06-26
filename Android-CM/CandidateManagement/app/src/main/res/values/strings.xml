@@ -6,8 +6,10 @@
     <string name="title_activity_search">Rechercher un candidat</string>
     <string name="title_activity_calendar">Agenda</string>
     <string name="title_activity_update">Modifier Candidat</string>
-    <string name="title_activity_salary">Prédire la tranche de salaire</string>
-    <string name="title_activity_sms">Envoyer un message</string>
+    <string name="title_activity_salary">Prédiction salariale</string>
+    <string name="title_activity_sms">Envoyer un SMS</string>
+    <string name="title_activity_satisfaction">Prédiction satisfaction</string>
+    <string name="title_activity_time">Prédiction temporelle</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>

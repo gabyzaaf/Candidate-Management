@@ -2,6 +2,7 @@ package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     EditText etNom;
     Button bSearch;
     public String nom = "";
+    String town;
 
 
     @Override
@@ -60,9 +62,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
 
         InitContent();
 
@@ -117,7 +116,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title(candidate.firstname + " " + candidate.lastname)
-                .snippet(candidate.phone+" "+candidate.zipcode));
+                .snippet(candidate.phone+" "+candidate.zipcode+" "+town));
 
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
@@ -132,9 +131,28 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             public void onInfoWindowClick(Marker arg0) {
                 Candidate candidate = Candidate.getCurrentCandidate();
                 if (arg0 != null && arg0.getTitle().equals(candidate.firstname + " " + candidate.lastname)) {
-                    Intent intent = new Intent(MapActivity.this, SearchActivity.class);
-                    intent.putExtra("candidateName", candidate.lastname);
-                    startActivity(intent);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                    builder.setTitle("Accéder à la fiche candidat");
+                    builder.setPositiveButton("Oui",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    Intent i = new Intent(MapActivity.this, SearchActivity.class);
+                                    i.putExtra("candidateName", etNom.getText().toString());
+                                    startActivity(i);
+                                }
+                            });
+                    builder.setNegativeButton("Annuler",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
             }
         });
@@ -211,7 +229,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void GetCandidatePosition(String zipcode){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://maps.googleapis.com/maps/api/geocode/json?address="+zipcode+"&sensor=false" ;
+        String url ="http://maps.googleapis.com/maps/api/geocode/json?address="+zipcode+"&sensor=false&components=country:FR" ;
 
         JsonObjectRequest LatLngRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()
@@ -225,13 +243,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                             JSONArray  results = response.getJSONArray("results");
                             JSONObject item = results.getJSONObject(0);
+                            JSONArray components = item.getJSONArray("address_components");
+                            JSONObject itemcompo = components.getJSONObject(1);
+                            town = itemcompo.getString("long_name");
                             JSONObject location = item.getJSONObject("geometry").getJSONObject("location");
 
                             Double lat = location.getDouble("lat");
                             Double lng = location.getDouble("lng");
 
                             if(lat != null || lng != null) {
-                               // Toast.makeText(MapActivity.this, "lat "+lat+" lng : "+lng, Toast.LENGTH_LONG).show();
+                                Toast.makeText(MapActivity.this, "lat "+lat+" lng : "+lng, Toast.LENGTH_LONG).show();
                                 addMarker(lat, lng);
                             }else {
                                 Toast.makeText(MapActivity.this, "La position n'a pas été trouvée", Toast.LENGTH_LONG).show();

@@ -1,5 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity
     String action ="";
     List<Candidate> candidates;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +98,8 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        tvWelcome = (EditText)findViewById(R.id.tvWelcome);
-        tvCandidates = (EditText)findViewById(R.id.tvCandidates);
+        tvWelcome = (TextView)findViewById(R.id.tvWelcome);
+        tvCandidates = (TextView)findViewById(R.id.tvCandidates);
         ivLogo = (ImageView)findViewById(R.id.imageView);
         spActions = (Spinner)findViewById(R.id.spActions);
 
@@ -127,7 +131,28 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Se déconnecter ?");
+            builder.setPositiveButton("Oui",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+                            User u = new User();
+                            User.setCurrentUser(u);
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    });
+            builder.setNegativeButton("Annuler",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 
@@ -161,13 +186,38 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, AgendaActivity.class));
         }
         else if (id == R.id.nav_close) {
-            startActivity(new Intent(this, LoginActivity.class));
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Se déconnecter ?");
+            builder.setPositiveButton("Oui",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+                            User u = new User();
+                            User.setCurrentUser(u);
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    });
+            builder.setNegativeButton("Annuler",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+                            dialog.dismiss();
+                        }
+                    });
         }
         else if (id == R.id.nav_map) {
             startActivity(new Intent(this, MapActivity.class));
         }
         else if (id == R.id.nav_salary) {
             startActivity(new Intent(this, PredictSalaryActivity.class));
+        }
+        else if (id == R.id.nav_satisfaction) {
+            startActivity(new Intent(this, SatisfactionActivity.class));
+        }
+        else if (id == R.id.nav_time) {
+            startActivity(new Intent(this, TimeActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
