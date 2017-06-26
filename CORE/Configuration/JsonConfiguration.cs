@@ -148,14 +148,29 @@ namespace core.configuration{
             }
          }
 
-
-         public string[] getEmailTemplate(){ 
+         public string getEmailTemplatePath(){
              try{
                 settingsExist();
                 if(String.IsNullOrEmpty(configuration[emailTemplate])){
                     throw new Exception("Votre fichier appsettings n'est pas conforme avec vos template d email");
                 }
-                string emailTemplates = configuration[emailTemplate];
+                return replaceSlashFolderIfNotExist(configuration[emailTemplate]);
+             }catch(Exception exception){
+                 throw new ConfigurationCustomException(this.GetType().Name,$"{exception.Message}");
+             }
+         }
+
+         private string replaceSlashFolderIfNotExist(string directory){
+            if(!directory.EndsWith("/")){
+                directory = $"{directory}/";
+            }
+            return directory;
+         }
+
+         public string[] getEmailTemplateFiles(){ 
+             try{
+                
+                string emailTemplates = getEmailTemplatePath();
                 if(!Directory.Exists(configuration[emailTemplate])){
                     throw new Exception("Le dossier n'existe pas veuillez creer le dossier de email template");
                 }

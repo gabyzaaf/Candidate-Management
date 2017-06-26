@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Adapter.Inteface;
+using core.configuration;
 namespace Candidate_Management.CORE.Remind
 {
     public class appellerRemind : LegacyRemind ,Iremind
     {
         private DateTime date = new DateTime();
         public int id {get;set;}
+        private string propertie = "appellerRemind"; 
+        private string extension = ".txt"; 
 
         public void add(int id,DateTime date){
             this.id = id;
@@ -25,7 +28,10 @@ namespace Candidate_Management.CORE.Remind
 
         public void exec(int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting){
             Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
-            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year} {fileName} {idJob} {fileName} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
+            JsonConfiguration json = JsonConfiguration.getInstance();
+            
+            string pathAndFile = $"{json.getEmailTemplatePath()}{propertie}{extension}";
+            string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year} {pathAndFile} {idJob} {fileName} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
             Console.WriteLine(cmd);
         }
     }

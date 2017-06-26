@@ -17,7 +17,7 @@ namespace Candidate_Management.CORE.LoadingTemplates
 
         private void getFilesFromTheFolder(){
             try{
-                contents =  JsonConfiguration.getInstance().getEmailTemplate();
+                contents =  JsonConfiguration.getInstance().getEmailTemplateFiles();
                 if(contents.Length == 0){
                      new NotFileContentFolderException("c01","Aucun template d'email n'existe actuellement, veuillez en créer");
                 }
