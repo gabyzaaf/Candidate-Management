@@ -88,7 +88,7 @@ namespace Candidate_Management.API
         public IActionResult updateContentEmailFromTitle([FromBody]Template emailTemplate){
             ArrayList templateEmailResult = null;
             try{
-                Console.WriteLine(emailTemplate);
+                
                 if(emailTemplate == null){
                     throw new Exception("L'email template n'existe pas");
                 }
