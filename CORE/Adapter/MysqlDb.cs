@@ -484,6 +484,7 @@ namespace Core.Adapter{
         {
 
             try{
+                 
                  checkId(id);
                  checkDate(date);
                  Dictionary<String,Object> param = new Dictionary<String,Object>();
@@ -499,15 +500,22 @@ namespace Core.Adapter{
         
         }
 
+
+
         public void updateRemindType(int id,DateTime date){
             try{
+                
                 checkId(id);
                 checkDate(date);
-                Dictionary<String,Object> param = new Dictionary<String,Object>();
-                param.Add("@date",date.Date);
-                param.Add("@fid",id);
-                queryExecute("update remind set dates=@date where fid_candidate_remind=@fid",param,null);
-            }catch(Exception exc){
+                if(!remindExist(id)){
+                    remindType(id,date);
+                }else{
+                     Dictionary<String,Object> param = new Dictionary<String,Object>();
+                    param.Add("@date",date.Date);
+                    param.Add("@fid",id);
+                    queryExecute("update remind set dates=@date where fid_candidate_remind=@fid",param,null);     
+                }
+               }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }finally{
                 disconnect();
@@ -532,16 +540,16 @@ namespace Core.Adapter{
 
         public void typeAction(string actionType,int prix,DateTime date,int id,string type,string token){
                 try{
-                    Console.WriteLine("in the type action function"); 
+                    
                         if ("freelance".Equals(actionType)){
-                            Console.WriteLine("In freeLance");
-                        // Ajoute dans la table internNumeric
+                            
+                        // Add inside the numeric table
                             if("ADD".Equals(type)){
                                 addFreeLance(prix,id);
-                                Console.WriteLine("In ADD freeLance");
+                                
                             }else if("UPDATE".Equals(type)){
                                 updateFreeLance(prix,id);
-                                Console.WriteLine("In UPDATE freeLance");
+                                
                             }      
                         }else{
                             ContextRemindExecution remindExecution = new ContextRemindExecution(FactoryRemind.createRemind(actionType));
@@ -921,6 +929,30 @@ namespace Core.Adapter{
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
+        }
+
+        public bool remindExist(int id){
+            ArrayList output = null;
+            try{
+                if(id == 0){
+                throw new SqlCustomException(this.GetType().Name,"L'id ne peut etre egale a 0");
+                }
+                string sql = "select count(*) as nb from remind where fid_candidate_remind=@id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",id);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nb");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Aucun remind n'existe avec l'id suivant : {id}");
+                }
+                Dictionary<string,string> datas = (Dictionary<string,string>)output[0];
+                int existe = Int32.Parse(datas["nb"]);
+                return Convert.ToBoolean(existe);
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            
         }
     }
 }

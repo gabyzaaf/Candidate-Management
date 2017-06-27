@@ -74,6 +74,9 @@ namespace Core.Adapter.Inteface
           void updateTemplateEmailFromTitle(string title,string content);
 
           void deleteTemplateEmailFromTitle(string title);
+
+          bool remindExist(int id);
+          
     
     }
 

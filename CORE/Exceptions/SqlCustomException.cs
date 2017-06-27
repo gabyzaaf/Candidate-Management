@@ -3,7 +3,7 @@ using System.IO;
 using ConsoleApplication;
 using core.configuration;
 using CORE.LogManager;
-using Serilog;
+
 
 namespace exception.sql
 {

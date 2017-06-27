@@ -9,12 +9,14 @@ using Core.Adapter.Inteface;
 using exception.ws;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-
+using Candidate_Management.CORE.Exceptions;
 namespace API.wsUser
 {
     [EnableCors("SiteCorsPolicy")]
     [Route("api/[controller]")]
     public class UserController : Controller{
+
+        private static readonly string specificException = "Object reference not set to an instance of an object.";
 
         [HttpPost("admin/auth/")]
         public IActionResult  GetAuthentification([FromBody]User user){
@@ -110,29 +112,29 @@ namespace API.wsUser
           */
         public IActionResult addCandidat([FromBody] Candidat candidat){
             try{
-                Console.WriteLine("BEFORE CHECK");
+                
                 checkCandidat(candidat);
-                Console.WriteLine("AFTER CHECK");
+                
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 isql.UserCanUpdate(candidat.session_id);
-                Console.WriteLine("AFTER User can update");
+                
                 if(isql.CandidatAlreadyExist(candidat)){
                      throw new Exception("Le candidat est deja existant dans votre systeme");
                 } 
-                Console.WriteLine("BEFORE getIdFromToken");
+                
                 int idUser = isql.getIdFromToken(candidat.session_id);
-                Console.WriteLine("BEFORE ADD CANDIDATE");
                 isql.addCandidate(candidat,idUser);
-                Console.WriteLine("AFTER ADD CANDIDATE");
                 int idCandidat = isql.getIdFromCandidateEmail(candidat.emailAdress);
-                Console.WriteLine($"candidat id is {idCandidat}");
                 isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"ADD",candidat.session_id);
                 return new ObjectResult(new State(){code=3,content="Le candidat a ete ajoute à votre systeme",success=true});
             }catch(Exception exc){
+                if(exc.Message.Equals(specificException)){
+                    new WsCustomeInfoException(this.GetType().Name,$"Le candidat modifie ne possede pas de remind associe a cette action {candidat.action}");
+                    return new ObjectResult(new State(){code=4,content=$"Le candidat a ete ajoute à votre systeme mais ne possede pas de remind avec l'action {candidat.action}",success=true});
+                }
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
                 return CreatedAtRoute("GetNote", new { error = state },state);
-                
             }  
         }
 
@@ -150,6 +152,10 @@ namespace API.wsUser
                 isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"UPDATE",candidat.session_id);
                 return new ObjectResult(new State(){code=4,content="Le candidat a ete modifie dans votre systeme",success=true});
             }catch(Exception exc){
+                if(exc.Message.Equals(specificException)){
+                    new WsCustomeInfoException(this.GetType().Name,$"Le candidat modifie ne possede pas de remind associe a cette action {candidat.action}");
+                    return new ObjectResult(new State(){code=4,content=$"Le candidat a ete modifie dans votre systeme mais ne possede pas de remind avec l'action {candidat.action}",success=true});
+                }
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
                 return CreatedAtRoute("GetNote", new { error = state },state);
