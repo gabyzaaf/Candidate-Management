@@ -33,6 +33,7 @@ public class PredictSalaryRequest extends JsonObjectRequest {
     JSONObject GlobalParameters;
     JSONArray ColumnNames;
     JSONArray Values;
+    JSONArray v;
     String requestBody;
 
 
@@ -54,15 +55,17 @@ public class PredictSalaryRequest extends JsonObjectRequest {
         ColumnNames.put(4, "promotion_last_5years");
 
         Values = new JSONArray();
-        Values.put(0, nbProject);
-        Values.put(1, nbHoursMonth);
-        Values.put(2, companyTime);
-        Values.put(3, accident);
-        Values.put(4, promo);
+        v = new JSONArray();
+
+        v.put(0, nbProject);
+        v.put(1, nbHoursMonth);
+        v.put(2, companyTime);
+        v.put(3, accident);
+        v.put(4, promo);
+        Values.put(v);
 
         jsonBody.put("Inputs",Inputs.put("input1", input1.put("ColumnNames", ColumnNames).put("Values", Values))).put("GlobalParameters", GlobalParameters);
         requestBody = jsonBody.toString();
-        requestBody = requestBody.substring(0,147)+"["+requestBody.substring(147,170)+"]"+requestBody.substring(170,requestBody.length());
 
         headers = new HashMap<>();
         headers.put("Authorization", "Bearer kCOq3e2iLBwBIzQY5vOG+FNbYSNrwSIvfmBi5xp+a3AhMsAKC8WSh1WKuMxmEQChYAaC8fQRRlYDrfV6OMTPrw==");

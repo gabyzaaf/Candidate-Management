@@ -12,7 +12,15 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/backgroundButton</item>
+        <item name="colorAccent">@color/textEditable</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MySpinnerStyle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/textInfo</item>
+    </style>
 
 </resources>

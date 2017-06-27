@@ -74,24 +74,11 @@ public class MainActivity extends AppCompatActivity
 
 
         InitContent();
-        setMenu();
+        //setMenu();
 
     }
 
-    private void setMenu() {
 
-        MenuItem nav_search = (MenuItem)  navigationView.getMenu().findItem(R.id.nav_search);
-        nav_search.setVisible(true);
-
-        MenuItem nav_add = (MenuItem)  navigationView.getMenu().findItem(R.id.nav_add);
-        nav_add.setVisible(true);
-
-        MenuItem nav_calendar = (MenuItem)  navigationView.getMenu().findItem(R.id.nav_calendar);
-        nav_calendar.setVisible(true);
-
-        MenuItem nav_map = (MenuItem)  navigationView.getMenu().findItem(R.id.nav_map);
-        nav_calendar.setVisible(true);
-    }
 
     private void InitContent() {
         User user = User.getCurrentUser();
@@ -131,28 +118,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Se déconnecter ?");
-            builder.setPositiveButton("Oui",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            User u = new User();
-                            User.setCurrentUser(u);
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        }
-                    });
-            builder.setNegativeButton("Annuler",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+            deconnect();
         }
     }
 
@@ -182,30 +148,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, SearchActivity.class));
         } else if (id == R.id.nav_add) {
             startActivity(new Intent(this, AddActivity.class));
-        } else if (id == R.id.nav_calendar) {
-            startActivity(new Intent(this, AgendaActivity.class));
         }
         else if (id == R.id.nav_close) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Se déconnecter ?");
-            builder.setPositiveButton("Oui",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            User u = new User();
-                            User.setCurrentUser(u);
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        }
-                    });
-            builder.setNegativeButton("Annuler",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            dialog.dismiss();
-                        }
-                    });
+            deconnect();
         }
         else if (id == R.id.nav_map) {
             startActivity(new Intent(this, MapActivity.class));
@@ -294,38 +239,30 @@ public class MainActivity extends AppCompatActivity
         };
         queue.add(getCandidatesRequest);
     }
-    public void SendMail() {
 
-        //ALert dialog : êtes vous sûr de vouloir envoyer uun mail de relance à :
-        //- machun ..
-
-        for (Candidate candidate : candidates) {
-            //récupérer email
-            //envoiemail
-            Log.i("Send email", "");
-            String[] TO = {"gamelinfabien@gmail.com"};
-            String[] CC = {""};
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-            emailIntent.putExtra(Intent.EXTRA_CC, CC);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Test");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, " Salut," +
-                    "ça va ?" +
-                    "au revoir");
-
-            try {
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                finish();
-                Log.i("Finished sending email", "");
-                Toast.makeText(MainActivity.this, "Le mail a bien été envoyé", Toast.LENGTH_SHORT).show();
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(MainActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-            }
-            //update statut / Règles ?
-        }
+    public void deconnect() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
+        builder.setTitle("Se déconnecter ?");
+        builder.setPositiveButton("Oui",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        User u = new User();
+                        User.setCurrentUser(u);
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                });
+        builder.setNegativeButton("Annuler",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 

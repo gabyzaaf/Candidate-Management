@@ -71,10 +71,6 @@ public class PredictSalaryActivity extends AppCompatActivity {
         radioGroupAccident.check(R.id.rbaccidentFalseSalary);
         radioGroupPromo.check(R.id.rbPromoFalseSalary);
 
-        etNbNbHours.setFilters(new InputFilter[]{new InputFilterMinMax("100", "999")});
-        etNbProject.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "9")});
-        etNbYears.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "9")});
-
         bPredict.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +79,12 @@ public class PredictSalaryActivity extends AppCompatActivity {
                     Toast.makeText(PredictSalaryActivity.this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
                 } else {
 
-                    PredictSalary();
+                    int nbhours = Integer.valueOf(etNbNbHours.getText().toString());
+                    if (nbhours < 100) {
+                        Toast.makeText(PredictSalaryActivity.this, "Veuillez saisir un nombre d'heures correct", Toast.LENGTH_LONG).show();
+                    } else {
+                        PredictSalary();
+                    }
                    /* try {
                         TestJsonBody();
                     } catch (JSONException e) {
@@ -221,33 +222,12 @@ public class PredictSalaryActivity extends AppCompatActivity {
     JSONObject Inputs;
     JSONObject input1;
     JSONObject GlobalParameters;
-    JSONArray ColumnNames;
-    JSONArray Values;
-    JSONArray ValuesNone;
 
     public void TestJsonBody() throws JSONException {
         jsonBody = new JSONObject();
         Inputs = new JSONObject();
         input1 = new JSONObject();
         GlobalParameters = new JSONObject();
-
-       /* ColumnNames = new JSONArray();
-        ColumnNames.put(0, "number_project");
-        ColumnNames.put(1, "average_montly_hours");
-        ColumnNames.put(2, "time_spend_company");
-        ColumnNames.put(3, "Work_accident");
-        ColumnNames.put(4, "promotion_last_5years");
-
-        Values = new JSONArray();
-        
-        Values.put(0, "2");
-        Values.put(1, "167");
-        Values.put(2, "4");
-        Values.put(3, "0");
-        Values.put(4, "0");
-
-
-        jsonBody.put("Inputs",Inputs.put("input1", input1.put("ColumnNames", ColumnNames).put("Values", Values))).put("GlobalParameters", GlobalParameters);*/
 
         input1.put("number_project", "2");
         input1.put("average_montly_hours", "189");

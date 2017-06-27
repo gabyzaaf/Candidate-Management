@@ -3,8 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FEFEFE</color>
-    <color name ="textEditable">#F1F7FE</color>
-    <color name="textInfo">#4899F6</color>
+    <color name ="textInfo">#F1F7FE</color>
+    <color name="textEditable">#4899F6</color>
     <color name="backgroundButton">#ABCFF9</color>
-    <color name="barColor">#4A9AF4</color>
+    <color name="barColor">#010101</color>
+    <color name="dialogColorBack">#141918</color>
 </resources>

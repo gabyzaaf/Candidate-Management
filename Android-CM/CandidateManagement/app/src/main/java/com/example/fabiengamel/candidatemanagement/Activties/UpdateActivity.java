@@ -3,6 +3,8 @@ package com.example.fabiengamel.candidatemanagement.Activties;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,9 +61,7 @@ public class UpdateActivity extends AppCompatActivity {
     EditText etNote;
     EditText etXpNote;
     EditText etNsNote;
-    Button bAdd;
     String action = "";
-    Button bCancel;
     Button bUpdate;
     RadioGroup sexes;
     RadioGroup approche_emaill;
@@ -216,6 +216,34 @@ public class UpdateActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
+        builder.setTitle("Quitter la modification ?");
+        builder.setPositiveButton("Oui",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Intent i = new Intent(UpdateActivity.this, SearchActivity.class);
+                        i.putExtra("candidateName", etName.getText().toString());
+                        startActivity(i);
+                    }
+                });
+        builder.setNegativeButton("Annuler",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
 
     public void UpdateCandidate(){
 

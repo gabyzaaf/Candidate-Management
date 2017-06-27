@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
-    android:background="@drawable/background_color_gradient"
+    android:background="@drawable/fond_1"
     tools:context="com.example.fabiengamel.candidatemanagement.Activties.MainActivity">
 
     <TextView
@@ -17,7 +17,7 @@
         android:id="@+id/tvWelcome"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:textColor="#4899F6"
+        android:textColor="@color/textInfo"
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_horizontal_margin"
         android:textSize="18dp"
@@ -44,7 +44,7 @@
         android:layout_alignEnd="@+id/tvWelcome"
         android:maxLines = "50"
         android:scrollbars = "vertical"
-        android:textColor="#4899F6"
+        android:textColor="@color/textEditable"
         android:layout_below="@+id/LinearLayoutMain" />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -55,14 +55,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Afficher les candidats par action  "
-            android:textColor="#4899F6"
+            android:text="Ici vous visualisez les candidats  "
+            android:textColor="@color/textInfo"
             android:textStyle="bold"/>
         <Spinner
-            android:layout_width="181dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spActions"
-            android:textColor="#4899F6"
+            style="@style/MySpinnerStyle"
+            android:textColor="@color/textInfo"
              />
     </LinearLayout>
 </RelativeLayout>

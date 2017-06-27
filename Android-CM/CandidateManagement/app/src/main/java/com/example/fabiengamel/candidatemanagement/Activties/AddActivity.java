@@ -169,6 +169,31 @@ public class AddActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
+        builder.setTitle("Quitter l'ajout ?");
+        builder.setPositiveButton("Oui",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Intent i = new Intent(AddActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                });
+        builder.setNegativeButton("Annuler",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }

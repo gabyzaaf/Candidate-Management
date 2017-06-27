@@ -28,27 +28,28 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etMail;
     EditText etPassword;
+    Button bLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-     /*   if(Build.VERSION.SDK_INT > 9){
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }*/
+        InitContent();
 
+    }
+
+    public void InitContent() {
         etMail = (EditText) findViewById(R.id.etMailAdd);
         etPassword = (EditText) findViewById(R.id.etPassword);
-        final Button bLogin = (Button) findViewById(R.id.bLogin);
+        bLogin = (Button) findViewById(R.id.bLogin);
 
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Login();
-               // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Login();
+                // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 //LoginActivity.this.startActivity(intent);
             }
         });

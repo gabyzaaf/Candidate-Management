@@ -1,10 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.fabiengamel.candidatemanagement.Activties.TimeActivity">
+    tools:context="TimeActivity"
+    android:background="@drawable/fond_1">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Veuillez remplir les champs suivants concernant la situation actuelle de l'employé, afin de prédire le temps qu'il va rester "
+        android:textStyle="bold"
+        android:textColor="#4899F6"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        <TableRow
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Nombre de projets *"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <EditText
+                android:id="@+id/etNbProjectTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="(0-9)"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:maxLength="1"
+                android:singleLine="true"
+                />
+        </TableRow>
 
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Heures par mois *"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <EditText
+                android:id="@+id/etNbHoursByMonthTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="(100-999)"
+                android:layout_weight="1"
+                android:maxLength="3"
+                android:singleLine="true"
+                android:inputType="number"
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Satisfaction estimée (en %) *"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <EditText
+                android:id="@+id/etSatisfactionTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="0-100%"
+                android:layout_weight="1"
+                android:maxLength="3"
+                android:singleLine="true"
+                android:inputType="number"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="  Salaire *"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spSalaireTime" />
+        </TableRow>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            >
+            <RadioGroup
+                android:id="@+id/rgaccidentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/radio2"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Accident *"
+                    android:textStyle="bold"
+                    android:textColor="#4899F6"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    />
+                <RadioButton
+                    android:id="@+id/rbaccidentTrueTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oui"
+                    android:textColor="#4899F6"
+                    android:checked="false"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    />
+                <RadioButton
+                    android:id="@+id/rbaccidentFalseTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non"
+                    android:textColor="#4899F6"
+                    />
+            </RadioGroup>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Promotion *"
+                android:paddingRight="6dp"
+                android:textStyle="bold"
+                android:textColor="#4899F6"
+                />
+            <RadioGroup
+                android:id="@+id/rgPromoTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/radio2"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/rbPromoTrueTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oui"
+                    android:textColor="#4899F6"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:checked="false" />
+                <RadioButton
+                    android:id="@+id/rbPromoFalseTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#4899F6"
+                    android:text="Non"
+                    />
+            </RadioGroup>
+        </LinearLayout>
+    </TableLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prédire"
+        android:id="@+id/bPredictTime"
+        android:textColor="#4899F6"
+        android:gravity="center"
+        android:layout_below="@+id/tableLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"/>
 </RelativeLayout>

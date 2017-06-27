@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +55,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     Button bSearch;
     public String nom = "";
     String town;
+    String nameRetour;
 
 
     @Override
@@ -78,6 +81,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         } else {
             candidateName= (String) savedInstanceState.getSerializable("candidateName");
         }
+        nameRetour = candidateName;
         etNom.setText(candidateName);
 
     }
@@ -156,6 +160,19 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MapActivity.this, SearchActivity.class);
+        if(!nameRetour.matches("")) {
+            i.putExtra("candidateName", nameRetour);
+            startActivity(i);
+        }
+        else{
+            i.putExtra("candidateName", etNom.getText().toString());
+            startActivity(i);
+        }
     }
 
     public void GetCandidateZipCode(String nom) {
