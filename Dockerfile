@@ -39,9 +39,10 @@ RUN mkdir /home/candidate && cd /home/candidate && git clone -b Server https://g
  && mkdir -p /var/candidate/logs/ \
  && mkdir -p /var/candidate/plugins/ \
  && cd /var/candidate/plugins/ \
- && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git \
+ && git clone -b pluginEmail https://github.com/gabyzaaf/Candidate-Management.git
  && cd /var/candidate/plugins/ && dotnet restore \
- && cp sample.txt bin/Debug/netcoreapp2.0 \
+ 
+ RUN cp sample.txt bin/Debug/netcoreapp2.0 \
  && touch /var/candidate/logs/emailPlugins.txt \
  && mkdir -p /var/candidate/emailTemplates/ \
  && apt-get install at -y
