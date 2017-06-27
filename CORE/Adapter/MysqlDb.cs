@@ -269,6 +269,7 @@ namespace Core.Adapter{
                 results.AddLast("prenom");
                 results.AddLast("sexe");
                 results.AddLast("phone");
+                results.AddLast("zipcode");
                 results.AddLast("actions");
                 results.AddLast("annee");
                 results.AddLast("lien");
@@ -338,14 +339,15 @@ namespace Core.Adapter{
                 dico.Add("@sexe",candidat.sexe);
                 dico.Add("@etat",candidat.action);
                 dico.Add("@annee",candidat.year);
+                dico.Add("@zipcode",candidat.zipcode);
                 dico.Add("@lien",candidat.link);
                 dico.Add("@crcall",candidat.crCall);
                 dico.Add("@ns",candidat.ns);
                 dico.Add("@email",candidat.email);
                 dico.Add("@userId",id);
-                queryExecute("insert into candidate (nom,prenom,phone,email,sexe,actions,annee,lien,crCall,NS,approche_email,fid_user_candidate) values (@nom,@prenom,@num,@emailAdress,@sexe,@etat,@annee,@lien,@crcall,@ns,@email,@userId)",dico,null);
+                queryExecute("insert into candidate (nom,prenom,phone,email,zipcode,sexe,actions,annee,lien,crCall,NS,approche_email,fid_user_candidate) values (@nom,@prenom,@num,@emailAdress,@zipcode,@sexe,@etat,@annee,@lien,@crcall,@ns,@email,@userId)",dico,null);
             }catch(Exception exc){
-                throw new SqlCustomException(this.GetType().Name,exc.Message);
+                throw new SqlCustomException(this.GetType().Name,$"In addCandidate function {exc.Message}");
             }
           
         }
@@ -532,11 +534,14 @@ namespace Core.Adapter{
                 try{
                     Console.WriteLine("in the type action function"); 
                         if ("freelance".Equals(actionType)){
+                            Console.WriteLine("In freeLance");
                         // Ajoute dans la table internNumeric
                             if("ADD".Equals(type)){
                                 addFreeLance(prix,id);
+                                Console.WriteLine("In ADD freeLance");
                             }else if("UPDATE".Equals(type)){
                                 updateFreeLance(prix,id);
+                                Console.WriteLine("In UPDATE freeLance");
                             }      
                         }else{
                             ContextRemindExecution remindExecution = new ContextRemindExecution(FactoryRemind.createRemind(actionType));
@@ -546,7 +551,7 @@ namespace Core.Adapter{
                                 remindExecution.executeUpdate(id,date);
                             }
                             // (token,DateTime.Now)
-                            remindExecution.execTheAtCommand(token,DateTime.Now); 
+                            //remindExecution.execTheAtCommand(token,DateTime.Now); 
                         }
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
@@ -581,6 +586,7 @@ namespace Core.Adapter{
                     param.Add("@prenom",candidat.Firstname);
                     param.Add("@phone",candidat.phone);
                     param.Add("@sexe",candidat.sexe);
+                    param.Add("@zipcode",candidat.zipcode);
                     param.Add("@actions",candidat.action);
                     param.Add("@annee",candidat.year);
                     param.Add("@lien",candidat.link);
@@ -588,7 +594,7 @@ namespace Core.Adapter{
                     param.Add("@ns",candidat.ns);
                     param.Add("@approcheemail",candidat.email);
                     param.Add("@email",candidat.emailAdress);
-                    queryExecute("update candidate set nom=@nom,prenom=@prenom,phone=@phone,sexe=@sexe,actions=@actions,annee=@annee,lien=@lien,crCall=@crCall,NS=@ns,approche_email=@approcheemail where email=@email",param,null);
+                    queryExecute("update candidate set nom=@nom,prenom=@prenom,phone=@phone,zipcode=@zipcode,sexe=@sexe,actions=@actions,annee=@annee,lien=@lien,crCall=@crCall,NS=@ns,approche_email=@approcheemail where email=@email",param,null);
                 
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);

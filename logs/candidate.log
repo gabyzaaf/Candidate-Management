@@ -178,3 +178,57 @@ Parameter name: path
 6/26/17 11:58:14 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
 6/26/17 11:58:14 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
 6/26/17 11:58:14 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/27/17 8:24:47 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat n'existe avec l'identifiant : 2
+6/27/17 8:29:31 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:29:31 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 8:29:55 AM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+6/27/17 8:30:38 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:30:38 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 8:39:26 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:39:26 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 8:43:35 AM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+6/27/17 8:44:28 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:44:28 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 8:46:30 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:46:30 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 8:48:03 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:48:03 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 8:57:08 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 8:57:08 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 9:05:29 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 9:05:29 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 9:08:01 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 9:08:01 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 9:10:06 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 9:10:06 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 9:12:34 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 9:12:34 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 9:14:32 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 9:14:32 AM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 7:17:07 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+6/27/17 7:28:51 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+6/27/17 7:28:51 PM - [Error] - WsCustomeException - UserController - Object reference not set to an instance of an object.
+6/27/17 7:29:17 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:29:17 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:29:27 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:29:27 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:34:52 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:34:52 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:35:47 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:35:47 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:36:29 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:36:29 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:38:24 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:38:24 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:43:19 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:43:19 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:44:08 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:44:08 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:46:19 PM - [Error] - LoadingCustomException - L02 - Le chemin du fichier est vide
+6/27/17 7:46:19 PM - [Error] - WsCustomeException - CandidateController - Le chemin du fichier est vide
+6/27/17 7:53:48 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/27/17 7:53:48 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/27/17 7:53:48 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/27/17 7:53:48 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/27/17 7:53:48 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/27/17 7:53:48 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)

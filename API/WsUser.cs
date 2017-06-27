@@ -110,15 +110,22 @@ namespace API.wsUser
           */
         public IActionResult addCandidat([FromBody] Candidat candidat){
             try{
+                Console.WriteLine("BEFORE CHECK");
                 checkCandidat(candidat);
+                Console.WriteLine("AFTER CHECK");
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 isql.UserCanUpdate(candidat.session_id);
+                Console.WriteLine("AFTER User can update");
                 if(isql.CandidatAlreadyExist(candidat)){
                      throw new Exception("Le candidat est deja existant dans votre systeme");
                 } 
+                Console.WriteLine("BEFORE getIdFromToken");
                 int idUser = isql.getIdFromToken(candidat.session_id);
+                Console.WriteLine("BEFORE ADD CANDIDATE");
                 isql.addCandidate(candidat,idUser);
+                Console.WriteLine("AFTER ADD CANDIDATE");
                 int idCandidat = isql.getIdFromCandidateEmail(candidat.emailAdress);
+                Console.WriteLine($"candidat id is {idCandidat}");
                 isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"ADD",candidat.session_id);
                 return new ObjectResult(new State(){code=3,content="Le candidat a ete ajoute à votre systeme",success=true});
             }catch(Exception exc){

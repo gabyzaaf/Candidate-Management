@@ -9,6 +9,7 @@ namespace core.candidat{
         public string emailAdress{get;set;}
         public string phone{get;set;}
 
+        public string zipcode{get;set;}
         public char sexe{get;set;}
 
         public string action{get;set;}

@@ -1,12 +1,13 @@
 using System;
 using System.IO;
 using exception.loading;
+using core.configuration;
 namespace Candidate_Management.CORE.LoadingTemplates
 {
     public class Template
     {
         public string token{get;set;}
-        private string path;
+        public string path{get;set;}
         public string title{get;set;}
         public string content{private get;set;}
 
@@ -33,6 +34,7 @@ namespace Candidate_Management.CORE.LoadingTemplates
 
         public string getContent(){
             try{
+                
                 checkPath(path);
                 if(String.IsNullOrEmpty(content)){
                     content = File.ReadAllText(path);
@@ -45,8 +47,13 @@ namespace Candidate_Management.CORE.LoadingTemplates
 
         private void checkPath(string _path){
              if(String.IsNullOrEmpty(_path)){
-                    throw new Exception("Le chemin du fichier est vide");
+                   path =  JsonConfiguration.getInstance().getEmailTemplatePath();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Le chemin est {path} le titre est {title}";
         }
 
     }
