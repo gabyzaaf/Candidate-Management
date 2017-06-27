@@ -15,37 +15,6 @@
             var myWindow = window.open("agenda.html", "", "width=700,height=800");
         }
 
-        function colorResponse() {
-
-            setTimeout(function () {
-                if (document.getElementById("rep").innerHTML != "Le candidat a ete ajoute à votre systeme") {
-                    document.getElementById("rep").style.color = "#DC0B0B";
-                } else {
-                    document.getElementById("rep").style.color = "#2CAC3D";
-                }
-            }, 50);
-
-
-            if (document.getElementById("Name").innerHTML == "") {
-                $style = 'style="border-color:red"';
-            }
-            if (document.getElementById("Firstname").innerHTML == "") {
-                $style = 'style="border-color:red"';
-            }
-            if (document.getElementById("emailAdress").innerHTML == "") {
-                $style = 'style="border-color:red"';
-            }
-            if (document.getElementById("phone").innerHTML == "") {
-                $style = 'style="border-color:red"';
-            }
-            if (document.getElementById("actions").innerHTML == "") {
-                $style = 'style="border-color:red"';
-            }
-            if (document.getElementById("sexe").innerHTML == "") {
-                $style = 'style="border-color:red"';
-            }
-
-        }
     </script>
 </head>
 <body ng-controller="app">
@@ -70,7 +39,7 @@
                 <table align="center">
                     <tbody>
                         <tr>
-                            <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
+                            <td colspan="5" align="center" ><h2>{{contentResponse}}</h2></td>
                         </tr>
                         <tr>
                             <td>*Nom : </td>
@@ -98,7 +67,7 @@
                         <tr>
                             <td>*Action : </td>
                             <td>
-                                <select id="actions" name="actions" ng-model="candidat.actions">
+                                <select id="actions" name="action" ng-model="candidat.action">
                                     <option value="interne" selected>Interne</option>
                                     <option value="enCours">En cours</option>
                                     <option value="RN">RN</option>
@@ -153,16 +122,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5"><textarea name="templatemsg" ng-model="utilisateur.email" cols="100" rows="4"></textarea></td>
+                            <td colspan="5"><textarea name="templatemsg" ng-model="candidat.email" cols="100" rows="4"></textarea></td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="left"><input type="file" value="CV" name="cv" ng-model="utilisateur.email" /></td>
+                            <td colspan="5" align="left"><input type="file" value="CV" name="cv" ng-model="candidat.email" /></td>
                         </tr>
                         <tr>
                             <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" onclick="colorResponse()" /></td>
+                            <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
                         </tr>
                     </tbody>
                 </table>

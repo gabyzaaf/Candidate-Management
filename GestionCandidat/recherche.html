@@ -74,7 +74,7 @@
                 <tr>
                     <td>
                         <strong>
-                            Nom : <input type="text" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90px" />
+                            Nom : <input type="text" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90" />
                         </strong>
                     </td>
                 </tr>
@@ -135,12 +135,12 @@
                         <td>*Téléphone :</td>
                         <td><input type="tel" name="telephone" ng-value="phoneCoor" ng-model="updateCandidate.telephone" required /></td>
                         <td>Code postal : </td>
-                        <td><input type="text" size="5" name="cp" ng-value="cp" ng-model="updateCandidate.cp" /></td>
+                        <td><input type="text" size="5" name="cp" ng-value="cpCoor" ng-model="updateCandidate.cp" /></td>
                     </tr>
                     <tr>
-                        <td>*Action : </td>{{actionsCoor}}
+                        <td>*Action : </td>
                         <td>
-                            <select name="actions" ng-value="actionsCoor" ng-model="updateCandidate.actions" required>
+                            <select name="action" ng-value="actionsCoor" ng-model="updateCandidate.action" required>
                                 <option value="interne">Interne</option>
                                 <option value="enCours">En cours</option>
                                 <option value="RN">RN</option>

@@ -3,6 +3,128 @@
 var gestionCandidatApp = angular.module('gestionCandidatApp', ['ngRoute', 'ngCookies']);
 
 
+/********************   Analyse Candidat   ********************/
+
+gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $http.get('http://192.168.0.16:5000/api/user/MlCandidates/recherche/' + $cookies.get('cookie')).then(function (response) {
+        $scope.todos = response.data;
+        for (var i = 0; i < 500; i++) {
+            if ($scope.todos[0].content != null) {
+                console.log($scope.todos[0].content);
+            } else {
+                if (i == 0) {
+                    $scope.satisfaction_level = $scope.todos[i].satisfaction_level.replace(",", ".");;
+                    $scope.last_evaluation = $scope.todos[i].last_evaluation.replace(",", ".");;
+                    $scope.c = $scope.todos[i].number_project;
+                    $scope.average_montly_hours = $scope.todos[i].average_montly_hours;
+                    $scope.time_spend_company = $scope.todos[i].time_spend_company;
+                    $scope.Work_accident = $scope.todos[i].Work_accident;
+                    $scope.left_work = $scope.todos[i].left_work;
+                    $scope.promotion_last_5years = $scope.todos[i].promotion_last_5years;
+                    $scope.sales = $scope.todos[i].sales;
+                    $scope.salary = $scope.todos[i].salary;
+                } else {
+                    $scope.satisfaction_level = $scope.satisfaction_level + ';' + $scope.todos[i].satisfaction_level.replace(",", ".");;
+                    $scope.last_evaluation = $scope.last_evaluation + ';' + $scope.todos[i].last_evaluation.replace(",", ".");;
+                    $scope.number_project = $scope.number_project + ';' + $scope.todos[i].number_project;
+                    $scope.average_montly_hours = $scope.average_montly_hours + ';' + $scope.todos[i].average_montly_hours;
+                    $scope.time_spend_company = $scope.time_spend_company + ';' + $scope.todos[i].time_spend_company;
+                    $scope.Work_accident = $scope.Work_accident + ';' + $scope.todos[i].Work_accident;
+                    $scope.left_work = $scope.left_work + ';' + $scope.todos[i].left_work;
+                    $scope.promotion_last_5years = $scope.promotion_last_5years + ';' + $scope.todos[i].promotion_last_5years;
+                    $scope.sales = $scope.sales + ';' + $scope.todos[i].sales;
+                    $scope.salary = $scope.salary + ';' + $scope.todos[i].salary;
+                }
+            }
+        };
+
+
+        $scope.chart = null;
+        $scope.chart2 = null;
+        $scope.chart3 = null;
+        $scope.chart4 = null;
+
+        $scope.config = {};
+        
+
+        $scope.typeOptions = ["line", "bar", "spline", "step", "area", "area-step", "area-spline"];
+
+        $scope.config.type1 = $scope.typeOptions[0];
+        $scope.config.type2 = $scope.typeOptions[1];
+
+        $scope.showGraph = function () {
+            $scope.graph1 = "Graph 1 : Graphique sur les promotions et les nombres de projet";
+            $scope.config["test1"] = $scope.number_project;
+            $scope.config.data2 = $scope.promotion_last_5years;
+            $scope.config.type1 = $scope.typeOptions[6];
+            $scope.config.type2 = $scope.typeOptions[2];
+            var config = {};
+            config.bindto = '#chart';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.data1 = $scope.config["test1"].split(";");
+            config.data.json.data2 = $scope.config.data2.split(";");
+            config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
+            config.data.types = { "test1": $scope.config.type1, "data2": $scope.config.type2 };
+            $scope.chart = c3.generate(config);
+        }
+
+        $scope.showGraph2 = function () {
+            $scope.graph2 = "Graph 2 : Graphique sur les niveaux de satisfaction du salarié et des promotions eux durant les 5 dernières années";
+            $scope.config.data1 = $scope.satisfaction_level;
+            $scope.config.data2 = $scope.promotion_last_5years;
+            $scope.config.type1 = $scope.typeOptions[6];
+            $scope.config.type2 = $scope.typeOptions[2];
+            var config = {};
+            config.bindto = '#chart2';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.data1 = $scope.config.data1.split(";");
+            config.data.json.data2 = $scope.config.data2.split(";");
+            config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
+            config.data.types = { "data1": $scope.config.type1, "data2": $scope.config.type2 };
+            $scope.chart2 = c3.generate(config);
+        }
+
+        $scope.showGraph3 = function () {
+            $scope.graph3 = "Graph 3 : Graphique sur le nombre de projet et l'évaluation du salarié";
+            $scope.config.data1 = $scope.number_project;
+            $scope.config.data2 = $scope.last_evaluation;
+            $scope.config.type1 = $scope.typeOptions[6];
+            $scope.config.type2 = $scope.typeOptions[2];
+            var config = {};
+            config.bindto = '#chart3';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.data1 = $scope.config.data1.split(";");
+            config.data.json.data2 = $scope.config.data2.split(";");
+            config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
+            config.data.types = { "data1": $scope.config.type1, "data2": $scope.config.type2 };
+            $scope.chart3 = c3.generate(config);
+        }
+
+        $scope.showGraph4 = function () {
+            $scope.graph4 = "Graph 4 : Graphique sur la satisfaction du salarié et le nombre de projet qu'il a effectué";
+            $scope.config.data1 = $scope.satisfaction_level;
+            $scope.config.data2 = $scope.number_project;
+            $scope.config.type1 = $scope.typeOptions[6];
+            $scope.config.type2 = $scope.typeOptions[2];
+            var config = {};
+            config.bindto = '#chart4';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.data1 = $scope.config.data1.split(";");
+            config.data.json.data2 = $scope.config.data2.split(";");
+            config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
+            config.data.types = { "data1": $scope.config.type1, "data2": $scope.config.type2 };
+            $scope.chart4 = c3.generate(config);
+        }
+
+    });
+}]);
+
+/********************************************************/
+
 /********************   Session ID   ********************/
 
 gestionCandidatApp.controller('app', function ($scope, $cookies) {
@@ -20,7 +142,7 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
     $scope.sendEntry = function (utilisateur) {
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/admin/auth/',
+            url: 'http://192.168.0.16:5000/api/user/admin/auth/',
             responseType: "json",
             data: { email: utilisateur.email, password: utilisateur.password }
         }
@@ -54,21 +176,22 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
     $scope.sendEntry = function (candidat) {
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/add/candidat/',
+            url: 'http://192.168.0.16:5000/api/user/add/candidat/',
             responseType: "json",
             data: {
                 session_id: $cookies.get('cookie'),
                 Name: candidat.Name,
                 Firstname: candidat.Firstname,
                 emailAdress: candidat.emailAdress,
-                cp: candidat.cp,
                 phone: candidat.phone,
-                sexe: "M",
-                actions: candidat.actions,
+                sexe: candidat.sexe,
+                action: candidat.action,
                 year: candidat.year,
                 link: candidat.link,
                 crCall: candidat.crCall,
-                ns: candidat.ns
+                ns: candidat.ns,
+                email: "true",
+                cp : candidat.cp
             }
         }
 
@@ -76,6 +199,8 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
             $scope.contentResponse = response.data.content;
             if (response.data.content != "Le candidat a ete ajoute à votre systeme") {
                 console.log("In the error");
+                console.log(candidat.action);
+                console.log(candidat.Name);
                 
             } else {
                 console.log("En attente du cookie baby");
@@ -98,7 +223,7 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
         console.log($scope.selectedCar);
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/add/candidat/report',
+            url: 'http://192.168.0.16:5000/api/user/add/candidat/report',
             responseType: "json",
             data: {
                 sessionId: $cookies.get('cookie'),
@@ -155,8 +280,8 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
         if ($scope.updateCandidate.sexe == null) {
             $scope.updateCandidate.sexe = $scope.sexeCoor;
         }
-        if ($scope.updateCandidate.actions == null) {
-            $scope.updateCandidate.actions = $scope.actionsCoor;
+        if ($scope.updateCandidate.action == null) {
+            $scope.updateCandidate.action = $scope.actionsCoor;
         }
         if ($scope.updateCandidate.anneediplome == null) {
             $scope.updateCandidate.anneediplome = $scope.anneeCoor;
@@ -170,19 +295,22 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
         if ($scope.updateCandidate.note == null) {
             $scope.updateCandidate.note = $scope.NSCoor;
         }
+        if ($scope.updateCandidate.cp == null) {
+            $scope.updateCandidate.cp = $scope.CpCoor;
+        }
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/update/candidat/',
+            url: 'http://192.168.0.16:5000/api/user/update/candidat/',
             responseType: "json",
             data: {
                 session_id: $cookies.get('cookie'),
                 Name: updateCandidate.nom,
                 Firstname: updateCandidate.prenom,
                 emailAdress: updateCandidate.email,
-                cp: updateCandidate.cp,
+                zipcode: updateCandidate.cp,
                 phone: updateCandidate.telephone,
                 sexe: updateCandidate.sexe,
-                actions: updateCandidate.actions,
+                action: updateCandidate.action,
                 year: updateCandidate.anneediplome,
                 link: updateCandidate.url,
                 crCall: updateCandidate.cr,
@@ -203,7 +331,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 console.log(updateCandidate.cp);
                 console.log(updateCandidate.telephone);
                 console.log(updateCandidate.sexe);
-                console.log(updateCandidate.actions);
+                console.log(updateCandidate.action);
                 console.log(updateCandidate.anneediplome);
                 console.log(updateCandidate.url);
                 console.log(updateCandidate.cr);
@@ -261,7 +389,7 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/update/candidat/report',
+            url: 'http://192.168.0.16:5000/api/user/update/candidat/report',
             responseType: "json",
             data: {
                 sessionId: $cookies.get('cookie'),
@@ -305,7 +433,7 @@ gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$wi
     $scope.sendEntry = function (message) {
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/add/message/',
+            url: 'http://192.168.0.16:5000/api/user/add/message/',
             responseType: "json",
             data: {
                 session_id: $cookies.get('cookie'),
@@ -348,18 +476,18 @@ gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '
 
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/update/message/',
+            url: 'http://192.168.0.16:5000/api/candidate/template/email/update',
             responseType: "json",
             data: {
-                session_id: $cookies.get('cookie'),
-                titre: updateMessage.titre_message,
-                contenu: updateMessage.contenu_message,
+                token: $cookies.get('cookie'),
+                title: updateMessage.titre_message,
+                content: updateMessage.contenu_message,
             }
         }
 
         $http(req).then(function (response) {
             $scope.contentResponseMessage = response.data.content;
-            if (response.data.content != "Le message a ete modifie dans votre systeme") {
+            if (response.data.content != "Le template d'email a bien ete modifie") {
                 console.log("In the error");
                 console.log(response.data.content);
             } else {
@@ -382,23 +510,17 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
     $scope.sendMessageDel = function (deleteMessage) {
         var req = {
             method: 'POST',
-            url: 'http://192.168.0.14:5000/api/user/delete/message/',
+            url: 'http://192.168.0.16:5000/api/candidate/template/email/delete',
             responseType: "json",
             data: {
-                session_id: $cookies.get('cookie'),
-                titre: $scope.selectedMsg,
+                token: $cookies.get('cookie'),
+                title: $scope.selectedMsg,
             }
         }
 
         $http(req).then(function (response) {
             $scope.contentResponseMessage = response.data.content;
-            if (response.data.content != "Le message a ete supprimer dans votre systeme") {
-                console.log("In the error");
-                console.log(response.data.content);
-            } else {
-                console.log("En attente du cookie");
-                console.log(response.data.content);
-            }
+            console.log(response.data.content);
 
         }, (err) => {
             console.log("ceci est une erreur" + err);
@@ -413,7 +535,7 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
 gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
     $scope.sendCandidat = function (candidat) {
-        $http.get('http://192.168.0.14:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
+        $http.get('http://192.168.0.16:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
             $scope.todos = response.data;
             if ($scope.todos != null) {
                 if ($scope.todos[0].content != null) {
@@ -470,7 +592,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
 
 gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
-        $http.get('http://192.168.0.14:5000/api/user/Candidates/rechercheAllCandidate').then(function (response) {
+        $http.get('http://192.168.0.16:5000/api/user/Candidates/rechercheAllCandidate').then(function (response) {
             $scope.todos = response.data;
             $scope.selectedCar = $cookies.get('id');
             if ($scope.todos != null) {
@@ -504,10 +626,10 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
 /*********************  Recherche tous les messages  ********************/
 
 gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
-        $http.get('http://192.168.0.14:5000/api/user/searchAllMessage/message/').then(function (response) {
+    $http.get('http://192.168.0.16:5000/api/candidate/email/template/titles/' + $cookies.get('cookie') + '/0/200').then(function (response) {
             $scope.todos = response.data;
             $scope.sendMessage = function (message) {
-                $http.get('http://192.168.0.14:5000/api/user/searchAllMessage/message/').then(function (response) {
+                $http.get('http://192.168.0.16:5000/api/candidate/email/template/titles/' + $cookies.get('cookie') + '/0/200').then(function (response) {
                     $scope.todos = response.data;
                     if ($scope.todos != null) {
                         if ($scope.todos[0].content != null) {
@@ -517,12 +639,12 @@ gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$ht
                             for (var i = 0; i < $scope.todos.length; i++) {
                                 if ($scope.todos[i].titre_message == $scope.selectedMsg) {
                                     nbSelect = i;
-                                    //console.log($scope.todos[i].email);
                                 }
-                                //console.log($scope.todos[i].email);
                             }
                             $scope.titreMsg = $scope.todos[nbSelect].titre_message;
-                            $scope.contenuMsg = $scope.todos[nbSelect].contenu_message;
+                            $http.get('http://192.168.0.16:5000/api/candidate/template/email/' + $cookies.get('cookie') + '/' + $scope.titreMsg).then(function (response) {
+                                $scope.contenuMsg = response.data[0].contenu_message;
+                                });
                         }
                     } else {
                         console.log("In the error");
@@ -542,7 +664,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
 
     var req = {
         method: 'GET',
-        url: 'http://192.168.0.14:5000/api/user/Candidates/recherche/',
+        url: 'http://192.168.0.16:5000/api/user/Candidates/recherche/',
         responseType: "json",
     }
 

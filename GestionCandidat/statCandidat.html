@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html ng-app="gestionCandidatApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Statistique</title>
+    <meta charset="utf-8" />
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="js/script.js"></script>
+    <script src="scripts/c3.js"></script>
+    <script src="scripts/c3.min.js"></script>
+    <script src="scripts/d3.js" charset="utf-8"></script>
+    <script src="scripts/d3.min.js" charset="utf-8"></script>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="Content/c3.css" rel="stylesheet" type="text/css">
+    <link href="Content/c3.min.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8" />
+</head>
+<body ng-controller="GraphCtrl" ng-init="showGraph()">
+    <h2>Statistique</h2>
+    <br />
+    <div ng-include="'barreMenu.html'"></div>
+    <br />
+    <table align="center" border="1">
+        <tr>
+            <td><button ng-click="showGraph()">Graph 1</button></td>
+            <td><button ng-click="showGraph2()">Graph 2</button></td>
+            <td><button ng-click="showGraph3()">Graph 3</button></td>
+            <td><button ng-click="showGraph4()">Graph 4</button></td>
+        </tr>
+    </table>
+    <br />
+
+    <center>
+    <form novalidate>
+        <table hidden="hidden">
+            <tr>
+                <th>Bleu</th>
+                <th>Orange</th>
+            </tr>
+            <tr>
+                <td><select ng-model="config.type1" ng-options="typeOption for typeOption in typeOptions"></select></td>
+                <td><select ng-model="config.type2" ng-options="typeOption for typeOption in typeOptions"></select></td>
+            </tr>
+        </table>
+    </form>
+    </center>
+
+    <br />
+
+
+    <h3 align="center">{{graph1}}</h3>
+    <br />
+    <div id="chart"></div>
+    <h3 align="center">{{graph2}}</h3>
+    <br />
+    <div id="chart2"></div>
+    <h3 align="center">{{graph3}}</h3>
+    <br />
+    <div id="chart3"></div>
+    <h3 align="center">{{graph4}}</h3>
+    <br />
+    <div id="chart4"></div>
+    <h3 align="center">{{graph5}}</h3>
+    <br />
+    <div id="chart5"></div>
+    
+
+</body>
+</html>
