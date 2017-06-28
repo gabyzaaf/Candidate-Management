@@ -15,11 +15,33 @@
             var myWindow = window.open("agenda.html", "", "width=700,height=800");
         }
 
+        function toggleSelectMsg() {
+            var lTextarea = document.getElementById("ContenuMessage");
+            lTextarea.style.display = (lTable.style.display == "textarea") ? "none" : "none";
+        }
+
+        function toggleTableMod() {
+
+            var lSelect = document.getElementById("selectMessage").value;
+            if (lSelect == "? undefined:undefined ?") {
+                alert("Selectionner un message !")
+            } else {
+                var lTable = document.getElementById("loginTableMod");
+                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            }
+        }
+
+
+        function toggleSelectModSupp() {
+            var lTable = document.getElementById("loginTableMod");
+            lTable.style.display = (lTable.style.display == "table") ? "none" : "none";
+        }
+
     </script>
 </head>
 <body ng-controller="app">
     <br />
-    <h2>Recherche</h2>
+    <h2>Fiche Coodonnée</h2>
     <br />
     <div ng-include="'barreMenu.html'"></div>
     <br />
@@ -110,21 +132,6 @@
                             <td colspan="5"><textarea name="crCall" ng-model="candidat.crCall" cols="100" rows="4"></textarea></td>
                         </tr>
                         <tr>
-                            <td>Date : </td>
-                            <td><input type="date" name="date" ng-model="candidat.date"/></td>
-                            <td>Heure : </td>
-                            <td><input type="time" name="heure" ng-model="candidat.heure"/></td>
-                            <td>
-                                <select name="template" ng-model="candidat.template">
-                                    <option value="approcheLinkedIn" selected>Approche LinkedIn</option>
-                                    <option value="rdv">Rendez-vous</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5"><textarea name="templatemsg" ng-model="candidat.email" cols="100" rows="4"></textarea></td>
-                        </tr>
-                        <tr>
                             <td colspan="5" align="left"><input type="file" value="CV" name="cv" ng-model="candidat.email" /></td>
                         </tr>
                         <tr>
@@ -138,7 +145,59 @@
             </div>
         </form>
     </section>
-     <br />
+    <br />
+    <br />
+    <section ng-controller="rechercheAllMessage">
+        <form ng-submit="sendMessage(message)">
+            <div class="form-style">
+                <table align="center" border="1" width="500">
+                    <tr>
+                        <th>Message</th>
+                        <th>Modifier</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select ng-model="selectedMsg" id="selectMessage" style="width:500px;">
+                                <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
+                            </select>
+                        </td>
+                        <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableMod()" /></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+        <br />
+        <section ng-controller="updateMessage">
+            <form ng-submit="sendEntry(updateMessage)">
+                <div class="form-style">
+                    <table align="center" id="loginTableMod" hidden="hidden">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
+                            </tr>
+                            <tr>
+                                <td>Titre du template : </td>
+                                <td colspan="2">
+                                    <input ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Contenu du message : </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Modifier" onclick="" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </section>
+    </section>
+    <br />
      <!--
      <div ng-controller="verifRecherche">
          <p>{{/nom}}</p>
