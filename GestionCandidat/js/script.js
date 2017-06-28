@@ -296,7 +296,10 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
             $scope.updateCandidate.note = $scope.NSCoor;
         }
         if ($scope.updateCandidate.cp == null) {
-            $scope.updateCandidate.cp = $scope.CpCoor;
+            $scope.updateCandidate.cp = $scope.cpCoor;
+        }
+        if ($scope.updateCandidate.ns == null) {
+            $scope.updateCandidate.ns = $scope.nsCoor;
         }
         var req = {
             method: 'POST',
@@ -307,14 +310,15 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 Name: updateCandidate.nom,
                 Firstname: updateCandidate.prenom,
                 emailAdress: updateCandidate.email,
-                zipcode: updateCandidate.cp,
+                cp: updateCandidate.cp,
                 phone: updateCandidate.telephone,
                 sexe: updateCandidate.sexe,
                 action: updateCandidate.action,
                 year: updateCandidate.anneediplome,
                 link: updateCandidate.url,
                 crCall: updateCandidate.cr,
-                ns: updateCandidate.note
+                ns: updateCandidate.note,
+                email: "true"
             }
         }
 
@@ -555,9 +559,8 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                     $scope.prenomCoor = $scope.todos[nbSelect].prenom;
                     $scope.phoneCoor = $scope.todos[nbSelect].phone;
                     $scope.emailCoor = $scope.todos[nbSelect].email;
-                    console.log($scope.selectedCar);
                     $scope.sexeCoor = $scope.todos[nbSelect].sexe;
-                    $scope.cp = $scope.todos[nbSelect].cp;
+                    $scope.cpCoor = $scope.todos[nbSelect].cp;
                     $scope.actionsCoor = $scope.todos[nbSelect].actions;
                     $scope.anneeCoor = $scope.todos[nbSelect].annee;
                     $scope.lienCoor = $scope.todos[nbSelect].lien;
