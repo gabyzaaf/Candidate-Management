@@ -42,6 +42,9 @@
     <table align="center">
         <tbody>
             <tr>
+                <td><h3>Séléctionner un candidat qui n'est pas relié à une fiche entretien :</h3></td>
+            </tr>
+            <tr>
                 <td colspan="4">
                     <select ng-model="selectedCar" id="selectCandidat">
                         <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}} </option>
@@ -59,83 +62,62 @@
                             <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
                         </tr>
                         <tr>
-                            <td>Date : </td>
-                            <td><input type="date" name="date" /></td>
-                            <td>Heure : </td>
-                            <td><input type="time" name="heure" /></td>
-                        </tr>
-                        <tr>
-                            <td>Test technique : </td>
-                            <td><input type="url" name="testtech" ng-model="entretien.testtech" /></td>
+                            <td>Lien du test technique : </td>
+                            <td><input type="text" name="link" ng-model="entretien.link" /></td>
+                            <td>Note test technique : </td>
+                            <td><input type="text" name="note" ng-model="entretien.note" /></td>
                         </tr>
                         <tr>
                             <td>XP note :</td>
-                            <td><input type="text" name="xpnote" ng-model="entretien.xpnote" /></td>
-                            <td>PS note : </td>
-                            <td><input type="text" name="psnote" ng-model="entretien.psnote" /></td>
-                        </tr>
-                        <tr>
-                            <td>Note test technique : </td>
-                        </tr>
-                        <tr>
-                            <td><input type="number" size="3" name="test1" ng-model="entretien.test1"/></td>
-                            <td><input type="number" size="2" name="test2" /></td>
-                            <td><input type="number" size="2" name="test3" /></td>
-                            <td><input type="number" size="1" name="test4" /></td>
-                        </tr>
-                        <tr>
-                            <td>Compte Rendu entretien RH : </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea name="crrh" cols="100" rows="4" ng-model="entretien.crrh" ></textarea></td>
-                        </tr>
-                        <tr>
+                            <td><input type="text" name="xpNote" ng-model="entretien.xpNote" /></td>
                             <td>NS note : </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea name="nsnote" cols="100" rows="4" ng-model="entretien.nsnote" ></textarea></td>
+                            <td><input type="text" name="nsNote" ng-model="entretien.nsNote" /></td>
                         </tr>
                         <tr>
                             <td>Job idéal : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="jobideal" cols="100" rows="4" ng-model="entretien.jobideal" ></textarea></td>
+                            <td colspan="4"><textarea name="jobIdealNote" cols="100" rows="4" ng-model="entretien.jobIdealNote" ></textarea></td>
                         </tr>
                         <tr>
                             <td>Piste : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="piste" cols="100" rows="4" ng-model="entretien.piste" ></textarea></td>
+                            <td colspan="4"><textarea name="pisteNote" cols="100" rows="4" ng-model="entretien.pisteNote" ></textarea></td>
                         </tr>
                         <tr>
-                            <td>Dispo : </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea name="dispo" cols="100" rows="4" ng-model="entretien.dispo" ></textarea></td>
-                        </tr>
                         <tr>
                             <td>PK à l'écoute : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="pkecoute" cols="100" rows="4" ng-model="entretien.pkecoute" ></textarea></td>
+                            <td colspan="4"><textarea name="pieCouteNote" cols="100" rows="4" ng-model="entretien.pieCouteNote" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Location : </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><textarea name="locationNote" cols="100" rows="4" ng-model="entretien.locationNote"></textarea></td>
                         </tr>
                         <tr>
                             <td>Anglais : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="anglais" cols="100" rows="4" ng-model="entretien.anglais" ></textarea></td>
+                            <td colspan="4"><textarea name="EnglishNote" cols="100" rows="4" ng-model="entretien.EnglishNote" ></textarea></td>
                         </tr>
                         <tr>
                             <td>Nationalité : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="nationalite" cols="100" rows="4" ng-model="entretien.nationalite" ></textarea></td>
+                            <td colspan="4"><textarea name="nationalityNote" cols="100" rows="4" ng-model="entretien.nationalityNote" ></textarea></td>
                         </tr>
                         <tr>
                             <td>Compétences : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="competence" cols="100" rows="4" ng-model="entretien.competence" ></textarea></td>
+                            <td colspan="4"><textarea name="competences" cols="100" rows="4" ng-model="entretien.competences" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
                         </tr>
                         <tr>
                             <td>CR technique : </td>
@@ -158,9 +140,6 @@
                         </tr>
                         <tr>
                             <td colspan="4"><textarea name="crcom" cols="100" rows="4" ng-model="entretien.crcom" ></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
                         </tr>
                     </tbody>
                 </table>

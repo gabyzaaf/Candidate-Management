@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="container" style="width: 700px; margin: 0px auto 0;">
-        <nav id="navigation">
-            <ul>
-                <li><a href="recherche.html">Recherche</a></li>
-                <li><a href="coordonnee.html">Ajouter</a></li>
-                <li><a href="messagemodifier.html">Message</a></li>
-                <li><a href="agenda.html">Agenda</a></li>
-                <li><a href="statCandidat.html">Statistique</a></li>
-                <li><a href="statCandidat.html">Prédiction</a></li>
-            </ul>
-        </nav>
-    </div>
+    <section ng-controller="verifId">
+        <section ng-controller="seDeconncter">
+            <form ng-submit="sendConnexion()">
+                <table align="right">
+                    <tr>
+                        <td><input type="submit" class="btnRouge" value="se deconnecter" /></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+
+        <div id="container" style="width: 460px; margin: 0px auto 0;">
+            <nav id="navigation">
+                <ul>
+                    <li><a href="recherche.html">Recherche</a></li>
+                    <li><a href="coordonnee.html">Ajouter</a></li>
+                    <li><a href="messagemodifier.html">Message</a></li>
+                    <li><a href="agenda.html">Agenda</a></li>
+                    <!--<li><a href="statCandidat.html">Statistique</a></li>
+                        <li><a href="statCandidat.html">Prédiction</a></li>-->
+                </ul>
+            </nav>
+        </div>
+    </section>
 </body>
 </html>

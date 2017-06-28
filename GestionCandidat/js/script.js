@@ -125,6 +125,33 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
 
 /********************************************************/
 
+/********************   Se déconnecter   ********************/
+
+gestionCandidatApp.controller('seDeconncter', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $scope.sendConnexion = function () {
+        $cookies.put('cookie', "null");
+        if ($cookies.get('cookie') == "null") {
+            $window.location.href = 'index.html';
+        }
+    }
+
+}]);
+
+/********************************************************/
+
+/********************   Vérification ID  ********************/
+
+gestionCandidatApp.controller('verifId', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+
+        if ($cookies.get('cookie') == "null") {
+            $window.location.href = 'index.html';
+        }
+
+}]);
+
+/*************************************************************/
+
+
 /********************   Session ID   ********************/
 
 gestionCandidatApp.controller('app', function ($scope, $cookies) {
@@ -189,7 +216,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 year: candidat.year,
                 link: candidat.link,
                 crCall: candidat.crCall,
-                ns: candidat.ns,
+                ns: candidat.note,
                 email: "true",
                 cp : candidat.cp
             }
@@ -228,17 +255,17 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
             data: {
                 sessionId: $cookies.get('cookie'),
                 emailCandidat : $scope.selectedCar,
-                note: entretien.test1,
-                link : entretien.testtech,
-                xpNote : entretien.xpnote,
-                nsNote : entretien.psnote,
-                jobIdealNote : entretien.jobideal,
-                pisteNote : entretien.piste,
-                pieCouteNote : entretien.pkecoute,
-                locationNote : entretien.dispo,
-                EnglishNote : entretien.anglais,
-                nationalityNote: entretien.nationalite,
-                competences: entretien.competence
+                note: entretien.note,
+                link: entretien.link,
+                xpNote: entretien.xpNote,
+                nsNote: entretien.nsNote,
+                jobIdealNote: entretien.jobIdealNote,
+                pisteNote: entretien.pisteNote,
+                pieCouteNote: entretien.pieCouteNote,
+                locationNote: entretien.locationNote,
+                EnglishNote: entretien.EnglishNote,
+                nationalityNote: entretien.nationalityNote,
+                competences: entretien.competences
             }
         }
 
@@ -298,9 +325,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
         if ($scope.updateCandidate.cp == null) {
             $scope.updateCandidate.cp = $scope.cpCoor;
         }
-        if ($scope.updateCandidate.ns == null) {
-            $scope.updateCandidate.ns = $scope.nsCoor;
-        }
+
         var req = {
             method: 'POST',
             url: 'http://192.168.0.16:5000/api/user/update/candidat/',
@@ -317,7 +342,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 year: updateCandidate.anneediplome,
                 link: updateCandidate.url,
                 crCall: updateCandidate.cr,
-                ns: updateCandidate.note,
+                NS: updateCandidate.note,
                 email: "true"
             }
         }
@@ -357,14 +382,14 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
 gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
     $scope.sendEntry = function (updateEntretien) {
-        if ($scope.updateEntretien.approche_email == null) {
-            $scope.updateEntretien.approche_email = $scope.approche_emailCoor;
+        if ($scope.updateEntretien.link == null) {
+            $scope.updateEntretien.link = $scope.linkCoor;
         }
         if ($scope.updateEntretien.note == null) {
             $scope.updateEntretien.note = $scope.noteCoor;
         }
-        if ($scope.updateEntretien.link == null) {
-            $scope.updateEntretien.link = $scope.linkCoor;
+        if ($scope.updateEntretien.nsNote == null) {
+            $scope.updateEntretien.nsNote = $scope.nsNoteCoor;
         }
         if ($scope.updateEntretien.xpNote == null) {
             $scope.updateEntretien.xpNote = $scope.xpNoteCoor;
@@ -375,8 +400,8 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
         if ($scope.updateEntretien.pisteNote == null) {
             $scope.updateEntretien.pisteNote = $scope.pisteNoteCoor;
         }
-        if ($scope.updateEntretien.pieCouteNoter == null) {
-            $scope.updateEntretien.pieCouteNoter = $scope.pieCouteNoteCoor;
+        if ($scope.updateEntretien.pieCouteNote == null) {
+            $scope.updateEntretien.pieCouteNote = $scope.pieCouteNoteCoor;
         }
         if ($scope.updateEntretien.locationNote == null) {
             $scope.updateEntretien.locationNote = $scope.locationNoteCoor;
@@ -401,11 +426,11 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
                 note: updateEntretien.note,
                 link: updateEntretien.link,
                 xpNote: updateEntretien.xpNote,
-                nsNote: updateEntretien.psnote,
+                nsNote: updateEntretien.nsNote,
                 jobIdealNote: updateEntretien.jobIdealNote,
                 pisteNote: updateEntretien.pisteNote,
-                pieCouteNote: updateEntretien.pieCouteNoter,
-                locationNote: updateEntretien.dispo,
+                pieCouteNote: updateEntretien.pieCouteNote,
+                locationNote: updateEntretien.locationNote,
                 EnglishNote: updateEntretien.EnglishNote,
                 nationalityNote: updateEntretien.nationalityNote,
                 competences: updateEntretien.competences
@@ -414,7 +439,7 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 
         $http(req).then(function (response) {
             $scope.contentResponseEntretien = response.data.content;
-            if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
+            if (response.data.content != "Le report a ete modifie parfaitement à votre system") {
                 console.log("In the error");
                 console.log(response.data.content);
             } else {
@@ -595,7 +620,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
 
 gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
-        $http.get('http://192.168.0.16:5000/api/user/Candidates/rechercheAllCandidate').then(function (response) {
+    $http.get('http://192.168.0.16:5000/api/user/Candidates/rechercheAll/' + $cookies.get('cookie')).then(function (response) {
             $scope.todos = response.data;
             $scope.selectedCar = $cookies.get('id');
             if ($scope.todos != null) {

@@ -189,14 +189,12 @@
                     <tr>
                         <td>Année de diplôme : </td>
                         <td><input type="text" size="4" name="anneediplome" ng-value="anneeCoor" ng-model="updateCandidate.anneediplome" /></td>
-                        <td>NS : </td>
-                        <td><input type="text" name="ns" ng-value="nsCoor" ng-model="updateCandidate.ns" /></td>
                     </tr>
                     <tr>
                         <td>Note : </td>
                     </tr>
                     <tr>
-                        <td colspan="5"><textarea name="note" cols="100" rows="4" ng-value="noteCoor" ng-model="updateCandidate.note"></textarea></td>
+                        <td colspan="5"><textarea name="note" cols="100" rows="4" ng-value="NSCoor" ng-model="updateCandidate.note"></textarea></td>
                     </tr>
                     <tr>
                         <td>Compte Rendu (CR) : </td>
@@ -231,10 +229,16 @@
                         <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseEntretien}}</h2></td>
                     </tr>
                     <tr>
-                        <td>XP note :</td>
-                        <td><input type="text" name="xpnote" ng-value="xpNoteCoor" ng-model="updateEntretien.xpNote"/></td>
+                        <td>Lien Test :</td>
+                        <td><input type="text" name="note" ng-value="linkCoor" ng-model="updateEntretien.link" /></td>
                         <td>Note :</td>
                         <td><input type="text" name="note" ng-value="noteCoor" ng-model="updateEntretien.note" /></td>
+                    </tr>
+                    <tr>
+                        <td>XP note :</td>
+                        <td><input type="text" name="xpnote" ng-value="xpNoteCoor" ng-model="updateEntretien.xpNote"/></td>
+                        <td>NS note :</td>
+                        <td><input type="text" name="ns" ng-value="nsNoteCoor" ng-model="updateEntretien.nsNote" /></td>
                     </tr>
                     <tr>
                         <td>Job idéal : </td>
@@ -253,6 +257,12 @@
                     </tr>
                     <tr>
                         <td colspan="4"><textarea name="pkecoute" cols="100" rows="4" ng-value="pieCouteNoteCoor" ng-model="updateEntretien.pieCouteNoter"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Localisation : </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><textarea name="locationNote" cols="100" rows="4" ng-value="locationNoteCoor" ng-model="updateEntretien.locationNote"></textarea></td>
                     </tr>
                     <tr>
                         <td>Anglais : </td>
@@ -275,7 +285,6 @@
                     <tr>
                         <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnRouge" value="Modifier" /></td>
                     </tr>
-                    <br />
                     <tr>
                         <td>CR technique : </td>
                     </tr>
