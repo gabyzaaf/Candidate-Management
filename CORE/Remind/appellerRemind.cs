@@ -35,10 +35,7 @@ namespace Candidate_Management.CORE.Remind
            isql.updateRemindType(id,date);
         }
 
-        public void changeTestDate(int id,DateTime _date){
-            this.id = id;
-            this.date = _date.AddMinutes(2);
-        }
+        
 
         public void exec(string token,DateTime meeting){
             checkFileNameIsNull();

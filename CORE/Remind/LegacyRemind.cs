@@ -25,5 +25,7 @@ namespace Candidate_Management.CORE.Remind
             string pathAndFile = $"{json.getEmailTemplatePath()}{fileName}{extension}";
             return pathAndFile;
         }
+
+        
     }
 }
