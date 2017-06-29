@@ -81,13 +81,12 @@ namespace ConsoleApplication
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();
                 LoadPlugins load = new LoadPlugins(folder);
-                load.getPluginFromFolders();
-                Console.WriteLine($"The folder is {folder}");
+                string[] fileList = load.getPluginFromFolders();                
                 Context contexte = new Context(new LoadingEmailTemplate());
                 contexte.executeLoading();
                 var host = new WebHostBuilder()
                             .UseKestrel()
-                            //.UseUrls("http://192.168.1.31:5000")
+                            //.UseUrls("http://10.0.0.34:5000")
                             .UseStartup<Startup>()
                             .Build();
                 host.Run();
