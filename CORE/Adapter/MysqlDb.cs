@@ -559,7 +559,7 @@ namespace Core.Adapter{
                                 remindExecution.executeUpdate(id,date);
                             }
                             // (token,DateTime.Now)
-                            //remindExecution.execTheAtCommand(token,DateTime.Now); 
+                            remindExecution.execTheAtCommand(token,DateTime.Now); 
                         }
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);

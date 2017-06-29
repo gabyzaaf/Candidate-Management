@@ -128,3 +128,4 @@
 6/28/17 6:49:07 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
 6/28/17 6:49:54 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
 6/28/17 6:49:54 PM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
+6/29/17 9:17:09 AM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme

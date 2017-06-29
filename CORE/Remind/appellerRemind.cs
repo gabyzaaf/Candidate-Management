@@ -34,8 +34,8 @@ namespace Candidate_Management.CORE.Remind
            isql.updateRemindType(id,date);
         }
 
-        public void changeTestDate(){
-            date = date.AddMinute(2);
+        public void changeTestDate(DateTime _date){
+            date = _date.AddMinutes(2);
         }
 
         public void exec(string token,DateTime meeting){
@@ -43,7 +43,11 @@ namespace Candidate_Management.CORE.Remind
             Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
             string pathAndFile = getPathNameAndFileFromTemplate(fileName);
            // string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}  {token} {pathAndFile} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
-           string cmd = $"./script.sh {date.Hour}:{date.Minute} {date.Month}/{date.Day}/{date.Year}  {token} sample.txt {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
+           string currentDate = $"{date.Month}/{date.Day}/{date.Year}";
+           string currentHourMinute = $"{date.Hour}:{date.Minute}";
+           string emailPluginPath = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll";
+           string filePathTemplate = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/sample.txt";
+           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {token}  {emailPluginPath} {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
             Console.WriteLine(cmd);
             
             //Schedule schedule = new Schedule(cmd);
