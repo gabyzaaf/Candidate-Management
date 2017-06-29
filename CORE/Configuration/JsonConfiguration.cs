@@ -24,6 +24,8 @@ namespace core.configuration{
        
         private static string emailTemplate = "emailTemplate";
 
+        private static string  bashScriptPath = "bashScriptPath";
+
         private static IConfigurationRoot configuration = null ;
 
         
@@ -158,6 +160,23 @@ namespace core.configuration{
              }catch(Exception exception){
                  throw new ConfigurationCustomException(this.GetType().Name,$"{exception.Message}");
              }
+         }
+
+         public string getTheBashScriptPath(){
+            try{
+                settingsExist();
+                if(String.IsNullOrEmpty(configuration[bashScriptPath])){
+                    throw new Exception("Votre fichier appsettings n'est pas conforme avec votre repertoire de script");
+                }
+                string bashFolderPath = replaceSlashFolderIfNotExist(configuration[bashScriptPath]);
+                if(!Directory.Exists(bashFolderPath)){
+                    throw new Exception("Le repertoire de vos fichiers de script n'existe pas, veuillez le créer");
+                }
+                
+                return bashFolderPath;
+            }catch(Exception exception){
+                throw new ConfigurationCustomException(this.GetType().Name,$"{exception.Message}");
+            }
          }
 
          private string replaceSlashFolderIfNotExist(string directory){
