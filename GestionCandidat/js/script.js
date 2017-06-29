@@ -11,17 +11,43 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
             method: 'POST',
             url: 'https://ussouthcentral.services.azureml.net/workspaces/f976db5dc6194a59a479f37fc96dffd4/services/ce01fbb1b995484582eaaa8639bd3884/execute?api-version=2.0&details=true',
             responseType: "json",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer lvoOpIc0yr72Hozn3/+MLJtCuH8Ki8se1pxwNESj/CK/H0RLqDoI8SblrgWQ0e5wHLB+1dRliLPMwH2n3ktKYA==',
+                'Access-Control-Allow-Origin': '*'
+            },
             data: {
-                satisfaction_level: prediction.satisfaction_level,
-                last_evaluation: prediction.last_evaluation,
-                number_project: prediction.number_project,
-                average_montly_hours: prediction.average_montly_hours,
-                time_spend_company: prediction.time_spend_company,
-                Work_accident: prediction.Work_accident,
-                promotion_last_5years: prediction.promotion_last_5years,
-                sales: prediction.sales,
-                salary: prediction.salary
-            }
+                "Inputs": {
+                    "input1": {
+                        "ColumnNames": [
+                          "satisfaction_level",
+                          "last_evaluation",
+                          "number_project",
+                          "average_montly_hours",
+                          "time_spend_company",
+                          "Work_accident",
+                          "promotion_last_5years",
+                          "sales",
+                          "salary"
+                        ],
+                        "Values": [
+                          [
+                            "0.53",
+                            "0.68",
+                            "4",
+                            "160",
+                            "0",
+                            "0",
+                            "0",
+                            "sales",
+                            "low"
+                          ]
+                        ]
+                    }
+                },
+                "GlobalParameters": {}
+            },
+
         }
 
         $http(req).then(function (response) {
