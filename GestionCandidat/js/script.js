@@ -3,6 +3,37 @@
 var gestionCandidatApp = angular.module('gestionCandidatApp', ['ngRoute', 'ngCookies']);
 
 
+/********************   machine learning azure   ********************/
+
+gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $scope.sendValueForAzure = function (prediction) {
+        var req = {
+            method: 'POST',
+            url: 'https://ussouthcentral.services.azureml.net/workspaces/f976db5dc6194a59a479f37fc96dffd4/services/ce01fbb1b995484582eaaa8639bd3884/execute?api-version=2.0&details=true',
+            responseType: "json",
+            data: {
+                satisfaction_level: prediction.satisfaction_level,
+                last_evaluation: prediction.last_evaluation,
+                number_project: prediction.number_project,
+                average_montly_hours: prediction.average_montly_hours,
+                time_spend_company: prediction.time_spend_company,
+                Work_accident: prediction.Work_accident,
+                promotion_last_5years: prediction.promotion_last_5years,
+                sales: prediction.sales,
+                salary: prediction.salary
+            }
+        }
+
+        $http(req).then(function (response) {
+            console.log(response.data);
+        }, (err) => {
+            console.log("ceci est une erreur" + err);
+        });
+    }
+}]);
+
+/*******************************************************************/
+
 /********************   Analyse Candidat   ********************/
 
 gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
