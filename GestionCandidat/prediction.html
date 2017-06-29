@@ -91,8 +91,10 @@
 
             if (!Boolean(i)) {
                 document.getElementById("erreurChamp").style.display = 'none';
+                document.getElementById("reponsetable").style.display = 'block';
             } else {
                 document.getElementById("erreurChamp").style.display = 'block';
+                document.getElementById("reponsetable").style.display = 'none';
             }
         }
 
@@ -178,18 +180,20 @@
         </tbody>
     </table>
     <br />
-    <table border="1" align="center" id="reponsetable" hidden="hidden">
-        <tr>
-            <th colspan="2">Reponse prédiction</th>
-        </tr>
-        <tr>
-            <th>Quite ou non l'entreprise</th>
-            <th>Probabilité de la reponse</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+    <div id="reponsetable" hidden="hidden">
+        <table border="1" align="center">
+            <tr>
+                <th colspan="2">Reponse prédiction</th>
+            </tr>
+            <tr>
+                <th>Quite ou non l'entreprise</th>
+                <th>Probabilité de la reponse</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
