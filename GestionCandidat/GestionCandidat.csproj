@@ -114,7 +114,6 @@
     <Content Include="agenda.html" />
     <Content Include="agendaajouter.html" />
     <Content Include="agendamodifier.html" />
-    <Content Include="authentificationWebService.asmx" />
     <Content Include="barreMenu.html" />
     <Content Include="Content\c3.css" />
     <Content Include="Content\c3.min.css" />
@@ -137,6 +136,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="js\script.js" />
+    <Content Include="prediction.html" />
     <Content Include="recherche.html" />
     <Content Include="scripts\c3.js" />
     <Content Include="scripts\c3.min.js" />
@@ -930,14 +930,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentification.cs" />
-    <Compile Include="authentificationWebService.asmx.cs">
-      <DependentUpon>authentificationWebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Candidat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recherche.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

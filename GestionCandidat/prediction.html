@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html ng-app="gestionCandidatApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Prédiction</title>
+    <meta charset="utf-8" />
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="js/script.js"></script>
+    <script src="scripts/c3.js"></script>
+    <script src="scripts/c3.min.js"></script>
+    <script src="scripts/d3.js" charset="utf-8"></script>
+    <script src="scripts/d3.min.js" charset="utf-8"></script>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="Content/c3.css" rel="stylesheet" type="text/css">
+    <link href="Content/c3.min.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8" />
+    <script>
+        function verifChamp() {
+
+            var satisfaction_level = document.getElementById("selectCandidat").value;
+            var last_evaluation = document.getElementById("last_evaluation").value;
+            var number_project = document.getElementById("number_project").value;
+            var average_montly_hours = document.getElementById("average_montly_hours").value;
+            var time_spend_company = document.getElementById("time_spend_company").value;
+            var Work_accident = document.getElementById("Work_accident").value;
+            var promotion_last_5years = document.getElementById("promotion_last_5years").value;
+            var sales = document.getElementById("sales").value;
+            var salary = document.getElementById("salary").value;
+            console.log(satisfaction_level);
+            if (satisfaction_level == "undefined" && last_evaluation == "undefined" && number_project == "undefined" && average_montly_hours == "undefined") {
+                alert("Remplir tous les champs !")
+            } else {
+                var lTable = document.getElementById("reponsetable");
+                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Prédiction</h2>
+    <br />
+    <div ng-include="'barreMenu.html'"></div>
+    <br />
+    <br />
+    <h1>Prédiction : le salarié serait-il suceptible de quitte l'entreprise ou non ?</h1>
+    <table align="center">
+        <tbody>
+            <tr>
+                <td><label>Level de satisfaction (décimal entre 0 à 1)</label></td>
+                <td><input type="number" step="0.01" min="0" max="1" id="satisfaction_level" ng-model="prediction.satisfaction_level" placeholder="0 à 1" /></td>
+            </tr>
+            <tr>
+                <td><label>Dernière évaluation (décimal entre 0 à 1)</label></td>
+                <td><input type="number" step="0.01" min="0" max="1" id="last_evaluation" ng-model="prediction.last_evaluation" placeholder="0 à 1" /></td>
+            </tr>
+            <tr>
+                <td><label>Nombre de projet réaliser</label></td>
+                <td><input type="number" id="number_project" ng-model="prediction.number_project" placeholder="Nombre de projet..." /></td>
+            </tr>
+            <tr>
+                <td><label>Moyenne d'heures travaillé par mois</label></td>
+                <td><input type="number" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
+            </tr>
+            <tr>
+                <td><label>Temps passé à l'entreprise (en année)</label></td>
+                <td><input type="number" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
+            </tr>
+            <tr>
+                <td><label>A-t-il déjà eu au moins un accident de travail ?</label></td>
+                <td>
+                    <select id="Work_accident" ng-model="prediction.Work_accident">
+                        <option value="0" selected>NON</option>
+                        <option value="1">OUI</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>A-t-il déjà eu au moins une promotion durant les 5 dernières anneès ?</label></td>
+                <td>
+                    <select id="promotion_last_5years" ng-model="prediction.promotion_last_5years">
+                        <option value="0" selected>NON</option>
+                        <option value="1">OUI</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Secteur</label></td>
+                <td>
+                    <select id="sales" ng-model="prediction.sales">
+                        <option value="sales" selected>Vente</option>
+                        <option value="it">Informatique</option>
+                        <option value="support">Support</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>salary</label></td>
+                <td>
+                    <select id="salary" ng-model="prediction.salary">
+                        <option value="low" selected>Faible</option>
+                        <option value="middle">Moyen</option>
+                        <option value="high">Fort</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Prediction" onclick="verifChamp()"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <table border="1" align="center" id="reponsetable" hidden="hidden">
+        <tr>
+            <th colspan="2">Reponse prédiction</th>
+        </tr>
+        <tr>
+            <th>Quite ou non l'entreprise</th>
+            <th>Probabilité de la reponse</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
