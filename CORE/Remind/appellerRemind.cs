@@ -49,7 +49,7 @@ namespace Candidate_Management.CORE.Remind
            string currentHourMinute = $"{date.Hour}:{date.Minute}";
            string emailPluginPath = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll";
            string filePathTemplate = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/sample.txt";
-           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {token}  {emailPluginPath} {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
+           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {token}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
             Console.WriteLine(cmd);
             
             Schedule schedule = new Schedule(cmd);
