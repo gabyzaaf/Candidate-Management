@@ -91,6 +91,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             $scope.config.type2 = $scope.typeOptions[2];
             var config = {};
             config.bindto = '#chart';
+            config.zoom = { "enabled": "true" };
             config.data = {};
             config.data.json = {};
             config.data.json.data1 = $scope.config["test1"].split(";");
@@ -108,6 +109,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             $scope.config.type2 = $scope.typeOptions[2];
             var config = {};
             config.bindto = '#chart2';
+            config.zoom = { "enabled": "true" };
             config.data = {};
             config.data.json = {};
             config.data.json.data1 = $scope.config.data1.split(";");
@@ -125,6 +127,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             $scope.config.type2 = $scope.typeOptions[2];
             var config = {};
             config.bindto = '#chart3';
+            config.zoom = { "enabled": "true" };
             config.data = {};
             config.data.json = {};
             config.data.json.data1 = $scope.config.data1.split(";");
@@ -142,6 +145,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             $scope.config.type2 = $scope.typeOptions[2];
             var config = {};
             config.bindto = '#chart4';
+            config.zoom = { "enabled": "true" };
             config.data = {};
             config.data.json = {};
             config.data.json.data1 = $scope.config.data1.split(";");
