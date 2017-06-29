@@ -77,7 +77,8 @@ namespace Core.Adapter.Inteface
 
           bool remindExist(int id);
           
-    
+           
+
     }
 
 } 
