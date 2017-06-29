@@ -11,9 +11,6 @@ public class Candidate {
     public String phone;
     public String email;
     public String sexe;
-   /* public enum actions {interne, enCours, RN,trop_relance, freelance, etranger,
-    appelerRemind, aRelancerMail, aRelancerLKD, PAERemind, HcJunior, HcLangue,
-    HCGeo, HCSenior, HCPasDev, HCMFST, HCBacMoins5}*/
     public String actions;
     public int annee;
     public String lien;

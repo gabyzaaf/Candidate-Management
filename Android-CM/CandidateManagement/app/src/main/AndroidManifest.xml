@@ -36,10 +36,6 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".Activties.AgendaActivity"
-            android:label="@string/title_activity_calendar" >
-        </activity>
-        <activity
             android:name=".Activties.SearchActivity"
             android:label="@string/title_activity_search"
             android:windowSoftInputMode="stateHidden">

@@ -26,7 +26,7 @@ public class UpdateRequest extends JsonObjectRequest {
     String requestBody;
 
 
-    public UpdateRequest(String sessionId, String Name, String Firstname, String mail,String phone, String sexe, String action,
+    public UpdateRequest(String sessionId, String Name, String Firstname, String mail,String phone, String zipcode, String sexe, String action,
                       int year, String link, String crCall, String ns, Boolean email, String prix, Response.Listener<JSONObject> listener,
                       Response.ErrorListener errorListener) throws JSONException {
         super(Request.Method.POST, UPDATE_REQUEST_URL, null, listener, errorListener);
@@ -37,6 +37,7 @@ public class UpdateRequest extends JsonObjectRequest {
         jsonBody.put("Firstname", Firstname);
         jsonBody.put("emailAdress", mail);
         jsonBody.put("phone", phone);
+        jsonBody.put("zipcode", zipcode);
         jsonBody.put("sexe", sexe);
         jsonBody.put("action", action);
         jsonBody.put("year", year);
@@ -44,7 +45,7 @@ public class UpdateRequest extends JsonObjectRequest {
         jsonBody.put("crCall", crCall);
         jsonBody.put("ns", ns);
         jsonBody.put("email", email);
-        jsonBody.put("idependant", prix);
+        jsonBody.put("independant", prix);
         requestBody = jsonBody.toString();
 
         headers = new HashMap<>();

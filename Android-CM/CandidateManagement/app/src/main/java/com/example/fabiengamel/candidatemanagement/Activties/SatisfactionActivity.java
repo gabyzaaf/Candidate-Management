@@ -73,8 +73,8 @@ public class SatisfactionActivity extends AppCompatActivity {
         radioGroupPromo.check(R.id.rbPromoFalseSatisfaction);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.salaire_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.salaire_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
         spSalaire.setAdapter(adapter);
 
         spSalaire.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -174,7 +174,7 @@ public class SatisfactionActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Log.d("log2=", error.toString());
-                AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
                         .create()

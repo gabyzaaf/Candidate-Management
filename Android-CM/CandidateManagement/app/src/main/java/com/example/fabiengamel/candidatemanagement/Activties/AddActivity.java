@@ -37,6 +37,7 @@ public class AddActivity extends AppCompatActivity {
     EditText etFirstname;
     EditText etMail;
     EditText etPhone;
+    EditText etZipcode;
     RadioButton rdHomme;
     RadioButton rdFemme;
     Spinner spAction;
@@ -99,10 +100,11 @@ public class AddActivity extends AppCompatActivity {
         etPRix = (EditText)findViewById(R.id.etPrixAdd);
         bAdd = (Button)findViewById(R.id.bAdd);
         tvPrix = (TextView)findViewById(R.id.tvPrixAdd);
+        etZipcode = (EditText)findViewById(R.id.etZipcodeAdd);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.actions_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.actions_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
         spAction.setAdapter(adapter);
 
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -133,7 +135,7 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                     builder.setTitle("Ajouter le candidat ?");
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
@@ -223,7 +225,7 @@ public class AddActivity extends AppCompatActivity {
                         else {
                             //erreur
                             String erreur = response.getString("content");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                             builder.setMessage("json_add"+erreur)
                                     .setNegativeButton("Réessayer", null)
                                     .create()
@@ -242,7 +244,7 @@ public class AddActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //Gestion error
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("ERREUR SERVEUR : "+error.toString())
                             .setNegativeButton("Réessayer", null)
                             .create()
@@ -260,6 +262,7 @@ public class AddActivity extends AppCompatActivity {
                 String name = etName.getText().toString();
                 String firstname = etFirstname.getText().toString();
                 String phone = etPhone.getText().toString();
+                String zipcode = etZipcode.getText().toString();
                 String sexe = "";
                 if(rdHomme.isChecked()) {
                     sexe = "M";
@@ -286,11 +289,11 @@ public class AddActivity extends AppCompatActivity {
                 else {
                     prix = "0";
                 }
-                addRequest = new AddRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,
+                addRequest = new AddRequest(sessionId,name,firstname, mail, phone, zipcode, sexe, action, year, link,
                         crCall, ns, email, prix, responseListener, errorListener);
 
             } catch (JSONException e) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                 builder.setMessage(e.toString())
                         .setNegativeButton("Réessayer", null)
                         .create()
@@ -309,10 +312,9 @@ public class AddActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.d("REPORT :", response.toString());
 
-                // JSONArray results = null;
                 try {
                     if(response.getBoolean("success")) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                         builder.setTitle("Le candidat a bien été ajouté");
                         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -327,7 +329,7 @@ public class AddActivity extends AppCompatActivity {
                     else {
                         //erreur
                         String erreur = response.getString("content");
-                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("json_report"+erreur)
                                 .setNegativeButton("Réessayer", null)
                                 .create()
@@ -335,7 +337,7 @@ public class AddActivity extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                     builder.setMessage(e.toString())
                             .setNegativeButton("Réessayer", null)
                             .create()
@@ -349,7 +351,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Gestion error
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
                         .create()

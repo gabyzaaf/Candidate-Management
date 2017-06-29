@@ -73,8 +73,8 @@ public class TimeActivity extends AppCompatActivity {
         radioGroupPromo.check(R.id.rbPromoFalseTime);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.salaire_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.salaire_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
         spSalaire.setAdapter(adapter);
 
         spSalaire.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

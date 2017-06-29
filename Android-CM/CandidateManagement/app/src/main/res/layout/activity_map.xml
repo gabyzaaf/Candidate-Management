@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@drawable/fond_1"
+    android:background="@drawable/background_color_gradient"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.fabiengamel.candidatemanagement.Activties.MapActivity">
@@ -18,15 +18,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Nom "
-            android:textColorHint="#4899F6"
-            android:textColor="#4899F6"
+            android:textColorHint="@color/textEditable"
+            android:textColor="@color/textEditable"
             android:layout_weight="1"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Localiser"
-            android:textColor="#4899F6"
+            android:textColor="@color/textButton"
+            android:background="@color/backgroundButton"
             android:id="@+id/bLocateMap" />
 
     </LinearLayout>

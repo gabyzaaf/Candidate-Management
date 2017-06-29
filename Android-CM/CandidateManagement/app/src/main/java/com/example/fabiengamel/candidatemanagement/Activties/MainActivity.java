@@ -91,9 +91,11 @@ public class MainActivity extends AppCompatActivity
         spActions = (Spinner)findViewById(R.id.spActions);
 
         tvWelcome.setText("Bonjour " + user.email);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.actions_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.actions_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
+
         spActions.setAdapter(adapter);
         tvCandidates.setMovementMethod(new ScrollingMovementMethod());
 
@@ -130,11 +132,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -204,7 +202,6 @@ public class MainActivity extends AppCompatActivity
                                     candidate.firstname = jsonOBject.getString("prenom");
                                     candidate.lastname = jsonOBject.getString("nom");
                                     candidate.email = jsonOBject.getString("email");
-                                    //candidate.action = jsonOBject.getString("actions");
 
                                     candidates.add(candidate);
 

@@ -10,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -48,7 +50,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     EditText etNom;
@@ -62,6 +64,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -112,11 +115,43 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(MapActivity.this, SearchActivity.class);
+                i.putExtra("candidateName", etNom.getText().toString());
+                startActivity(i);
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MapActivity.this, SearchActivity.class);
+        if(!nameRetour.matches("")) {
+            i.putExtra("candidateName", nameRetour);
+            startActivity(i);
+        }
+        else{
+            i.putExtra("candidateName", etNom.getText().toString());
+            startActivity(i);
+        }
+    }
+
     public void addMarker(Double lat, Double lng){
         LatLng latLng = new LatLng(lat,lng);
         Candidate candidate = Candidate.getCurrentCandidate();
 
-        //mMap.clear();
+
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title(candidate.firstname + " " + candidate.lastname)
@@ -162,18 +197,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(MapActivity.this, SearchActivity.class);
-        if(!nameRetour.matches("")) {
-            i.putExtra("candidateName", nameRetour);
-            startActivity(i);
-        }
-        else{
-            i.putExtra("candidateName", etNom.getText().toString());
-            startActivity(i);
-        }
-    }
 
     public void GetCandidateZipCode(String nom) {
         User user = User.getCurrentUser();
@@ -198,22 +221,22 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     Toast.makeText(MapActivity.this, "Erreur : " + jsonOBject.getString("content"), Toast.LENGTH_LONG).show();
                                 }
                                 else {
-                                    //En attente des zipcodes en base
-                                    //candidate.zipcode = jsonOBject.getString("zipcode");
+
+                                    candidate.zipcode = jsonOBject.getString("zipcode");
                                     candidate.firstname = jsonOBject.getString("prenom");
                                     candidate.lastname = jsonOBject.getString("nom");
                                     candidate.phone =  jsonOBject.getString("phone");
                                     candidate.lien = jsonOBject.getString("lien");
                                     candidate.actions = jsonOBject.getString("actions");
-                                    candidate.zipcode = "94300";
+
                                     Candidate.setCurrentCandidate(candidate);
 
-                                    if(candidate.zipcode != null) {
-                                        Toast.makeText(MapActivity.this, "zipcode : " +candidate.zipcode, Toast.LENGTH_LONG).show();
+                                    if(!candidate.zipcode.matches("")) {
+                                       // Toast.makeText(MapActivity.this, "Code postal : " +candidate.zipcode, Toast.LENGTH_LONG).show();
                                         GetCandidatePosition(candidate.zipcode);
 
                                     } else {
-                                        Toast.makeText(MapActivity.this, "Code postal inexistant pour ce candidat", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MapActivity.this, "Code postal non renseigné pour ce candidat", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             }
@@ -269,14 +292,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                             Double lng = location.getDouble("lng");
 
                             if(lat != null || lng != null) {
-                                Toast.makeText(MapActivity.this, "lat "+lat+" lng : "+lng, Toast.LENGTH_LONG).show();
+                                Toast.makeText(MapActivity.this, town, Toast.LENGTH_LONG).show();
+
                                 addMarker(lat, lng);
                             }else {
                                 Toast.makeText(MapActivity.this, "La position n'a pas été trouvée", Toast.LENGTH_LONG).show();
                             }
 
                         }catch(JSONException e){
-                            //Toast.makeText(MapActivity.this, "Erreur : " +e, Toast.LENGTH_LONG).show();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
                             builder.setMessage("Erreur : " +e)
                                     .setNeutralButton("Réessayer", null)

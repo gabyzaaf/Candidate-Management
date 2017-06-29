@@ -67,6 +67,7 @@ public class UpdateActivity extends AppCompatActivity {
     RadioGroup approche_emaill;
     EditText etPRix;
     TextView tvPrix;
+    EditText etZipcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,7 @@ public class UpdateActivity extends AppCompatActivity {
         approche_emaill = (RadioGroup)findViewById(R.id.rgEmailUpdate);
         etPRix = (EditText)findViewById(R.id.etPrixUpdate);
         tvPrix = (TextView)findViewById(R.id.tvPrixUpdate);
+        etZipcode = (EditText)findViewById(R.id.etZipcodeUpdate);
 
 
         bUpdate.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +121,7 @@ public class UpdateActivity extends AppCompatActivity {
                 if (!tool.isEmailValid(etMail.getText())) {
                     Toast.makeText(UpdateActivity.this, "Email non valide", Toast.LENGTH_LONG).show();
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                     builder.setTitle("Modifier le candidat ?");
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
@@ -146,8 +148,8 @@ public class UpdateActivity extends AppCompatActivity {
 
         //set spinner values
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.actions_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.actions_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
         spAction.setAdapter(adapter);
 
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -185,6 +187,7 @@ public class UpdateActivity extends AppCompatActivity {
         etCrCall.setText(candidate.crCall);
         etNs.setText(candidate.NS);
         etPhone.setText(candidate.phone);
+        etZipcode.setText(candidate.zipcode);
         if(candidate.approche_email){
             approche_emaill.check(rdEmailyes.getId());
         }else {
@@ -258,7 +261,7 @@ public class UpdateActivity extends AppCompatActivity {
                     else {
                         //erreur
                         String erreur = response.getString("content");
-                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("json_add"+erreur)
                                 .setNegativeButton("Réessayer", null)
                                 .create()
@@ -277,7 +280,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Gestion error
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
                         .create()
@@ -295,6 +298,7 @@ public class UpdateActivity extends AppCompatActivity {
             String name = etName.getText().toString();
             String firstname = etFirstname.getText().toString();
             String phone = etPhone.getText().toString();
+            String zipcode = etZipcode.getText().toString();
             String sexe = "";
             if(rdHomme.isChecked()) {
                 sexe = "M";
@@ -321,11 +325,11 @@ public class UpdateActivity extends AppCompatActivity {
                 prix = "0";
             }
 
-            updateRequest = new UpdateRequest(sessionId,name,firstname, mail, phone, sexe, action, year, link,
+            updateRequest = new UpdateRequest(sessionId,name,firstname, mail, phone,zipcode, sexe, action, year, link,
                     crCall, ns, email, prix, responseListener, errorListener);
 
         } catch (JSONException e) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
             builder.setMessage(e.toString())
                     .setNegativeButton("Réessayer", null)
                     .create()
@@ -346,7 +350,7 @@ public class UpdateActivity extends AppCompatActivity {
 
                 try {
                     if(response.getBoolean("success")) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                         builder.setTitle("Le candidat a bien été modifié");
                         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -362,7 +366,7 @@ public class UpdateActivity extends AppCompatActivity {
                     else {
                         //erreur
                         String erreur = response.getString("content");
-                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("json_report"+erreur)
                                 .setNegativeButton("Réessayer", null)
                                 .create()
@@ -370,7 +374,7 @@ public class UpdateActivity extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                     builder.setMessage(e.toString())
                             .setNegativeButton("Réessayer", null)
                             .create()
@@ -384,7 +388,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Gestion error
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
                         .create()

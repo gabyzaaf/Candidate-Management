@@ -7,13 +7,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="SatisfactionActivity"
-    android:background="@drawable/fond_1">
+    android:background="@drawable/background_color_gradient">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="  Veuillez remplir les champs suivants concernant la situation actuelle de l'employé, afin de prédire son taux de satisfaction "
         android:textStyle="bold"
-        android:textColor="#4899F6"
+        android:textColor="@color/textInfo"
         android:gravity="center"
         android:textSize="18sp"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Nombre de projets *"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <EditText
                 android:id="@+id/etNbProjectSatisfaction"
@@ -46,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:hint="(0-9)"
                 android:layout_weight="1"
+                android:textColorHint="@color/textEditable"
+                android:textColor="@color/textEditable"
                 android:inputType="number"
                 android:maxLength="1"
                 android:singleLine="true"
@@ -59,7 +61,7 @@
                 android:text="  Heures par mois *"
                 android:inputType="number"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <EditText
                 android:id="@+id/etNbHoursByMonthSatisfaction"
@@ -67,6 +69,8 @@
                 android:layout_height="wrap_content"
                 android:hint="(100-999)"
                 android:layout_weight="1"
+                android:textColorHint="@color/textEditable"
+                android:textColor="@color/textEditable"
                 android:maxLength="3"
                 android:singleLine="true"
                 android:inputType="number"
@@ -88,6 +92,8 @@
                 android:layout_height="wrap_content"
                 android:hint="(0-9)"
                 android:layout_weight="1"
+                android:textColorHint="@color/textEditable"
+                android:textColor="@color/textEditable"
                 android:maxLength="1"
                 android:singleLine="true"
                 android:inputType="number"
@@ -100,7 +106,7 @@
                 android:paddingTop="20dp"
                 android:text="  Salaire *"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <Spinner
                 android:layout_width="wrap_content"
@@ -125,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="  Accident *"
                     android:textStyle="bold"
-                    android:textColor="#4899F6"
+                    android:textColor="@color/textInfo"
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     />
                 <RadioButton
@@ -142,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Non"
-                    android:textColor="#4899F6"
+                    android:textColor="@color/textInfo"
                     />
             </RadioGroup>
 
@@ -159,7 +165,7 @@
                 android:text="  Promotion *"
                 android:paddingRight="6dp"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <RadioGroup
                 android:id="@+id/rgPromoSatisfaction"
@@ -173,14 +179,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Oui"
-                    android:textColor="#4899F6"
+                    android:textColor="@color/textInfo"
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:checked="false" />
                 <RadioButton
                     android:id="@+id/rbPromoFalseSatisfaction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#4899F6"
+                    android:textColor="@color/textInfo"
                     android:text="Non"
                     />
             </RadioGroup>
@@ -191,7 +197,8 @@
         android:layout_height="wrap_content"
         android:text="Prédire"
         android:id="@+id/bPredictSatisfaction"
-        android:textColor="#4899F6"
+        android:textColor="@color/textButton"
+        android:background="@color/backgroundButton"
         android:gravity="center"
         android:layout_below="@+id/tableLayout"
         android:layout_centerHorizontal="true"

@@ -78,7 +78,7 @@ public class PredictSalaryRequest extends JsonObjectRequest {
 
 
     @Override
-    public byte[] getBody() /*throws AuthFailureError*/ {
+    public byte[] getBody() {
         try {
             return requestBody.getBytes("utf-8");
         } catch (UnsupportedEncodingException uee) {

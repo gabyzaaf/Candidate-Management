@@ -5,7 +5,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/fond_1"
+    android:background="@drawable/background_color_gradient"
     tools:context="com.example.fabiengamel.candidatemanagement.Activties.SMSActivity">
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="  Nom "
             android:textStyle="bold"
-            android:textColor="#4899F6"
+            android:textColor="@color/textInfo"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:text=""
             android:id="@+id/tvNomSMS"
             android:textStyle="bold"
-            android:textColor="#4899F6"
+            android:textColor="@color/textInfo"
             />
         </TableRow>
         <TableRow>
@@ -50,7 +50,7 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="  Prenom "
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                 android:text="  N°Tel "
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:text=""
                 android:id="@+id/tvPhoneSMS"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
         </TableRow>
         <TableRow>
@@ -86,7 +86,7 @@
                 android:text="  Action "
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                 android:text=""
                 android:id="@+id/tvActionSMS"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
         </TableRow>
     </TableLayout>
@@ -105,6 +105,7 @@
        android:layout_below="@id/tableLayoutSMS"
        android:gravity="top"
        android:layout_marginTop="@dimen/activity_vertical_margin"
+       android:textColor="@color/textEditable"
        android:id="@+id/etContentSMS" />
 
     <Button
@@ -112,9 +113,9 @@
         android:layout_height="wrap_content"
         android:text="Envoyer"
         android:textStyle="bold"
-        android:textColor="#4899F6"
+        android:textColor="@color/textButton"
+        android:background="@color/backgroundButton"
         android:id="@+id/bSendSMS"
         android:layout_below="@+id/etContentSMS"
         android:layout_centerHorizontal="true" />
-
 </RelativeLayout>

@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -40,6 +42,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -51,6 +56,7 @@ public class SearchActivity extends AppCompatActivity {
     Button bModify;
     Button bLocate;
     Button bSMS;
+    Candidate candidate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +71,22 @@ public class SearchActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 candidateName= null;
+                bModify.setVisibility(View.INVISIBLE);
+                bLocate.setVisibility(View.INVISIBLE);
+                bSMS.setVisibility(View.INVISIBLE);
+                tvInfo.setVisibility(View.INVISIBLE);
             } else {
                 candidateName= extras.getString("candidateName");
+                getEmail(candidateName);
                 SearchCandidate(candidateName);
             }
         } else {
             candidateName= (String) savedInstanceState.getSerializable("candidateName");
+            bModify.setVisibility(View.INVISIBLE);
+            bLocate.setVisibility(View.INVISIBLE);
+            bSMS.setVisibility(View.INVISIBLE);
+            tvInfo.setVisibility(View.INVISIBLE);
+            tvResult.setVisibility(View.INVISIBLE);
         }
         etNom.setText(candidateName);
     }
@@ -111,9 +127,12 @@ public class SearchActivity extends AppCompatActivity {
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-                String nom = etNom.getText().toString();
-                SearchCandidate(nom);
 
+                tvResult.setText("");
+                String nom = etNom.getText().toString();
+
+                getEmail(nom);
+                SearchCandidate(nom);
             }
         });
 
@@ -127,6 +146,23 @@ public class SearchActivity extends AppCompatActivity {
                 i.putExtra("candidateFirstname", c.firstname);
                 i.putExtra("candidateAction", c.actions);
                 startActivity(i);
+            }
+        });
+
+        etNom.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                bModify.setVisibility(View.INVISIBLE);
+                bLocate.setVisibility(View.INVISIBLE);
+                bSMS.setVisibility(View.INVISIBLE);
+                tvInfo.setVisibility(View.INVISIBLE);
+                tvResult.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -148,7 +184,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void SearchCandidate(String nom) {
         User user = User.getCurrentUser();
-        final Candidate candidate = new Candidate();
+        candidate = Candidate.getCurrentCandidate();
         final Meeting report = new Meeting();
 
 
@@ -168,12 +204,16 @@ public class SearchActivity extends AppCompatActivity {
                                 JSONObject jsonOBject = response.getJSONObject(i);
                                     if(jsonOBject.has("success"))
                                     {
+                                        tvInfo.setVisibility(View.VISIBLE);
                                         tvResult.setText("Erreur : " + jsonOBject.getString("content"));
                                     }
                                 else {
+
                                         candidate.firstname = jsonOBject.getString("prenom");
                                         candidate.lastname = jsonOBject.getString("nom");
+                                      //  candidate.email = mail;
                                         candidate.phone =  jsonOBject.getString("phone");
+                                        candidate.zipcode = jsonOBject.getString("zipcode");
                                         candidate.lien = jsonOBject.getString("lien");
                                         candidate.actions = jsonOBject.getString("actions");
                                         candidate.sexe = jsonOBject.getString("sexe");
@@ -189,6 +229,7 @@ public class SearchActivity extends AppCompatActivity {
                                         report.EnglishNote = jsonOBject.getString("EnglishNote");
                                         report.competences = jsonOBject.getString("competences");
 
+
                                         Candidate.setCurrentCandidate(candidate);
                                         Meeting.setCurrentMeeting(report);
 
@@ -200,7 +241,11 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.append("\n");
                                         tvResult.append("Sexe : " + candidate.sexe);
                                         tvResult.append("\n");
+                                        tvResult.append("Email : " + candidate.email);
+                                        tvResult.append("\n");
                                         tvResult.append("N°Phone : " + candidate.phone );
+                                        tvResult.append("\n");
+                                        tvResult.append("Code postal : " + candidate.zipcode );
                                         tvResult.append("\n");
                                         tvResult.append("Année : " + candidate.annee);
                                         tvResult.append("\n");
@@ -208,6 +253,10 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.append("\n");
                                         tvResult.append("Action : " + candidate.actions);
                                         tvResult.append("\n");
+                                        if(candidate.actions.matches("freelance")){
+                                            tvResult.append("Prix : " + candidate.prix);
+                                            tvResult.append("\n");
+                                        }
                                         tvResult.append("crCall : " + candidate.crCall);
                                         tvResult.append("\n");
                                         tvResult.append("Approche_email : " + String.valueOf(candidate.approche_email));
@@ -232,13 +281,10 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.append("\n");
                                         tvResult.append("EnglishNote : " +report.EnglishNote );
                                         tvResult.append("\n");
-                                        tvResult.append("NationalityNote : " +report.nationalityNote );
+                                        tvResult.append("NationalityNote : " + report.nationalityNote);
                                         tvResult.append("\n");
                                         tvResult.append("Competences : " + report.competences);
-                                        bModify.setVisibility(View.VISIBLE);
-                                        bLocate.setVisibility(View.VISIBLE);
-                                        bSMS.setVisibility(View.VISIBLE);
-                                        tvInfo.setVisibility(View.VISIBLE);
+                                        showButton();
                                     }
 
                                 }
@@ -247,7 +293,12 @@ public class SearchActivity extends AppCompatActivity {
                                 tvResult.append("\n");
                                 tvResult.append(""+e);
                                 e.printStackTrace();
-                            }
+                            } catch (InterruptedException e) {
+                            tvResult.append("Erreur système : ");
+                            tvResult.append("\n");
+                            tvResult.append(""+e);
+                            e.printStackTrace();
+                        }
                     }
 
                 },
@@ -257,6 +308,55 @@ public class SearchActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        tvResult.append("Une erreur serveur est survenue : " + error.toString());
+                        tvResult.setVisibility(View.VISIBLE);
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+        queue.add(searchRequest);
+    }
+
+    public void getEmail(String nom){
+        User user = User.getCurrentUser();
+
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/mobile/" +nom+"/"+user.sessionId ;
+
+        JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>()
+                {
+                    public static final String TAG ="Recherche candidat : " ;
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("Response", response.toString());
+                        try {
+
+                                JSONObject jsonOBject = response.getJSONObject(0);
+                                candidate = new Candidate();
+                                candidate.email = jsonOBject.getString("email");
+                                Candidate.setCurrentCandidate(candidate);
+
+                        }catch(JSONException e){
+
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Log.d("ERROR", "error => " + error.toString());
+                        tvResult.setVisibility(View.VISIBLE);
                         tvResult.append("Une erreur serveur est survenue : "+error.toString());
                     }
                 }
@@ -268,6 +368,15 @@ public class SearchActivity extends AppCompatActivity {
             }
         };
         queue.add(searchRequest);
+    }
+
+    public void showButton() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        bModify.setVisibility(View.VISIBLE);
+        bLocate.setVisibility(View.VISIBLE);
+        bSMS.setVisibility(View.VISIBLE);
+        tvInfo.setVisibility(View.VISIBLE);
+        tvResult.setVisibility(View.VISIBLE);
     }
 
 }

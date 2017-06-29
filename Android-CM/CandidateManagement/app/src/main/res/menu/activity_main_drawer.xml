@@ -7,11 +7,11 @@
         <item android:id="@+id/nav_add" android:icon="@android:drawable/ic_input_add"
             android:title="Ajouter un candidat" />
         <item android:id="@+id/nav_map" android:icon="@android:drawable/ic_menu_mylocation"
-            android:title="Localisation" />
+            android:title="Localisation"  />
         </menu>
     </item>
 
-    <item android:title="Machine Learning">
+    <item android:title="Machine Learning" >
         <menu>
         <item android:id="@+id/nav_salary" android:icon="@android:drawable/ic_menu_zoom"
             android:title="Prédiction salariale" />

@@ -95,7 +95,7 @@ public class SMSActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!tvPhone.getText().toString().matches("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SMSActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SMSActivity.this, R.style.MyDialogTheme);
                     builder.setTitle("Envoyer : "+etContentSMS.getText().toString());
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
@@ -120,7 +120,7 @@ public class SMSActivity extends AppCompatActivity {
 
                 }
                 else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SMSActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SMSActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("Erreur : N°Tel non disponible...")
                             .setNegativeButton("Annuler", null)
                             .create()
@@ -185,62 +185,5 @@ public class SMSActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-      /*  public String GetSMSContent(String action) {
-
-        User user = User.getCurrentUser();
-        final Candidate candidate = new Candidate();
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
-
-        JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
-                    public static final String TAG ="Get email template : " ;
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("Response", response.toString());
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonOBject = response.getJSONObject(i);
-                                if(jsonOBject.has("success"))
-                                {
-
-                                }
-                                else {
-
-
-
-                                }
-
-                            }
-                        }catch(JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-        queue.add(searchRequest);
-
-
-        return "todo";
-    }*/
 
 }
