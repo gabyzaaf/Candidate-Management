@@ -476,9 +476,6 @@ namespace Core.Adapter{
             if(date == null){
                 throw new Exception("La date mis en paramtre n'est pas conforme");
             }
-            if(date.Date == DateTime.Now.Date){
-                 throw new Exception(this.GetType().Name+" La date ne peut pas etre identique a la date d'aujourd'hui");
-            } 
         }
         public void remindType(int id,DateTime date)
         {
@@ -552,6 +549,7 @@ namespace Core.Adapter{
                                 
                             }      
                         }else{
+                            
                             ContextRemindExecution remindExecution = new ContextRemindExecution(FactoryRemind.createRemind(actionType));
                             if("ADD".Equals(type)){
                                 remindExecution.executeAdd(id,date);

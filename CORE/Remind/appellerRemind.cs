@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.Adapter.Inteface;
 using core.configuration;
+using scheduler;
 namespace Candidate_Management.CORE.Remind
 {
     public class appellerRemind : LegacyRemind ,Iremind
@@ -22,7 +23,7 @@ namespace Candidate_Management.CORE.Remind
             this.id = id;
             checkFileNameIsNull();
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
-            date = date.AddDays(1);
+            this.date = date.AddDays(1);
             isql.remindType(id,date);
         }
         
@@ -30,12 +31,13 @@ namespace Candidate_Management.CORE.Remind
            this.id = id;
            checkFileNameIsNull();
            IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
-           date = date.AddDays(1);
+           this.date = date.AddDays(1);
            isql.updateRemindType(id,date);
         }
 
-        public void changeTestDate(DateTime _date){
-            date = _date.AddMinutes(2);
+        public void changeTestDate(int id,DateTime _date){
+            this.id = id;
+            this.date = _date.AddMinutes(2);
         }
 
         public void exec(string token,DateTime meeting){
@@ -50,8 +52,8 @@ namespace Candidate_Management.CORE.Remind
            string cmd = $"./script.sh {currentHourMinute} {currentDate}  {token}  {emailPluginPath} {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
             Console.WriteLine(cmd);
             
-            //Schedule schedule = new Schedule(cmd);
-            //schedule.executeTask(); 
+            Schedule schedule = new Schedule(cmd);
+            schedule.executeTask(); 
         }
     }
 }

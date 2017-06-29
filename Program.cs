@@ -76,7 +76,7 @@ namespace ConsoleApplication
                 appellerRemind remind = new appellerRemind();
                 // (int idJob,string fileName,string candidateName,string Candidatefirstname, DateTime meeting)
                 
-                remind.update(20,DateTime.Now);
+                remind.changeTestDate(1,DateTime.Now);
                 remind.exec("23",DateTime.Now);
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();
