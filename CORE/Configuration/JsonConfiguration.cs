@@ -13,18 +13,18 @@ namespace core.configuration{
     public class JsonConfiguration{
 
         public static JsonConfiguration conf = null;
-        private static string configurationLog = "logPath";
-        private static string configurationPluginFolder="pluginPath";
+        private static readonly string configurationLog = "logPath";
+        private static readonly string configurationPluginFolder="pluginPath";
 
-        private static string configurationCode = "ErrorCode";
+        private static readonly string configurationCode = "ErrorCode";
 
-        private static string configurationEmail="email";
+        private static readonly string configurationEmail="email";
 
-        private static string configurationSql="SQL";
+        private static readonly string configurationSql="SQL";
        
-        private static string emailTemplate = "emailTemplate";
+        private static readonly string emailTemplate = "emailTemplate";
 
-        private static string  bashScriptPath = "bashScriptPath";
+        private static readonly string  bashScriptPath = "bashScriptPath";
 
         private static IConfigurationRoot configuration = null ;
 

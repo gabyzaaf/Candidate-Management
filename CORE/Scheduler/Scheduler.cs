@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 
+using core.configuration;
 namespace scheduler{
 
     public class Schedule{
@@ -14,7 +15,7 @@ namespace scheduler{
         public void executeTask(){
             try{
                 ProcessStartInfo _processStartInfo = new ProcessStartInfo();
-                _processStartInfo.WorkingDirectory = @"/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Plugin-CM/";
+                _processStartInfo.WorkingDirectory = JsonConfiguration.getInstance().getTheBashScriptPath();
                 _processStartInfo.FileName         = @"bash";
                 _processStartInfo.Arguments        = cmd;
                 _processStartInfo.CreateNoWindow   = true;
