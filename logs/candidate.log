@@ -213,3 +213,11 @@
 6/30/17 12:24:48 PM - [Error] - WsCustomeException - RemindController - Il n'existe aucun remind
 6/30/17 12:28:49 PM - [Error] - SqlCustomException - MysqlDb - Il n'existe aucun remind
 6/30/17 12:28:49 PM - [Error] - WsCustomeException - RemindController - Il n'existe aucun remind
+6/30/17 12:39:45 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:39:45 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:39:45 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:39:45 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:39:45 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:39:45 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:49:19 PM - [Error] - SqlCustomException - MysqlDb - Il n'existe aucun remind
+6/30/17 12:49:20 PM - [Error] - WsCustomeException - RemindController - Il n'existe aucun remind
