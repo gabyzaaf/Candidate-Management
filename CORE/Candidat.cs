@@ -51,6 +51,20 @@ namespace core.candidat{
 
         public int independant {get;set;}
 
+        public Candidat(){
+
+        }
+
+        
+
+        public Candidat(string _name,string _firstname,string _emailAdress,string _zipcode,string _phone,string _action){
+            this.Name = _name;
+            this.Firstname = _firstname;
+            this.emailAdress = _emailAdress;
+            this.zipcode = _zipcode;
+            this.phone = _phone;
+            this.action = _action;
+        }
 
          public override string ToString()
         {
