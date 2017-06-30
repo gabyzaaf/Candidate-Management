@@ -23,7 +23,7 @@ This webservice is ***GET***
 choice : Is the choice like departement.
 token : Is the user token.
 
-3. Sample format result :
+4. Sample format result :
 
 ```json
 [
