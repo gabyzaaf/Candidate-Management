@@ -10,6 +10,8 @@ The web service type is ***GET***
 ***http://localhost:5000/api/Remind/candidate/withoutRapport/{token}***
 
 3. The params : 
+
+
 |  token |
 |---| 
 |  string |
