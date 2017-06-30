@@ -1015,7 +1015,52 @@ namespace Core.Adapter{
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
                 }
-                
+        }
+
+        public void stateChoiceExist(string choice){
+            ArrayList output = null;
+            try{
+                string sql = "select count(*) as nb from mlcandidate where sales = @choice";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@choice",choice);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nb");
+                output = queryExecute(sql,dico,results);
+                Dictionary<string,string> numbersDatasRetournedByChoice = (Dictionary<string,string>)output[0];
+                int valueReturned = Int32.Parse(numbersDatasRetournedByChoice["nb"]);
+                if(valueReturned == 0){
+                    throw new Exception($"Votre choix {choice} n'existe pas ");
+                }
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
+
+        public ArrayList getDatasFromChoice(string choice){
+            ArrayList output = null;
+            try{
+                string sql = "select * from mlcandidate where sales = @choice";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@choice",choice);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("satisfaction_level");
+                results.AddLast("last_evaluation");
+                results.AddLast("number_project");
+                results.AddLast("average_montly_hours");
+                results.AddLast("time_spend_company");
+                results.AddLast("work_accident");
+                results.AddLast("promotion_last_5years");
+                results.AddLast("sales");
+                results.AddLast("salary");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Votre choix {choice} n'existe pas");
+                }
+                return output;
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            
         }
     }
 }

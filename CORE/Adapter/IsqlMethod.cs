@@ -81,6 +81,10 @@ namespace Core.Adapter.Inteface
 
           ArrayList getRemindInformationForCalendar();
 
+          void stateChoiceExist(string choice);
+
+          ArrayList getDatasFromChoice(string choice);
+
     }
 
 } 
