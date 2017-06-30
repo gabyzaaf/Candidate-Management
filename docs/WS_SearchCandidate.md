@@ -11,7 +11,7 @@ The webService is ***GET***
 
 3. The params : 
 
-|  name | token   |
+|  name | token |
 |---|---| 
 |  string |  string |
 
