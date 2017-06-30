@@ -8,7 +8,7 @@ The webService type is ***GET***
 
 ***http://localhost:5000/api/User/Disconnect/{token}*** 
 
-3. Parameters : 
+3. Parameter : 
 
 |  token |
 |---| 
