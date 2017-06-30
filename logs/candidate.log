@@ -203,3 +203,13 @@
 6/30/17 11:33:36 AM - [Error] - WsCustomeException - RemindController - Input string was not in a correct format.
 6/30/17 11:34:42 AM - [Error] - SqlCustomException - MysqlDb - Input string was not in a correct format.
 6/30/17 11:34:42 AM - [Error] - WsCustomeException - RemindController - Input string was not in a correct format.
+6/30/17 12:22:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:22:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:22:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:22:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:22:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:22:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+6/30/17 12:24:48 PM - [Error] - SqlCustomException - MysqlDb - Il n'existe aucun remind
+6/30/17 12:24:48 PM - [Error] - WsCustomeException - RemindController - Il n'existe aucun remind
+6/30/17 12:28:49 PM - [Error] - SqlCustomException - MysqlDb - Il n'existe aucun remind
+6/30/17 12:28:49 PM - [Error] - WsCustomeException - RemindController - Il n'existe aucun remind

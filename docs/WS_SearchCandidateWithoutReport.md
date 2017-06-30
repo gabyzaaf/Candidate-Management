@@ -7,7 +7,7 @@ You need to have the read access.
 The web service type is ***GET***
 
 2. The web service URL : 
-***http://localhost:5000/api/Remind/calendar/informations/{token}***
+***http://localhost:5000/api/Remind/candidate/withoutRapport/{token}***
 
 3. The params : 
 | token   |

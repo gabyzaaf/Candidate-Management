@@ -14,9 +14,10 @@ namespace Candidate_Management.API
     [Route("api/[controller]")]
     public class RemindController:Controller
     {
-            [HttpGet("calendar/informations/{token}")]
+            [HttpGet("candidate/withoutRapport/{token}")]
             public IActionResult getTheRemindsForTheCalendar(string token){
                 try{
+                   
                     if(String.IsNullOrEmpty(token)){
                         throw new Exception("Le token ne peut etre vide");
                     }
@@ -29,6 +30,24 @@ namespace Candidate_Management.API
                     return CreatedAtRoute("SendRemindsError", new { error = state },state);
                 }
             }
+
+
+            [HttpGet("calendar/remind/informations/{token}")]
+            public IActionResult getTheRemindsInformations(string token){
+                try{
+                    if(String.IsNullOrEmpty(token)){
+                        throw new Exception("Le token ne peut etre vide");
+                    }
+                    IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                    isql.UserCanRead(token);
+                    return new ObjectResult(isql.getRemindInformationForCalendar());
+                }catch(Exception exc){
+                    new WsCustomeException(this.GetType().Name,exc.Message);
+                    State state = new State(){code=1,content=exc.Message,success=false};
+                    return CreatedAtRoute("SendRemindsError", new { error = state },state);
+                }
+            }
+
 
 
             [HttpGet("{error}", Name = "SendRemindsError")]

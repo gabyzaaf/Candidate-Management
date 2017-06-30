@@ -79,6 +79,8 @@ namespace Core.Adapter.Inteface
           
           LinkedList<Candidat> getCandidatWithoutReport();
 
+          ArrayList getRemindInformationForCalendar();
+
     }
 
 } 

@@ -975,9 +975,7 @@ namespace Core.Adapter{
                 results.AddLast("lien");
                 results.AddLast("crCall");
                 results.AddLast("NS");
-                
                 output = queryExecute(sql,dico,results);
-                
                 int numberDatasReturned = output.Count;
                 if(numberDatasReturned == 0){
                      throw new Exception($"Toutes les fiches candidat ont étés lié à une fiche entretiens");
@@ -988,14 +986,36 @@ namespace Core.Adapter{
                  
                     Candidat candidat = new Candidat(dataByLine["nom"],dataByLine["prenom"],dataByLine["email"],dataByLine["zipcode"],dataByLine["phone"],dataByLine["actions"],dataByLine["annee"],dataByLine["sexe"],dataByLine["lien"],dataByLine["crCall"],dataByLine["NS"]);
                     candidateList.AddLast(candidat);
-                }
-               
-                
+                } 
                 return candidateList;
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
          
+        }
+
+        public ArrayList getRemindInformationForCalendar(){
+                ArrayList output = null;
+                try{
+                    string sql = "select * from  candidate c ,remind r where r.fid_candidate_remind = c.id";
+                    Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                    dico.Add("@id","c.id");
+                    LinkedList<String> results = new LinkedList<String>();
+                    results.AddLast("nom");
+                    results.AddLast("prenom");
+                    results.AddLast("email");
+                    results.AddLast("dates");
+                    results.AddLast("zipcode");
+                    results.AddLast("actions");
+                    output = queryExecute(sql,dico,results);
+                    if(output.Count == 0){
+                        throw new Exception("Il n'existe aucun remind");
+                    }
+                    return output;
+                }catch(Exception exc){
+                    throw new SqlCustomException(this.GetType().Name,exc.Message);
+                }
+                
         }
     }
 }
