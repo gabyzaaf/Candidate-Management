@@ -85,6 +85,10 @@ namespace Core.Adapter.Inteface
 
           ArrayList getDatasFromChoice(string choice);
 
+          void disconnectUser(int id);
+
+          string getUserEmailFromId(int id);
+
     }
 
 } 

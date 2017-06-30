@@ -10,6 +10,7 @@ using exception.ws;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Candidate_Management.CORE.Exceptions;
+
 namespace API.wsUser
 {
     [EnableCors("SiteCorsPolicy")]
@@ -31,6 +32,7 @@ namespace API.wsUser
                 }else{
                     throw new Exception("Le token de l'utilisateur existe deja");
                 }
+                new WsCustomeInfoException("DC01",$"The user with the email {newUser.email} is connected");
                 return new ObjectResult(newUser);
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
@@ -249,11 +251,31 @@ namespace API.wsUser
                 new WsCustomeException(this.GetType().Name,exception.Message);
                 ArrayList errorList = new ArrayList();
                 errorList.Add(new State(){code=3,content=exception.Message,success=false});
-
                 return CreatedAtRoute("GetErrors", new { error = errorList },errorList);
             }
             
         }
+
+        [HttpGet("Disconnect/{token}")]
+        public IActionResult disconnectTheUser(string token){
+            try{
+                if(String.IsNullOrEmpty(token)){
+                    return new ObjectResult(new User(null,null,null,null));
+                }
+                IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                int id = isql.getIdFromToken(token);
+                string emailForLogTheUser = isql.getUserEmailFromId(id);
+                isql.disconnectUser(id);
+                new WsCustomeInfoException("DC02",$"The user with the email {emailForLogTheUser} is disconnected");
+                return new ObjectResult(new User(null,null,null,null));
+            }catch(Exception exception){
+                 new WsCustomeException(this.GetType().Name,exception.Message);
+                ArrayList errorList = new ArrayList();
+                errorList.Add(new State(){code=3,content=exception.Message,success=false});
+                return CreatedAtRoute("GetErrors", new { error = errorList },errorList);
+            }
+        }
+
 
         
     }

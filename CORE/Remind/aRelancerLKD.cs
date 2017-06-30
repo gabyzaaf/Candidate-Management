@@ -43,7 +43,7 @@ namespace Candidate_Management.CORE.Remind
             schedule.executeTask(); 
         }
 
-          private void checkFileNameIsNull(){
+        private void checkFileNameIsNull(){
             if(fileName == null){
                 fileName = this.GetType().Name;
             }

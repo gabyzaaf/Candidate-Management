@@ -1062,5 +1062,42 @@ namespace Core.Adapter{
             }
             
         }
+
+        public void disconnectUser(int id){
+            try{
+                if(id == 0){
+                    throw new Exception("L'identifiant de l'utilisateur n'est pas conforme");
+                }
+                string sql = "update user set session_id = null where id = @id";
+                Dictionary<String,Object> param = new Dictionary<String,Object>();
+                param.Add("@id",id);
+                queryExecute(sql,param,null); 
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+            
+        }
+
+        public string getUserEmailFromId(int id){
+            try{
+                ArrayList output = null;
+                if(id == 0){
+                    throw new Exception("L'identifiant de l'utilisateur n'est pas conforme");
+                }
+                string sql = "select email from user where id = @id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",id);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("email");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception("Aucun utilisateur ne possède cet identifiant");
+                }
+                Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
+                return userEmailData["email"];
+            }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
     }
 }
