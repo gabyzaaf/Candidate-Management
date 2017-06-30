@@ -22,7 +22,7 @@ namespace Candidate_Management.API
                     }
                     IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                     isql.UserCanRead(token);
-                    return new ObjectResult(token);
+                    return new ObjectResult(isql.getCandidatWithoutReport());
                 }catch(Exception exc){
                     new WsCustomeException(this.GetType().Name,exc.Message);
                     State state = new State(){code=1,content=exc.Message,success=false};

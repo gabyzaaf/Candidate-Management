@@ -191,3 +191,15 @@
 6/30/17 10:49:10 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
 6/30/17 10:58:22 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
 6/30/17 10:58:22 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+6/30/17 11:23:58 AM - [Error] - SqlCustomException - MysqlDb - String must be exactly one character long.
+6/30/17 11:23:58 AM - [Error] - WsCustomeException - RemindController - String must be exactly one character long.
+6/30/17 11:26:50 AM - [Error] - SqlCustomException - MysqlDb - String must be exactly one character long.
+6/30/17 11:26:50 AM - [Error] - WsCustomeException - RemindController - String must be exactly one character long.
+6/30/17 11:30:50 AM - [Error] - SqlCustomException - MysqlDb - String must be exactly one character long.
+6/30/17 11:30:50 AM - [Error] - WsCustomeException - RemindController - String must be exactly one character long.
+6/30/17 11:32:37 AM - [Error] - SqlCustomException - MysqlDb - String must be exactly one character long.
+6/30/17 11:32:37 AM - [Error] - WsCustomeException - RemindController - String must be exactly one character long.
+6/30/17 11:33:36 AM - [Error] - SqlCustomException - MysqlDb - Input string was not in a correct format.
+6/30/17 11:33:36 AM - [Error] - WsCustomeException - RemindController - Input string was not in a correct format.
+6/30/17 11:34:42 AM - [Error] - SqlCustomException - MysqlDb - Input string was not in a correct format.
+6/30/17 11:34:42 AM - [Error] - WsCustomeException - RemindController - Input string was not in a correct format.

@@ -1,3 +1,4 @@
+using System;
 namespace core.candidat{
 
     public class Candidat{
@@ -54,16 +55,20 @@ namespace core.candidat{
         public Candidat(){
 
         }
+ 
 
-        
-
-        public Candidat(string _name,string _firstname,string _emailAdress,string _zipcode,string _phone,string _action){
+        public Candidat(string _name,string _firstname,string _emailAdress,string _zipcode,string _phone,string _action,string _year,string _sexe,string _link,string _crCall,string _NS){
             this.Name = _name;
             this.Firstname = _firstname;
             this.emailAdress = _emailAdress;
             this.zipcode = _zipcode;
             this.phone = _phone;
             this.action = _action;
+            this.sexe = _sexe[0];
+            this.year = Int32.Parse(_year);
+            this.link = _link;
+            this.crCall = _crCall;
+            this.ns = _NS;
         }
 
          public override string ToString()

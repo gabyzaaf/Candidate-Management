@@ -960,30 +960,38 @@ namespace Core.Adapter{
                 string sql = "SELECT * from candidate where id not in (select fid_candidate_meeting from meeting) order by @id @desc";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
                 Dictionary<string,string> dataByLine = null;
+                LinkedList<Candidat> candidateList = new LinkedList<Candidat>();
                 dico.Add("@id","id");
                 dico.Add("@desc","desc");
                 LinkedList<String> results = new LinkedList<String>();
                 results.AddLast("nom");
                 results.AddLast("prenom");
                 results.AddLast("email");
-                results.AddLast("sexe");
                 results.AddLast("phone");
                 results.AddLast("zipcode");
                 results.AddLast("actions");
+                results.AddLast("sexe");
                 results.AddLast("annee");
                 results.AddLast("lien");
                 results.AddLast("crCall");
+                results.AddLast("NS");
+                
                 output = queryExecute(sql,dico,results);
+                
                 int numberDatasReturned = output.Count;
                 if(numberDatasReturned == 0){
                      throw new Exception($"Toutes les fiches candidat ont étés lié à une fiche entretiens");
                 }
+               
                 for(int i = 0;i<numberDatasReturned;i++){
                     dataByLine = (Dictionary<string,string>) output[i];
-                    
+                 
+                    Candidat candidat = new Candidat(dataByLine["nom"],dataByLine["prenom"],dataByLine["email"],dataByLine["zipcode"],dataByLine["phone"],dataByLine["actions"],dataByLine["annee"],dataByLine["sexe"],dataByLine["lien"],dataByLine["crCall"],dataByLine["NS"]);
+                    candidateList.AddLast(candidat);
                 }
+               
                 
-                return null;
+                return candidateList;
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
