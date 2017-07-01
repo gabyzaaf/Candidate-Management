@@ -12,9 +12,9 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">@color/dialogColorText</item>
-        <item name="android:background">@color/backgroundButton</item>
-        <item name="colorAccent">@color/textEditable</item>
+        <item name="android:textColor">@color/dialogColorBack</item>
+        <item name="android:background">@color/dialogColorText</item>
+        <item name="colorAccent">@color/barColor</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColor">@color/textEditable</item>
@@ -25,5 +25,4 @@
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/textInfo</item>
     </style>
-
 </resources>

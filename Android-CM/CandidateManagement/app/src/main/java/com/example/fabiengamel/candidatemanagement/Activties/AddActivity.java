@@ -112,6 +112,11 @@ public class AddActivity extends AppCompatActivity {
                 action = spAction.getSelectedItem().toString();
                 if(action.matches("freelance"))
                 {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
+                    builder.setMessage("Vous avez selectionné Freelance : le champs Prix obligatoire est apparu en bas de la page")
+                            .setNeutralButton("Compris !", null)
+                            .create()
+                            .show();
                     etPRix.setVisibility(View.VISIBLE);
                     tvPrix.setVisibility(View.VISIBLE);
                 }

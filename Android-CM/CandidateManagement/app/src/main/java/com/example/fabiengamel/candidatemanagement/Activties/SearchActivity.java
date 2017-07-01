@@ -2,7 +2,9 @@ package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -57,6 +59,7 @@ public class SearchActivity extends AppCompatActivity {
     Button bLocate;
     Button bSMS;
     Candidate candidate;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,12 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        InitContent();
+        try {
+            InitContent();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         String candidateName;
         if (savedInstanceState == null) {
@@ -77,6 +85,10 @@ public class SearchActivity extends AppCompatActivity {
                 tvInfo.setVisibility(View.INVISIBLE);
             } else {
                 candidateName= extras.getString("candidateName");
+                bModify.setVisibility(View.INVISIBLE);
+                bLocate.setVisibility(View.INVISIBLE);
+                bSMS.setVisibility(View.INVISIBLE);
+                tvInfo.setVisibility(View.INVISIBLE);
                 getEmail(candidateName);
                 SearchCandidate(candidateName);
             }
@@ -91,7 +103,7 @@ public class SearchActivity extends AppCompatActivity {
         etNom.setText(candidateName);
     }
 
-    public void InitContent(){
+    public void InitContent() throws InterruptedException {
         etNom = (EditText)findViewById(R.id.etName);
         bRecherche = (Button)findViewById(R.id.bSearchSingle);
         bModify = (Button)findViewById(R.id.bModify);
@@ -105,9 +117,13 @@ public class SearchActivity extends AppCompatActivity {
         bLocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent i = new Intent(SearchActivity.this, MapActivity.class);
-                Candidate c = Candidate.getCurrentCandidate();
-                i.putExtra("candidateName", c.lastname);
+                i.putExtra("candidateName", candidate.lastname);
                 startActivity(i);
             }
         });
@@ -115,6 +131,11 @@ public class SearchActivity extends AppCompatActivity {
         bModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 startActivity(new Intent(SearchActivity.this, UpdateActivity.class));
             }
         });
@@ -139,12 +160,16 @@ public class SearchActivity extends AppCompatActivity {
         bSMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent i = new Intent(SearchActivity.this, SMSActivity.class);
-                Candidate c = Candidate.getCurrentCandidate();
-                i.putExtra("candidatePhone", c.phone);
-                i.putExtra("candidateName", c.lastname);
-                i.putExtra("candidateFirstname", c.firstname);
-                i.putExtra("candidateAction", c.actions);
+                i.putExtra("candidatePhone", candidate.phone);
+                i.putExtra("candidateName", candidate.lastname);
+                i.putExtra("candidateFirstname", candidate.firstname);
+                i.putExtra("candidateAction", candidate.actions);
                 startActivity(i);
             }
         });
@@ -165,12 +190,20 @@ public class SearchActivity extends AppCompatActivity {
                 tvResult.setVisibility(View.INVISIBLE);
             }
         });
+
+    }
+
+    public void onBackPressed() {
+        Intent i = new Intent(SearchActivity.this, MainActivity.class);
+        startActivity(i);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent i = new Intent(SearchActivity.this, MainActivity.class);
+                startActivity(i);
                 finish();
                 return true;
         }
@@ -183,9 +216,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void SearchCandidate(String nom) {
-        User user = User.getCurrentUser();
-        candidate = Candidate.getCurrentCandidate();
-        final Meeting report = new Meeting();
+        //candidate = Candidate.getCurrentCandidate();
+        final Meeting report = Meeting.getCurrentMeeting();
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -208,10 +240,8 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.setText("Erreur : " + jsonOBject.getString("content"));
                                     }
                                 else {
-
                                         candidate.firstname = jsonOBject.getString("prenom");
                                         candidate.lastname = jsonOBject.getString("nom");
-                                      //  candidate.email = mail;
                                         candidate.phone =  jsonOBject.getString("phone");
                                         candidate.zipcode = jsonOBject.getString("zipcode");
                                         candidate.lien = jsonOBject.getString("lien");
@@ -253,10 +283,12 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.append("\n");
                                         tvResult.append("Action : " + candidate.actions);
                                         tvResult.append("\n");
+
                                         if(candidate.actions.matches("freelance")){
                                             tvResult.append("Prix : " + candidate.prix);
                                             tvResult.append("\n");
                                         }
+
                                         tvResult.append("crCall : " + candidate.crCall);
                                         tvResult.append("\n");
                                         tvResult.append("Approche_email : " + String.valueOf(candidate.approche_email));
@@ -284,6 +316,7 @@ public class SearchActivity extends AppCompatActivity {
                                         tvResult.append("NationalityNote : " + report.nationalityNote);
                                         tvResult.append("\n");
                                         tvResult.append("Competences : " + report.competences);
+
                                         showButton();
                                     }
 
@@ -294,9 +327,8 @@ public class SearchActivity extends AppCompatActivity {
                                 tvResult.append(""+e);
                                 e.printStackTrace();
                             } catch (InterruptedException e) {
-                            tvResult.append("Erreur système : ");
-                            tvResult.append("\n");
-                            tvResult.append(""+e);
+                            tvResult.setVisibility(View.VISIBLE);
+                            tvResult.append("Une erreur serveur est survenue : "+e.toString());
                             e.printStackTrace();
                         }
                     }
@@ -323,7 +355,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void getEmail(String nom){
-        User user = User.getCurrentUser();
+        user = User.getCurrentUser();
 
         final RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/mobile/" +nom+"/"+user.sessionId ;
@@ -339,12 +371,13 @@ public class SearchActivity extends AppCompatActivity {
                         try {
 
                                 JSONObject jsonOBject = response.getJSONObject(0);
-                                candidate = new Candidate();
+                                candidate = Candidate.getCurrentCandidate();
                                 candidate.email = jsonOBject.getString("email");
                                 Candidate.setCurrentCandidate(candidate);
 
                         }catch(JSONException e){
-
+                            tvResult.setVisibility(View.VISIBLE);
+                            tvResult.append("Une erreur serveur est survenue : "+e.toString());
                             e.printStackTrace();
                         }
                     }
@@ -371,7 +404,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void showButton() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         bModify.setVisibility(View.VISIBLE);
         bLocate.setVisibility(View.VISIBLE);
         bSMS.setVisibility(View.VISIBLE);

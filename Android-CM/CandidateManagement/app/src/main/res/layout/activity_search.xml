@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Fiche du candidat "
         android:textStyle="bold"
-        android:textColor="@color/textInfo"
+        android:textColor="@color/textTitle"
         android:gravity="center"
         android:textSize="18sp"
         android:paddingTop="@dimen/activity_vertical_margin"

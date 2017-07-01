@@ -3,11 +3,13 @@
     <color name="colorPrimary">#4EDBC8</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#4EDBC8</color>
-    <color name ="textInfo">#4899F6</color>
+    <color name ="textInfo">#7BC5F7</color>
     <color name="textEditable">#141918</color>
-    <color name="textButton">#141918</color>
+    <color name="textTitle">#4899F6</color>
+    <color name="textButton">#F8F9F9</color>
     <color name="backgroundButton">#4EDBC8</color>
     <color name="barColor">#4EDBC8</color>
-    <color name="dialogColorText">#141918</color>
+    <color name="dialogColorText">#F8F9F9</color>
     <color name="dialogColorBack">#4EDBC8</color>
+    <color name="blanc">#F8F9F9</color>
 </resources>

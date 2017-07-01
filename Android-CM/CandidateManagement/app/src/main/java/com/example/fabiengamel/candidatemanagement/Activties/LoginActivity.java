@@ -80,12 +80,11 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     Log.d("LOGIN :", response.toString());
 
-                   // JSONArray results = null;
                     try {
 
                         if(response.has("content"))
                         {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyDialogTheme);
                             builder.setMessage(""+response.getString("content"))
                                     .setNeutralButton("Réessayer", null)
                                     .create()

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="  Informations sur le candidat : "
         android:textStyle="bold"
-        android:textColor="#4899F6"
+        android:textColor="@color/textTitle"
         android:gravity="center"
         android:textSize="18sp"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -58,7 +58,7 @@
                 android:text=""
                 android:id="@+id/tvPrenomSMS"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
         </TableRow>
         <TableRow>

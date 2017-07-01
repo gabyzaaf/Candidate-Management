@@ -173,7 +173,6 @@ public class MainActivity extends AppCompatActivity
         User user = User.getCurrentUser();
         candidates = new ArrayList<Candidate>();
 
-        //requete get de recup
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.sessionId ;
 
@@ -191,10 +190,26 @@ public class MainActivity extends AppCompatActivity
                         try {
                             for(int i=0; i<response.length();i++) {
                                 JSONObject jsonOBject = response.getJSONObject(i);
-                                Log.d(TAG, "json (" + i + ") = " + jsonOBject.toString()) ;
+                                Log.d(TAG, "GET ACTION " + jsonOBject.toString()) ;
 
                                 if(jsonOBject.has("content"))
                                 {
+                                    if(jsonOBject.getInt("code") == 4){
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
+                                        builder.setTitle("Veuillez vous reconnecter");
+                                        builder.setPositiveButton("Ok",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        User u = new User();
+                                                        User.setCurrentUser(u);
+                                                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                                    }
+                                                });
+                                        AlertDialog alert = builder.create();
+                                        alert.show();
+
+                                    }
                                     tvCandidates.append(jsonOBject.getString("content"));
                                 }
                                 else {

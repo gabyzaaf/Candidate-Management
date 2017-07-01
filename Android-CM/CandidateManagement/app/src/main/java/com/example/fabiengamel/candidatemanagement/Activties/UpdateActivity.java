@@ -36,6 +36,8 @@ import com.example.fabiengamel.candidatemanagement.Utils.Tools;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 public class UpdateActivity extends AppCompatActivity {
 
     EditText etName;
@@ -68,6 +70,9 @@ public class UpdateActivity extends AppCompatActivity {
     EditText etPRix;
     TextView tvPrix;
     EditText etZipcode;
+    User user;
+    Candidate candidate;
+    Meeting report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +80,18 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        InitContent();
+        try {
+            InitContent();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void InitContent()
-    {
-        Candidate candidate = Candidate.getCurrentCandidate();
-        Meeting report = Meeting.getCurrentMeeting();
+    public void InitContent() throws InterruptedException {
+
+        candidate = Candidate.getCurrentCandidate();
+        report = Meeting.getCurrentMeeting();
         etName = (EditText)findViewById(R.id.etNomUpdate);
         etFirstname = (EditText)findViewById(R.id.etPrenomUpdate);
         etPhone = (EditText)findViewById(R.id.etPhoneUpdate);
@@ -112,7 +121,6 @@ public class UpdateActivity extends AppCompatActivity {
         etPRix = (EditText)findViewById(R.id.etPrixUpdate);
         tvPrix = (TextView)findViewById(R.id.tvPrixUpdate);
         etZipcode = (EditText)findViewById(R.id.etZipcodeUpdate);
-
 
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +154,6 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
-        //set spinner values
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
@@ -157,6 +164,11 @@ public class UpdateActivity extends AppCompatActivity {
                 action = spAction.getSelectedItem().toString();
                 if(action.matches("freelance"))
                 {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
+                    builder.setMessage("Vous avez selectionné Freelance : le champs Prix obligatoire est disponible en bas de la page")
+                            .setNeutralButton("Compris !", null)
+                            .create()
+                            .show();
                     etPRix.setVisibility(View.VISIBLE);
                     tvPrix.setVisibility(View.VISIBLE);
                 }
@@ -171,11 +183,9 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
-        //set edittexts values
         etName.setText(candidate.lastname);
         etFirstname.setText(candidate.firstname);
-        etMail.setText(candidate.email); //en attente que le WS le retourne sinon faire recherche/mobile/
-        //sp action : on laisse comme ça ?
+        etMail.setText(candidate.email);
         if(candidate.sexe.matches("M")){
             sexes.check(rdHomme.getId());
         } else if (candidate.sexe.matches("F")) {
@@ -253,13 +263,12 @@ public class UpdateActivity extends AppCompatActivity {
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("ADD :", response.toString());
+                Log.d("UPDATE :", response.toString());
                 try {
                     if(response.getBoolean("success")) {
                         UpdateReport();
                     }
                     else {
-                        //erreur
                         String erreur = response.getString("content");
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("json_add"+erreur)
@@ -279,7 +288,6 @@ public class UpdateActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Gestion error
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
@@ -290,16 +298,16 @@ public class UpdateActivity extends AppCompatActivity {
 
         UpdateRequest updateRequest = null;
         try {
-            User user = User.getCurrentUser();
+            user = User.getCurrentUser();
             String sessionId = user.sessionId;
 
-            //valeurs champs
             String mail = etMail.getText().toString();
             String name = etName.getText().toString();
             String firstname = etFirstname.getText().toString();
             String phone = etPhone.getText().toString();
             String zipcode = etZipcode.getText().toString();
             String sexe = "";
+
             if(rdHomme.isChecked()) {
                 sexe = "M";
             } else if(rdFemme.isChecked()){
@@ -307,7 +315,6 @@ public class UpdateActivity extends AppCompatActivity {
             }
             int year = Integer.parseInt(etYear.getText().toString());
 
-            //champs facultatifs
             String link = etLink.getText().toString();
             String crCall = etCrCall.getText().toString();
             String ns = etNs.getText().toString();
@@ -387,7 +394,6 @@ public class UpdateActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Gestion error
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
@@ -398,13 +404,11 @@ public class UpdateActivity extends AppCompatActivity {
 
         UpdateReportRequest updateReportRequest = null;
         try {
-            User user = User.getCurrentUser();
+            user = User.getCurrentUser();
             String sessionId = user.sessionId;
             String mail = etMail.getText().toString();
 
-            //champs facultatifs
             String link = etLink.getText().toString();
-            String crCall = etCrCall.getText().toString();
             String jobIdeal = etJobIdeal.getText().toString() ;
             String pisteNote = etPiste.getText().toString();
             String pieCoute = etPisteCoute.getText().toString();

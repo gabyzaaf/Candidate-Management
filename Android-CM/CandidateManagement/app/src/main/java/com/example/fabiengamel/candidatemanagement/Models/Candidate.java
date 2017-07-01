@@ -17,7 +17,6 @@ public class Candidate {
     public String crCall;
     public String NS;
     public boolean approche_email;
-    public int fid_user_candidate;
     public String prix;
     public String zipcode;
 
