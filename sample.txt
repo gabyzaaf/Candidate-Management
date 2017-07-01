@@ -1,1 +1,1 @@
-bonjour je m'appelle <pnom> et j'aime les fruits
+bonjour je m'appelle <pnom> et j'aime les fruits et mon email <pemail>

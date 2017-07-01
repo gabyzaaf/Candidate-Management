@@ -5,7 +5,7 @@ namespace actions{
 
     public class UserFeatures{
 
-        public int idJob{get;set;}
+        public string userEmail{get;set;}
         public string fileName{get;set;}
 
         public string candidateName{get;set;}
@@ -14,19 +14,22 @@ namespace actions{
 
         public DateTime dateMeeting{get;set;}
 
+        public string candidateEmail {get;set;}
+
         
-        public UserFeatures(int _idJob,string _fileName,string _candidateName,string _candidateFirstname,DateTime _dateMeeting){
-            this.idJob = _idJob;
+        public UserFeatures(string _userEmail,string _fileName,string _candidateName,string _candidateFirstname,DateTime _dateMeeting,string _candidateEmail){
+            this.userEmail = _userEmail;
             this.fileName = _fileName;
             this.candidateName = _candidateName;
             this.candidateFirstname = _candidateFirstname;
             this.dateMeeting = _dateMeeting;
+            this.candidateEmail = _candidateEmail;
             check();
         }
 
         private void check(){
-            if(this.idJob <= 0){
-                throw new Exception("the job id inside the database is <= 0");
+            if(String.IsNullOrEmpty(this.userEmail)){
+                throw new Exception("the user email is empty");
             }
             if(String.IsNullOrEmpty(this.fileName)){
                 throw new Exception("the file name is empty");
@@ -40,28 +43,12 @@ namespace actions{
             if(String.IsNullOrEmpty(this.candidateFirstname)){
                 throw new Exception("the candidate firstname not exist");
             }
+            if(String.IsNullOrEmpty(this.candidateEmail)){
+                throw new Exception("the candidate email not exist");
+            }
         }
 
-        public int getIdJob(){
-            return this.idJob;
-        }
-
-        public string getFileName(){
-            return this.fileName;
-        }
-
-        public string getCandidateName(){
-            return this.candidateName;
-        }
-
-        public string getCandidateFirstname(){
-            return this.candidateFirstname;
-        }
-
-        public DateTime getDateMeeting(){
-            return this.dateMeeting;
-        }
-
+        
     }
 
 

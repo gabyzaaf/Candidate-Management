@@ -4,6 +4,7 @@ using actions;
 using exceptions;
 using MailKit.Net.Smtp;
 using MimeKit;
+using conf;
 using MailKit.Security;
 
 namespace actionUser{
@@ -12,6 +13,7 @@ namespace actionUser{
     public class ActionUser{
 
         private UserFeatures user;
+        private ConfigurationData conf = ConfigurationData.getInstance();
 
         public ActionUser(UserFeatures _feature){
             this.user=_feature;
@@ -27,7 +29,7 @@ namespace actionUser{
                 throw new Exception("Le contenu du fichier est vide, veuillez le completer");
             }
             string content = File.ReadAllText(user.fileName);
-            return content.Replace("<prenom>","Gabriel").Replace("<pnom>","toto");
+            return content.Replace("<prenom>",user.candidateFirstname).Replace("<pnom>",user.candidateName).Replace("<pemail>",user.candidateEmail);
         }
        
          // string email,  string emailBody, string firstName
@@ -36,7 +38,7 @@ namespace actionUser{
             try 
             { 
                 //From Address 
-                string FromAddress = "upload.file.travail@gmail.com"; 
+                string FromAddress = conf.email; 
                 string FromAdressTitle = "Email from ASP.NET Core 1.1"; 
                 //To Address 
                 string ToAddress = email; 
@@ -65,7 +67,7 @@ namespace actionUser{
                     client.Connect(SmtpServer, SmtpPortNumber, false); 
                     // Note: only needed if the SMTP server requires authentication 
                     // Error 5.5.1 Authentication  
-                    client.Authenticate("upload.file.travail@gmail.com", "ESGI@2017"); 
+                    client.Authenticate(conf.email, conf.password); 
                     client.Send(mimeMessage); 
                     Console.WriteLine("The mail has been sent successfully !!"); 
                     client.Disconnect(true); 

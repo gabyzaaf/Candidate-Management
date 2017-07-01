@@ -5,6 +5,7 @@ using exceptions;
 using System.IO;
 using conf;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 namespace email
 {
     class Program
@@ -23,17 +24,18 @@ namespace email
             // "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/plugins/email/sample.txt"
             /*
                 Data enter : 
-                ID-Job [0].
+                UserEmail [0].
                 FileName [1].
                 Candidate Name [2].
                 Candidate Firstname [3].
                 Meetings Optionnal [4].
+                Candidate email [5].
              */
              
             try{
                 
                 Program.writeLogs("/Users/zaafranigabriel/Documents/logs/log.txt",string.Format($"the date is {DateTime.Now.ToString()} BEGIN PROGRAM"));
-                UserFeatures users = new UserFeatures(int.Parse(args[0]),args[1],args[2],args[3],DateTime.Parse(args[4]));
+                UserFeatures users = new UserFeatures(args[0],args[1],args[2],args[3],DateTime.Parse(args[4]),args[5]);
                 ActionUser action = new ActionUser(users);
                 Console.WriteLine(action.transformTextFromCandidate());
                 action.sendEmail("gabriel.zaafrani@gmail.com",action.transformTextFromCandidate(),"gaby");
@@ -43,18 +45,10 @@ namespace email
                 new EmailCustomException(exc.Message).writeLog("/Users/zaafranigabriel/Documents/logs/log.txt");
             }
             
-           
         }
 
-/*
-        public void LoadJson()
-        {
-            using (StreamReader r = new StreamReader("configuration.json"))
-            {
-                string json = r.ReadToEnd();
-                List<ConfigurationData> items = JsonConvert.DeserializeObject<List<ConfigurationData>>(json);
-            }
-        }
- */
+
+        
+ 
     }
 }
