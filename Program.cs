@@ -29,7 +29,6 @@ namespace email
             /*
                 Data enter : 
                 jobId [0]
-                UserEmail [1].
                 FileName [2].
                 Candidate Name [3].
                 Candidate Firstname [4].
@@ -40,7 +39,7 @@ namespace email
             try{
                 conf = ConfigurationData.getInstance();
                 Program.writeLogs(conf.getLogPath(),string.Format($"the date is {DateTime.Now.ToString()} BEGIN PROGRAM"));
-                UserFeature users = new UserFeature(Int32.Parse(args[0]),args[1],args[2],args[3],args[4],DateTime.Parse(args[5]),args[6]);
+                UserFeature users = new UserFeature(Int32.Parse(args[0]),args[1],args[2],args[3],DateTime.Parse(args[4]),args[5]);
                 string json = JsonConvert.SerializeObject(users);
                 POST("http://localhost:5000/api/Remind/change/job/state/",json);
                 ActionUser action = new ActionUser(users);
@@ -74,7 +73,7 @@ namespace email
             long length = 0;
             try {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse()) {
-                    //var encoding = ;
+                    
                     using (var reader = new System.IO.StreamReader(response.GetResponseStream(), Encoding.UTF8))
                     {
                         string responseText = reader.ReadToEnd();
