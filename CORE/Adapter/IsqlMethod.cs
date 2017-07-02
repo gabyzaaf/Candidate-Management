@@ -96,6 +96,8 @@ namespace Core.Adapter.Inteface
           void remindAlreadyUpdated(int id);
 
           int getLastCandidateIdFromRemind(int userId);
+
+          string getCandidateEmailFromId(int candidateId);
     }
 
 } 

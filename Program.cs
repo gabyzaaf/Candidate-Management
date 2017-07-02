@@ -73,7 +73,11 @@ namespace ConsoleApplication
              */
             
             try{
-                
+                appellerRemind appeller = new appellerRemind();
+                appeller.add(20,DateTime.Now);
+                appeller.display();
+                appeller.exec("token",DateTime.Now);
+                //appeller.display();
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();
                 LoadPlugins load = new LoadPlugins(folder);

@@ -25,8 +25,8 @@ namespace Candidate_Management.CORE.Remind
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
             this.date = date.AddDays(1);
             isql.remindType(id,date);
-            userId = isql.getLastCandidateIdFromRemind(id);
-
+            remindId = isql.getLastCandidateIdFromRemind(id);
+            emailCandidate = isql.getCandidateEmailFromId(id);
         }
         
         public void update(int id,DateTime date){
@@ -35,9 +35,13 @@ namespace Candidate_Management.CORE.Remind
            IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
            this.date = date.AddDays(1);
            isql.updateRemindType(id,date);
-           userId = isql.getLastCandidateIdFromRemind(id);
+           remindId = isql.getLastCandidateIdFromRemind(id);
+           emailCandidate = isql.getCandidateEmailFromId(id);
         }
 
+        public void display(){
+            Console.WriteLine($"L'email du candidat est {emailCandidate}");
+        }
         
 
         public void exec(string token,DateTime meeting){
@@ -49,7 +53,7 @@ namespace Candidate_Management.CORE.Remind
            string currentHourMinute = $"{date.Hour}:{date.Minute}";
            string emailPluginPath = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll";
            string filePathTemplate = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/sample.txt";
-           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {userId}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
+           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {remindId}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting} {emailCandidate}";
             Console.WriteLine(cmd);
             
             Schedule schedule = new Schedule(cmd);

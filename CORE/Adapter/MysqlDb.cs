@@ -1194,5 +1194,29 @@ namespace Core.Adapter{
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
+
+        public string getCandidateEmailFromId(int candidateId){
+            try{
+                
+                ArrayList output = null;
+                if(candidateId <= 0){
+                    throw new Exception($"L'id de votre candidat ({candidateId}) n'est pas conforme ");
+                }
+                string sql = "select email from candidate where id=@id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",candidateId);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("email");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Aucun job n'existe avec l'identifiant {candidateId}");
+                }
+                Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
+                string emailCandidat = userEmailData["email"];
+                return emailCandidat;
+            }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
     }
 }

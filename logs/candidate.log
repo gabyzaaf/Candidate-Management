@@ -27,3 +27,12 @@
 02/07/2017 10:51:20 - [Error] - SqlCustomException - MysqlDb - Votre job avec l'identifiant 3 a déja été envoyé
 02/07/2017 10:51:20 - [Error] - WsCustomeException - RemindController - Votre job avec l'identifiant 3 a déja été envoyé
 02/07/2017 10:52:07 - [Information] - WsCustomeInfoException - S001 - The email for the candidate gabriel.zaafrani@gmail.com had been send 
+02/07/2017 11:23:03 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 11:23:03 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 11:23:03 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 11:23:03 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 11:23:03 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 11:23:03 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/2/17 11:35:44 AM - [Error] - SqlCustomException - MysqlDb - Aucun utilisateur ne possède cet identifiant
+7/2/17 11:38:36 AM - [Error] - SqlCustomException - MysqlDb - Aucun utilisateur ne possède cet identifiant
+7/2/17 11:57:34 AM - [Error] - SqlCustomException - MysqlDb - Aucun job n'existe avec l'identifiant 9
