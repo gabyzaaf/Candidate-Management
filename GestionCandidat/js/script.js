@@ -9,49 +9,33 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
     $scope.sendValueForAzure = function (prediction) {
         var req = {
             method: 'POST',
-            url: 'https://ussouthcentral.services.azureml.net/workspaces/f976db5dc6194a59a479f37fc96dffd4/services/ce01fbb1b995484582eaaa8639bd3884/execute?api-version=2.0&details=true',
+            url: 'http://192.168.0.16:5000/api/user/MlCandidate/prediction',
             responseType: "json",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer lvoOpIc0yr72Hozn3/+MLJtCuH8Ki8se1pxwNESj/CK/H0RLqDoI8SblrgWQ0e5wHLB+1dRliLPMwH2n3ktKYA==',
-                'Access-Control-Allow-Origin': '*'
-            },
             data: {
-                "Inputs": {
-                    "input1": {
-                        "ColumnNames": [
-                          "satisfaction_level",
-                          "last_evaluation",
-                          "number_project",
-                          "average_montly_hours",
-                          "time_spend_company",
-                          "Work_accident",
-                          "promotion_last_5years",
-                          "sales",
-                          "salary"
-                        ],
-                        "Values": [
-                          [
-                            "0.53",
-                            "0.68",
-                            "4",
-                            "160",
-                            "0",
-                            "0",
-                            "0",
-                            "sales",
-                            "low"
-                          ]
-                        ]
-                    }
-                },
-                "GlobalParameters": {}
-            },
-
+                satisfaction_level: prediction.satisfaction_level,
+                last_evaluation: prediction.last_evaluation,
+                number_project: prediction.number_project,
+                average_montly_hours: prediction.average_montly_hours,
+                time_spend_company: prediction.time_spend_company,
+                Work_accident: prediction.Work_accident,
+                promotion_last_5years: prediction.promotion_last_5years,
+                sales: prediction.sales,
+                salary: prediction.salary
+            }
         }
 
         $http(req).then(function (response) {
-            console.log(response.data);
+            $scope.resultatAzure = response.data.content.substring(0, 1);
+            $scope.probAzure = response.data.content.substring(3) + "%";
+            if ($scope.resultatAzure == 1) {
+                $scope.resultatAzure = "Salarié quitte l'entreprise";
+            } else {
+                $scope.resultatAzure = "Salarié ne quitte pas l'entreprise";
+            }
+            
+            console.log($scope.resultatAzure)
+            console.log($scope.probAzure)
+            //console.log(response.data.content);
         }, (err) => {
             console.log("ceci est une erreur" + err);
         });

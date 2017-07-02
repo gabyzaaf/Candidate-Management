@@ -92,9 +92,11 @@
             if (!Boolean(i)) {
                 document.getElementById("erreurChamp").style.display = 'none';
                 document.getElementById("reponsetable").style.display = 'block';
+                return true;
             } else {
                 document.getElementById("erreurChamp").style.display = 'block';
                 document.getElementById("reponsetable").style.display = 'none';
+                return false;
             }
         }
 
@@ -113,7 +115,7 @@
         <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
     </div>
     <section ng-controller="predictionAzure">
-        <form ng-submit="sendValueForAzure(prediction)">
+        <form ng-submit="sendValueForAzure(prediction)" onsubmit="return verifChamp();">
             <table border="1" align="center">
                 <tbody>
                     <tr>
@@ -182,7 +184,6 @@
                 </tbody>
             </table>
         </form>
-    </section>
     <br />
     <div id="reponsetable" hidden="hidden">
         <table border="1" align="center">
@@ -194,10 +195,11 @@
                 <th>Probabilité de la reponse</th>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
+                <td>{{resultatAzure}}</td>
+                <td>{{probAzure}}</td>
             </tr>
         </table>
     </div>
+    </section>
 </body>
 </html>
