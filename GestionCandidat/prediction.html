@@ -88,20 +88,16 @@
             } else {
                 salary.style.borderColor = "";
             }
-
+            
             if (!Boolean(i)) {
                 document.getElementById("erreurChamp").style.display = 'none';
                 document.getElementById("reponsetable").style.display = 'block';
-                return true;
             } else {
                 document.getElementById("erreurChamp").style.display = 'block';
                 document.getElementById("reponsetable").style.display = 'none';
-                return false;
             }
         }
-        function mySubmitFunction() {
-            return false;
-        }
+
 
     </script>
 </head>
@@ -117,7 +113,7 @@
         <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
     </div>
     <section ng-controller="predictionAzure">
-        <form onsubmit="return mySubmitFunction();" ng-submit="sendValueForAzure(prediction)">
+        <form ng-submit="sendValueForAzure(prediction)">
             <table border="1" align="center">
                 <tbody>
                     <tr>
@@ -134,11 +130,11 @@
                     </tr>
                     <tr>
                         <td><label>Moyenne d'heures travaillé par mois</label></td>
-                        <td><input type="number" min="0" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
+                        <td><input type="number" min="0" max="4040" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
                     </tr>
                     <tr>
                         <td><label>Temps passé à l'entreprise (en année)</label></td>
-                        <td><input type="number" min="0" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
+                        <td><input type="number" min="0" max="66" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
                     </tr>
                     <tr>
                         <td><label>A-t-il déjà eu au moins un accident de travail ?</label></td>

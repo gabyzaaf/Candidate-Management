@@ -7,38 +7,44 @@ var gestionCandidatApp = angular.module('gestionCandidatApp', ['ngRoute', 'ngCoo
 
 gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $scope.sendValueForAzure = function (prediction) {
-        var req = {
-            method: 'POST',
-            url: 'http://192.168.0.16:5000/api/user/MlCandidate/prediction',
-            responseType: "json",
-            data: {
-                satisfaction_level: prediction.satisfaction_level,
-                last_evaluation: prediction.last_evaluation,
-                number_project: prediction.number_project,
-                average_montly_hours: prediction.average_montly_hours,
-                time_spend_company: prediction.time_spend_company,
-                Work_accident: prediction.Work_accident,
-                promotion_last_5years: prediction.promotion_last_5years,
-                sales: prediction.sales,
-                salary: prediction.salary
-            }
-        }
+        if (prediction.satisfaction_level == null || prediction.last_evaluation == null || prediction.number_project == null || prediction.number_project > 356 || prediction.average_montly_hours == null || prediction.average_montly_hours > 4040 || prediction.time_spend_company == null || prediction.time_spend_company > 66 || prediction.Work_accident == null || prediction.promotion_last_5years == null || prediction.sales == null || prediction.salary == null) {
+            console.log("erreur : tous les champs ne sont pas remplie");
+        } else {
 
-        $http(req).then(function (response) {
-            $scope.resultatAzure = response.data.content.substring(0, 1);
-            $scope.probAzure = response.data.content.substring(3) + "%";
-            if ($scope.resultatAzure == 1) {
-                $scope.resultatAzure = "Salarié quitte l'entreprise";
-            } else {
-                $scope.resultatAzure = "Salarié ne quitte pas l'entreprise";
+            console.log(prediction.satisfaction_level);
+            var req = {
+                method: 'POST',
+                url: 'http://192.168.0.16:5000/api/user/MlCandidate/prediction',
+                responseType: "json",
+                data: {
+                    satisfaction_level: prediction.satisfaction_level,
+                    last_evaluation: prediction.last_evaluation,
+                    number_project: prediction.number_project,
+                    average_montly_hours: prediction.average_montly_hours,
+                    time_spend_company: prediction.time_spend_company,
+                    Work_accident: prediction.Work_accident,
+                    promotion_last_5years: prediction.promotion_last_5years,
+                    sales: prediction.sales,
+                    salary: prediction.salary
+                }
             }
-            
-            console.log($scope.resultatAzure)
-            console.log($scope.probAzure)
-            //console.log(response.data.content);
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
+
+            $http(req).then(function (response) {
+                $scope.resultatAzure = response.data.content.substring(0, 1);
+                $scope.probAzure = response.data.content.substring(3) + "%";
+                if ($scope.resultatAzure == 1) {
+                    $scope.resultatAzure = "Salarié quitte l'entreprise";
+                } else {
+                    $scope.resultatAzure = "Salarié ne quitte pas l'entreprise";
+                }
+
+                console.log($scope.resultatAzure)
+                console.log($scope.probAzure)
+                //console.log(response.data.content);
+            }, (err) => {
+                console.log("ceci est une erreur" + err);
+            });
+        }
     }
 }]);
 
