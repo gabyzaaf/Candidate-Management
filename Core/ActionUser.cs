@@ -47,7 +47,7 @@ namespace actionUser{
                 string BodyContent = message; 
     
                 //Smtp Server 
-                string SmtpServer = "smtp.gmail.com"; 
+                string SmtpServer = conf.smtp; 
                 //Smtp Port Number 
                 int SmtpPortNumber = 587; 
     

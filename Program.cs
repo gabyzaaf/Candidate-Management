@@ -45,6 +45,8 @@ namespace email
                 new EmailCustomException(exc.Message).writeLog("/Users/zaafranigabriel/Documents/logs/log.txt");
             }
             
+             
+           
         }
 
 

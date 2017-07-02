@@ -9,6 +9,8 @@ namespace conf{
         public string email {get;set;}
         public string password {get;set;}
         public string emailTemplatePath {private get;set;}
+        public string smtp {get;set;}
+        
         private static ConfigurationData conf = null;
 
         public static ConfigurationData getInstance()
