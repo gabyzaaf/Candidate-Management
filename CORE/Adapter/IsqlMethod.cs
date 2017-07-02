@@ -75,7 +75,7 @@ namespace Core.Adapter.Inteface
 
           void deleteTemplateEmailFromTitle(string title);
 
-          bool remindExist(int id);
+          bool remindExistByCandidate(int id);
           
           LinkedList<Candidat> getCandidatWithoutReport();
 
@@ -89,6 +89,11 @@ namespace Core.Adapter.Inteface
 
           string getUserEmailFromId(int id);
 
+          void changeJobState(int id);
+
+          bool remindExistByJob(int id);
+
+          void remindAlreadyUpdated(int id);
     }
 
 } 

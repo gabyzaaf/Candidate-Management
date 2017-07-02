@@ -504,7 +504,7 @@ namespace Core.Adapter{
                 
                 checkId(id);
                 checkDate(date);
-                if(!remindExist(id)){
+                if(!remindExistByCandidate(id)){
                     remindType(id,date);
                 }else{
                      Dictionary<String,Object> param = new Dictionary<String,Object>();
@@ -929,7 +929,7 @@ namespace Core.Adapter{
             }
         }
 
-        public bool remindExist(int id){
+        public bool remindExistByCandidate(int id){
             ArrayList output = null;
             try{
                 if(id == 0){
@@ -1095,6 +1095,75 @@ namespace Core.Adapter{
                 }
                 Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
                 return userEmailData["email"];
+            }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
+
+        public void changeJobState(int id){
+            try{
+                ArrayList output = null;
+                if(id <= 0){
+                    throw new Exception("Votre job n'est pas conforme car il est inférrieur ou égale à 0");
+                }
+                string sql = "update remind set finish = true where id = @id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",id);
+                queryExecute(sql,dico,null);
+            }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
+
+        public bool remindExistByJob(int id){
+            try{
+                ArrayList output = null;
+                if(id <= 0){
+                    throw new Exception("Votre job n'est pas conforme car il est inférrieur ou égale à 0");
+                }
+                string sql = "select count(*) as nb from remind where id = @id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",id);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nb");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Aucun job n'existe avec l'identifiant {id}");
+                }
+                Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
+                int nbValue = Int32.Parse(userEmailData["nb"]);
+                if(nbValue > 1){
+                    throw new Exception("Vous devez avoir uniquement 1 job avec le meme identifiant");
+                }
+                if(nbValue == 0){
+                    return false;
+                }
+                return true;
+            }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
+
+        public void remindAlreadyUpdated(int id){
+            try{
+                ArrayList output = null;
+                if(id <= 0){
+                    throw new Exception("Votre job n'est pas conforme car il est inférrieur ou égale à 0");
+                }
+                string sql = "select count(*) as nb from remind where id = @id and finish = 1";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",id);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nb");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Aucun job n'existe avec l'identifiant {id}");
+                }
+                Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
+                int nbValue = Int32.Parse(userEmailData["nb"]);
+                if(nbValue == 1){
+                    throw new Exception($"Votre job avec l'identifiant {id} a déja été envoyé");
+                }
             }catch(Exception exc){
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
             }

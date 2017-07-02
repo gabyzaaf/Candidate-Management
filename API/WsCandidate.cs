@@ -7,6 +7,7 @@ using core.success;
 using exception.ws;
 using Candidate_Management.CORE.LoadingTemplates;
 using System.Collections.Generic;
+using core.user;
 
 namespace Candidate_Management.API
 {
@@ -154,11 +155,15 @@ namespace Candidate_Management.API
             } 
         }
 
+         
+
        [HttpGet("{error}", Name = "GetErrorsCandidate")]
         public IActionResult ErrorList(ArrayList errors)
         {
             return new ObjectResult(errors);
         }
+
+        
           
       
 
