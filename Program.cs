@@ -73,6 +73,7 @@ namespace ConsoleApplication
              */
             
             try{
+                
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();
                 LoadPlugins load = new LoadPlugins(folder);

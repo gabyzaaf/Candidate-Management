@@ -9,6 +9,7 @@ namespace Candidate_Management.CORE.Remind
     {
 
         protected static readonly string extension = ".txt";
+        protected int userId;
 
         protected Dictionary<string,string> getCandidateNameFromId(int id){
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");

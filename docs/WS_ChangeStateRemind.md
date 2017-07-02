@@ -13,13 +13,12 @@ The type of this webservice is ***POST***
 
 ```json
 {
-		"jobId":"3",
-        "userEmail":"gz@gmail.com",
-        "fileName":"namefile",
-        "candidateName":"zaaf",
-        "candidateFirstname":"gaby",
-        "dateMeeting":"05/09/2017",
-        "candidateEmail":"candidat@gmail.com"
+	"jobId":"3",
+    "fileName":"namefile",
+    "candidateName":"zaaf",
+    "candidateFirstname":"gaby",
+    "dateMeeting":"05/09/2017",
+    "candidateEmail":"candidat@gmail.com"
 }
 ```
 

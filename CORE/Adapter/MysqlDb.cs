@@ -1168,5 +1168,31 @@ namespace Core.Adapter{
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
+
+        public int getLastCandidateIdFromRemind(int userId){
+            try{
+                ArrayList output = null;
+                if(userId <= 0){
+                    throw new Exception($"L'id de votre candidat ({userId}) n'est pas conforme ");
+                }
+                string sql = "select max(id) as total from remind where fid_candidate_remind = @id";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@id",userId);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("total");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Aucun job n'existe avec l'identifiant {userId}");
+                }
+                Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
+                int nbValue = Int32.Parse(userEmailData["total"]);
+                if(nbValue == 0){
+                    throw new Exception($"Votre utilisateur avec l'identifiant ({userId}) ne possède aucun remind");
+                }
+                return nbValue;
+            }catch(Exception exc){
+                 throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
     }
 }

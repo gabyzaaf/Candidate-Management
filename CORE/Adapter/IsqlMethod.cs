@@ -94,6 +94,8 @@ namespace Core.Adapter.Inteface
           bool remindExistByJob(int id);
 
           void remindAlreadyUpdated(int id);
+
+          int getLastCandidateIdFromRemind(int userId);
     }
 
 } 
