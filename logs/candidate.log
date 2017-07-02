@@ -36,3 +36,39 @@
 7/2/17 11:35:44 AM - [Error] - SqlCustomException - MysqlDb - Aucun utilisateur ne possède cet identifiant
 7/2/17 11:38:36 AM - [Error] - SqlCustomException - MysqlDb - Aucun utilisateur ne possède cet identifiant
 7/2/17 11:57:34 AM - [Error] - SqlCustomException - MysqlDb - Aucun job n'existe avec l'identifiant 9
+02/07/2017 20:37:59 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 20:37:59 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 20:37:59 - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+02/07/2017 20:39:22 - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+02/07/2017 20:39:22 - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+02/07/2017 20:39:42 - [Error] - WsCustomeException - RemindController - Le job spécifié avec l'identifiant 20 n'existe pas 
+02/07/2017 20:40:19 - [Information] - WsCustomeInfoException - S001 - The email for the candidate gabriel.zaafrani@gmail.com had been send 
+7/2/17 8:51:59 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 8:51:59 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+02/07/2017 20:52:31 - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+02/07/2017 20:52:31 - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 8:59:41 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 8:59:41 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:07:42 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:07:42 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:14:44 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:14:44 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:15:05 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:15:05 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:16:03 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:16:03 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:16:34 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:16:34 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 9:21:47 PM - [Information] - WsCustomeInfoException - S001 - The email for the candidate gabriel.zaafrani@gmail.com had been send 
+7/2/17 9:22:13 PM - [Error] - SqlCustomException - MysqlDb - Votre job avec l'identifiant 5 a déja été envoyé
+7/2/17 9:22:13 PM - [Error] - WsCustomeException - RemindController - Votre job avec l'identifiant 5 a déja été envoyé
+7/2/17 10:14:33 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 10:14:33 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 10:16:57 PM - [Information] - WsCustomeInfoException - S001 - The email for the candidate gabriel.zaafrani@gmail.com had been send 
+7/2/17 10:17:10 PM - [Error] - SqlCustomException - MysqlDb - Votre job avec l'identifiant 11 a déja été envoyé
+7/2/17 10:17:10 PM - [Error] - WsCustomeException - RemindController - Votre job avec l'identifiant 11 a déja été envoyé
+7/2/17 10:19:00 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 10:19:00 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/2/17 10:19:14 PM - [Error] - SqlCustomException - MysqlDb - Votre job avec l'identifiant 11 a déja été envoyé
+7/2/17 10:19:14 PM - [Error] - WsCustomeException - RemindController - Votre job avec l'identifiant 11 a déja été envoyé
+7/2/17 10:19:35 PM - [Information] - WsCustomeInfoException - S001 - The email for the candidate gabriel.zaafrani@gmail.com had been send 

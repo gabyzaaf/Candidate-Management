@@ -1,0 +1,8 @@
+Objet du mail : Confirmation de notre RV / C17 Engineering, l’ESN .NET
+[Monsieur/Madame] [NOM],
+J'ai le plaisir de vous confirmer notre entretien le [Jour 00 Mois] à [00 h00].
+Instructions : Interphone C17 Engineering, 7eme étage, code ascenseur : 65412
+
+Bien à vous,
+
+Julie.
