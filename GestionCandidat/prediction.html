@@ -99,7 +99,9 @@
                 return false;
             }
         }
-
+        function mySubmitFunction() {
+            return false;
+        }
 
     </script>
 </head>
@@ -115,7 +117,7 @@
         <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
     </div>
     <section ng-controller="predictionAzure">
-        <form ng-submit="sendValueForAzure(prediction)" onsubmit="return verifChamp();">
+        <form onsubmit="return mySubmitFunction();" ng-submit="sendValueForAzure(prediction)">
             <table border="1" align="center">
                 <tbody>
                     <tr>
