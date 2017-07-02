@@ -6,16 +6,15 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using conf;
 using MailKit.Security;
-
 namespace actionUser{
 
 
     public class ActionUser{
 
-        private UserFeatures user;
+        private UserFeature user;
         private ConfigurationData conf = ConfigurationData.getInstance();
 
-        public ActionUser(UserFeatures _feature){
+        public ActionUser(UserFeature _feature){
             this.user=_feature;
         }
 
@@ -39,11 +38,11 @@ namespace actionUser{
             { 
                 //From Address 
                 string FromAddress = conf.email; 
-                string FromAdressTitle = "Email from ASP.NET Core 1.1"; 
+                //string FromAdressTitle = "Email from ASP.NET Core 1.1"; 
                 //To Address 
                 string ToAddress = email; 
-                string ToAdressTitle = "Microsoft ASP.NET Core"; 
-                string Subject = "Hello World - Sending email using ASP.NET Core 1.1"; 
+                //string toAdressTitle = "Microsoft ASP.NET Core"; 
+                string subject = "Hello World - Sending email using ASP.NET Core 1.1"; 
                 string BodyContent = message; 
     
                 //Smtp Server 
@@ -52,9 +51,9 @@ namespace actionUser{
                 int SmtpPortNumber = 587; 
     
                 var mimeMessage = new MimeMessage(); 
-                mimeMessage.From.Add(new MailboxAddress(FromAdressTitle, FromAddress)); 
-                mimeMessage.To.Add(new MailboxAddress(ToAdressTitle, ToAddress)); 
-                mimeMessage.Subject = Subject; 
+                mimeMessage.From.Add(new MailboxAddress(conf.fromAdressTitle, FromAddress)); 
+                mimeMessage.To.Add(new MailboxAddress(conf.toAdressTitle, ToAddress)); 
+                mimeMessage.Subject = conf.subject; 
                 mimeMessage.Body = new TextPart("plain") 
                 { 
                     Text = BodyContent 

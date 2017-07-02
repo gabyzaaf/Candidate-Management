@@ -2,6 +2,10 @@
     "email":"upload.file.travail@gmail.com",
     "password":"ESGI@2017",
     "emailTemplatePath":"/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/",
-    "smtp":"smtp.gmail.com"
+    "smtp":"smtp.gmail.com",
+    "logFile":"/Users/zaafranigabriel/Documents/logs/log3.txt",
+    "fromAdressTitle":"l'expediteur du message",
+    "toAdressTitle":"Le titre pour le destinataire du message",
+    "subject":"Titre du mail"
     
 }

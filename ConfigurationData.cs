@@ -10,7 +10,11 @@ namespace conf{
         public string password {get;set;}
         public string emailTemplatePath {private get;set;}
         public string smtp {get;set;}
-        
+        public string logFile {private get;set;}
+        public string fromAdressTitle {get;set;}
+        public string toAdressTitle {get;set;}
+        public string subject {get;set;}
+
         private static ConfigurationData conf = null;
 
         public static ConfigurationData getInstance()
@@ -38,6 +42,16 @@ namespace conf{
                 throw new EmailCustomException($"Le repertoire specifié {emailTemplatePath} n'existe pas");
             }
             return emailTemplatePath;
+        }
+
+        public string getLogPath(){
+            if(String.IsNullOrEmpty(logFile)){
+                throw new LogNotExistException("Le fichier de log a mal été renseigné");
+            }
+            if(Directory.Exists(logFile)){
+                throw new LogNotExistException($"Le chemin spécifié {logFile} est un repertoire, ca doit etre un fichier");
+            }
+            return logFile;
         }
     }
 

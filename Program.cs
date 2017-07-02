@@ -6,11 +6,15 @@ using System.IO;
 using conf;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Net;
+using System.Text;
+using Candidate_Management.Core;
 namespace email
 {
     class Program
     {
 
+        private ConfigurationData conf = null;
 
         public static void writeLogs(string pathWithFile,string content){
             using (StreamWriter sw = File.AppendText(pathWithFile)) 
@@ -24,29 +28,67 @@ namespace email
             // "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/plugins/email/sample.txt"
             /*
                 Data enter : 
-                UserEmail [0].
-                FileName [1].
-                Candidate Name [2].
-                Candidate Firstname [3].
-                Meetings Optionnal [4].
-                Candidate email [5].
-             */
-             
+                jobId [0]
+                UserEmail [1].
+                FileName [2].
+                Candidate Name [3].
+                Candidate Firstname [4].
+                Meetings Optionnal [5].
+                Candidate email [6].
+            */
+             ConfigurationData conf = null;
             try{
-                
-                Program.writeLogs("/Users/zaafranigabriel/Documents/logs/log.txt",string.Format($"the date is {DateTime.Now.ToString()} BEGIN PROGRAM"));
-                UserFeatures users = new UserFeatures(args[0],args[1],args[2],args[3],DateTime.Parse(args[4]),args[5]);
+                conf = ConfigurationData.getInstance();
+                Program.writeLogs(conf.getLogPath(),string.Format($"the date is {DateTime.Now.ToString()} BEGIN PROGRAM"));
+                UserFeature users = new UserFeature(Int32.Parse(args[0]),args[1],args[2],args[3],args[4],DateTime.Parse(args[5]),args[6]);
+                string json = JsonConvert.SerializeObject(users);
+                POST("http://localhost:5000/api/Remind/change/job/state/",json);
                 ActionUser action = new ActionUser(users);
                 Console.WriteLine(action.transformTextFromCandidate());
-                action.sendEmail("gabriel.zaafrani@gmail.com",action.transformTextFromCandidate(),"gaby");
-                Program.writeLogs("/Users/zaafranigabriel/Documents/logs/log.txt","END PROGRAM");
+                action.sendEmail(users.candidateEmail,action.transformTextFromCandidate(),"gaby");
+                Program.writeLogs(conf.getLogPath(),"END PROGRAM");
+            }catch(LogNotExistException logException){
+                Console.WriteLine(logException.Message);
             }catch(Exception exc){
                 // /Users/zaafranigabriel/Documents/logs/log.txt
-                new EmailCustomException(exc.Message).writeLog("/Users/zaafranigabriel/Documents/logs/log.txt");
+                new EmailCustomException(exc.Message).writeLog(conf.getLogPath());
             }
-            
              
-           
+             
+        }
+
+        public static void POST(string url, string jsonContent) 
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+
+            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+            Byte[] byteArray = encoding.GetBytes(jsonContent);
+
+            request.ContentLength = byteArray.Length;
+            request.ContentType = @"application/json";
+
+            using (Stream dataStream = request.GetRequestStream()) {
+                dataStream.Write(byteArray, 0, byteArray.Length);
+            }
+            long length = 0;
+            try {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse()) {
+                    //var encoding = ;
+                    using (var reader = new System.IO.StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                    {
+                        string responseText = reader.ReadToEnd();
+                        State state = JsonConvert.DeserializeObject<State>(responseText);
+                        if(state.success == false){
+                            throw new Exception(state.content);
+                        }
+                    }
+                    length = response.ContentLength;
+                }
+            }
+            catch (WebException ex) {
+                // Log exception and throw as for GET example above
+            }
         }
 
 
