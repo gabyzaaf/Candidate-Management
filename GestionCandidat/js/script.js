@@ -615,11 +615,11 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
 gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
     $scope.sendCandidat = function (candidat) {
-        console.log(candidat.nom)
         if (candidat.nom == "") {
             console.log("le champ recherche est vide ou n'est pas rempli")
         } else {
             $http.get('http://192.168.0.16:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
+                console.log(candidat.nom)
                 $scope.todos = response.data;
                 if ($scope.todos != null) {
                     if ($scope.todos[0].content != null) {
@@ -627,6 +627,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                         console.log($scope.todos[0].content);
 
                     } else {
+                        $scope.contentResponse = "";
                         var nbSelect = 0;
                         for (var i = 0; i < $scope.todos.length; i++) {
                             if ($scope.todos[i].email == $scope.selectedCar) {

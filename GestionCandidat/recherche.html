@@ -107,7 +107,7 @@
         <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
     </div>
     <div class="form-style">
-        <form ng-submit="sendCandidat(candidat)" method="get">
+        <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
             <table align="center">
                 <tr>
                     <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
@@ -115,13 +115,13 @@
                 <tr>
                     <td>
                         <strong>
-                            Nom : <input type="text" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90" />
+                            Nom : <input type="text" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90" required/>
                         </strong>
                     </td>
                 </tr>
             </table>
             <br />
-            <center><input type="submit" class="btn" value="Recherche candidat" onclick="verifChamp();"/></center>
+            <center><input type="submit" class="btn" value="Recherche candidat" id="btnRecherche" onclick="verifChamp()"/></center>
 
 
             <br />
@@ -239,7 +239,7 @@
 
     <br />
     <section ng-controller="updateEntretien">
-        <form ng-submit="sendEntry(updateEntretien)">
+        <form ng-submit="sendEntry(updateEntretien)" onsubmit="return isValidForm()">
             <table align="center" id="loginTableEntr" hidden="hidden">
                 <tbody>
                     <tr>
@@ -305,7 +305,7 @@
                     <tr>
                         <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnRouge" value="Modifier" /></td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td>CR technique : </td>
                     </tr>
                     <tr>
@@ -327,7 +327,7 @@
                     </tr>
                     <tr>
                         <td colspan="4"><textarea name="crcom" cols="100" rows="4"></textarea></td>
-                    </tr>
+                    </tr>-->
 
                 </tbody>
             </table>
