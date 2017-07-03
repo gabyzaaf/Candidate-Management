@@ -615,53 +615,58 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
 gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
     $scope.sendCandidat = function (candidat) {
-        $http.get('http://192.168.0.16:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
-            $scope.todos = response.data;
-            if ($scope.todos != null) {
-                if ($scope.todos[0].content != null) {
-                    $scope.contentResponse = $scope.todos[0].content;
-                    console.log($scope.todos[0].content);
+        console.log(candidat.nom)
+        if (candidat.nom == "") {
+            console.log("le champ recherche est vide ou n'est pas rempli")
+        } else {
+            $http.get('http://192.168.0.16:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
+                $scope.todos = response.data;
+                if ($scope.todos != null) {
+                    if ($scope.todos[0].content != null) {
+                        $scope.contentResponse = $scope.todos[0].content;
+                        console.log($scope.todos[0].content);
 
-                } else {
-                    var nbSelect = 0;
-                    for (var i = 0; i < $scope.todos.length; i++) {
-                        if ($scope.todos[i].email == $scope.selectedCar) {
-                            nbSelect = i;
+                    } else {
+                        var nbSelect = 0;
+                        for (var i = 0; i < $scope.todos.length; i++) {
+                            if ($scope.todos[i].email == $scope.selectedCar) {
+                                nbSelect = i;
+                                //console.log($scope.todos[i].email);
+                            }
                             //console.log($scope.todos[i].email);
                         }
-                        //console.log($scope.todos[i].email);
+                        $scope.nomCoor = $scope.todos[nbSelect].nom;
+                        $scope.prenomCoor = $scope.todos[nbSelect].prenom;
+                        $scope.phoneCoor = $scope.todos[nbSelect].phone;
+                        $scope.emailCoor = $scope.todos[nbSelect].email;
+                        $scope.sexeCoor = $scope.todos[nbSelect].sexe;
+                        $scope.cpCoor = $scope.todos[nbSelect].cp;
+                        $scope.actionsCoor = $scope.todos[nbSelect].actions;
+                        $scope.anneeCoor = $scope.todos[nbSelect].annee;
+                        $scope.lienCoor = $scope.todos[nbSelect].lien;
+                        $scope.crCallCoor = $scope.todos[nbSelect].crCall;
+                        $scope.NSCoor = $scope.todos[nbSelect].NS;
+                        $scope.approche_emailCoor = $scope.todos[nbSelect].approche_email;
+                        $scope.noteCoor = $scope.todos[nbSelect].note;
+                        $scope.linkCoor = $scope.todos[nbSelect].link;
+                        $scope.xpNoteCoor = $scope.todos[nbSelect].xpNote;
+                        $scope.nsNoteCoor = $scope.todos[nbSelect].nsNote;
+                        $scope.jobIdealNoteCoor = $scope.todos[nbSelect].jobIdealNote;
+                        $scope.pisteNoteCoor = $scope.todos[nbSelect].pisteNote;
+                        $scope.pieCouteNoteCoor = $scope.todos[nbSelect].pieCouteNote;
+                        $scope.locationNoteCoor = $scope.todos[nbSelect].locationNote;
+                        $scope.EnglishNoteCoor = $scope.todos[nbSelect].EnglishNote;
+                        $scope.nationalityNoteCoor = $scope.todos[nbSelect].nationalityNote;
+                        $scope.competencesCoor = $scope.todos[nbSelect].competences;
                     }
-                    $scope.nomCoor = $scope.todos[nbSelect].nom;
-                    $scope.prenomCoor = $scope.todos[nbSelect].prenom;
-                    $scope.phoneCoor = $scope.todos[nbSelect].phone;
-                    $scope.emailCoor = $scope.todos[nbSelect].email;
-                    $scope.sexeCoor = $scope.todos[nbSelect].sexe;
-                    $scope.cpCoor = $scope.todos[nbSelect].cp;
-                    $scope.actionsCoor = $scope.todos[nbSelect].actions;
-                    $scope.anneeCoor = $scope.todos[nbSelect].annee;
-                    $scope.lienCoor = $scope.todos[nbSelect].lien;
-                    $scope.crCallCoor = $scope.todos[nbSelect].crCall;
-                    $scope.NSCoor = $scope.todos[nbSelect].NS;
-                    $scope.approche_emailCoor = $scope.todos[nbSelect].approche_email;
-                    $scope.noteCoor = $scope.todos[nbSelect].note;
-                    $scope.linkCoor = $scope.todos[nbSelect].link;
-                    $scope.xpNoteCoor = $scope.todos[nbSelect].xpNote;
-                    $scope.nsNoteCoor = $scope.todos[nbSelect].nsNote;
-                    $scope.jobIdealNoteCoor = $scope.todos[nbSelect].jobIdealNote;
-                    $scope.pisteNoteCoor = $scope.todos[nbSelect].pisteNote;
-                    $scope.pieCouteNoteCoor = $scope.todos[nbSelect].pieCouteNote;
-                    $scope.locationNoteCoor = $scope.todos[nbSelect].locationNote;
-                    $scope.EnglishNoteCoor = $scope.todos[nbSelect].EnglishNote;
-                    $scope.nationalityNoteCoor = $scope.todos[nbSelect].nationalityNote;
-                    $scope.competencesCoor = $scope.todos[nbSelect].competences;
+                } else {
+                    console.log("In the error");
                 }
-            } else {
-                console.log("In the error");
-            }
-        }, (err) => {
-            console.log(err);
-        });
+            }, (err) => {
+                console.log(err);
+            });
 
+        }
     }
 }]);
 

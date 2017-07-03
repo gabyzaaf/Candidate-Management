@@ -11,10 +11,27 @@
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8" />
     <script>
+        function verifChamp() {
+            var recherche = document.getElementById("recherche");
+            var i = 0;
+            if (recherche.value == "") {
+                recherche.style.borderColor = "red";
+                i = 1;
+            } else {
+                recherche.style.borderColor = "";
+            }
+
+            if (!Boolean(i)) {
+                document.getElementById("erreurChamp").style.display = 'none';
+            } else {
+                document.getElementById("erreurChamp").style.display = 'block';
+            }
+
+        }
         function toggleTableCoord() {
             
             var lSelect = document.getElementById("selectCandidat").value;
-            if (lSelect == "? undefined:undefined ?") {
+            if (lSelect == "? undefined:undefined ?" || lSelect == "" || lSelect == null) {
                 alert("Selectionner un candidat !")
             } else {
                 var lTable = document.getElementById("loginTableCoord");
@@ -25,7 +42,7 @@
         function toggleTableEntr() {
             
             var lSelect = document.getElementById("selectCandidat").value;
-            if (lSelect == "? undefined:undefined ?") {
+            if (lSelect == "? undefined:undefined ?" || lSelect == "" || lSelect == null) {
                 alert("Selectionner un candidat !")
             } else {
                 var lTable = document.getElementById("loginTableEntr");
@@ -86,6 +103,9 @@
     <br />
     <h3>Recherche Candidat</h3>
     <br />
+    <div id="erreurChamp" hidden="hidden">
+        <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
+    </div>
     <div class="form-style">
         <form ng-submit="sendCandidat(candidat)" method="get">
             <table align="center">
@@ -95,13 +115,13 @@
                 <tr>
                     <td>
                         <strong>
-                            Nom : <input type="text" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90" />
+                            Nom : <input type="text" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90" />
                         </strong>
                     </td>
                 </tr>
             </table>
             <br />
-            <center><input type="submit" class="btn" value="Recherche candidat" /></center>
+            <center><input type="submit" class="btn" value="Recherche candidat" onclick="verifChamp();"/></center>
 
 
             <br />
@@ -114,7 +134,7 @@
                 <tr>
                     <td>
                         <select ng-model="selectedCar" id="selectCandidat" style="width:500px;" onclick="toggleSelectCoordEntr()">
-                            <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} - {{todo.prenom}} - {{todo.phone}} - {{todo.email}} </option>
+                            <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
                         </select>
                     </td>
                     <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableCoord()" /></td>
