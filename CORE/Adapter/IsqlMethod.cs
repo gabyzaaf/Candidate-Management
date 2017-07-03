@@ -65,7 +65,7 @@ namespace Core.Adapter.Inteface
 
           void addEmailTemplates(Template emailTemplate);
 
-          ArrayList emailTemplateExist(string title);
+          bool emailTemplateExist(string title);
 
           ArrayList emailTemplateTiltes(int limite1,int limite2);
           

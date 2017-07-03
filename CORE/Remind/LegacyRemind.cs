@@ -11,6 +11,8 @@ namespace Candidate_Management.CORE.Remind
         protected static readonly string extension = ".txt";
         protected int remindId;
         protected string emailCandidate = null;
+        protected string fileName = null; 
+
 
         protected Dictionary<string,string> getCandidateNameFromId(int id){
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -28,6 +30,11 @@ namespace Candidate_Management.CORE.Remind
             return pathAndFile;
         }
 
+        protected void checkFileNameIsNull(){
+            if(fileName == null){
+                fileName = $"{this.GetType().Name}{extension}";
+            }
+        }
         
     }
 }

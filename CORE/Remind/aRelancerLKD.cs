@@ -10,7 +10,7 @@ namespace Candidate_Management.CORE.Remind
     {
          private DateTime date = new DateTime();
          public int id {get;set;}
-         private string fileName = null; 
+        
         
         public void add(int id,DateTime date){
             this.id = id;
@@ -29,24 +29,20 @@ namespace Candidate_Management.CORE.Remind
       
 
         public void exec(string token,DateTime meeting){
-            checkFileNameIsNull();
-            Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
-            string pathAndFile = getPathNameAndFileFromTemplate(fileName);
+           checkFileNameIsNull();
+           Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
+           string pathAndFile = getPathNameAndFileFromTemplate(fileName);
            string currentDate = $"{date.Month}/{date.Day}/{date.Year}";
            string currentHourMinute = $"{date.Hour}:{date.Minute}";
            string emailPluginPath = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll";
-           string filePathTemplate = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/sample.txt";
-           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {token}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {meeting}";
-            Console.WriteLine(cmd);
+           string filePathTemplate = $"{JsonConfiguration.getInstance().getEmailTemplatePath()}{this.fileName}";
+           string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {remindId}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {currentDate} {emailCandidate}";
+           Console.WriteLine(cmd);
             
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask(); 
         }
 
-        private void checkFileNameIsNull(){
-            if(fileName == null){
-                fileName = this.GetType().Name;
-            }
-        }
+        
     }
 }

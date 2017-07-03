@@ -14,11 +14,7 @@ namespace Candidate_Management.CORE.Remind
         private string fileName = null; 
          
 
-        private void checkFileNameIsNull(){
-            if(fileName == null){
-                fileName = $"{this.GetType().Name}{extension}";
-            }
-        }
+       
 
         public void add(int id,DateTime date){
             this.id = id;

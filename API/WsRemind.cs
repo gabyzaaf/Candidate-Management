@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using Factory;
 using Candidate_Management.CORE;
 using Candidate_Management.CORE.Exceptions;
+using core.remind;
+
 namespace Candidate_Management.API
 {
     [EnableCors("SiteCorsPolicy")]
@@ -99,6 +101,13 @@ namespace Candidate_Management.API
                 
                 
             }
+
+            [HttpPost("add/job/")]
+            public IActionResult addJobInsideTheSystem([FromBody]Remind remind){
+
+                return new ObjectResult(remind);
+            }
+
 
             [HttpGet("{error}", Name = "SendRemindsError")]
             public IActionResult ErrorList(ArrayList errors)

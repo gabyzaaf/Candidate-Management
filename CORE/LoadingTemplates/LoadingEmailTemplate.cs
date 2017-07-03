@@ -13,12 +13,15 @@ namespace Candidate_Management.CORE.LoadingTemplates
 {
     public class LoadingEmailTemplate : Iloading
     {
-        private string[] contents;
+        private static readonly string extension = ".txt";
+        private string[] containAllTheFiles;
+        private ArrayList containFileOnlyWithExtension = new ArrayList();
+        private IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
 
         private void getFilesFromTheFolder(){
             try{
-                contents =  JsonConfiguration.getInstance().getEmailTemplateFiles();
-                if(contents.Length == 0){
+                containAllTheFiles =  JsonConfiguration.getInstance().getEmailTemplateFiles();
+                if(containAllTheFiles.Length == 0){
                      new NotFileContentFolderException("c01","Aucun template d'email n'existe actuellement, veuillez en créer");
                 }
             }catch(IOException exc){
@@ -27,48 +30,36 @@ namespace Candidate_Management.CORE.LoadingTemplates
             }
         }
 
-        private bool messageExists(Template message){
-              try{
-                IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
-                ArrayList liste = isql.emailTemplateExist(message.title);
-                Dictionary<String,String> dico = (Dictionary<String,String>)liste[0];
-                bool existe = Convert.ToBoolean(Int32.Parse(dico["nb"]));
-                return existe;
-              }catch(Exception exc){
-                Console.WriteLine($" exception : {exc.Message}");
-                return false;
-              }   
-        }
-
-        private void addMessage(ArrayList emailListe){
-            foreach (Template email in emailListe)
-            {
-                if(!messageExists(email)){
-                   IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
-                   isql.addEmailTemplates(email);
-                }
+        private void filterWithTextExtension(){
+            foreach(string file in containAllTheFiles){
+                if(file.EndsWith(extension)){
+                    string[] fileContent = file.Split("/");
+                    string dfile = fileContent[fileContent.Length-1];
+                    containFileOnlyWithExtension.Add(dfile);
+                }        
             }
         }
 
-        private void injectFolderInsideTheSystem(){
-            ArrayList liste = new ArrayList();
-            try{
-                getFilesFromTheFolder();
-                foreach(var pathWithFile in contents){
-                    liste.Add(new Template(pathWithFile));
+        private void addTheFileInsideTheSystem(){
+            foreach(string element in containFileOnlyWithExtension){
+                if(!isql.emailTemplateExist(element)){
+                    string fileWithExtension = $"{JsonConfiguration.getInstance().getEmailTemplatePath()}{element}";
+                    string fileContent = File.ReadAllText(fileWithExtension);
+                    Template template = new Template(fileWithExtension,element,fileContent);
+                    isql.addEmailTemplates(template);
+                    
                 }
-                addMessage(liste);
-            }catch(Exception exc){
-                Console.WriteLine(exc.Message);
             }
         }
 
         
+        
 
         public void loadFiles(){
             try{
-                this.getFilesFromTheFolder();
-                this.injectFolderInsideTheSystem();
+                getFilesFromTheFolder(); // get the file for the folder
+                filterWithTextExtension(); // add the files with extension inside the array list
+                addTheFileInsideTheSystem();
             }catch(NotFileContentFolderException notFile){
                 throw notFile;
             }

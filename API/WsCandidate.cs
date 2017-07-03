@@ -87,7 +87,7 @@ namespace Candidate_Management.API
 
         [HttpPost("template/email/update")]
         public IActionResult updateContentEmailFromTitle([FromBody]Template emailTemplate){
-            ArrayList templateEmailResult = null;
+            
             try{
                 
                 if(emailTemplate == null){
@@ -98,7 +98,7 @@ namespace Candidate_Management.API
                     throw new Exception("Le token n'existe pas, vous devez le renseigner");
                 }
                 
-                if(String.IsNullOrEmpty(emailTemplate.getContent())){
+                if(String.IsNullOrEmpty(emailTemplate.content)){
                     throw new Exception("Le contenu de l'email n'existe pas ");
                 }
                 
@@ -109,13 +109,12 @@ namespace Candidate_Management.API
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 isql.UserCanUpdate(emailTemplate.token);
                 
-                templateEmailResult = isql.emailTemplateExist(emailTemplate.title);
+                bool templateExist = isql.emailTemplateExist(emailTemplate.title);
 
-                Dictionary<string,string> result = (Dictionary<string,string>)templateEmailResult[0];
-                if(!Convert.ToBoolean(Convert.ToInt32(result["nb"]))){
+                if(!templateExist){
                     throw new Exception($"Aucun template existe avec votre titre : {emailTemplate.title}");
                 }
-                isql.updateTemplateEmailFromTitle(emailTemplate.title,emailTemplate.getContent());
+                isql.updateTemplateEmailFromTitle(emailTemplate.title,emailTemplate.content);
                 return new ObjectResult(new State(){code=4,content="Le template d'email a bien ete modifie",success=true}); 
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
@@ -127,7 +126,7 @@ namespace Candidate_Management.API
 
         [HttpPost("template/email/delete")]
         public IActionResult deleteContentEmailFromTitle([FromBody]Template emailTemplate){
-            ArrayList templateEmailResult = null;
+           
             try{
                 if(emailTemplate == null){
                     throw new Exception("L'email template n'existe pas");
@@ -140,9 +139,8 @@ namespace Candidate_Management.API
                 }
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 isql.UserCanDelete(emailTemplate.token);
-                templateEmailResult = isql.emailTemplateExist(emailTemplate.title);
-                Dictionary<string,string> result = (Dictionary<string,string>)templateEmailResult[0];
-                if(!Convert.ToBoolean(Convert.ToInt32(result["nb"]))){
+                bool templateExist = isql.emailTemplateExist(emailTemplate.title);
+                if(!templateExist){
                     throw new Exception($"Aucun template existe avec votre titre : {emailTemplate.title}");
                 }
                 isql.deleteTemplateEmailFromTitle(emailTemplate.title);

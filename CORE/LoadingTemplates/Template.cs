@@ -9,47 +9,19 @@ namespace Candidate_Management.CORE.LoadingTemplates
         public string token{get;set;}
         public string path{get;set;}
         public string title{get;set;}
-        public string content{private get;set;}
+        public string content{get;set;}
 
         public Template(){
 
         }
 
-        public Template(string _path){
-            try{
-                checkPath(_path);
-                path = _path;
-                if(path.Contains("/")){
-                    string[] containsThePath = path.Split("/");
-                    int size = (containsThePath.Length-1);
-                    title = containsThePath[size];
-                }
-                title = title.Replace(".txt","");
-                
-            }catch(Exception exc){
-                throw new LoadingCustomException("L01",exc.Message);
-            }
-            
+        public Template(string _path,string _title, string _content){
+            this.path = _path;
+            this.title = _title;
+            this.content = _content;
         }
 
-        public string getContent(){
-            try{
-                
-                checkPath(path);
-                if(String.IsNullOrEmpty(content)){
-                    content = File.ReadAllText(path);
-                }
-                return content;
-            }catch(Exception exc){
-               throw new LoadingCustomException("L02",exc.Message);
-            }   
-        }
-
-        private void checkPath(string _path){
-             if(String.IsNullOrEmpty(_path)){
-                   path =  JsonConfiguration.getInstance().getEmailTemplatePath();
-            }
-        }
+       
 
         public override string ToString()
         {

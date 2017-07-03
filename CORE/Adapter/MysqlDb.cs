@@ -809,7 +809,7 @@ namespace Core.Adapter{
                 string sql = "insert into message (titre_message,contenu_message) VALUES (@title,@content)";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
                 dico.Add("@title",emailTemplate.title);
-                dico.Add("@content",emailTemplate.getContent());
+                dico.Add("@content",emailTemplate.content);
                 queryExecute(sql,dico,null);
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
@@ -817,7 +817,7 @@ namespace Core.Adapter{
              
         }
 
-        public ArrayList emailTemplateExist(string title){
+        public bool emailTemplateExist(string title){
             ArrayList output;
             try{
                 if(String.IsNullOrEmpty(title)){
@@ -832,10 +832,13 @@ namespace Core.Adapter{
                 if(output == null || output.Count==0){
                     throw new Exception($"Aucun template d'email ne possede ce titre : {title}");
                 }
+                Dictionary<string,string> dicoWithDatas = (Dictionary<string,string>)output[0];
+                int existValue = Int32.Parse(dicoWithDatas["nb"]);
+                return Convert.ToBoolean(existValue);
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
-            return output;
+           
         }
 
         public ArrayList emailTemplateTiltes(int limite1,int limite2){

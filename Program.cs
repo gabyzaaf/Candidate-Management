@@ -73,20 +73,16 @@ namespace ConsoleApplication
              */
             
             try{
-                appellerRemind appeller = new appellerRemind();
-                appeller.add(20,DateTime.Now);
-                appeller.display();
-                appeller.exec("token",DateTime.Now);
-                //appeller.display();
+                
                 JsonConfiguration conf = JsonConfiguration.getInstance();
                 string folder = conf.getPluginFolder();
                 LoadPlugins load = new LoadPlugins(folder);
-                string[] fileList = load.getPluginFromFolders();                
+                string[] fileList = load.getPluginFromFolders();            
                 Context contexte = new Context(new LoadingEmailTemplate());
                 contexte.executeLoading();
                 var host = new WebHostBuilder()
                             .UseKestrel()
-                            //.UseUrls("http://10.0.0.34:5000")
+                            .UseUrls("http://localhost:5000")
                             .UseStartup<Startup>()
                             .Build();
                 host.Run();
