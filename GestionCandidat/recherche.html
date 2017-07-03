@@ -133,7 +133,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select ng-model="selectedCar" id="selectCandidat" style="width:500px;" onclick="toggleSelectCoordEntr()">
+                        <select ng-model="selectedCar" id="selectCandidat" style="width:500px;" onclick="toggleSelectCoordEntr()" required>
                             <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
                         </select>
                     </td>
@@ -346,7 +346,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select ng-model="selectedMsg" id="selectMessage" style="width:500px;" onclick="toggleSelectModSupp()">
+                            <select ng-model="selectedMsg" id="selectMessage" style="width:500px;" onclick="toggleSelectModSupp()" required>
                                 <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
                             </select>
                         </td>
