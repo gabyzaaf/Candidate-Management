@@ -101,8 +101,8 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
 
         $scope.showGraph = function () {
             $scope.graph1 = "Graph 1 : Graphique sur les promotions et les nombres de projet";
-            $scope.config["test1"] = $scope.number_project;
-            $scope.config.data2 = $scope.promotion_last_5years;
+            $scope.config.number_project = $scope.number_project;
+            $scope.config.promotion_last_5years = $scope.promotion_last_5years;
             $scope.config.type1 = $scope.typeOptions[6];
             $scope.config.type2 = $scope.typeOptions[2];
             var config = {};
@@ -110,10 +110,10 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             config.zoom = { "enabled": "true" };
             config.data = {};
             config.data.json = {};
-            config.data.json.data1 = $scope.config["test1"].split(";");
-            config.data.json.data2 = $scope.config.data2.split(";");
+            config.data.json.number_project = $scope.config.number_project.split(";");
+            config.data.json.promotion_last_5years = $scope.config.promotion_last_5years.split(";");
             config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
-            config.data.types = { "test1": $scope.config.type1, "data2": $scope.config.type2 };
+            config.data.types = { "number_project": $scope.config.type1, "promotion_last_5years": $scope.config.type2 };
             $scope.chart = c3.generate(config);
         }
 
