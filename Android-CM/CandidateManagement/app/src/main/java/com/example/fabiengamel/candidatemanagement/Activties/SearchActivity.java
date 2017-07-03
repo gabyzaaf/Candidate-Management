@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,11 +68,8 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        try {
-            InitContent();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        InitContent();
 
 
         String candidateName;
@@ -85,12 +83,6 @@ public class SearchActivity extends AppCompatActivity {
                 tvInfo.setVisibility(View.INVISIBLE);
             } else {
                 candidateName= extras.getString("candidateName");
-                bModify.setVisibility(View.INVISIBLE);
-                bLocate.setVisibility(View.INVISIBLE);
-                bSMS.setVisibility(View.INVISIBLE);
-                tvInfo.setVisibility(View.INVISIBLE);
-                getEmail(candidateName);
-                SearchCandidate(candidateName);
             }
         } else {
             candidateName= (String) savedInstanceState.getSerializable("candidateName");
@@ -103,7 +95,7 @@ public class SearchActivity extends AppCompatActivity {
         etNom.setText(candidateName);
     }
 
-    public void InitContent() throws InterruptedException {
+    public void InitContent() {
         etNom = (EditText)findViewById(R.id.etName);
         bRecherche = (Button)findViewById(R.id.bSearchSingle);
         bModify = (Button)findViewById(R.id.bModify);
@@ -145,15 +137,12 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-
                 tvResult.setText("");
                 String nom = etNom.getText().toString();
 
                 getEmail(nom);
-                SearchCandidate(nom);
             }
         });
 
@@ -175,13 +164,8 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         etNom.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 bModify.setVisibility(View.INVISIBLE);
                 bLocate.setVisibility(View.INVISIBLE);
@@ -190,7 +174,6 @@ public class SearchActivity extends AppCompatActivity {
                 tvResult.setVisibility(View.INVISIBLE);
             }
         });
-
     }
 
     public void onBackPressed() {
@@ -215,11 +198,8 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    public void SearchCandidate(String nom) {
-        //candidate = Candidate.getCurrentCandidate();
+    public void SearchCandidate(String nom, final String prenom) {
         final Meeting report = Meeting.getCurrentMeeting();
-
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
 
@@ -227,97 +207,122 @@ public class SearchActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>()
                 {
                     public static final String TAG ="Recherche candidat : " ;
-
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("Response", response.toString());
+                        String errorToken = "Aucun token ayant ce numero "+user.sessionId+" existe veuillez vous identifier";
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonOBject = response.getJSONObject(i);
                                     if(jsonOBject.has("success"))
                                     {
+                                        if(jsonOBject.getString("content").matches(errorToken)){
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
+                                            builder.setTitle("Veuillez vous reconnecter");
+                                            builder.setPositiveButton("Ok",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            User u = new User();
+                                                            User.setCurrentUser(u);
+                                                            startActivity(new Intent(SearchActivity.this, LoginActivity.class));
+                                                        }
+                                                    });
+                                            AlertDialog alert = builder.create();
+                                            alert.show();
+
+                                        }
                                         tvInfo.setVisibility(View.VISIBLE);
                                         tvResult.setText("Erreur : " + jsonOBject.getString("content"));
                                     }
-                                else {
-                                        candidate.firstname = jsonOBject.getString("prenom");
-                                        candidate.lastname = jsonOBject.getString("nom");
-                                        candidate.phone =  jsonOBject.getString("phone");
-                                        candidate.zipcode = jsonOBject.getString("zipcode");
-                                        candidate.lien = jsonOBject.getString("lien");
-                                        candidate.actions = jsonOBject.getString("actions");
-                                        candidate.sexe = jsonOBject.getString("sexe");
-                                        candidate.crCall = jsonOBject.getString("crCall");
-                                        candidate.annee = Integer.parseInt(jsonOBject.getString("annee"));
-                                        candidate.approche_email = Boolean.valueOf(jsonOBject.getString("approche_email"));
-                                        report.note = jsonOBject.getString("note");
-                                        report.xpNote = jsonOBject.getString("xpNote");
-                                        report.pisteNote = jsonOBject.getString("pisteNote");
-                                        report.pieCouteNote = jsonOBject.getString("pieCouteNote");
-                                        report.locationNote =jsonOBject.getString("locationNote");
-                                        report.nationalityNote = jsonOBject.getString("nationalityNote");
-                                        report.EnglishNote = jsonOBject.getString("EnglishNote");
-                                        report.competences = jsonOBject.getString("competences");
+                                else if(candidate != null) {
+                                        if (jsonOBject.getString("prenom").matches(prenom) || prenom.matches("")) {
+                                            candidate.firstname = jsonOBject.getString("prenom");
+                                            candidate.lastname = jsonOBject.getString("nom");
+                                            candidate.phone = jsonOBject.getString("phone");
+                                            candidate.zipcode = jsonOBject.getString("zipcode");
+                                            candidate.lien = jsonOBject.getString("lien");
+                                            candidate.actions = jsonOBject.getString("actions");
+                                            candidate.sexe = jsonOBject.getString("sexe");
+                                            candidate.crCall = jsonOBject.getString("crCall");
+                                            candidate.annee = Integer.parseInt(jsonOBject.getString("annee"));
+                                            candidate.approche_email = Boolean.valueOf(jsonOBject.getString("approche_email"));
+                                            report.note = jsonOBject.getString("note");
+                                            report.xpNote = jsonOBject.getString("xpNote");
+                                            report.pisteNote = jsonOBject.getString("pisteNote");
+                                            report.pieCouteNote = jsonOBject.getString("pieCouteNote");
+                                            report.locationNote = jsonOBject.getString("locationNote");
+                                            report.nationalityNote = jsonOBject.getString("nationalityNote");
+                                            report.EnglishNote = jsonOBject.getString("EnglishNote");
+                                            report.competences = jsonOBject.getString("competences");
 
+                                            Candidate.setCurrentCandidate(candidate);
+                                            Meeting.setCurrentMeeting(report);
 
-                                        Candidate.setCurrentCandidate(candidate);
-                                        Meeting.setCurrentMeeting(report);
-
-                                        tvResult.append("\n");
-                                        tvResult.append("\n");
-                                        tvResult.append("Nom : " + candidate.lastname);
-                                        tvResult.append("\n");
-                                        tvResult.append("Prénom : " + candidate.firstname);
-                                        tvResult.append("\n");
-                                        tvResult.append("Sexe : " + candidate.sexe);
-                                        tvResult.append("\n");
-                                        tvResult.append("Email : " + candidate.email);
-                                        tvResult.append("\n");
-                                        tvResult.append("N°Phone : " + candidate.phone );
-                                        tvResult.append("\n");
-                                        tvResult.append("Code postal : " + candidate.zipcode );
-                                        tvResult.append("\n");
-                                        tvResult.append("Année : " + candidate.annee);
-                                        tvResult.append("\n");
-                                        tvResult.append("Lien : " + candidate.lien );
-                                        tvResult.append("\n");
-                                        tvResult.append("Action : " + candidate.actions);
-                                        tvResult.append("\n");
-
-                                        if(candidate.actions.matches("freelance")){
-                                            tvResult.append("Prix : " + candidate.prix);
                                             tvResult.append("\n");
+                                            tvResult.append("\n");
+                                            tvResult.append("Nom : " + candidate.lastname);
+                                            tvResult.append("\n");
+                                            tvResult.append("Prénom : " + candidate.firstname);
+                                            tvResult.append("\n");
+                                            tvResult.append("Sexe : " + candidate.sexe);
+                                            tvResult.append("\n");
+                                            tvResult.append("Email : " + candidate.email);
+                                            tvResult.append("\n");
+                                            tvResult.append("N°Phone : " + candidate.phone);
+                                            tvResult.append("\n");
+                                            tvResult.append("Code postal : " + candidate.zipcode);
+                                            tvResult.append("\n");
+                                            tvResult.append("Année : " + candidate.annee);
+                                            tvResult.append("\n");
+                                            tvResult.append("Lien : " + candidate.lien);
+                                            tvResult.append("\n");
+                                            tvResult.append("Action : " + candidate.actions);
+                                            tvResult.append("\n");
+
+                                            if (candidate.actions.matches("freelance")) {
+                                                tvResult.append("Prix : " + candidate.prix);
+                                                tvResult.append("\n");
+                                            }
+
+                                            tvResult.append("crCall : " + candidate.crCall);
+                                            tvResult.append("\n");
+                                            tvResult.append("Approche_email : " + String.valueOf(candidate.approche_email));
+                                            tvResult.append("\n");
+                                            tvResult.append("\n");
+                                            tvResult.append("Entretien du candidat : ");
+                                            tvResult.append("\n");
+                                            tvResult.append("\n");
+                                            tvResult.append("Note : " + report.note);
+                                            tvResult.append("\n");
+                                            tvResult.append("XpNote : " + report.xpNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("NSNote : " + report.nsNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("JobIdealNote : " + report.jobIdealNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("PisteNote : " + report.pisteNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("PieCouteNote : " + report.pieCouteNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("LocationNote : " + report.locationNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("EnglishNote : " + report.EnglishNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("NationalityNote : " + report.nationalityNote);
+                                            tvResult.append("\n");
+                                            tvResult.append("Competences : " + report.competences);
+
+
+                                            try {
+                                                showButton();
+                                            } catch (InterruptedException e) {
+                                                tvResult.append("Erreur système : ");
+                                                tvResult.append("\n");
+                                                tvResult.append("" + e);
+                                                e.printStackTrace();
+                                            }
                                         }
-
-                                        tvResult.append("crCall : " + candidate.crCall);
-                                        tvResult.append("\n");
-                                        tvResult.append("Approche_email : " + String.valueOf(candidate.approche_email));
-                                        tvResult.append("\n");
-                                        tvResult.append("\n");
-                                        tvResult.append("Entretien du candidat : ");
-                                        tvResult.append("\n");
-                                        tvResult.append("\n");
-                                        tvResult.append("Note : " + report.note);
-                                        tvResult.append("\n");
-                                        tvResult.append("XpNote : " + report.xpNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("NSNote : " + report.nsNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("JobIdealNote : " + report.jobIdealNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("PisteNote : " + report.pisteNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("PieCouteNote : " + report.pieCouteNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("LocationNote : " + report.locationNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("EnglishNote : " +report.EnglishNote );
-                                        tvResult.append("\n");
-                                        tvResult.append("NationalityNote : " + report.nationalityNote);
-                                        tvResult.append("\n");
-                                        tvResult.append("Competences : " + report.competences);
-
-                                        showButton();
                                     }
 
                                 }
@@ -326,11 +331,7 @@ public class SearchActivity extends AppCompatActivity {
                                 tvResult.append("\n");
                                 tvResult.append(""+e);
                                 e.printStackTrace();
-                            } catch (InterruptedException e) {
-                            tvResult.setVisibility(View.VISIBLE);
-                            tvResult.append("Une erreur serveur est survenue : "+e.toString());
-                            e.printStackTrace();
-                        }
+                            }
                     }
 
                 },
@@ -356,25 +357,87 @@ public class SearchActivity extends AppCompatActivity {
 
     public void getEmail(String nom){
         user = User.getCurrentUser();
-
         final RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/mobile/" +nom+"/"+user.sessionId ;
-
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
                 {
                     public static final String TAG ="Recherche candidat : " ;
 
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(final JSONArray response) {
                         Log.d("Response", response.toString());
                         try {
+                            final String[] firstname = {""};
 
+                            if(response.length() > 1){
+                                //more than one candidat found, need to choice just one by his firstname
+                                final EditText edittext = new EditText(SearchActivity.this);
+                                //Ask for his firstname
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
+                                    builder.setTitle("Nom similaire");
+                                    builder.setMessage("Plusieurs candidats ont le même nom, veuillez préciser le prénom :");
+                                    builder.setView(edittext);
+                                    builder.setPositiveButton("Chercher !",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    firstname[0] = edittext.getText().toString();
+                                                    Boolean found = false;
+                                                    outerloop:
+                                                    try {
+                                                        //searching for the right candidat
+                                                        for (int i = 0; i < response.length(); i++) {
+                                                            JSONObject jsonOBject = response.getJSONObject(i);
+                                                            if (jsonOBject.getString("prenom").matches(firstname[0]) && found == false) {
+                                                                found = true;
+                                                                candidate = Candidate.getCurrentCandidate();
+                                                                candidate.email = jsonOBject.getString("email");
+                                                                Candidate.setCurrentCandidate(candidate);
+                                                                SearchCandidate(etNom.getText().toString(), firstname[0]);
+                                                                break outerloop;
+                                                            }
+                                                        }
+                                                        //If it doesn't exist : try with another or dismiss
+                                                        if(!found){
+                                                            AlertDialog.Builder dialogFalse = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
+                                                            dialogFalse.setTitle("Le candidat "+firstname[0]+" "+etNom.getText().toString()+" n'existe pas");
+                                                            dialogFalse.setNeutralButton("Réessayer",
+                                                                    new DialogInterface.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(DialogInterface dialog, int which) {
+                                                                            getEmail(etNom.getText().toString());
+                                                                        }
+                                                                    });
+                                                            dialogFalse.setNegativeButton("Annuler",
+                                                                    new DialogInterface.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(DialogInterface dialog, int which) {
+                                                                            dialog.dismiss();
+                                                                        }
+                                                                    });
+                                                            AlertDialog alertFalse = dialogFalse.create();
+                                                            alertFalse.show();
+                                                        }
+                                                    }
+                                                    catch(JSONException e){
+                                                        tvResult.setVisibility(View.VISIBLE);
+                                                        tvResult.append("Une erreur serveur est survenue : "+e.toString());
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                            }
+                            //Only one candidat found with this name
+                            else if (response.length() == 1) {
                                 JSONObject jsonOBject = response.getJSONObject(0);
                                 candidate = Candidate.getCurrentCandidate();
                                 candidate.email = jsonOBject.getString("email");
                                 Candidate.setCurrentCandidate(candidate);
-
+                                SearchCandidate(etNom.getText().toString(), "");
+                            }
                         }catch(JSONException e){
                             tvResult.setVisibility(View.VISIBLE);
                             tvResult.append("Une erreur serveur est survenue : "+e.toString());

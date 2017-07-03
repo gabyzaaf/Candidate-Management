@@ -211,14 +211,15 @@ public class AddActivity extends AppCompatActivity {
                 etYear.getText().toString().matches("") || etNote.getText().toString().matches("")) {
             return false;
         }
+        else if (!rdFemme.isChecked() && !rdHomme.isChecked()) {
+            return false;
+        }
 
         return true;
     }
 
 
     public void AddCandidat() {
-
-
                Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -228,7 +229,6 @@ public class AddActivity extends AppCompatActivity {
                         AddReport();
                         }
                         else {
-                            //erreur
                             String erreur = response.getString("content");
                             AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                             builder.setMessage("json_add"+erreur)
@@ -248,7 +248,6 @@ public class AddActivity extends AppCompatActivity {
             Response.ErrorListener errorListener = new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //Gestion error
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("ERREUR SERVEUR : "+error.toString())
                             .setNegativeButton("Réessayer", null)

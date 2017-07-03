@@ -16,6 +16,8 @@
         android:text="  Veuillez remplir les champs suivants concernant la situation actuelle de l'employé, afin de prédire ses attentes salariales "
         android:textStyle="bold"
         android:textColor="@color/textTitle"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:textSize="18sp"
         android:paddingTop="@dimen/activity_vertical_margin"

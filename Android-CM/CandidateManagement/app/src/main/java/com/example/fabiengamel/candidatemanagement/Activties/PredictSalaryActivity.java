@@ -141,19 +141,27 @@ public class PredictSalaryActivity extends AppCompatActivity {
                     String mediumProbability = (String) Values.get(2);
                     String result = (String) Values.get(3);
                     String probability = "";
+                    String resultAffich = "";
+
                     if(result.matches("low"))
                     {
                         probability = lowProbability;
+                        resultAffich = "FAIBLE";
                     }
                     else if(result.matches("medium")) {
                         probability = mediumProbability;
+                        resultAffich = "MOYEN";
                     }
                     else if(result.matches("high")) {
                         probability = highProbability;
+                        resultAffich = "FORT";
                     }
 
+                    Double res = Double.valueOf(probability) * 100;
+                    String probabilityAffich = String.valueOf(res);
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
-                    builder.setMessage("Tranche de salaire éstimée : "+result+" avec une probabilité de : "+probability)
+                    builder.setMessage("Tranche de salaire éstimée : "+resultAffich+" avec une probabilité de : "+probabilityAffich+"%")
                             .setNeutralButton("Ok", null)
                             .create()
                             .show();
@@ -215,38 +223,6 @@ public class PredictSalaryActivity extends AppCompatActivity {
         }
         RequestQueue queue = Volley.newRequestQueue(PredictSalaryActivity.this);
         queue.add(salaryRequest);
-    }
-
-
-    JSONObject jsonBody;
-    JSONObject Inputs;
-    JSONObject input1;
-    JSONObject GlobalParameters;
-
-    public void TestJsonBody() throws JSONException {
-        jsonBody = new JSONObject();
-        Inputs = new JSONObject();
-        input1 = new JSONObject();
-        GlobalParameters = new JSONObject();
-
-        input1.put("number_project", "2");
-        input1.put("average_montly_hours", "189");
-        input1.put("time_spend_company", "2");
-        input1.put("Work_accident", "0");
-        input1.put("promotion_last_5years", "1");
-        jsonBody.put("Inputs",Inputs.put("input1", input1).put("GlobalParameters", GlobalParameters));
-        String body = jsonBody.toString();
-       // body = body.substring(0,147)+"["+body.substring(147,170)+"]"+body.substring(170,body.length());
-       // body = body.substring(1, body.length()-1);
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
-        builder.setMessage(" "+body)
-                .setNeutralButton("Ok", null)
-                .create()
-                .show();
-
-
     }
 
 }

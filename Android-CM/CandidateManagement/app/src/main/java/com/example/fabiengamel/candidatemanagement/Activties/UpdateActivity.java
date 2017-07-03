@@ -191,7 +191,6 @@ public class UpdateActivity extends AppCompatActivity {
         } else if (candidate.sexe.matches("F")) {
             sexes.check(rdFemme.getId());
         }
-      //  etYear.setText(candidate.annee);
         etYear.setText(String.valueOf(candidate.annee));
         etLink.setText(candidate.lien);
         etCrCall.setText(candidate.crCall);

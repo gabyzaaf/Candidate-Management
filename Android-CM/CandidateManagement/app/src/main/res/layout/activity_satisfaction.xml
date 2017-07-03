@@ -14,6 +14,8 @@
         android:text="  Veuillez remplir les champs suivants concernant la situation actuelle de l'employé, afin de prédire son taux de satisfaction "
         android:textStyle="bold"
         android:textColor="@color/textTitle"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:textSize="18sp"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -84,7 +86,7 @@
                 android:text="  Ancienneté (en année) *"
                 android:inputType="number"
                 android:textStyle="bold"
-                android:textColor="#4899F6"
+                android:textColor="@color/textInfo"
                 />
             <EditText
                 android:id="@+id/etTimeSpendSatisfaction"
@@ -139,8 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Oui"
-                    android:textColor="#4899F6"
-                    android:checked="false"
+                    android:textColor="@color/textInfo"
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     />
                 <RadioButton

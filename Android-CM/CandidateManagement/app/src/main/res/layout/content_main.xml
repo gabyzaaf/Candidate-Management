@@ -20,7 +20,7 @@
         android:textColor="@color/textTitle"
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:textSize="22dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -28,40 +28,46 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:enabled="false" />
-
-
     <TextView
-        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:id="@+id/tvCandidates"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
+        android:inputType="textMultiLine"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="sans-serif-medium"
+        android:id="@+id/tvCandidates"
         android:layout_alignRight="@+id/tvWelcome"
         android:layout_alignEnd="@+id/tvWelcome"
         android:maxLines = "50"
         android:scrollbars = "vertical"
+        android:scrollbarSize="4dp"
         android:textColor="@color/textEditable"
-        android:layout_below="@+id/LinearLayoutMain" />
+        android:layout_below="@+id/LinearLayoutMain"
+        android:layout_alignParentBottom="true" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/LinearLayoutMain"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/tvWelcome">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ici vous visualisez les candidats  "
+            android:text="Visualiser les candidats  "
+            android:fontFamily="sans-serif-medium"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:textColor="@color/textInfo"
             android:textStyle="bold"/>
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spActions"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:backgroundTint="@color/textInfo"
             android:textColor="@color/textInfo"
              />

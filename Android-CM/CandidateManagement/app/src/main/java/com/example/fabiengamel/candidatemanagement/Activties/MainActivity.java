@@ -48,7 +48,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     NavigationView navigationView;
     TextView tvCandidates;
     TextView tvWelcome;
@@ -57,28 +56,20 @@ public class MainActivity extends AppCompatActivity
     String action ="";
     List<Candidate> candidates;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
         InitContent();
-        //setMenu();
-
     }
-
-
 
     private void InitContent() {
         User user = User.getCurrentUser();
@@ -89,16 +80,13 @@ public class MainActivity extends AppCompatActivity
         tvCandidates = (TextView)findViewById(R.id.tvCandidates);
         ivLogo = (ImageView)findViewById(R.id.imageView);
         spActions = (Spinner)findViewById(R.id.spActions);
-
         tvWelcome.setText("Bonjour " + user.email);
+        tvCandidates.setMovementMethod(new ScrollingMovementMethod());
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
-
         spActions.setAdapter(adapter);
-        tvCandidates.setMovementMethod(new ScrollingMovementMethod());
-
         spActions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -106,7 +94,6 @@ public class MainActivity extends AppCompatActivity
                 action = spActions.getSelectedItem().toString();
                 GetCandidatesByActions(action);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 action = "aRelancerMail";
@@ -125,11 +112,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        return true;
-    }
-
+    public boolean onCreateOptionsMenu(Menu menu) {return true;}
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -162,17 +145,14 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_time) {
             startActivity(new Intent(this, TimeActivity.class));
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     public void GetCandidatesByActions(String action) {
-
-        User user = User.getCurrentUser();
+        final User user = User.getCurrentUser();
         candidates = new ArrayList<Candidate>();
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.sessionId ;
 
@@ -183,10 +163,11 @@ public class MainActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>()
                 {
                     public static final String TAG ="Recherche action : " ;
-
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("Response", response.toString());
+                        String errorToken = "Aucun token ayant ce numero "+user.sessionId+" existe veuillez vous identifier";
+                       // String errorTokenNull = "Aucun token ayant ce numero"+user.sessionId+"existe veuillez vous identifier";
                         try {
                             for(int i=0; i<response.length();i++) {
                                 JSONObject jsonOBject = response.getJSONObject(i);
@@ -194,7 +175,7 @@ public class MainActivity extends AppCompatActivity
 
                                 if(jsonOBject.has("content"))
                                 {
-                                    if(jsonOBject.getInt("code") == 4){
+                                    if(jsonOBject.getString("content").matches(errorToken)){
                                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
                                         builder.setTitle("Veuillez vous reconnecter");
                                         builder.setPositiveButton("Ok",
@@ -210,7 +191,9 @@ public class MainActivity extends AppCompatActivity
                                         alert.show();
 
                                     }
+                                    else{
                                     tvCandidates.append(jsonOBject.getString("content"));
+                                    }
                                 }
                                 else {
                                     Candidate candidate = new Candidate();
