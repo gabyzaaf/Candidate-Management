@@ -8,7 +8,10 @@
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
     <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styleConnexion.css">
+    <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <script>
         function verifChamp() {
@@ -96,53 +99,41 @@
 </head>
 
 <body ng-controller="rechercheCandidat">
-    <br />
-    <h2>Recherche</h2>
-    <br />
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <h3>Recherche Candidat</h3>
+    <center><p class="h1">Recherche Candidat</p></center>
     <br />
     <div id="erreurChamp" hidden="hidden">
-        <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
+        <center><p class="h3"><font color="red">Veuillez remplir les champs rouge</font></p></center>
     </div>
-    <div class="form-style">
-        <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
-            <table align="center">
-                <tr>
-                    <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>
-                            Nom : <input type="text" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom.." size="90" required/>
-                        </strong>
-                    </td>
-                </tr>
-            </table>
-            <br />
-            <center><input type="submit" class="btn" value="Recherche candidat" id="btnRecherche" onclick="verifChamp()"/></center>
+    <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
+        <br />
+        <center><h2 id="rep">{{contentResponse}}</h2></center>
+        <div class="form-group">
+            <div style="width: 70%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
+                <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" required />
+                <i class="icon icon-search"></i>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-inverse" id="btnRecherche" onclick="verifChamp()">Rechercher</button>
+                </span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div style="width: 70%; margin: auto;" class="icon-addon addon-lg">
+                <select class="form-control input-lg" ng-model="selectedCar" id="selectCandidat" onclick="toggleSelectCoordEntr()">
+                    <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
+                </select>
+                <i class="icon icon-search"></i>
+                <br />
+                <center>
+                    <input type="button" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableCoord()" />
+                    <input type="button" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableEntr()" />
+                </center>
+            </div>
+        </div>
+    </form>
 
-
-            <br />
-            <table align="center" border="1" width="500">
-                <tr>
-                    <th>Candidat</th>
-                    <th>Coordonnée</th>
-                    <th>Entretien</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select ng-model="selectedCar" id="selectCandidat" style="width:500px;" onclick="toggleSelectCoordEntr()" required>
-                            <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
-                        </select>
-                    </td>
-                    <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableCoord()" /></td>
-                    <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableEntr()" /></td>
-                </tr>
-            </table>
-        </form>
-    </div>
     <br />
 
     <br />
@@ -151,7 +142,7 @@
             <table align="center" id="loginTableCoord" hidden="hidden">
                 <tbody>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h1><b>Coordonnée</b></h1></td>
+                        <td colspan="5" align="center" id="response"><h1>Coordonnée</h1></td>
                     </tr>
                     <tr>
                         <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
@@ -243,7 +234,7 @@
             <table align="center" id="loginTableEntr" hidden="hidden">
                 <tbody>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h1><b>Entretien</b></h1></td>
+                        <td colspan="5" align="center" id="response"><h1>Entretien</h1></td>
                     </tr>
                     <tr>
                         <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseEntretien}}</h2></td>
@@ -335,24 +326,20 @@
     </section>
 
     <br />
-    <h3>Modifier un template message</h3>
+    <center><p class="h1">Modifier un template message</p></center>
     <section ng-controller="rechercheAllMessage">
         <form ng-submit="sendMessage(message)">
-            <div class="form-style">
-                <table align="center" border="1" width="500">
-                    <tr>
-                        <th>Message</th>
-                        <th>Modifier</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select ng-model="selectedMsg" id="selectMessage" style="width:500px;" onclick="toggleSelectModSupp()" required>
-                                <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
-                            </select>
-                        </td>
-                        <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableMod()" /></td>
-                    </tr>
-                </table>
+            <div class="form-group">
+                <div style="width: 70%; margin: auto;" class="icon-addon addon-lg">
+                    <select ng-model="selectedMsg" id="selectMessage" class="form-control input-lg" onclick="toggleSelectModSupp()" required>
+                        <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
+                    </select>
+                    <i class="icon icon-search"></i>
+                    <br />
+                    <center>
+                        <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableMod()" />
+                    </center>
+                </div>
             </div>
         </form>
         <br />
@@ -384,6 +371,8 @@
                     </table>
                 </div>
             </form>
+
+
         </section>
     </section>
     <br />
