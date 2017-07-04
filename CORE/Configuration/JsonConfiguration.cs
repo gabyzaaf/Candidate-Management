@@ -26,6 +26,8 @@ namespace core.configuration{
 
         private static readonly string  bashScriptPath = "bashScriptPath";
 
+        private static readonly string UrlOrIpAdressWithPort = "UrlOrIpAdressWithPort";
+
         private static IConfigurationRoot configuration = null ;
 
         
@@ -158,6 +160,18 @@ namespace core.configuration{
              }
          }
 
+         public string getUrlOrIpAdressWithPort(){
+             try{
+                settingsExist();
+                if(String.IsNullOrEmpty(configuration[UrlOrIpAdressWithPort])){
+                    return "http://localhost:5000";
+                }
+                return configuration[UrlOrIpAdressWithPort];
+             }catch(Exception exc){
+                throw new ConfigurationCustomException(this.GetType().Name,$"{exc.Message}");
+             }
+         }
+
          public string getTheBashScriptPath(){
             try{
                 settingsExist();
@@ -198,6 +212,7 @@ namespace core.configuration{
              }
              
          }
+
 
         private void settingsExist(){
             if(configuration==null){

@@ -69,7 +69,7 @@ namespace ConsoleApplication
                 loadingTheFolders.executeLoading();
                 var host = new WebHostBuilder()
                             .UseKestrel()
-                            .UseUrls("http://localhost:5000")
+                            .UseUrls(JsonConfiguration.getInstance().getUrlOrIpAdressWithPort())
                             .UseStartup<Startup>()
                             .Build();
                 host.Run();
