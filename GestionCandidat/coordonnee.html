@@ -8,7 +8,10 @@
     <script src="scripts/angular-route.js"></script>
     <script src="js/script.js"></script>
     <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styleConnexion.css">
+    <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <script>
         function myFunction() {
@@ -40,10 +43,9 @@
     </script>
 </head>
 <body ng-controller="app">
-    <br />
-    <h2>Fiche Coodonnée</h2>
-    <br />
     <div ng-include="'barreMenu.html'"></div>
+    <br />
+    <center><p class="h1">Fiche Coodonnée</p></center>
     <br />
     <table align="center">
         <tbody>
@@ -136,7 +138,7 @@
                             <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
+                            <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -145,23 +147,20 @@
     </section>
     <br />
     <br />
+    <center><p class="h1">Modifier un template message</p></center>
     <section ng-controller="rechercheAllMessage">
         <form ng-submit="sendMessage(message)">
-            <div class="form-style">
-                <table align="center" border="1" width="500">
-                    <tr>
-                        <th>Message</th>
-                        <th>Modifier</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select ng-model="selectedMsg" id="selectMessage" style="width:500px;">
-                                <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
-                            </select>
-                        </td>
-                        <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableMod()" /></td>
-                    </tr>
-                </table>
+            <div class="form-group">
+                <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
+                    <select ng-model="selectedMsg" id="selectMessage" class="form-control input-lg" onclick="toggleSelectModSupp()" required>
+                        <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
+                    </select>
+                    <i class="icon icon-search"></i>
+                    <br />
+                    <center>
+                        <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableMod()" />
+                    </center>
+                </div>
             </div>
         </form>
         <br />
@@ -187,22 +186,15 @@
                             </tr>
                             <tr>
                             <tr>
-                                <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Modifier" onclick="" /></td>
+                                <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btn btn-warning" value="Modifier" /></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </form>
+
+
         </section>
     </section>
-    <br />
-     <!--
-     <div ng-controller="verifRecherche">
-         <p>{{/nom}}</p>
-         <p>{{/prenom}}</p>
-         <p>{{/telephone}}</p>
-         <p>{{/email}}</p>
-     </div>
-     -->
 </body>
 </html>

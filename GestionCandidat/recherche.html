@@ -98,6 +98,7 @@
     </script>
 </head>
 
+
 <body ng-controller="rechercheCandidat">
     <div ng-include="'barreMenu.html'"></div>
     <br />
@@ -110,7 +111,7 @@
         <br />
         <center><h2 id="rep">{{contentResponse}}</h2></center>
         <div class="form-group">
-            <div style="width: 70%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
+            <div style="width: 50%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
                 <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" required />
                 <i class="icon icon-search"></i>
                 <span class="input-group-btn">
@@ -120,15 +121,15 @@
         </div>
         <br />
         <div class="form-group">
-            <div style="width: 70%; margin: auto;" class="icon-addon addon-lg">
+            <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
                 <select class="form-control input-lg" ng-model="selectedCar" id="selectCandidat" onclick="toggleSelectCoordEntr()">
                     <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
                 </select>
                 <i class="icon icon-search"></i>
                 <br />
                 <center>
-                    <input type="button" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableCoord()" />
-                    <input type="button" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableEntr()" />
+                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableCoord()" />
+                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableEntr()" />
                 </center>
             </div>
         </div>
@@ -136,16 +137,15 @@
 
     <br />
 
-    <br />
     <section ng-controller="updateCandidate">
         <form ng-submit="sendEntry(updateCandidate)">
             <table align="center" id="loginTableCoord" hidden="hidden">
                 <tbody>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h1>Coordonnée</h1></td>
+                        <td colspan="5" align="center" ><h1>Coordonnée</h1></td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
+                        <td colspan="5" align="center" ><h2 id="rep">{{contentResponse}}</h2></td>
                     </tr>
                     <tr>
                         <td>*Nom : </td>
@@ -220,7 +220,7 @@
                         <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btnRouge" value="Modifier" /></td>
+                        <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -294,7 +294,7 @@
                         <td colspan="4"><textarea name="competence" cols="100" rows="4" ng-value="competencesCoor" ng-model="updateEntretien.competences"></textarea></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnRouge" value="Modifier" /></td>
+                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" /></td>
                     </tr>
                     <!--<tr>
                         <td>CR technique : </td>
@@ -330,7 +330,7 @@
     <section ng-controller="rechercheAllMessage">
         <form ng-submit="sendMessage(message)">
             <div class="form-group">
-                <div style="width: 70%; margin: auto;" class="icon-addon addon-lg">
+                <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
                     <select ng-model="selectedMsg" id="selectMessage" class="form-control input-lg" onclick="toggleSelectModSupp()" required>
                         <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
                     </select>
@@ -365,7 +365,7 @@
                             </tr>
                             <tr>
                             <tr>
-                                <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Modifier" onclick="" /></td>
+                                <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btn btn-warning" value="Modifier"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -375,7 +375,6 @@
 
         </section>
     </section>
-    <br />
 
 </body>
 </html>

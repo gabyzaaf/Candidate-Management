@@ -269,7 +269,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 crCall: candidat.crCall,
                 ns: candidat.note,
                 email: "true",
-                cp : candidat.cp
+                zipcode : candidat.cp
             }
         }
 
@@ -386,7 +386,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 Name: updateCandidate.nom,
                 Firstname: updateCandidate.prenom,
                 emailAdress: updateCandidate.email,
-                cp: updateCandidate.cp,
+                zipcode: updateCandidate.cp,
                 phone: updateCandidate.telephone,
                 sexe: updateCandidate.sexe,
                 action: updateCandidate.action,
@@ -634,14 +634,14 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                                 nbSelect = i;
                                 //console.log($scope.todos[i].email);
                             }
-                            //console.log($scope.todos[i].email);
+                            console.log($scope.todos[i].email);
                         }
                         $scope.nomCoor = $scope.todos[nbSelect].nom;
                         $scope.prenomCoor = $scope.todos[nbSelect].prenom;
                         $scope.phoneCoor = $scope.todos[nbSelect].phone;
                         $scope.emailCoor = $scope.todos[nbSelect].email;
                         $scope.sexeCoor = $scope.todos[nbSelect].sexe;
-                        $scope.cpCoor = $scope.todos[nbSelect].cp;
+                        $scope.cpCoor = $scope.todos[nbSelect].zipcode;
                         $scope.actionsCoor = $scope.todos[nbSelect].actions;
                         $scope.anneeCoor = $scope.todos[nbSelect].annee;
                         $scope.lienCoor = $scope.todos[nbSelect].lien;
@@ -677,7 +677,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
 
 gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
-    $http.get('http://192.168.0.16:5000/api/user/Candidates/rechercheAll/' + $cookies.get('cookie')).then(function (response) {
+    $http.get('http://192.168.0.16:5000/api/Remind/candidate/withoutRapport/' + $cookies.get('cookie')).then(function (response) {
             $scope.todos = response.data;
             $scope.selectedCar = $cookies.get('id');
             if ($scope.todos != null) {
@@ -693,10 +693,10 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
                         }
                     }
                     $scope.id = $scope.todos[nbSelect].id;
-                    $scope.nomCoor = $scope.todos[nbSelect].nom;
-                    $scope.prenomCoor = $scope.todos[nbSelect].prenom;
+                    $scope.nomCoor = $scope.todos[nbSelect].name;
+                    $scope.prenomCoor = $scope.todos[nbSelect].firstname;
                     $scope.phoneCoor = $scope.todos[nbSelect].phone;
-                    $scope.emailCoor = $scope.todos[nbSelect].email;
+                    $scope.emailCoor = $scope.todos[nbSelect].emailAdress;
                 }
             } else {
                 console.log("In the error");
