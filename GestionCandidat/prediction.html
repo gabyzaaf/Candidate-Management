@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html ng-app="gestionCandidatApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Prédiction</title>
+    <meta charset="utf-8" />
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="js/script.js"></script>
+    <script src="scripts/c3.js"></script>
+    <script src="scripts/c3.min.js"></script>
+    <script src="scripts/d3.js" charset="utf-8"></script>
+    <script src="scripts/d3.min.js" charset="utf-8"></script>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="Content/c3.css" rel="stylesheet" type="text/css">
+    <link href="Content/c3.min.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8" />
+    <script>
+        function divOnloadHidden() {
+            document.getElementById("erreurChamp").style.visibility = 'hidden';
+        }
+
+        function verifChamp() {
+            var satisfaction_level = document.getElementById("satisfaction_level");
+            var last_evaluation = document.getElementById("last_evaluation");
+            var number_project = document.getElementById("number_project");
+            var average_montly_hours = document.getElementById("average_montly_hours");
+            var time_spend_company = document.getElementById("time_spend_company");
+            var Work_accident = document.getElementById("Work_accident");
+            var promotion_last_5years = document.getElementById("promotion_last_5years");
+            var sales = document.getElementById("sales");
+            var salary = document.getElementById("salary");
+            var i = 0;
+            if (satisfaction_level.value == "") {
+                satisfaction_level.style.borderColor = "red";
+                i = 1;
+            } else {
+                satisfaction_level.style.borderColor = "";
+            }
+            if (last_evaluation.value == "") {
+                last_evaluation.style.borderColor = "red";
+                i = 1;
+            } else {
+                last_evaluation.style.borderColor = "";
+            }
+            if (number_project.value == "") {
+                number_project.style.borderColor = "red";
+                i = 1;
+            } else {
+                number_project.style.borderColor = "";
+            }
+            if (average_montly_hours.value == "") {
+                average_montly_hours.style.borderColor = "red";
+                i = 1;
+            } else {
+                average_montly_hours.style.borderColor = "";
+            }
+            if (time_spend_company.value == "") {
+                time_spend_company.style.borderColor = "red";
+                i = 1;
+            } else {
+                time_spend_company.style.borderColor = "";
+            }
+            if (Work_accident.value == "? undefined:undefined ?") {
+                Work_accident.style.borderColor = "red";
+                i = 1;
+            } else {
+                Work_accident.style.borderColor = "";
+            }
+            if (promotion_last_5years.value == "? undefined:undefined ?") {
+                promotion_last_5years.style.borderColor = "red";
+                i = 1;
+            } else {
+                promotion_last_5years.style.borderColor = "";
+            }
+            if (sales.value == "? undefined:undefined ?") {
+                sales.style.borderColor = "red";
+                i = 1;
+            } else {
+                sales.style.borderColor = "";
+            }
+            if (salary.value == "? undefined:undefined ?") {
+                salary.style.borderColor = "red";
+                i = 1;
+            } else {
+                salary.style.borderColor = "";
+            }
+            
+            if (!Boolean(i)) {
+                document.getElementById("erreurChamp").style.display = 'none';
+                document.getElementById("reponsetable").style.display = 'block';
+            } else {
+                document.getElementById("erreurChamp").style.display = 'block';
+                document.getElementById("reponsetable").style.display = 'none';
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h2>Prédiction</h2>
+    <br />
+    <div ng-include="'barreMenu.html'"></div>
+    <br />
+    <br />
+    <h1>Prédiction : le salarié serait-il suceptible de quitte l'entreprise ou non ?</h1>
+    <div id="erreurChamp" hidden="hidden">
+        <h2><font color="red">Veuillez remplir les champs rouge</font></h2>
+    </div>
+    <section ng-controller="predictionAzure">
+        <form ng-submit="sendValueForAzure(prediction)">
+            <table border="1" align="center">
+                <tbody>
+                    <tr>
+                        <td><label>Level de satisfaction (décimal entre 0 à 1)</label></td>
+                        <td><input type="number" step="0.01" min="0" max="1" id="satisfaction_level" ng-model="prediction.satisfaction_level" placeholder="0 à 1" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Dernière évaluation (décimal entre 0 à 1)</label></td>
+                        <td><input type="number" step="0.01" min="0" max="1" id="last_evaluation" ng-model="prediction.last_evaluation" placeholder="0 à 1" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Nombre de projet réaliser</label></td>
+                        <td><input type="number" id="number_project" min="0" ng-model="prediction.number_project" placeholder="Nombre de projet..." /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Moyenne d'heures travaillé par mois</label></td>
+                        <td><input type="number" min="0" max="4040" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Temps passé à l'entreprise (en année)</label></td>
+                        <td><input type="number" min="0" max="66" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
+                    </tr>
+                    <tr>
+                        <td><label>A-t-il déjà eu au moins un accident de travail ?</label></td>
+                        <td>
+                            <select id="Work_accident" ng-model="prediction.Work_accident">
+                                <option value="0">NON</option>
+                                <option value="1">OUI</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>A-t-il déjà eu au moins une promotion durant les 5 dernières anneès ?</label></td>
+                        <td>
+                            <select id="promotion_last_5years" ng-model="prediction.promotion_last_5years">
+                                <option value="0">NON</option>
+                                <option value="1">OUI</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Secteur</label></td>
+                        <td>
+                            <select id="sales" ng-model="prediction.sales">
+                                <option value="sales">Vente</option>
+                                <option value="it">Informatique</option>
+                                <option value="support">Support</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>salary</label></td>
+                        <td>
+                            <select id="salary" ng-model="prediction.salary">
+                                <option value="low">Faible</option>
+                                <option value="middle">Moyen</option>
+                                <option value="high">Fort</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" value="Prediction" onclick="verifChamp()" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    <br />
+    <div id="reponsetable" hidden="hidden">
+        <table border="1" align="center">
+            <tr>
+                <th colspan="2">Reponse prédiction</th>
+            </tr>
+            <tr>
+                <th>Quite ou non l'entreprise</th>
+                <th>Probabilité de la reponse</th>
+            </tr>
+            <tr>
+                <td>{{resultatAzure}}</td>
+                <td>{{probAzure}}</td>
+            </tr>
+        </table>
+    </div>
+    </section>
+</body>
+</html>
