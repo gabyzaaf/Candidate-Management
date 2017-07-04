@@ -63,16 +63,10 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {    
             try{
-                JsonConfiguration conf = JsonConfiguration.getInstance(); 
                 Context loadingTheFolders = new Context();
                 loadingTheFolders.setFolders(new LoadingEmailTemplate());
                 loadingTheFolders.setFolders(new LoadingPlugins());
                 loadingTheFolders.executeLoading();
-                // load the plugins.
-                // load the template
-                         
-               // Context contexte = new Context(new LoadingEmailTemplate());
-               // contexte.executeLoading();
                 var host = new WebHostBuilder()
                             .UseKestrel()
                             .UseUrls("http://localhost:5000")

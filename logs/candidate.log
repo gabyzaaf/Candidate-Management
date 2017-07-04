@@ -113,3 +113,25 @@
 7/4/17 10:59:04 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/4/17 10:59:11 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
 7/4/17 10:59:29 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 22:59 7/6/2017  /var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/6/2017 
+7/4/17 11:10:27 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/4/17 11:10:27 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/4/17 11:10:27 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/4/17 11:11:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/4/17 11:11:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/4/17 11:11:23 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/4/17 11:11:43 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 11:11:43 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/4/17 11:12:10 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/4/17 11:12:26 PM - [Error] - SqlCustomException - MysqlDb - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''pluginsInfo'' at line 1
+7/4/17 11:12:26 PM - [Error] - SqlCustomException - MysqlDb - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''pluginsInfo'' at line 1 - Dans la fonction getPluginList
+7/4/17 11:12:26 PM - [Error] - WsCustomeException - RemindController - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''pluginsInfo'' at line 1 - Dans la fonction getPluginList
+7/4/17 11:13:24 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 11:13:24 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/4/17 11:17:03 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 11:17:03 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/4/17 11:18:00 PM - [Error] - SqlCustomException - MysqlDb - Vous ne possedez aucun plugin - Dans la fonction getPluginList
+7/4/17 11:18:00 PM - [Error] - WsCustomeException - RemindController - Vous ne possedez aucun plugin - Dans la fonction getPluginList
+7/4/17 11:18:53 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 11:18:53 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/4/17 11:20:52 PM - [Error] - SqlCustomException - MysqlDb - Vous ne possedez aucun plugin
+7/4/17 11:20:52 PM - [Error] - WsCustomeException - RemindController - Vous ne possedez aucun plugin

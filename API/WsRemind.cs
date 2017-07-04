@@ -100,6 +100,19 @@ namespace Candidate_Management.API
                 }
             }
 
+            [HttpGet("display/plugins/list")]
+            public IActionResult changeJobState(){
+               ArrayList pluginList = new ArrayList();
+               try{
+                    IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                    pluginList = isql.getPluginList();
+                    return new ObjectResult(pluginList);
+                }catch(Exception exc){
+                    new WsCustomeException(this.GetType().Name,exc.Message);
+                    State state = new State(){code=3,content=exc.Message,success=false};
+                    return CreatedAtRoute("SendRemindsError", new { error = state },state);
+                } 
+            }
 
             [HttpGet("{error}", Name = "SendRemindsError")]
             public IActionResult ErrorList(ArrayList errors)

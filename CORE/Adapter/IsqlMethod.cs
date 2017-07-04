@@ -103,6 +103,8 @@ namespace Core.Adapter.Inteface
           bool pluginExist(Plugin plugin);
 
           void addPlugin(Plugin plugin);
+
+          ArrayList getPluginList();
     }
 
 } 

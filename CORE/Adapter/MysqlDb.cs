@@ -1264,5 +1264,23 @@ namespace Core.Adapter{
                 throw new Exception("Le nom du plugin ne peut etre vide");
             }
         }
+
+        public ArrayList getPluginList(){
+            try{
+                ArrayList output = null;
+                string sql = "select pluginName from pluginsInfo";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@table","pluginsInfo");
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("pluginName");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception("Vous ne possedez aucun plugin");
+                }
+                return output;
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
+            }
+        }
     }
 }
