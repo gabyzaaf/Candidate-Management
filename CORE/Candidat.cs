@@ -23,7 +23,7 @@ namespace core.candidat{
 
         public string ns{get;set;}
 
-        public bool email {get;set;}
+        public string pluginType {get;set;}
         
         public string meetingNote{get;set;}
 

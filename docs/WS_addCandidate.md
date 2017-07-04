@@ -16,11 +16,12 @@ The url is type ***POST***, the url content is :
 	"phone":"065434563",
 	"sexe":"M",
 	"action":"interne",
+	"zipcode":"75018",
 	"year":"2015",
 	"link":"http://google.com",
 	"crCall":"cr call",
 	"ns":"NS",
-	"email":"true"
+	"pluginType":"email"
 }
 ```
 

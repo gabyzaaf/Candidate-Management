@@ -343,9 +343,9 @@ namespace Core.Adapter{
                 dico.Add("@lien",candidat.link);
                 dico.Add("@crcall",candidat.crCall);
                 dico.Add("@ns",candidat.ns);
-                dico.Add("@email",candidat.email);
+                dico.Add("@pluginType",candidat.pluginType);
                 dico.Add("@userId",id);
-                queryExecute("insert into candidate (nom,prenom,phone,email,zipcode,sexe,actions,annee,lien,crCall,NS,approche_email,fid_user_candidate) values (@nom,@prenom,@num,@emailAdress,@zipcode,@sexe,@etat,@annee,@lien,@crcall,@ns,@email,@userId)",dico,null);
+                queryExecute("insert into candidate (nom,prenom,phone,email,zipcode,sexe,actions,annee,lien,crCall,NS,pluginType,fid_user_candidate) values (@nom,@prenom,@num,@emailAdress,@zipcode,@sexe,@etat,@annee,@lien,@crcall,@ns,@pluginType,@userId)",dico,null);
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,$"In addCandidate function {exc.Message}");
             }
@@ -598,9 +598,8 @@ namespace Core.Adapter{
                     param.Add("@lien",candidat.link);
                     param.Add("@crCall",candidat.crCall);
                     param.Add("@ns",candidat.ns);
-                    param.Add("@approcheemail",candidat.email);
                     param.Add("@email",candidat.emailAdress);
-                    queryExecute("update candidate set nom=@nom,prenom=@prenom,phone=@phone,zipcode=@zipcode,sexe=@sexe,actions=@actions,annee=@annee,lien=@lien,crCall=@crCall,NS=@ns,approche_email=@approcheemail where email=@email",param,null);
+                    queryExecute("update candidate set nom=@nom,prenom=@prenom,phone=@phone,zipcode=@zipcode,sexe=@sexe,actions=@actions,annee=@annee,lien=@lien,crCall=@crCall,NS=@ns where email=@email",param,null);
                 
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
@@ -752,7 +751,7 @@ namespace Core.Adapter{
                 results.AddLast("lien");
                 results.AddLast("crCall");
                 results.AddLast("NS");
-                results.AddLast("approche_email");
+                results.AddLast("pluginType");
                 results.AddLast("note");
                 results.AddLast("link");
                 results.AddLast("xpNote");

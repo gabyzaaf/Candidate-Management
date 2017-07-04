@@ -135,3 +135,26 @@
 7/4/17 11:18:53 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/4/17 11:20:52 PM - [Error] - SqlCustomException - MysqlDb - Vous ne possedez aucun plugin
 7/4/17 11:20:52 PM - [Error] - WsCustomeException - RemindController - Vous ne possedez aucun plugin
+7/4/17 11:59:40 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 11:59:40 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 12:01:33 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 12:01:33 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 12:01:49 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/5/17 12:02:14 AM - [Error] - SqlCustomException - MysqlDb - Unknown column 'pluginType' in 'field list'
+7/5/17 12:02:14 AM - [Error] - SqlCustomException - MysqlDb - In addCandidate function Unknown column 'pluginType' in 'field list'
+7/5/17 12:02:14 AM - [Error] - WsCustomeException - UserController - In addCandidate function Unknown column 'pluginType' in 'field list'
+7/5/17 12:03:04 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 12:03:04 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 12:03:31 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/5/17 12:03:42 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+7/5/17 12:03:42 AM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
+7/5/17 12:05:45 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 12:05:45 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 12:06:03 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+7/5/17 12:06:03 AM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
+7/5/17 12:06:43 AM - [Error] - SqlCustomException - MysqlDb - Le nom de fichier pour les templates d'email ne peut pas etre vide
+7/5/17 12:06:43 AM - [Error] - WsCustomeException - UserController - Le nom de fichier pour les templates d'email ne peut pas etre vide
+7/5/17 12:07:12 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 12:07:12 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 12:07:29 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+7/5/17 12:07:29 AM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
