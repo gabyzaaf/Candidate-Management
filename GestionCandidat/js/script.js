@@ -53,7 +53,7 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
 /********************   Analyse Candidat   ********************/
 
 gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
-    $http.get('http://192.168.0.16:5000/api/user/MlCandidates/recherche/' + $cookies.get('cookie')).then(function (response) {
+    $http.get('http://192.168.0.16:5000/api/Remind/stat/mlcandidate/sales/' + $cookies.get('cookie')).then(function (response) {
         $scope.todos = response.data;
         for (var i = 0; i < 500; i++) {
             if ($scope.todos[0].content != null) {
