@@ -9,13 +9,10 @@ namespace Candidate_Management.CORE.Remind
 {
     public class appellerRemind : LegacyRemind ,Iremind
     {
-        private DateTime date = new DateTime();
+       
         public int id {get;set;}
         private string fileName = null; 
          
-
-       
-
         public void add(int id,DateTime date){
             this.id = id;
             checkFileNameIsNull();
@@ -36,14 +33,10 @@ namespace Candidate_Management.CORE.Remind
            emailCandidate = isql.getCandidateEmailFromId(id);
         }
 
-        public void display(){
-            Console.WriteLine($"L'email du candidat est {emailCandidate}");
-        }
+        
         
 
         public void exec(string token,DateTime meeting){
-            
-
             checkFileNameIsNull();
             Dictionary<string,string> candidateInformation = getCandidateNameFromId(this.id);
             string pathAndFile = getPathNameAndFileFromTemplate(fileName);
@@ -54,8 +47,7 @@ namespace Candidate_Management.CORE.Remind
            //string filePathTemplate = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/sample.txt";
            string filePathTemplate = $"{JsonConfiguration.getInstance().getEmailTemplatePath()}{this.fileName}";
            string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {remindId}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {currentDate} {emailCandidate}";
-            Console.WriteLine(cmd);
-            
+            traceOutSideTheSystem(cmd); 
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask(); 
             

@@ -6,6 +6,7 @@ using core.report;
 using core.success;
 using core.user;
 using Candidate_Management.CORE.LoadingTemplates;
+using Candidate_Management.CORE.Load;
 
 namespace Core.Adapter.Inteface
 {
@@ -98,6 +99,10 @@ namespace Core.Adapter.Inteface
           int getLastCandidateIdFromRemind(int userId);
 
           string getCandidateEmailFromId(int candidateId);
+
+          bool pluginExist(Plugin plugin);
+
+          void addPlugin(Plugin plugin);
     }
 
 } 

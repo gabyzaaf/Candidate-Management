@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using Core.Adapter;
 using Core.Adapter.Inteface;
 using System.Collections;
-using Candidate_Management.CORE.LoadingTemplates;
+using Candidate_Management.CORE.Loading;
+using Candidate_Management.CORE.Exceptions;
 
-namespace Candidate_Management.CORE.LoadingTemplates
+namespace Candidate_Management.CORE.Loading
 {
     public class LoadingEmailTemplate : Iloading
     {
@@ -55,11 +56,12 @@ namespace Candidate_Management.CORE.LoadingTemplates
         
         
 
-        public void loadFiles(){
+        public void loading(){
             try{
                 getFilesFromTheFolder(); // get the file for the folder
                 filterWithTextExtension(); // add the files with extension inside the array list
-                addTheFileInsideTheSystem();
+                addTheFileInsideTheSystem(); // add files in the database
+                new WsCustomeInfoException("EmailTemplate","Les templates d'emails ont bien été chargé au démarrage");
             }catch(NotFileContentFolderException notFile){
                 throw notFile;
             }

@@ -66,10 +66,6 @@ namespace core.configuration{
             if(!Directory.Exists(configuration[configurationPluginFolder])){
                  throw new ConfigurationCustomException(this.GetType().Name,"Le dossier n'existe pas veuillez creer le dossier de plugin");
             }
-            string pluginFolder = configuration[configurationPluginFolder];
-            if(!Directory.Exists(pluginFolder)){
-                throw new ConfigurationCustomException(this.GetType().Name,$"Le repertoire spécifié à cette adresse {pluginFolder} n'existe ");
-            }
             return configuration[configurationPluginFolder];
         }
         

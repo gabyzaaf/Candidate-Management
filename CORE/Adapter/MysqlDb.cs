@@ -12,7 +12,7 @@ using exception.sql;
 using MySql.Data.MySqlClient;
 using Candidate_Management.CORE.LoadingTemplates;
 using Candidate_Management.CORE.Remind;
-
+using Candidate_Management.CORE.Load;
 
 namespace Core.Adapter{
 
@@ -1219,6 +1219,49 @@ namespace Core.Adapter{
                 return emailCandidat;
             }catch(Exception exc){
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
+
+        public bool pluginExist(Plugin plugin){
+            try{
+                ArrayList output = null;
+                pluginIsNullOrNameIsEmpty(plugin);
+                string sql = "select count(*) as nb from pluginsInfo where pluginName = @name";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@name",plugin.name);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("nb");
+                output = queryExecute(sql,dico,results);
+                Dictionary<string,string> numberPlugins = (Dictionary<string,string>)output[0];
+                int pluginCount = Int32.Parse(numberPlugins["nb"]);
+                if(pluginCount==0){
+                    return false;
+                }
+                return true;
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message} - Dans la fonction PluginExist");
+            }
+        }
+
+        public void addPlugin(Plugin plugin){
+            try{
+                pluginIsNullOrNameIsEmpty(plugin);
+                Dictionary<String,Object> param = new Dictionary<String,Object>();
+                param.Add("@name",plugin.name);
+                queryExecute("insert into pluginsInfo (pluginName) values (@name)",param,null);
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message} - Dans la fonction addPlugin");
+            }
+            
+
+        }
+
+        private void pluginIsNullOrNameIsEmpty(Plugin plugin){
+            if(plugin == null){
+                throw new Exception("Les informations lié au plugin ne peuvent pas etre vide ");
+            }
+            if(String.IsNullOrEmpty(plugin.name)){
+                throw new Exception("Le nom du plugin ne peut etre vide");
             }
         }
     }

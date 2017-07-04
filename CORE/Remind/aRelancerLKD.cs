@@ -37,8 +37,7 @@ namespace Candidate_Management.CORE.Remind
            string emailPluginPath = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll";
            string filePathTemplate = $"{JsonConfiguration.getInstance().getEmailTemplatePath()}{this.fileName}";
            string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {remindId}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {currentDate} {emailCandidate}";
-           Console.WriteLine(cmd);
-            
+           traceOutSideTheSystem(cmd); 
             Schedule schedule = new Schedule(cmd);
             schedule.executeTask(); 
         }

@@ -90,7 +90,7 @@ namespace Candidate_Management.API
                       isql.remindAlreadyUpdated(idJob);
                       isql.changeJobState(idJob);
 
-                      new WsCustomeInfoException("S001",$"The email for the candidate {user.candidateEmail} had been send ");
+                      new WsCustomeInfoException("S001",$"L'email du candidat {user.candidateEmail} a bien ete envoye ");
                       State state = new State(){code=1,content=$"Le job avec l'id {idJob} a été modifié ",success=true};
                      return new ObjectResult(state);
                 }catch(Exception exc){
@@ -98,14 +98,6 @@ namespace Candidate_Management.API
                     State state = new State(){code=3,content=exc.Message,success=false};
                     return CreatedAtRoute("SendRemindsError", new { error = state },state);
                 }
-                
-                
-            }
-
-            [HttpPost("add/job/")]
-            public IActionResult addJobInsideTheSystem([FromBody]Remind remind){
-
-                return new ObjectResult(remind);
             }
 
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using core.candidat;
-using core.plugin.engine;
 using core.report;
 using core.success;
 using core.user;
@@ -181,13 +180,6 @@ namespace API.wsUser
                 
                 throw new Exception("Vous devez creer votre utilisateur convenablement prealablement");
             }
-        }
-
-         [HttpGet("Candidates/loads/{id}")]
-        public void loadLibrary(string id){
-            Console.WriteLine("In load library");
-            StartPluginController start = new StartPluginController();
-            start.loadPlugin();
         }
 
         [HttpPost("add/candidat/report")]

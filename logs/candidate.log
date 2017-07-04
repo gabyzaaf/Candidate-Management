@@ -94,3 +94,22 @@
 7/3/17 8:49:32 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
 7/3/17 8:53:45 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
 7/3/17 8:53:45 PM - [Error] - SqlCustomException - MysqlDb - Data too long for column 'contenu_message' at row 1
+7/3/17 10:22:50 PM - [Information] - WsCustomeInfoException - S001 - The email for the candidate gabriel.zaafrani@gmail.com had been send 
+7/3/17 10:25:22 PM - [Error] - SqlCustomException - MysqlDb - Votre job avec l'identifiant 27 a déja été envoyé
+7/3/17 10:25:22 PM - [Error] - WsCustomeException - RemindController - Votre job avec l'identifiant 27 a déja été envoyé
+7/3/17 10:26:49 PM - [Error] - SqlCustomException - MysqlDb - Votre job avec l'identifiant 27 a déja été envoyé
+7/3/17 10:26:49 PM - [Error] - WsCustomeException - RemindController - Votre job avec l'identifiant 27 a déja été envoyé
+7/4/17 6:44:41 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/4/17 6:47:28 PM - [Error] - SqlCustomException - MysqlDb - Le nom de fichier pour les templates d'email ne peut pas etre vide
+7/4/17 6:47:28 PM - [Error] - WsCustomeException - UserController - Le nom de fichier pour les templates d'email ne peut pas etre vide
+7/4/17 7:03:07 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:3 7/6/2017  /var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/6/2017 
+7/4/17 7:07:04 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/4/17 7:07:14 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:7 7/6/2017  /var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/6/2017 
+7/4/17 7:07:22 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:7 7/6/2017  /var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/6/2017 
+7/4/17 8:22:16 PM - [Error] - WsCustomeException - RemindController - Le job spécifié avec l'identifiant 27 n'existe pas 
+7/4/17 10:55:05 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 10:55:05 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/4/17 10:59:04 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/4/17 10:59:04 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/4/17 10:59:11 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/4/17 10:59:29 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 22:59 7/6/2017  /var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/6/2017 

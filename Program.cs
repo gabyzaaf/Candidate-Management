@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
 using core.configuration;
-using core.plugin.engine;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -12,10 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Candidate_Management.CORE.LoadingTemplates;
 using Candidate_Management.CORE.Remind;
-using scheduler;
-using Candidate_Management.CORE.LoadingPlugin;
+using Candidate_Management.CORE.Loading;
+using System.Collections;
 
-using Candidate_Management.CORE.Remind;
 
 namespace ConsoleApplication
 {
@@ -63,23 +61,18 @@ namespace ConsoleApplication
         
 
         public static void Main(string[] args)
-        {
-            /*
-            string date = DateTime.Today.AddDays(1).ToString("MM/dd/yy",CultureInfo.InvariantCulture);
-            string cmd = $"script.sh {date}";
-            Console.WriteLine(cmd);
-            Schedule schedule = new Schedule(cmd);
-            schedule.executeTask();  
-             */
-            
+        {    
             try{
-                
-                JsonConfiguration conf = JsonConfiguration.getInstance();
-                string folder = conf.getPluginFolder();
-                LoadPlugins load = new LoadPlugins(folder);
-                string[] fileList = load.getPluginFromFolders();            
-                Context contexte = new Context(new LoadingEmailTemplate());
-                contexte.executeLoading();
+                JsonConfiguration conf = JsonConfiguration.getInstance(); 
+                Context loadingTheFolders = new Context();
+                loadingTheFolders.setFolders(new LoadingEmailTemplate());
+                loadingTheFolders.setFolders(new LoadingPlugins());
+                loadingTheFolders.executeLoading();
+                // load the plugins.
+                // load the template
+                         
+               // Context contexte = new Context(new LoadingEmailTemplate());
+               // contexte.executeLoading();
                 var host = new WebHostBuilder()
                             .UseKestrel()
                             .UseUrls("http://localhost:5000")

@@ -3,6 +3,7 @@ using Core.Adapter.Inteface;
 using System.Collections;
 using System;
 using core.configuration;
+using Candidate_Management.CORE.Exceptions;
 namespace Candidate_Management.CORE.Remind
 {
     public abstract class LegacyRemind
@@ -12,7 +13,7 @@ namespace Candidate_Management.CORE.Remind
         protected int remindId;
         protected string emailCandidate = null;
         protected string fileName = null; 
-
+        protected DateTime date = new DateTime();
 
         protected Dictionary<string,string> getCandidateNameFromId(int id){
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -36,5 +37,8 @@ namespace Candidate_Management.CORE.Remind
             }
         }
         
+        protected void traceOutSideTheSystem(string cmd){
+            new WsCustomeInfoException("SendRemind",$"The message was sent on time {date} + the command is {cmd}");
+        }
     }
 }
