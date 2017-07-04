@@ -112,8 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="agenda.html" />
-    <Content Include="agendaajouter.html" />
-    <Content Include="agendamodifier.html" />
     <Content Include="barreMenu.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
