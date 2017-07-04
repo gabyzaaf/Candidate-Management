@@ -43,4 +43,5 @@ RUN mkdir /home/candidate && cd /home/candidate && git clone -b Server https://g
  && cd /var/candidate/plugins/ \
  && touch /var/candidate/logs/emailPlugins.txt \
  && mkdir -p /var/candidate/emailTemplates/ \
+ && mkdir -p /var/candidate/bashScriptPath/ \
  && apt-get install at -y
