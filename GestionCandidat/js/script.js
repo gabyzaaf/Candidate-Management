@@ -178,12 +178,14 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
 
 /********************   Se déconnecter   ********************/
 
-gestionCandidatApp.controller('seDeconncter', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
-    $scope.sendConnexion = function () {
-        $cookies.put('cookie', "null");
-        if ($cookies.get('cookie') == "null") {
-            $window.location.href = 'index.html';
-        }
+gestionCandidatApp.controller('seDeconnecter', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+    $scope.sendDeconnexion = function () {
+        $http.get('http://192.168.0.16:5000/api/User/Disconnect/' + $cookies.get('cookie')).then(function (response) {
+            $cookies.put('cookie', "null");
+            if ($cookies.get('cookie') == "null") {
+                $window.location.href = 'index.html';
+            }
+        })
     }
 
 }]);
@@ -754,10 +756,7 @@ gestionCandidatApp.controller("rechercheAllReminds", ['$scope', '$cookies', '$ht
         if ($scope.todos != null) {
             if ($scope.todos[0].content != null) {
                 $scope.contentResponse = $scope.todos[0].content;
-                console.log($scope.todos[0].content);
-
             } else {
-                console.log($scope.todos);
                 $scope.stripDay = function (dates) {
                     return dates.substring(0,2);
                 }
