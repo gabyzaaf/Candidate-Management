@@ -149,16 +149,16 @@
                     </tr>
                     <tr>
                         <td>*Nom : </td>
-                        <td><input type="text" name="nomCoor" ng-value="nomCoor" ng-model="updateCandidate.nom" required /></td>
+                        <td><input class="form-control" type="text" name="nomCoor" ng-value="nomCoor" ng-model="updateCandidate.nom" required /></td>
                         <td>*Prenom : </td>
-                        <td><input type="text" name="prenomCoor" ng-value="prenomCoor" ng-model="updateCandidate.prenom" required /></td>
+                        <td><input class="form-control" type="text" name="prenomCoor" ng-value="prenomCoor" ng-model="updateCandidate.prenom" required /></td>
                     </tr>
                     <tr>
                         <td>*Email : </td>
-                        <td><input type="email" name="email" ng-value="emailCoor" ng-model="updateCandidate.email" disabled /></td>
+                        <td><input class="form-control" type="email" name="email" ng-value="emailCoor" ng-model="updateCandidate.email" disabled /></td>
                         <td>*Sexe : </td>
                         <td>
-                            <select name="sexe" ng-value="sexeCoor" ng-model="updateCandidate.sexe" required>
+                            <select class="form-control" name="sexe" ng-value="sexeCoor" ng-model="updateCandidate.sexe" required>
                                 <option value="H" selected>Homme</option>
                                 <option value="F">Femme</option>
                             </select>
@@ -166,14 +166,14 @@
                     </tr>
                     <tr>
                         <td>*Téléphone :</td>
-                        <td><input type="tel" name="telephone" ng-value="phoneCoor" ng-model="updateCandidate.telephone" required /></td>
+                        <td><input class="form-control" type="tel" name="telephone" ng-value="phoneCoor" ng-model="updateCandidate.telephone" required /></td>
                         <td>Code postal : </td>
-                        <td><input type="text" size="5" name="cp" ng-value="cpCoor" ng-model="updateCandidate.cp" /></td>
+                        <td><input class="form-control" type="text" size="5" name="cp" ng-value="cpCoor" ng-model="updateCandidate.cp" /></td>
                     </tr>
                     <tr>
                         <td>*Action : </td>
                         <td>
-                            <select name="action" ng-value="actionsCoor" ng-model="updateCandidate.action" required>
+                            <select class="form-control" name="action" ng-value="actionsCoor" ng-model="updateCandidate.action" required>
                                 <option value="interne">Interne</option>
                                 <option value="enCours">En cours</option>
                                 <option value="RN">RN</option>
@@ -195,14 +195,14 @@
                             </select>
                         </td>
                         <td>Source : </td>
-                        <td><input type="url" name="url" ng-value="lienCoor" ng-model="updateCandidate.url" /></td>
+                        <td><input class="form-control" type="url" name="url" ng-value="lienCoor" ng-model="updateCandidate.url" /></td>
                     </tr>
                     <tr>
                         <td>Année de diplôme : </td>
-                        <td><input type="text" size="4" name="anneediplome" ng-value="anneeCoor" ng-model="updateCandidate.anneediplome" /></td>
+                        <td><input class="form-control" type="text" size="4" name="anneediplome" ng-value="anneeCoor" ng-model="updateCandidate.anneediplome" /></td>
                         <td>Type e-mail : </td>
                         <td>
-                            <select name="sexe" ng-value="typeEmail" ng-model="updateCandidate.typeEmail" required>
+                            <select class="form-control" name="sexe" ng-value="typeEmail" ng-model="updateCandidate.typeEmail" required>
                                 <option value="email" selected>Email</option>
                             </select>
                         </td>
@@ -211,13 +211,13 @@
                         <td>Note : </td>
                     </tr>
                     <tr>
-                        <td colspan="5"><textarea name="note" cols="100" rows="4" ng-value="NSCoor" ng-model="updateCandidate.note"></textarea></td>
+                        <td colspan="5"><textarea class="form-control" name="note" cols="100" rows="4" ng-value="NSCoor" ng-model="updateCandidate.note"></textarea></td>
                     </tr>
                     <tr>
                         <td>Compte Rendu (CR) : </td>
                     </tr>
                     <tr>
-                        <td colspan="5"><textarea name="cr" cols="100" rows="4" ng-value="crCallCoor" ng-model="updateCandidate.cr"></textarea></td>
+                        <td colspan="5"><textarea class="form-control" name="cr" cols="100" rows="4" ng-value="crCallCoor" ng-model="updateCandidate.cr"></textarea></td>
                     </tr>
                     <!--<tr>
                         <td colspan="5" align="left"><input type="file" value="CV" name="cv" /></td>
@@ -247,57 +247,57 @@
                     </tr>
                     <tr>
                         <td>Lien Test :</td>
-                        <td><input type="text" name="note" ng-value="linkCoor" ng-model="updateEntretien.link" /></td>
+                        <td><input class="form-control" type="text" name="note" ng-value="linkCoor" ng-model="updateEntretien.link" /></td>
                         <td>Note :</td>
-                        <td><input type="text" name="note" ng-value="noteCoor" ng-model="updateEntretien.note" /></td>
+                        <td><input class="form-control" type="text" name="note" ng-value="noteCoor" ng-model="updateEntretien.note" /></td>
                     </tr>
                     <tr>
                         <td>XP note :</td>
-                        <td><input type="text" name="xpnote" ng-value="xpNoteCoor" ng-model="updateEntretien.xpNote"/></td>
+                        <td><input class="form-control" type="text" name="xpnote" ng-value="xpNoteCoor" ng-model="updateEntretien.xpNote"/></td>
                         <td>NS note :</td>
-                        <td><input type="text" name="ns" ng-value="nsNoteCoor" ng-model="updateEntretien.nsNote" /></td>
+                        <td><input class="form-control" type="text" name="ns" ng-value="nsNoteCoor" ng-model="updateEntretien.nsNote" /></td>
                     </tr>
                     <tr>
                         <td>Job idéal : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="jobideal" cols="100" rows="4" ng-value="jobIdealNoteCoor" ng-model="updateEntretien.jobIdealNote"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="jobideal" cols="100" rows="4" ng-value="jobIdealNoteCoor" ng-model="updateEntretien.jobIdealNote"></textarea></td>
                     </tr>
                     <tr>
                         <td>Piste : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="piste" cols="100" rows="4" ng-value="pisteNoteCoor" ng-model="updateEntretien.pisteNote"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="piste" cols="100" rows="4" ng-value="pisteNoteCoor" ng-model="updateEntretien.pisteNote"></textarea></td>
                     </tr>
                     <tr>
                         <td>PK à l'écoute : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="pkecoute" cols="100" rows="4" ng-value="pieCouteNoteCoor" ng-model="updateEntretien.pieCouteNoter"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="pkecoute" cols="100" rows="4" ng-value="pieCouteNoteCoor" ng-model="updateEntretien.pieCouteNoter"></textarea></td>
                     </tr>
                     <tr>
                         <td>Localisation : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="locationNote" cols="100" rows="4" ng-value="locationNoteCoor" ng-model="updateEntretien.locationNote"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="locationNote" cols="100" rows="4" ng-value="locationNoteCoor" ng-model="updateEntretien.locationNote"></textarea></td>
                     </tr>
                     <tr>
                         <td>Anglais : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="anglais" cols="100" rows="4" ng-value="EnglishNoteCoor" ng-model="updateEntretien.EnglishNote"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="anglais" cols="100" rows="4" ng-value="EnglishNoteCoor" ng-model="updateEntretien.EnglishNote"></textarea></td>
                     </tr>
                     <tr>
                         <td>Nationalité : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="nationalite" cols="100" rows="4" ng-value="nationalityNoteCoor" ng-model="updateEntretien.nationalityNote"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="nationalite" cols="100" rows="4" ng-value="nationalityNoteCoor" ng-model="updateEntretien.nationalityNote"></textarea></td>
                     </tr>
                     <tr>
                         <td>Compétences : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea name="competence" cols="100" rows="4" ng-value="competencesCoor" ng-model="updateEntretien.competences"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="competence" cols="100" rows="4" ng-value="competencesCoor" ng-model="updateEntretien.competences"></textarea></td>
                     </tr>
                     <tr>
                         <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" /></td>
@@ -360,14 +360,14 @@
                             <tr>
                                 <td>Titre du template : </td>
                                 <td colspan="2">
-                                    <input ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
+                                    <input class="form-control" ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">Contenu du message : </td>
                             </tr>
                             <tr>
-                                <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
+                                <td colspan="3"><textarea class="form-control" name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
                             </tr>
                             <tr>
                             <tr>

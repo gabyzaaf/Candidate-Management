@@ -67,16 +67,16 @@
                         </tr>
                         <tr>
                             <td>*Nom : </td>
-                            <td><input type="text" id ="Name" name="Name" ng-model="candidat.Name" /></td>
+                            <td><input class="form-control" type="text" id ="Name" name="Name" ng-model="candidat.Name" /></td>
                             <td>*Prenom : </td>
-                            <td><input type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" /></td>
+                            <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" /></td>
                         </tr>
                         <tr>
                             <td>*Email : </td>
-                            <td><input type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" /></td>
+                            <td><input class="form-control" type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" /></td>
                             <td>*Sexe : </td>
                             <td>
-                                <select name="sexe" id="sexe" ng-model="candidat.sexe">
+                                <select class="form-control" name="sexe" id="sexe" ng-model="candidat.sexe">
                                     <option value="H" selected>Homme</option>
                                     <option value="F">Femme</option>
                                 </select>
@@ -84,14 +84,14 @@
                         </tr>
                         <tr>
                             <td>*Téléphone :</td>
-                            <td><input type="tel" id="phone" name="phone" ng-model="candidat.phone" /></td>
+                            <td><input class="form-control" type="tel" id="phone" name="phone" ng-model="candidat.phone" /></td>
                             <td>*Code postal : </td>
-                            <td><input type="number" size="5" name="cp" ng-model="candidat.cp"/></td>
+                            <td><input class="form-control" type="number" size="5" name="cp" ng-model="candidat.cp"/></td>
                         </tr>
                         <tr>
                             <td>*Action : </td>
                             <td>
-                                <select id="actions" name="action" ng-model="candidat.action">
+                                <select class="form-control" id="actions" name="action" ng-model="candidat.action">
                                     <option value="interne" selected>Interne</option>
                                     <option value="enCours">En cours</option>
                                     <option value="RN">RN</option>
@@ -113,14 +113,14 @@
                                 </select>
                             </td>
                             <td>Source : </td>
-                            <td><input type="url" name="link" ng-model="candidat.link"/></td>
+                            <td><input class="form-control" type="url" name="link" ng-model="candidat.link"/></td>
                         </tr>
                         <tr>
                             <td>Année de diplôme : </td>
-                            <td><input type="number" size="4" name="year" ng-model="candidat.year"/></td>
+                            <td><input class="form-control" type="number" size="4" name="year" ng-model="candidat.year"/></td>
                             <td>Type e-mail : </td>
                             <td>
-                                <select name="sexe" ng-model="updateCandidate.typeEmail" required>
+                                <select class="form-control" name="sexe" ng-model="updateCandidate.typeEmail" required>
                                     <option value="email" selected>Email</option>
                                 </select>
                             </td>
@@ -129,13 +129,13 @@
                             <td>Note : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="note" ng-model="candidat.note" cols="100" rows="4"></textarea></td>
+                            <td colspan="4"><textarea class="form-control" name="note" ng-model="candidat.note" cols="100" rows="4"></textarea></td>
                         </tr>
                         <tr>
                             <td>Compte Rendu (CR) : </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><textarea name="crCall" ng-model="candidat.crCall" cols="100" rows="4"></textarea></td>
+                            <td colspan="4"><textarea class="form-control" name="crCall" ng-model="candidat.crCall" cols="100" rows="4"></textarea></td>
                         </tr>
                         <!--<tr>
                             <td colspan="4" align="left"><input type="file" value="CV" name="cv" ng-model="candidat.email" /></td>

@@ -64,8 +64,8 @@
                 <i class="icon icon-search"></i>
                 <br />
                 <center>
-                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableMod()" />
-                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableSupp()" />
+                    <input type="submit" class="btn btn-lg" value="Modifier Afficher/Cacher" onclick="toggleTableMod()" />
+                    <input type="submit" class="btn btn-lg" value="Supprimer Afficher/Cacher" onclick="toggleTableSupp()" />
                 </center>
             </div>
         </div>
@@ -77,19 +77,19 @@
                         <table align="center" id="loginTableMod" hidden="hidden">
                             <tbody>
                                 <tr>
-                                    <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
+                                    <td colspan="5" align="center" id="response"><p class="h4" id="rep">{{contentResponseMessage}}</p></td>
                                 </tr>
                                 <tr>
                                     <td>Titre du template : </td>
                                     <td colspan="2">
-                                        <input ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
+                                        <input ng-model="updateMessage.titre_message" class="form-control" ng-value="titreMsg" disabled />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">Contenu du message : </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
+                                    <td colspan="3"><textarea class="form-control" name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
                                 </tr>
                                 <tr>
                                 <tr>
@@ -112,14 +112,14 @@
                                 <tr>
                                     <td>Titre du template : </td>
                                     <td colspan="2">
-                                        <input ng-model="deleteMessage.titre_message" ng-value="titreMsg" disabled />
+                                        <input ng-model="deleteMessage.titre_message" class="form-control" ng-value="titreMsg" disabled />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">Contenu du message : </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-value="contenuMsg" disabled></textarea></td>
+                                    <td colspan="3"><textarea class="form-control" cols="70" rows="7" id="ContenuMessage" ng-value="contenuMsg" disabled></textarea></td>
                                 </tr>
                                 <tr>
                                 <tr>

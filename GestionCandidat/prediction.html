@@ -121,28 +121,28 @@
                 <tbody>
                     <tr>
                         <td><label>Level de satisfaction (décimal entre 0 à 1)</label></td>
-                        <td><input type="number" step="0.01" min="0" max="1" id="satisfaction_level" ng-model="prediction.satisfaction_level" placeholder="0 à 1" /></td>
+                        <td><input class="form-control" type="number" step="0.01" min="0" max="1" id="satisfaction_level" ng-model="prediction.satisfaction_level" placeholder="0 à 1" /></td>
                     </tr>
                     <tr>
                         <td><label>Dernière évaluation (décimal entre 0 à 1)</label></td>
-                        <td><input type="number" step="0.01" min="0" max="1" id="last_evaluation" ng-model="prediction.last_evaluation" placeholder="0 à 1" /></td>
+                        <td><input class="form-control" type="number" step="0.01" min="0" max="1" id="last_evaluation" ng-model="prediction.last_evaluation" placeholder="0 à 1" /></td>
                     </tr>
                     <tr>
                         <td><label>Nombre de projet réaliser</label></td>
-                        <td><input type="number" id="number_project" min="0" ng-model="prediction.number_project" placeholder="Nombre de projet..." /></td>
+                        <td><input class="form-control" type="number" id="number_project" min="0" ng-model="prediction.number_project" placeholder="Nombre de projet..." /></td>
                     </tr>
                     <tr>
                         <td><label>Moyenne d'heures travaillé par mois</label></td>
-                        <td><input type="number" min="0" max="4040" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
+                        <td><input class="form-control" type="number" min="0" max="4040" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
                     </tr>
                     <tr>
                         <td><label>Temps passé à l'entreprise (en année)</label></td>
-                        <td><input type="number" min="0" max="66" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
+                        <td><input class="form-control" type="number" min="0" max="66" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
                     </tr>
                     <tr>
                         <td><label>A-t-il déjà eu au moins un accident de travail ?</label></td>
                         <td>
-                            <select id="Work_accident" ng-model="prediction.Work_accident">
+                            <select id="Work_accident" class="form-control" ng-model="prediction.Work_accident">
                                 <option value="0">NON</option>
                                 <option value="1">OUI</option>
                             </select>
@@ -151,7 +151,7 @@
                     <tr>
                         <td><label>A-t-il déjà eu au moins une promotion durant les 5 dernières anneès ?</label></td>
                         <td>
-                            <select id="promotion_last_5years" ng-model="prediction.promotion_last_5years">
+                            <select id="promotion_last_5years" class="form-control" ng-model="prediction.promotion_last_5years">
                                 <option value="0">NON</option>
                                 <option value="1">OUI</option>
                             </select>
@@ -160,17 +160,23 @@
                     <tr>
                         <td><label>Secteur</label></td>
                         <td>
-                            <select id="sales" ng-model="prediction.sales">
-                                <option value="sales">Vente</option>
-                                <option value="it">Informatique</option>
-                                <option value="support">Support</option>
+                            <select id="sales" class="form-control" ng-model="prediction.sales">
+                                <option value="sales" selected>Vente</option>
+                                <option value="accounting">Comptabilité</option>
+                                <option value="hr">Ressource Humaine</option>
+                                <option value="technical">Technique</option>
+                                <option value="management">Management</option>
+                                <option value="IT">IT</option>
+                                <option value="product_mng">Production Management</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="RandD">Recherche et Développement</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td><label>salary</label></td>
                         <td>
-                            <select id="salary" ng-model="prediction.salary">
+                            <select id="salary" class="form-control" ng-model="prediction.salary">
                                 <option value="low">Faible</option>
                                 <option value="middle">Moyen</option>
                                 <option value="high">Fort</option>
