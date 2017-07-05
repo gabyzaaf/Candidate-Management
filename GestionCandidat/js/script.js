@@ -672,7 +672,7 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
 
 /*********************  Recherche un candidat  ********************/
 
-gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendCandidat = function (candidat) {
         if (candidat.nom == "") {
@@ -684,6 +684,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                 if ($scope.todos != null) {
                     if ($scope.todos[0].content != null) {
                         $scope.contentResponse = $scope.todos[0].content;
+                        $timeout(function () { $scope.contentResponse = ""; }, 3000);
                     } else {
                         $scope.contentResponse = "";
                         var nbSelect = 0;
