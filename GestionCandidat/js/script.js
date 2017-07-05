@@ -321,7 +321,8 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 year: candidat.year,
                 link: candidat.link,
                 crCall: candidat.crCall,
-                ns: candidat.note
+                ns: candidat.note,
+                pluginType: candidat.plugins
             }
         }
 
@@ -449,7 +450,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 link: updateCandidate.url,
                 crCall: updateCandidate.cr,
                 NS: updateCandidate.note,
-                email: "true"
+                pluginType : "email"
             }
         }
 
@@ -461,18 +462,6 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 console.log(response.data.content);
             } else {
                 console.log("En attente du cookie");
-                console.log(updateCandidate.nom);
-                console.log(updateCandidate.prenom);
-                console.log(updateCandidate.email);
-                console.log(updateCandidate.cp);
-                console.log(updateCandidate.telephone);
-                console.log(updateCandidate.sexe);
-                console.log(updateCandidate.action);
-                console.log(updateCandidate.anneediplome);
-                console.log(updateCandidate.url);
-                console.log(updateCandidate.cr);
-                console.log(updateCandidate.note);
-                console.log(response.data.content);
             }
 
 
@@ -644,7 +633,7 @@ gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '
 
 /*********************  supprimer un message  ********************/
 
-gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '$window', , '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
+gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendMessageDel = function (deleteMessage) {
         var req = {
@@ -705,7 +694,6 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                         $scope.lienCoor = $scope.todos[nbSelect].lien;
                         $scope.crCallCoor = $scope.todos[nbSelect].crCall;
                         $scope.NSCoor = $scope.todos[nbSelect].NS;
-                        $scope.approche_emailCoor = $scope.todos[nbSelect].approche_email;
                         $scope.noteCoor = $scope.todos[nbSelect].note;
                         $scope.linkCoor = $scope.todos[nbSelect].link;
                         $scope.xpNoteCoor = $scope.todos[nbSelect].xpNote;
@@ -768,7 +756,7 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
 
 /*********************  Recherche tous les messages  ********************/
 
-gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
     $http.get('http://192.168.0.16:5000/api/candidate/email/template/titles/' + $cookies.get('cookie') + '/0/200').then(function (response) {
             $scope.todos = response.data;
             $scope.sendMessage = function (message) {
@@ -831,6 +819,27 @@ gestionCandidatApp.controller("rechercheAllReminds", ['$scope', '$cookies', '$ht
 }]);
 
 /*************************************************************************/
+
+/**********************  Recherche tous les plugins  *********************/
+
+gestionCandidatApp.controller("rechercheAllPlugins", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+
+    $http.get('http://192.168.0.16:5000/api/Remind/display/plugins/list').then(function (response) {
+        $scope.todos = response.data;
+        if ($scope.todos != null) {
+            if ($scope.todos[0].content != null) {
+                console.log($scope.todos[0].content);
+            }
+        } else {
+            console.log("In the error");
+        }
+    }, (err) => {
+        console.log(err);
+    });
+}]);
+
+/*************************************************************************/
+
 
 /*
 gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {

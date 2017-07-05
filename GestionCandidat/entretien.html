@@ -29,7 +29,7 @@
 <body ng-controller="rechercheAllCandidat">
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <center><p class="h1">Fiche Entretien</p></center>
+    <center><div class="bg-info text-white"><p class="h1">Fiche Entretien</p></div></center>
     <br />
     <table align="center">
         <tbody>
@@ -45,7 +45,7 @@
     <div class="form-group">
         <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
             <select ng-model="selectedCar" id="selectCandidat" class="form-control input-lg" required>
-                <option ng-repeat="todo in todos" value="{{todo.emailAdress}}">{{todo.name}} - {{todo.firstname}} - {{todo.phone}} - {{todo.emailAdress}} </option>
+                <option ng-repeat="todo in todos" value="{{todo.emailAdress}}">{{todo.name}} {{todo.firstname}} {{todo.phone}} {{todo.emailAdress}}</option>
             </select>
             <i class="icon icon-search"></i>
         </div>

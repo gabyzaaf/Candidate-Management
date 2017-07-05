@@ -45,7 +45,7 @@
 <body ng-controller="app">
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <center><p class="h1">Fiche Coodonnée</p></center>
+    <center><div class="bg-info text-white"><p class="h1">Fiche Coodonnée</p></div></center>
     <br />
     <table align="center">
         <tbody>
@@ -57,99 +57,101 @@
         </tbody>
     </table>
     <br />
-    <section ng-controller="addCandidate">
-        <form ng-submit="sendEntry(candidat)">
-            <div class="form-style">
-                <table align="center">
-                    <tbody>
-                        <tr>
-                            <td colspan="4" align="center" ><p class="h4">{{contentResponse}}</p></td>
-                        </tr>
-                        <tr>
-                            <td>*Nom : </td>
-                            <td><input class="form-control" type="text" id ="Name" name="Name" ng-model="candidat.Name" /></td>
-                            <td>*Prenom : </td>
-                            <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" /></td>
-                        </tr>
-                        <tr>
-                            <td>*Email : </td>
-                            <td><input class="form-control" type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" /></td>
-                            <td>*Sexe : </td>
-                            <td>
-                                <select class="form-control" name="sexe" id="sexe" ng-model="candidat.sexe">
-                                    <option value="H" selected>Homme</option>
-                                    <option value="F">Femme</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>*Téléphone :</td>
-                            <td><input class="form-control" type="tel" id="phone" name="phone" ng-model="candidat.phone" /></td>
-                            <td>*Code postal : </td>
-                            <td><input class="form-control" type="number" size="5" name="cp" ng-model="candidat.cp"/></td>
-                        </tr>
-                        <tr>
-                            <td>*Action : </td>
-                            <td>
-                                <select class="form-control" id="actions" name="action" ng-model="candidat.action">
-                                    <option value="interne" selected>Interne</option>
-                                    <option value="enCours">En cours</option>
-                                    <option value="RN">RN</option>
-                                    <option value="trop relance">Trop relancé</option>
-                                    <option value="freelance">Freelance</option>
-                                    <option value="etranger">Etranger</option>
-                                    <option value="appellerRemind">A appeler</option>
-                                    <option value="aRelancerLKD">A relancer LKD</option>
-                                    <option value="aRelancerMail">A relancer MAIL</option>
-                                    <option value="PAERemind">PAE</option>
-                                    <option value="pi">PI</option>
-                                    <option value="HcJunior">HC junior</option>
-                                    <option value="HCSenior">HC senior</option>
-                                    <option value="HcLangue">HC Langue</option>
-                                    <option value="HCPasDev">HC pas Dev</option>
-                                    <option value="HCMSFT">HC pas MSFT</option>
-                                    <option value="HCGeo">HC Géo</option>
-                                    <option value="HCBacMoins5">HC BAC-5</option>
-                                </select>
-                            </td>
-                            <td>Source : </td>
-                            <td><input class="form-control" type="url" name="link" ng-model="candidat.link"/></td>
-                        </tr>
-                        <tr>
-                            <td>Année de diplôme : </td>
-                            <td><input class="form-control" type="number" size="4" name="year" ng-model="candidat.year"/></td>
-                            <td>Type e-mail : </td>
-                            <td>
-                                <select class="form-control" name="sexe" ng-model="updateCandidate.typeEmail" required>
-                                    <option value="email" selected>Email</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Note : </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea class="form-control" name="note" ng-model="candidat.note" cols="100" rows="4"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Compte Rendu (CR) : </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea class="form-control" name="crCall" ng-model="candidat.crCall" cols="100" rows="4"></textarea></td>
-                        </tr>
-                        <!--<tr>
-                            <td colspan="4" align="left"><input type="file" value="CV" name="cv" ng-model="candidat.email" /></td>
-                        </tr>-->
-                        <tr>
-                            <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </form>
+    <section ng-controller="rechercheAllPlugins">
+        <section ng-controller="addCandidate">
+            <form ng-submit="sendEntry(candidat)">
+                <div class="form-style">
+                    <table align="center">
+                        <tbody>
+                            <tr>
+                                <td colspan="4" align="center"><p class="h4">{{contentResponse}}</p></td>
+                            </tr>
+                            <tr>
+                                <td>*Nom : </td>
+                                <td><input class="form-control" type="text" id="Name" name="Name" ng-model="candidat.Name" /></td>
+                                <td>*Prenom : </td>
+                                <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" /></td>
+                            </tr>
+                            <tr>
+                                <td>*Email : </td>
+                                <td><input class="form-control" type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" /></td>
+                                <td>*Sexe : </td>
+                                <td>
+                                    <select class="form-control" name="sexe" id="sexe" ng-model="candidat.sexe">
+                                        <option value="H" selected>Homme</option>
+                                        <option value="F">Femme</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>*Téléphone :</td>
+                                <td><input class="form-control" type="tel" id="phone" name="phone" ng-model="candidat.phone" /></td>
+                                <td>*Code postal : </td>
+                                <td><input class="form-control" type="number" size="5" name="cp" ng-model="candidat.cp" /></td>
+                            </tr>
+                            <tr>
+                                <td>*Action : </td>
+                                <td>
+                                    <select class="form-control" id="actions" name="action" ng-model="candidat.action">
+                                        <option value="interne" selected>Interne</option>
+                                        <option value="enCours">En cours</option>
+                                        <option value="RN">RN</option>
+                                        <option value="trop relance">Trop relancé</option>
+                                        <option value="freelance">Freelance</option>
+                                        <option value="etranger">Etranger</option>
+                                        <option value="appellerRemind">A appeler</option>
+                                        <option value="aRelancerLKD">A relancer LKD</option>
+                                        <option value="aRelancerMail">A relancer MAIL</option>
+                                        <option value="PAERemind">PAE</option>
+                                        <option value="pi">PI</option>
+                                        <option value="HcJunior">HC junior</option>
+                                        <option value="HCSenior">HC senior</option>
+                                        <option value="HcLangue">HC Langue</option>
+                                        <option value="HCPasDev">HC pas Dev</option>
+                                        <option value="HCMSFT">HC pas MSFT</option>
+                                        <option value="HCGeo">HC Géo</option>
+                                        <option value="HCBacMoins5">HC BAC-5</option>
+                                    </select>
+                                </td>
+                                <td>Source : </td>
+                                <td><input class="form-control" type="url" name="link" ng-model="candidat.link" /></td>
+                            </tr>
+                            <tr>
+                                <td>Année de diplôme : </td>
+                                <td><input class="form-control" type="number" size="4" name="year" ng-model="candidat.year" /></td>
+                                <td>*Type e-mail : </td>
+                                <td>
+                                    <select class="form-control" name="sexe" ng-model="candidat.plugins" required>
+                                        <option ng-repeat="todo in todos" value="{{todo.pluginName}}">{{todo.pluginName}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Note : </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><textarea class="form-control" name="note" ng-model="candidat.note" cols="100" rows="4"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Compte Rendu (CR) : </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><textarea class="form-control" name="crCall" ng-model="candidat.crCall" cols="100" rows="4"></textarea></td>
+                            </tr>
+                            <!--<tr>
+                                <td colspan="4" align="left"><input type="file" value="CV" name="cv" ng-model="candidat.email" /></td>
+                            </tr>-->
+                            <tr>
+                                <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </section>
     </section>
     <br />
     <br />
