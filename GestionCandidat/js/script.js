@@ -321,6 +321,7 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
         }
 
         $http(req).then(function (response) {
+            console.log($scope.selectedCar)
             $scope.contentResponse = response.data.content;
             if (response.data.content != "Le report a ete ajoute parfaitement à votre system") {
                 console.log("In the error");

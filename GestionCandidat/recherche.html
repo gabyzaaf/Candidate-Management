@@ -200,6 +200,12 @@
                     <tr>
                         <td>Année de diplôme : </td>
                         <td><input type="text" size="4" name="anneediplome" ng-value="anneeCoor" ng-model="updateCandidate.anneediplome" /></td>
+                        <td>Type e-mail : </td>
+                        <td>
+                            <select name="sexe" ng-value="typeEmail" ng-model="updateCandidate.typeEmail" required>
+                                <option value="email" selected>Email</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Note : </td>

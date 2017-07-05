@@ -41,27 +41,22 @@
         </tbody>
     </table>
     <br />
-    <table align="center">
-        <tbody>
-            <tr>
-                <td><h3>Séléctionner un candidat qui n'est pas relié à une fiche entretien :</h3></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <select ng-model="selectedCar" id="selectCandidat">
-                        <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.name}} - {{todo.firstname}} - {{todo.phone}} - {{todo.emailAdress}} </option>
-                    </select>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <center><p class="h3">Séléctionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
+    <div class="form-group">
+        <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
+            <select ng-model="selectedCar" id="selectCandidat" class="form-control input-lg" required>
+                <option ng-repeat="todo in todos" value="{{todo.emailAdress}}">{{todo.name}} - {{todo.firstname}} - {{todo.phone}} - {{todo.emailAdress}} </option>
+            </select>
+            <i class="icon icon-search"></i>
+        </div>
+    </div>
     <section ng-controller="addEntretien">
         <form ng-submit="sendEntry(entretien)">
             <div class="form-style">
                 <table align="center">
                     <tbody>
                         <tr>
-                            <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
+                            <td colspan="4" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
                         </tr>
                         <tr>
                             <td>Lien du test technique : </td>
@@ -119,7 +114,7 @@
                             <td colspan="4"><textarea name="competences" cols="100" rows="4" ng-model="entretien.competences" ></textarea></td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btnVert" value="Enregistrer" /></td>
+                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" /></td>
                         </tr>
                         <!--<tr>
                             <td>CR technique : </td>
