@@ -303,7 +303,7 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
 
 /*********************  Ajouter un candidat  ********************/
 
-gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
     $scope.sendEntry = function (candidat) {
         var req = {
             method: 'POST',
@@ -327,6 +327,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
         $http(req).then(function (response) {
             $scope.contentResponse = response.data.content;
+            $timeout(function () { $scope.contentResponse = ""; }, 3000);
             if (response.data.content != "Le candidat a ete ajoute à votre systeme") {
                 console.log("In the error");
                 console.log(candidat.action);
@@ -348,7 +349,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
 /*********************  Ajouter un entretien  ********************/
 
-gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
     $scope.sendEntry = function (entretien) {
         console.log($scope.selectedCar);
         var req = {
@@ -375,6 +376,7 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
         $http(req).then(function (response) {
             console.log($scope.selectedCar)
             $scope.contentResponse = response.data.content;
+            $timeout(function () { $scope.contentResponse = ""; }, 3000);
             if (response.data.content != "Le report a ete ajoute parfaitement à votre system") {
                 console.log("In the error");
 
@@ -393,7 +395,7 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
 
 /*********************  Modifier un candidat  ********************/
 
-gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendEntry = function (updateCandidate) {
         if ($scope.updateCandidate.nom == null) {
@@ -453,6 +455,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
 
         $http(req).then(function (response) {
             $scope.contentResponse = response.data.content;
+            $timeout(function () { $scope.contentResponse = ""; }, 3000);
             if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
                 console.log("In the error");
                 console.log(response.data.content);
@@ -483,7 +486,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
 
 /*********************  Modifier un entretien  ********************/
 
-gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendEntry = function (updateEntretien) {
         if ($scope.updateEntretien.link == null) {
@@ -543,6 +546,7 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 
         $http(req).then(function (response) {
             $scope.contentResponseEntretien = response.data.content;
+            $timeout(function () { $scope.contentResponseEntretien = true; }, 3000);
             if (response.data.content != "Le report a ete modifie parfaitement à votre system") {
                 console.log("In the error");
                 console.log(response.data.content);
@@ -562,7 +566,7 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 
 /*********************  Ajouter un message  ********************/
 
-gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
     $scope.sendEntry = function (message) {
         var req = {
             method: 'POST',
@@ -577,6 +581,7 @@ gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$wi
 
         $http(req).then(function (response) {
             $scope.contentResponse = response.data.content;
+            $timeout(function () { $scope.contentResponse = ""; }, 3000);
             if (response.data.content != "Le message a ete ajoute à votre systeme") {
                 console.log("In the error");
 
@@ -596,7 +601,7 @@ gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$wi
 
 /*********************  modifier un message  ********************/
 
-gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '$window', "$timeout", function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendEntry = function (updateMessage) {
         if ($scope.updateMessage.titre_message == null) {
@@ -620,6 +625,7 @@ gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '
 
         $http(req).then(function (response) {
             $scope.contentResponseMessage = response.data.content;
+            $timeout(function () { $scope.contentResponseMessage = ""; }, 3000);
             if (response.data.content != "Le template d'email a bien ete modifie") {
                 console.log("In the error");
                 console.log(response.data.content);
@@ -638,7 +644,7 @@ gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '
 
 /*********************  supprimer un message  ********************/
 
-gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '$window', , '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendMessageDel = function (deleteMessage) {
         var req = {
@@ -653,6 +659,7 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
 
         $http(req).then(function (response) {
             $scope.contentResponseMessage = response.data.content;
+            $timeout(function () { $scope.contentResponseMessage = ""; }, 3000);
             console.log(response.data.content);
 
         }, (err) => {
