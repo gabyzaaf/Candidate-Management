@@ -34,31 +34,58 @@
     <br />
     <center><p class="h1">Statistique</p></center>
     <br />
-    <center>
-        <button class="btn btn-primary" onclick="toggle_visibility('divChart');" ng-click="showGraph()">Graph 1</button>
-        <button class="btn btn-primary" onclick="toggle_visibility('divChart2');" ng-click="showGraph2()">Graph 2</button>
-        <button class="btn btn-primary" onclick="toggle_visibility('divChart3');" ng-click="showGraph3()">Graph 3</button>
-        <button class="btn btn-primary" onclick="toggle_visibility('divChart4');" ng-click="showGraph4()">Graph 4</button>
-    </center>
-    <br />
-    <div hidden="hidden" id="divChart">
-        <h3 align="center">{{graph1}}</h3>
-        <h3><font color="black"><div id="chart" /></font></h3>
-    </div>
-    <br />
-    <div hidden="hidden" id="divChart2">
-        <h3 align="center">{{graph2}}</h3>
-        <h3><font color="black"><div id="chart2" /></font></h3>
-    </div>
-    <br />
-    <div hidden="hidden" id="divChart3">
-        <h3 align="center">{{graph3}}</h3>
-        <h3><font color="black"><div id="chart3" /></font></h3>
-    </div>
-    <br />
-    <div hidden="hidden" id="divChart4">
-        <h3 align="center">{{graph4}}</h3>
-        <h3><font color="black"><div id="chart4" /></font></h3>
-    </div>
+    <!--    <div class="form-group">
+            <div style="width: 40%; margin: auto;" class="icon-addon addon-lg">
+                <form ng-submit="sendSect()">
+                    <select ng-model="selectedSect" id="selectMessage" class="form-control input-lg" onclick='' required>
+                        <option value="sales" selected>Vente</option>
+                        <option value="accounting">Comptabilité</option>
+                        <option value="hr">Ressource Humaine</option>
+                        <option value="technical">Technique</option>
+                        <option value="management">Management</option>
+                        <option value="IT">IT</option>
+                        <option value="product_mng">Production Management</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="RandD">Recherche et Développement</option>
+                    </select>
+                    <i class="icon icon-search"></i>
+                    <br />
+                    <input type="submit" value="afficher graph" />
+                </form>
+            </div>
+        </div>
+        {{selectedSect}}
+    -->
+        <center>
+            <button class="btn btn-primary" onclick="toggle_visibility('divChart');" ng-click="showGraph()">Graph 1</button>
+            <button class="btn btn-primary" onclick="toggle_visibility('divChart2');" ng-click="showGraph2()">Graph 2</button>
+            <button class="btn btn-primary" onclick="toggle_visibility('divChart3');" ng-click="showGraph3()">Graph 3</button>
+            <button class="btn btn-primary" onclick="toggle_visibility('divChart4');" ng-click="showGraph4()">Graph 4</button>
+            <button class="btn btn-info" onclick="toggle_visibility('divChart5');" ng-click="showGraph5()">Graph 5</button>
+        </center>
+        <br />
+        <div hidden="hidden" id="divChart">
+            <h3 align="center">{{graph1}}</h3>
+            <h3><font color="black"><div id="chart" /></font></h3>
+        </div>
+        <br />
+        <div hidden="hidden" id="divChart2">
+            <h3 align="center">{{graph2}}</h3>
+            <h3><font color="black"><div id="chart2" /></font></h3>
+        </div>
+        <br />
+        <div hidden="hidden" id="divChart3">
+            <h3 align="center">{{graph3}}</h3>
+            <h3><font color="black"><div id="chart3" /></font></h3>
+        </div>
+        <br />
+        <div hidden="hidden" id="divChart4">
+            <h3 align="center">{{graph4}}</h3>
+            <h3><font color="black"><div id="chart4" /></font></h3>
+        </div>
+        <div hidden="hidden" id="divChart5">
+            <h3 align="center">{{graph5}}</h3>
+            <h3><font color="black"><div id="chart5" /></font></h3>
+        </div>
 </body>
 </html>

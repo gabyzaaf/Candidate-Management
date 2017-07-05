@@ -56,23 +56,18 @@
     <center><p class="h1">Template Message</p></center>
     <br />
     <form ng-submit="sendMessage(message)">
-        <div class="form-style">
-            <table align="center" border="1" width="500">
-                <tr>
-                    <th>Message</th>
-                    <th>Modifier</th>
-                    <th>Supprimer</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select ng-model="selectedMsg" id="selectMessage" style="width:500px;" onclick="toggleSelectModSupp()">
-                            <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
-                        </select>
-                    </td>
-                    <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableMod()" /></td>
-                    <td align="center"><input type="submit" class="btn" value="Afficher/Cacher" onclick="toggleTableSupp()" /></td>
-                </tr>
-            </table>
+        <div class="form-group">
+            <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
+                <select ng-model="selectedMsg" id="selectMessage" class="form-control input-lg" onclick="toggleSelectModSupp()" required>
+                    <option ng-repeat="todo in todos" value="{{todo.titre_message}}">{{todo.titre_message}}</option>
+                </select>
+                <i class="icon icon-search"></i>
+                <br />
+                <center>
+                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableMod()" />
+                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableSupp()" />
+                </center>
+            </div>
         </div>
     </form>
     <br />
@@ -98,7 +93,7 @@
                                 </tr>
                                 <tr>
                                 <tr>
-                                    <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Modifier" onclick="" /></td>
+                                    <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btn btn-warning" value="Modifier" onclick="" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -128,7 +123,7 @@
                                 </tr>
                                 <tr>
                                 <tr>
-                                    <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btnRouge" value="Supprimer" onClick="return confirm('êtes-bous sûre de vouloir supprimer le message template ' + document.getElementById('selectMessage').value + '?')" /></td>
+                                    <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btn btn-danger" value="Supprimer" onClick="return confirm('êtes-bous sûre de vouloir supprimer le message template ' + document.getElementById('selectMessage').value + '?')" /></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -61,7 +61,7 @@
         }
 
         function myFunction() {
-            var myWindow = window.open("agenda.html", "", "width=700,height=800");
+            var myWindow = window.open("agenda.html", "", "width=800,height=800");
         }
         function colorResponse() {
 
@@ -109,7 +109,7 @@
     </div>
     <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
         <br />
-        <center><h2 id="rep">{{contentResponse}}</h2></center>
+        <center><h3 id="rep">{{contentResponse}}</h3></center>
         <div class="form-group">
             <div style="width: 50%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
                 <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" required />
@@ -243,7 +243,7 @@
                         <td colspan="5" align="center" id="response"><h1>Entretien</h1></td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseEntretien}}</h2></td>
+                        <td colspan="5" align="center" id="response"><h3 id="rep">{{contentResponseEntretien}}</h3></td>
                     </tr>
                     <tr>
                         <td>Lien Test :</td>
@@ -355,7 +355,7 @@
                     <table align="center" id="loginTableMod" hidden="hidden">
                         <tbody>
                             <tr>
-                                <td colspan="5" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
+                                <td colspan="5" align="center" id="response"><h3 id="rep">{{contentResponseMessage}}</h3></td>
                             </tr>
                             <tr>
                                 <td>Titre du template : </td>

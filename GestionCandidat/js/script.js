@@ -32,14 +32,23 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
             $http(req).then(function (response) {
                 $scope.resultatAzure = response.data.content.substring(0, 1);
                 $scope.probAzure = response.data.content.substring(3) + "%";
+                console.log($scope.resultatAzure);
                 if ($scope.resultatAzure == 1) {
                     $scope.resultatAzure = "Salarié quitte l'entreprise";
-                } else {
+                } else if ($scope.resultatAzure == 0) {
                     $scope.resultatAzure = "Salarié ne quitte pas l'entreprise";
+                } else {
+                    $scope.resultatAzure = "Les données remplie sont incohérentes";
+                    $scope.probAzure = "Les données remplie sont incohérentes";
                 }
 
-                console.log($scope.resultatAzure)
-                console.log($scope.probAzure)
+                if ($scope.probAzure == "]]%") {
+                    $scope.resultatAzure = "Les données remplie sont incohérentes";
+                    $scope.probAzure = "Les données remplie sont incohérentes";
+                }
+
+                
+                console.log($scope.probAzure);
                 //console.log(response.data.content);
             }, (err) => {
                 console.log("ceci est une erreur" + err);
@@ -54,6 +63,11 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
 
 gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $http.get('http://192.168.0.16:5000/api/Remind/stat/mlcandidate/sales/' + $cookies.get('cookie')).then(function (response) {
+        /*$scope.selectedSect = "ko";
+        $scope.sendSect = function () {
+            $scope.selectedSect = selectedSect;
+            console.log($scope.selectedSect);
+        }*/
         $scope.todos = response.data;
         for (var i = 0; i < 500; i++) {
             if ($scope.todos[0].content != null) {
@@ -90,6 +104,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
         $scope.chart2 = null;
         $scope.chart3 = null;
         $scope.chart4 = null;
+        $scope.chart5 = null;
 
         $scope.config = {};
         
@@ -169,6 +184,42 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
             config.data.types = { "satisfaction_level": $scope.config.type1, "number_project": $scope.config.type2 };
             $scope.chart4 = c3.generate(config);
+        }
+
+        $scope.showGraph5 = function () {
+            $scope.graph5 = "Graph 5 : Ensemble des données";
+            $scope.config.data1 = $scope.satisfaction_level;
+            $scope.config.data2 = $scope.last_evaluation;
+            $scope.config.data3 = $scope.number_project;
+            //$scope.config.data4 = $scope.average_montly_hours;
+            $scope.config.data5 = $scope.time_spend_company;
+            $scope.config.data6 = $scope.Work_accident;
+            $scope.config.data7 = $scope.left_work;
+            $scope.config.data8 = $scope.promotion_last_5years;
+            $scope.config.type1 = $scope.typeOptions[0];
+            $scope.config.type2 = $scope.typeOptions[0];
+            $scope.config.type3 = $scope.typeOptions[0];
+            //$scope.config.type4 = $scope.typeOptions[0];
+            $scope.config.type5 = $scope.typeOptions[0];
+            $scope.config.type6 = $scope.typeOptions[0];
+            $scope.config.type7 = $scope.typeOptions[0];
+            $scope.config.type8 = $scope.typeOptions[0];
+            var config = {};
+            config.bindto = '#chart5';
+            config.zoom = { "enabled": "true" };
+            config.data = {};
+            config.data.json = {};
+            config.data.json.satisfaction_level = $scope.config.data1.split(";");
+            config.data.json.last_evaluation = $scope.config.data2.split(";");
+            config.data.json.number_project = $scope.config.data3.split(";");
+            //config.data.json.average_montly_hours = $scope.config.data4.split(";");
+            config.data.json.time_spend_company = $scope.config.data5.split(";");
+            config.data.json.Work_accident = $scope.config.data6.split(";");
+            config.data.json.left_work = $scope.config.data7.split(";");
+            config.data.json.promotion_last_5years = $scope.config.data8.split(";");
+            config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
+            config.data.types = { "satisfaction_level": $scope.config.type1, "last_evaluation": $scope.config.type2, "number_project": $scope.config.type3, /*"average_montly_hours": $scope.config.type4,*/ "time_spend_company": $scope.config.type5, "Work_accident": $scope.config.type6, "left_work": $scope.config.type7, "promotion_last_5years": $scope.config.type8 };
+            $scope.chart5 = c3.generate(config);
         }
 
     });
@@ -266,12 +317,11 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 phone: candidat.phone,
                 sexe: candidat.sexe,
                 action: candidat.action,
+                zipcode : candidat.cp,
                 year: candidat.year,
                 link: candidat.link,
                 crCall: candidat.crCall,
-                ns: candidat.note,
-                email: "true",
-                zipcode : candidat.cp
+                ns: candidat.note
             }
         }
 
@@ -627,8 +677,6 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                 if ($scope.todos != null) {
                     if ($scope.todos[0].content != null) {
                         $scope.contentResponse = $scope.todos[0].content;
-                        console.log($scope.todos[0].content);
-
                     } else {
                         $scope.contentResponse = "";
                         var nbSelect = 0;
@@ -637,7 +685,6 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                                 nbSelect = i;
                                 //console.log($scope.todos[i].email);
                             }
-                            console.log($scope.todos[i].email);
                         }
                         $scope.nomCoor = $scope.todos[nbSelect].nom;
                         $scope.prenomCoor = $scope.todos[nbSelect].prenom;
