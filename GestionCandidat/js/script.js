@@ -745,6 +745,39 @@ gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$ht
 
 /*************************************************************************/
 
+/**********************  Recherche tous les reminds  *********************/
+
+gestionCandidatApp.controller("rechercheAllReminds", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+
+    $http.get('http://192.168.0.16:5000/api/Remind/calendar/remind/informations/' + $cookies.get('cookie')).then(function (response) {
+        $scope.todos = response.data;
+        if ($scope.todos != null) {
+            if ($scope.todos[0].content != null) {
+                $scope.contentResponse = $scope.todos[0].content;
+                console.log($scope.todos[0].content);
+
+            } else {
+                console.log($scope.todos);
+                $scope.stripDay = function (dates) {
+                    return dates.substring(0,2);
+                }
+                $scope.stripMonth = function (dates) {
+                    return dates.substring(3,5);
+                }
+                $scope.stripYear = function (dates) {
+                    return dates.substring(6,10);
+                }
+            }
+        } else {
+            console.log("In the error");
+        }
+    }, (err) => {
+        console.log(err);
+    });
+}]);
+
+/*************************************************************************/
+
 /*
 gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 

@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styleConnexion.css">
+    <link rel="stylesheet" type="text/css" href="css/styleAgenda.css">
     <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <meta charset="utf-8" />
@@ -18,5 +19,53 @@
     <div ng-include="'barreMenu.html'"></div>
     <center><p class="h1">Accueil</p></center>
     <br />
+    <section ng-controller="rechercheAllReminds">
+        <div class="container">
+            <p class="h2">Agenda : Les 5 rendez-vous enregistrés</p>
+            <br />
+            <div class="agenda">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Dates</th>
+                                <th>Nom</th>
+                                <th>Prenore</th>
+                                <th>Email</th>
+                                <th>Code postale</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="todo in todos | limitTo: 5">
+                                <td class="agenda-date" rowspan="1">
+                                    <div class="dayofmonth">{{stripDay(todo.dates)}}</div>
+                                    <div class="dayofweek">{{stripMonth(todo.dates)}}</div>
+                                    <div class="shortdate text-muted">{{stripYear(todo.dates)}}</div>
+                                </td>
+                                <td class="agenda-time">
+                                    {{todo.nom}}
+                                </td>
+                                <td class="agenda-time">
+                                    {{todo.prenom}}
+                                </td>
+                                <td class="agenda-time">
+                                    {{todo.email}}
+                                </td>
+                                <td class="agenda-time">
+                                    {{todo.zipcode}}
+                                </td>
+                                <td class="agenda-events">
+                                    <div class="agenda-event">
+                                        {{todo.actions}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
