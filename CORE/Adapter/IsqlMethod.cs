@@ -105,6 +105,8 @@ namespace Core.Adapter.Inteface
           void addPlugin(Plugin plugin);
 
           ArrayList getPluginList();
+
+          string getPluginChoiceFromCandidate(string emailCandidat);
     }
 
 } 

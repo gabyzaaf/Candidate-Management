@@ -10,13 +10,14 @@ namespace Candidate_Management.CORE.Remind
     {
 
         protected static readonly string extension = ".txt";
+        protected static readonly string pluginExtension = ".dll";
         protected int remindId;
         protected string emailCandidate = null;
         protected string fileName = null; 
         protected DateTime date = new DateTime();
+        protected IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
 
-        protected Dictionary<string,string> getCandidateNameFromId(int id){
-            IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+        protected Dictionary<string,string> getCandidateNameFromId(int id){   
             ArrayList liste = isql.searchCandidateById(id);
             Dictionary<string,string> candidateInformation = (Dictionary<string,string>)liste[0];
             return candidateInformation;
@@ -39,6 +40,13 @@ namespace Candidate_Management.CORE.Remind
         
         protected void traceOutSideTheSystem(string cmd){
             new WsCustomeInfoException("SendRemind",$"The message was sent on time {date} + the command is {cmd}");
+        }
+
+        protected string getDllPathEmailFromEmailCandidat(string emailCandidate){
+            string pluginChoice =  isql.getPluginChoiceFromCandidate(emailCandidate);
+            string pluginFolder = JsonConfiguration.getInstance().getPluginFolder();
+            string dllFileToExecute = $"{pluginFolder}{pluginChoice}/{pluginChoice}{pluginExtension}";
+            return dllFileToExecute;
         }
     }
 }

@@ -1281,5 +1281,30 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
             }
         }
+
+        public string getPluginChoiceFromCandidate(string emailCandidat){
+            try{
+                if(String.IsNullOrEmpty(emailCandidat)){
+                    throw new Exception("L'email du candidat passé en parametre est vide");
+                }
+                ArrayList output = null;
+                string sql = "select pluginType from candidate where email = @email";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@email",emailCandidat);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("pluginType");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception("Vous ne possedez aucun plugin type pour votre candidat");
+                }
+                Dictionary<string,string> datas = (Dictionary<string,string>)output[0];
+                if(String.IsNullOrEmpty(datas["pluginType"])){
+                    throw new Exception("L'email du candidat passé en parametre est vide");
+                }
+                return datas["pluginType"];
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
+            }
+        }
     }
 }

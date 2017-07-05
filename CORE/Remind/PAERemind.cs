@@ -32,7 +32,7 @@ namespace Candidate_Management.CORE.Remind
            string pathAndFile = getPathNameAndFileFromTemplate(fileName);
            string currentDate = $"{date.Month}/{date.Day}/{date.Year}";
            string currentHourMinute = $"{date.Hour}:{date.Minute}";
-           string emailPluginPath = "/var/candidate/plugins/Candidate-Management/bin/Debug/netcoreapp2.0/email.dll";
+           string emailPluginPath = getDllPathEmailFromEmailCandidat(emailCandidate);
            string filePathTemplate = $"{JsonConfiguration.getInstance().getEmailTemplatePath()}{this.fileName}";
            string cmd = $"./script.sh {currentHourMinute} {currentDate}  {emailPluginPath} {remindId}  {filePathTemplate} {candidateInformation["nom"]} {candidateInformation["prenom"]} {currentDate} {emailCandidate}";
            traceOutSideTheSystem(cmd);
