@@ -128,8 +128,8 @@
                 <i class="icon icon-search"></i>
                 <br />
                 <center>
-                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableCoord()" />
-                    <input type="submit" class="btn btn-lg" value="Afficher/Cacher" onclick="toggleTableEntr()" />
+                    <input type="submit" class="btn btn-lg" value="Coordonnée : Afficher/Cacher" onclick="toggleTableCoord()" />
+                    <input type="submit" class="btn btn-lg" value="Entretien : Afficher/Cacher" onclick="toggleTableEntr()" />
                 </center>
             </div>
         </div>
@@ -174,24 +174,23 @@
                         <td>*Action : </td>
                         <td>
                             <select class="form-control" name="action" ng-value="actionsCoor" ng-model="updateCandidate.action" required>
-                                <option value="interne">Interne</option>
-                                <option value="enCours">En cours</option>
-                                <option value="RN">RN</option>
-                                <option value="trop relance">Trop relancé</option>
-                                <option value="freelance">Freelance</option>
-                                <option value="etranger">Etranger</option>
-                                <option value="appellerRemind">A appeler</option>
-                                <option value="aRelancerLKD">A relancer LKD</option>
-                                <option value="aRelancerMail">A relancer MAIL</option>
-                                <option value="PAERemind">PAE</option>
-                                <option value="pi">PI</option>
-                                <option value="HcJunior">HC junior</option>
-                                <option value="HCSenior">HC senior</option>
-                                <option value="HcLangue">HC Langue</option>
-                                <option value="HCPasDev">HC pas Dev</option>
-                                <option value="HCMSFT">HC pas MSFT</option>
-                                <option value="HCGeo">HC Géo</option>
-                                <option value="HCBacMoins5">HC BAC-5</option>
+                                    <option value="interne" selected>Interne</option>
+                                    <option value="enCours">En cours</option>
+                                    <option value="RN">RN</option>
+                                    <option value="trop relance">Trop relancé</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="etranger">Etranger</option>
+                                    <option value="appellerRemind">A appeler</option>
+                                    <option value="aRelancerLKD">A relancer LKD</option>
+                                    <option value="aRelancerMail">A relancer MAIL</option>
+                                    <option value="PAERemind">PAE</option>
+                                    <option value="HcJunior">HC junior</option>
+                                    <option value="HCSenior">HC senior</option>
+                                    <option value="HcLangue">HC Langue</option>
+                                    <option value="HCPasDev">HC pas Dev</option>
+                                    <option value="HCMSFT">HC pas MSFT</option>
+                                    <option value="HCGeo">HC Géo</option>
+                                    <option value="HCBacMoins5">HC BAC-5</option>
                             </select>
                         </td>
                         <td>Source : </td>
@@ -219,9 +218,6 @@
                     <tr>
                         <td colspan="5"><textarea class="form-control" name="cr" cols="100" rows="4" ng-value="crCallCoor" ng-model="updateCandidate.cr"></textarea></td>
                     </tr>
-                    <!--<tr>
-                        <td colspan="5" align="left"><input type="file" value="CV" name="cv" /></td>
-                    </tr>-->
                     <tr>
                         <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                     </tr>
@@ -302,30 +298,6 @@
                     <tr>
                         <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" /></td>
                     </tr>
-                    <!--<tr>
-                        <td>CR technique : </td>
-                    </tr>
-                    <tr>
-                        <td><input type="date" name="datecrtech" /></td>
-                        <td>Heure : </td>
-                        <td><input type="time" name="heurecrtech" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="crtech" cols="100" rows="5"></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td>CR entretien commercial : </td>
-                    </tr>
-                    <tr>
-                        <td><input type="date" name="datecrcom" /></td>
-                        <td>Heure : </td>
-                        <td><input type="time" name="heurecrcom" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><textarea name="crcom" cols="100" rows="4"></textarea></td>
-                    </tr>-->
-
                 </tbody>
             </table>
         </form>

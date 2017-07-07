@@ -14,6 +14,76 @@
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <script>
+        function divOnloadHidden() {
+            document.getElementById("erreurChamp").style.visibility = 'hidden';
+        }
+
+        function verifChamp() {
+            var Name = document.getElementById("Name");
+            var Firstname = document.getElementById("Firstname");
+            var emailAdress = document.getElementById("emailAdress");
+            var sexe = document.getElementById("sexe");
+            var phone = document.getElementById("phone");
+            var cp = document.getElementById("cp");
+            var action = document.getElementById("action");
+            var plugins = document.getElementById("plugins");
+            var i = 0;
+            if (Name.value == "") {
+                Name.style.borderColor = "red";
+                i = 1;
+            } else {
+                Name.style.borderColor = "";
+            }
+            if (Firstname.value == "") {
+                Firstname.style.borderColor = "red";
+                i = 1;
+            } else {
+                Firstname.style.borderColor = "";
+            }
+            if (emailAdress.value == "") {
+                emailAdress.style.borderColor = "red";
+                i = 1;
+            } else {
+                emailAdress.style.borderColor = "";
+            }
+            if (sexe.value == "? undefined:undefined ?") {
+                sexe.style.borderColor = "red";
+                i = 1;
+            } else {
+                sexe.style.borderColor = "";
+            }
+            if (phone.value == "") {
+                phone.style.borderColor = "red";
+                i = 1;
+            } else {
+                phone.style.borderColor = "";
+            }
+            if (cp.value == "") {
+                cp.style.borderColor = "red";
+                i = 1;
+            } else {
+                cp.style.borderColor = "";
+            }
+            
+            if (actions.value == "? undefined:undefined ?") {
+                actions.style.borderColor = "red";
+                i = 1;
+            } else {
+                actions.style.borderColor = "";
+            }
+            if (plugins.value == "? undefined:undefined ?") {
+                plugins.style.borderColor = "red";
+                i = 1;
+            } else {
+                plugins.style.borderColor = "";
+            }
+
+            if (!Boolean(i)) {
+                document.getElementById("erreurChamp").style.display = 'none';
+            } else {
+                document.getElementById("erreurChamp").style.display = 'block';
+            }
+        }
         function myFunction() {
             var myWindow = window.open("agenda.html", "", "width=700,height=800");
         }
@@ -60,6 +130,10 @@
     <section ng-controller="rechercheAllPlugins">
         <section ng-controller="addCandidate">
             <form ng-submit="sendEntry(candidat)">
+                <div id="erreurChamp" hidden="hidden">
+                    <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
+                </div>
+                <br />
                 <div class="form-style">
                     <table align="center">
                         <tbody>
@@ -67,33 +141,33 @@
                                 <td colspan="4" align="center"><p class="h4">{{contentResponse}}</p></td>
                             </tr>
                             <tr>
-                                <td>*Nom : </td>
-                                <td><input class="form-control" type="text" id="Name" name="Name" ng-model="candidat.Name" /></td>
-                                <td>*Prenom : </td>
-                                <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" /></td>
+                                <td><font color="red">*</font>Nom : </td>
+                                <td><input class="form-control" type="text" id="Name" name="Name" ng-model="candidat.Name" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required/></td>
+                                <td><font color="red">*</font>Prenom : </td>
+                                <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required/></td>
                             </tr>
                             <tr>
-                                <td>*Email : </td>
-                                <td><input class="form-control" type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" /></td>
-                                <td>*Sexe : </td>
+                                <td><font color="red">*</font>Email : </td>
+                                <td><input class="form-control" type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" onkeydown="if(event.keyCode==32) return false;" required/></td>
+                                <td><font color="red">*</font>Sexe : </td>
                                 <td>
-                                    <select class="form-control" name="sexe" id="sexe" ng-model="candidat.sexe">
+                                    <select class="form-control" name="sexe" id="sexe" ng-model="candidat.sexe" onkeydown="if(event.keyCode==32) return false;" required>
                                         <option value="H" selected>Homme</option>
                                         <option value="F">Femme</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td>*Téléphone :</td>
-                                <td><input class="form-control" type="tel" id="phone" name="phone" ng-model="candidat.phone" /></td>
-                                <td>*Code postal : </td>
-                                <td><input class="form-control" type="number" size="5" name="cp" ng-model="candidat.cp" /></td>
+                                <td><font color="red">*</font>Téléphone :</td>
+                                <td><input class="form-control" type="tel" id="phone" name="phone" ng-model="candidat.phone" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" required/></td>
+                                <td><font color="red">*</font>Code postal : </td>
+                                <td><input class="form-control" type="number" id="cp" size="5" name="cp" ng-model="candidat.cp" onkeydown="if(event.keyCode==32) return false;" required/></td>
                             </tr>
                             <tr>
-                                <td>*Action : </td>
+                                <td><font color="red">*</font>Action : </td>
                                 <td>
-                                    <select class="form-control" id="actions" name="action" ng-model="candidat.action">
-                                        <option value="interne" selected>Interne</option>
+                                    <select class="form-control" id="actions" name="action" ng-model="candidat.action" required>
+                                        <option value="interne">Interne</option>
                                         <option value="enCours">En cours</option>
                                         <option value="RN">RN</option>
                                         <option value="trop relance">Trop relancé</option>
@@ -103,7 +177,6 @@
                                         <option value="aRelancerLKD">A relancer LKD</option>
                                         <option value="aRelancerMail">A relancer MAIL</option>
                                         <option value="PAERemind">PAE</option>
-                                        <option value="pi">PI</option>
                                         <option value="HcJunior">HC junior</option>
                                         <option value="HCSenior">HC senior</option>
                                         <option value="HcLangue">HC Langue</option>
@@ -113,18 +186,18 @@
                                         <option value="HCBacMoins5">HC BAC-5</option>
                                     </select>
                                 </td>
-                                <td>Source : </td>
-                                <td><input class="form-control" type="url" name="link" ng-model="candidat.link" /></td>
-                            </tr>
-                            <tr>
-                                <td>Année de diplôme : </td>
-                                <td><input class="form-control" type="number" size="4" name="year" ng-model="candidat.year" /></td>
-                                <td>*Type e-mail : </td>
+                                <td><font color="red">*</font>Type e-mail : </td>
                                 <td>
-                                    <select class="form-control" name="sexe" ng-model="candidat.plugins" required>
+                                    <select class="form-control" name="plugins" id="plugins" ng-model="candidat.plugins" required>
                                         <option ng-repeat="todo in todos" value="{{todo.pluginName}}">{{todo.pluginName}}</option>
                                     </select>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>Année de diplôme : </td>
+                                <td><input class="form-control" type="number" size="4" min="1995" max="2017" name="year" ng-model="candidat.year" /></td>
+                                <td>Source : </td>
+                                <td><input class="form-control" name="link" ng-model="candidat.link" type="url" pattern="https?://.+"  /></td>
                             </tr>
                             <tr>
                                 <td>Note : </td>
@@ -145,7 +218,7 @@
                                 <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                             </tr>
                             <tr>
-                                <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" /></td>
+                                <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" onclick="verifChamp()"/></td>
                             </tr>
                         </tbody>
                     </table>
