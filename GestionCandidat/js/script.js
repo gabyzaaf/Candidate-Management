@@ -391,43 +391,55 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
 gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
     $scope.sendEntry = function (entretien) {
-        console.log($scope.selectedCar);
-        var req = {
-            method: 'POST',
-            url: 'http://192.168.126.145:5000/api/user/add/candidat/report',
-            responseType: "json",
-            data: {
-                sessionId: $cookies.get('cookie'),
-                emailCandidat : $scope.selectedCar,
-                note: entretien.note,
-                link: entretien.link,
-                xpNote: entretien.xpNote,
-                nsNote: entretien.nsNote,
-                jobIdealNote: entretien.jobIdealNote,
-                pisteNote: entretien.pisteNote,
-                pieCouteNote: entretien.pieCouteNote,
-                locationNote: entretien.locationNote,
-                EnglishNote: entretien.EnglishNote,
-                nationalityNote: entretien.nationalityNote,
-                competences: entretien.competences
-            }
-        }
-
-        $http(req).then(function (response) {
-            console.log($scope.selectedCar)
-            $scope.contentResponse = response.data.content;
-            $timeout(function () { $scope.contentResponse = ""; }, 3000);
-            if (response.data.content != "Le report a ete ajoute parfaitement à votre system") {
-                console.log("In the error");
-
+        try {
+            $scope.emailCandidat = $scope.selectedCar;
+            $scope.note = entretien.note;
+            if ($scope.emailCandidat == null || $scope.note == null) {
+                $scope.erreurEntretien = "Les champs obligatoir ne sont pas remplie";
+                console.log($scope.erreurEntretien);
             } else {
-                console.log(response.data.content);
+                var req = {
+                    method: 'POST',
+                    url: 'http://192.168.126.145:5000/api/user/add/candidat/report',
+                    responseType: "json",
+                    data: {
+                        sessionId: $cookies.get('cookie'),
+                        emailCandidat: $scope.selectedCar,
+                        note: entretien.note,
+                        link: entretien.link,
+                        xpNote: entretien.xpNote,
+                        nsNote: entretien.nsNote,
+                        jobIdealNote: entretien.jobIdealNote,
+                        pisteNote: entretien.pisteNote,
+                        pieCouteNote: entretien.pieCouteNote,
+                        locationNote: entretien.locationNote,
+                        EnglishNote: entretien.EnglishNote,
+                        nationalityNote: entretien.nationalityNote,
+                        competences: entretien.competences
+                    }
+                }
+
+                $http(req).then(function (response) {
+                    console.log($scope.selectedCar)
+                    $scope.contentResponse = response.data.content;
+                    $timeout(function () { $scope.contentResponse = ""; }, 3000);
+                    if (response.data.content != "Le report a ete ajoute parfaitement à votre system") {
+                        console.log("In the error");
+
+                    } else {
+                        console.log(response.data.content);
+                    }
+
+
+                }, (err) => {
+                    console.log("ceci est une erreur" + err);
+                });
             }
-
-
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
+            
+        } catch (e) {
+            console.log(e.message);
+        }
+        
     }
 }]);
 

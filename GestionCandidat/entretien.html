@@ -65,7 +65,7 @@
     <div id="erreurChamp" hidden="hidden">
         <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
     </div>
-    <center><p class="h3">Séléctionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
+    <center><p class="h3"><font color="red">*</font>Séléctionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
     <div class="form-group">
         <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
             <select ng-model="selectedCar" id="selectCandidat" class="form-control input-lg" required>
@@ -85,7 +85,7 @@
                         <tr>
                             <td>Lien du test technique : </td>
                             <td><input class="form-control" type="url" value="http://" name="link" ng-model="entretien.link" /></td>
-                            <td>Note test technique : </td>
+                            <td><font color="red">*</font>Note test technique : </td>
                             <td><input class="form-control" type="number" min="0" max="20"  id="note" name="note" ng-model="entretien.note" onkeydown="if(event.keyCode==32) return false;" required/></td>
                         </tr>
                         <tr>
