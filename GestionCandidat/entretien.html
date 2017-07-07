@@ -14,16 +14,37 @@
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <script>
-        function colorResponse() {
-
-            setTimeout(function () {
-                if (document.getElementById("rep").innerHTML != "Le report a ete ajoute parfaitement à votre system") {
-                    document.getElementById("rep").style.color = "#DC0B0B";
-                } else {
-                    document.getElementById("rep").style.color = "#2CAC3D";
-                }
-            }, 50);
+        function divOnloadHidden() {
+            document.getElementById("erreurChamp").style.visibility = 'hidden';
         }
+
+        function verifChamp() {
+
+            var selectCandidat = document.getElementById("selectCandidat");
+            var note = document.getElementById("note");
+            
+            var i = 0;
+            if (selectCandidat.value == "? undefined:undefined ?") {
+                selectCandidat.style.borderColor = "red";
+                i = 1;
+            } else {
+                selectCandidat.style.borderColor = "";
+            }
+            if (note.value == "") {
+                note.style.borderColor = "red";
+                i = 1;
+            } else {
+                note.style.borderColor = "";
+            }
+            
+
+            if (!Boolean(i)) {
+                document.getElementById("erreurChamp").style.display = 'none';
+            } else {
+                document.getElementById("erreurChamp").style.display = 'block';
+            }
+        }
+
     </script>
 </head>
 <body ng-controller="rechercheAllCandidat">
@@ -41,6 +62,9 @@
         </tbody>
     </table>
     <br />
+    <div id="erreurChamp" hidden="hidden">
+        <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
+    </div>
     <center><p class="h3">Séléctionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
     <div class="form-group">
         <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
@@ -62,7 +86,7 @@
                             <td>Lien du test technique : </td>
                             <td><input class="form-control" type="url" value="http://" name="link" ng-model="entretien.link" /></td>
                             <td>Note test technique : </td>
-                            <td><input class="form-control" type="text" name="note" ng-model="entretien.note" required/></td>
+                            <td><input class="form-control" type="number" min="0" max="20"  id="note" name="note" ng-model="entretien.note" onkeydown="if(event.keyCode==32) return false;" required/></td>
                         </tr>
                         <tr>
                             <td>XP note :</td>
@@ -114,43 +138,12 @@
                             <td colspan="4"><textarea class="form-control" name="competences" cols="100" rows="4" ng-model="entretien.competences" ></textarea></td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" /></td>
+                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" onclick="verifChamp()" /></td>
                         </tr>
-                        <!--<tr>
-                            <td>CR technique : </td>
-                        </tr>
-                        <tr>
-                            <td><input type="date" name="datecrtech" /></td>
-                            <td>Heure : </td>
-                            <td><input type="time" name="heurecrtech" /></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea name="crtech" cols="100" rows="5" ng-model="entretien.crtech" ></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>CR entretien commercial : </td>
-                        </tr>
-                        <tr>
-                            <td><input type="date" name="datecrcom" /></td>
-                            <td>Heure : </td>
-                            <td><input type="time" name="heurecrcom" /></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><textarea name="crcom" cols="100" rows="4" ng-model="entretien.crcom" ></textarea></td>
-                        </tr>-->
                     </tbody>
                 </table>
             </div>
         </form>
     </section>
-            <br />
-            <!--
-            <div ng-controller="verifRecherche">
-                <p>{{/nom}}</p>
-                <p>{{/prenom}}</p>
-                <p>{{/telephone}}</p>
-                <p>{{/email}}</p>
-            </div>
-            -->
 </body>
 </html>

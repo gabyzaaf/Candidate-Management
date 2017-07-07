@@ -19,6 +19,7 @@
         }
 
         function verifChamp() {
+
             var Name = document.getElementById("Name");
             var Firstname = document.getElementById("Firstname");
             var emailAdress = document.getElementById("emailAdress");
@@ -138,7 +139,10 @@
                     <table align="center">
                         <tbody>
                             <tr>
-                                <td colspan="4" align="center"><p class="h4">{{contentResponse}}</p></td>
+                                <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponse}}</font></p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="center"><p class="h4"><font color="green">{{contentResponseGreen}}</font></p></td>
                             </tr>
                             <tr>
                                 <td><font color="red">*</font>Nom : </td>

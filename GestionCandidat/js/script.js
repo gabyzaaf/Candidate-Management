@@ -363,12 +363,16 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
                 $http(req).then(function (response) {
                     $scope.contentResponse = response.data.content;
+                    $scope.contentResponseGreen = "";
                     $timeout(function () { $scope.contentResponse = ""; }, 5000);
-                    if (response.data.content != "Le candidat a ete ajoute à votre systeme") {
+                    $timeout(function () { $scope.contentResponseGreen = ""; }, 5000);
+                    if (response.data.content == "Le candidat est deja existant dans votre systeme" || response.data.content == "Le token n'existe pas") {
                         console.log($scope.contentResponse);
 
                     } else {
-                        console.log($scope.contentResponse);
+                        $scope.contentResponseGreen = $scope.contentResponse;
+                        $scope.contentResponse = "";
+                        console.log($scope.contentResponseGreen);
                     }
                 }, (err) => {
                     console.log("ceci est une erreur" + err);
