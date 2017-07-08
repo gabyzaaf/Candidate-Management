@@ -403,15 +403,14 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 $http(req).then(function (response) {
                     $scope.contentResponse = response.data.content;
                     $scope.contentResponseGreen = "";
-                    $timeout(function () { $scope.contentResponse = ""; }, 5000);
-                    $timeout(function () { $scope.contentResponseGreen = ""; }, 5000);
                     if (response.data.content == "Le candidat est deja existant dans votre systeme" || response.data.content == "Le token n'existe pas ") {
                         console.log($scope.contentResponse);
-
+                        $timeout(function () { $scope.contentResponse = ""; }, 5000);
                     } else {
                         $scope.contentResponseGreen = $scope.contentResponse;
-                        $scope.contentResponse = "";
                         console.log($scope.contentResponseGreen);
+                        $timeout(function () { $scope.contentResponseGreen = ""; }, 5000);
+                        $scope.contentResponse = "";
                     }
                 }, (err) => {
                     console.log("ceci est une erreur" + err);
@@ -766,6 +765,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
             $http.get('http://192.168.126.145:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
                 console.log(candidat.nom)
                 $scope.todos = response.data;
+                $scope.resultatTrouve = 0;
                 if ($scope.todos != null) {
                     if ($scope.todos[0].content != null) {
                         $scope.contentResponse = $scope.todos[0].content;
@@ -773,6 +773,7 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                     } else {
                         $scope.contentResponse = "";
                         var nbSelect = 0;
+                        $scope.resultatTrouve = $scope.todos.length;
                         for (var i = 0; i < $scope.todos.length; i++) {
                             if ($scope.todos[i].email == $scope.selectedCar) {
                                 nbSelect = i;
@@ -866,7 +867,7 @@ gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$ht
                         if ($scope.todos[0].content != null) {
                             console.log($scope.todos[0].content);
                         } else {
-                            var nbSelect = 0;
+                            var nbSelect = 0; 
                             for (var i = 0; i < $scope.todos.length; i++) {
                                 if ($scope.todos[i].titre_message == $scope.selectedMsg) {
                                     nbSelect = i;
