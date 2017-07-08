@@ -320,25 +320,40 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
             $scope.zipcode = candidat.cp;
             $scope.action = candidat.action;
             $scope.plugins = candidat.plugins;
+
+
+            /******************** Regex champ nom ********************/
+            try{
+                var regexNom = $scope.Name.match(/[A-Za-z]+/g);
+                if (regexNom[0] != $scope.Name) {
+                    $scope.erreurNormeNom = "Le champ nom ne respect pas la norme d'un nom";
+                    $timeout(function () { $scope.erreurNormeNom = ""; }, 5000);
+                }
+            } catch (e) {
+                $scope.erreurNormeNom = "Le champ nom ne respect pas la norme d'un nom";
+                $timeout(function () { $scope.erreurNormeNom = ""; }, 5000);
+            }
+            /********************************************************/
+
+            /******************** Regex champ prenom ********************/
+            try {
+                var regexFirstname = $scope.Firstname.match(/[A-Za-z]+/g);
+                if (regexFirstname[0] != $scope.Firstname) {
+                    $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
+                }
+            } catch (e) {
+                $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
+            }
+            /********************************************************/
+
+            
             if ($scope.Name == null || $scope.Firstname == null || $scope.emailAdress == null || $scope.phone == null || $scope.sexe == null || $scope.action == null || $scope.zipcode == null || $scope.plugins == null) {
-                $scope.erreurChamps = "Tous les champs obligatoire (*) ne sont pas remplie";
-                console.log($scope.erreurChamps);
+                $scope.erreurChamps = "Tous les champs obligatoire (*) ne sont pas remplie ou les normes ne sont pas respectés";
+                $timeout(function () { $scope.erreurChamps = ""; }, 5000);
                 
             } else {
-                /*
-                $scope.phoneNumberPattern = (function () {
-                    var regexp = /^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/;
-                    return {
-                        test: function (value) {
-                            if ($scope.requireTel === false) {
-                                return true;
-                            }
-                            return regexp.test(value);
-                        }
-                    };
-                })();
-                console.log($scope.phoneNumberPattern.data[0]);
-                */
 
                 var req = {
                     method: 'POST',

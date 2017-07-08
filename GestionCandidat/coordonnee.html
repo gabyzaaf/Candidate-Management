@@ -132,8 +132,11 @@
         <section ng-controller="addCandidate">
             <form ng-submit="sendEntry(candidat)">
                 <div id="erreurChamp" hidden="hidden">
-                    <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
+                    <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>                  
                 </div>
+                <center><p class="h4"><font color="red">{{erreurNormeNom}}</font></p></center>
+                <center><p class="h4"><font color="red">{{erreurNormeFirstname}}</font></p></center>
+                <center><p class="h4"><font color="red">{{erreurChamps}}</font></p></center>
                 <br />
                 <div class="form-style">
                     <table align="center">
