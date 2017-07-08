@@ -435,7 +435,7 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
             $scope.note = entretien.note;
             if ($scope.emailCandidat == null || $scope.note == null) {
                 $scope.erreurEntretien = "Les champs obligatoir ne sont pas remplie";
-                console.log($scope.erreurEntretien);
+                $timeout(function () { $scope.erreurEntretien = ""; }, 5000);
             } else {
                 var req = {
                     method: 'POST',
@@ -459,14 +459,20 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
                 }
 
                 $http(req).then(function (response) {
-                    console.log($scope.selectedCar)
                     $scope.contentResponse = response.data.content;
-                    $timeout(function () { $scope.contentResponse = ""; }, 3000);
-                    if (response.data.content != "Le report a ete ajoute parfaitement à votre system") {
-                        console.log("In the error");
+                    $scope.contentResponseGreen = "";
+                    $timeout(function () { $scope.contentResponse = ""; }, 5000);
+                    if (response.data.content != "Le report a ete ajoute parfaitement à votre system" || response.data.content == "Le token n'existe pas ") {
+                        console.log($scope.contentResponse);
 
                     } else {
-                        console.log(response.data.content);
+                        $scope.contentResponseGreen = $scope.contentResponse;
+                        $timeout(function () {
+                            $scope.contentResponseGreen = "";
+                            window.location.reload();
+                        }, 4000);
+                        $scope.contentResponse = "";
+                        console.log($scope.contentResponseGreen);
                     }
 
 
@@ -811,9 +817,10 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
 
 /*********************  Recherche tous les candidats  ********************/
 
-gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
+gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $http.get('http://192.168.126.145:5000/api/Remind/candidate/withoutRapport/' + $cookies.get('cookie')).then(function (response) {
+        try {
             $scope.todos = response.data;
             $scope.selectedCar = $cookies.get('id');
             if ($scope.todos != null) {
@@ -837,7 +844,10 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
             } else {
                 console.log("In the error");
             }
-        }, (err) => {
+        } catch (e) {
+            $scope.erreurRechercheAll = "Tous les candidats possède déjà une fiche entretien";
+        }
+    }, (err) => {
             console.log(err);
         });
 }]);

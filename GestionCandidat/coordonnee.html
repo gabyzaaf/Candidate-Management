@@ -227,7 +227,13 @@
                                 <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                             </tr>
                             <tr>
-                                <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" onclick="verifChamp()"/></td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="left"><input type="reset" name="enregistrer" class="btn btn-danger" value="Reset" /></td>
+                                <td colspan="2" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" onclick="verifChamp()" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -275,6 +281,10 @@
                                 <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
                             </tr>
                             <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
                             <tr>
                                 <td align="center" colspan="2"><input type="submit" name="modifiermsg" class="btn btn-warning" value="Modifier" /></td>
                             </tr>
@@ -286,5 +296,11 @@
 
         </section>
     </section>
+    <br />
+    <footer>
+        <div>
+            <center><div class="bg-info text-white"><p class="h6">GestionCandidat C17 Engineering 2017</p></div></center>
+        </div>
+    </footer>
 </body>
 </html>

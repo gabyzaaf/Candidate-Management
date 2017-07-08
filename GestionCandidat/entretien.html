@@ -65,7 +65,13 @@
     <div id="erreurChamp" hidden="hidden">
         <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
     </div>
-    <center><p class="h3"><font color="red">*</font>Séléctionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
+    <center><p class="h4"><font color="red">{{erreurRechercheAll}}</font></p></center>
+    <center><p class="h4"><font color="red">{{erreurEntretien}}</font></p></center>
+    <center><p class="h4"><font color="red">{{contentResponse}}</font></p></center>
+    <center><p class="h4"><font color="green">{{contentResponseGreen}}</font></p></center>
+    <br />
+    <center><p class="h4"><font color="red">*</font>Séléctionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
+    <br />
     <div class="form-group">
         <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
             <select ng-model="selectedCar" id="selectCandidat" class="form-control input-lg" required>
@@ -138,12 +144,24 @@
                             <td colspan="4"><textarea class="form-control" name="competences" cols="100" rows="4" ng-model="entretien.competences" ></textarea></td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" onclick="verifChamp()" /></td>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="left"><input type="reset" name="enregistrer" class="btn btn-danger" value="Reset" /></td>
+                            <td colspan="2" align="right"><input type="submit" name="enregistrer" class="btn btn-success" value="Enregistrer" onclick="verifChamp()" /></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </form>
     </section>
+    <br />
+    <footer>
+        <div>
+            <center><div class="bg-info text-white"><p class="h6">GestionCandidat C17 Engineering 2017</p></div></center>
+        </div>
+    </footer>
 </body>
 </html>
