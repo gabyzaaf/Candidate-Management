@@ -3,7 +3,7 @@
 var gestionCandidatApp = angular.module('gestionCandidatApp', ['ngRoute', 'ngCookies']);
 
 
-/********************   machine learning azure   ********************/
+/********************   Prediction machine learning azure   ********************/
 
 gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $scope.sendValueForAzure = function (prediction) {
@@ -65,7 +65,7 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
 
 /*******************************************************************/
 
-/********************   Analyse Candidat   ********************/
+/********************   Statistique Candidat   ********************/
 
 gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $http.get('http://192.168.126.145:5000/api/Remind/stat/mlcandidate/sales/' + $cookies.get('cookie')).then(function (response) {
@@ -405,7 +405,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                     $scope.contentResponseGreen = "";
                     $timeout(function () { $scope.contentResponse = ""; }, 5000);
                     $timeout(function () { $scope.contentResponseGreen = ""; }, 5000);
-                    if (response.data.content == "Le candidat est deja existant dans votre systeme" || response.data.content == "Le token n'existe pas") {
+                    if (response.data.content == "Le candidat est deja existant dans votre systeme" || response.data.content == "Le token n'existe pas ") {
                         console.log($scope.contentResponse);
 
                     } else {
