@@ -763,7 +763,6 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
             console.log("le champ recherche est vide ou n'est pas rempli")
         } else {
             $http.get('http://192.168.126.145:5000/api/user/Candidates/recherche/' + candidat.nom + '/' + $cookies.get('cookie')).then(function (response) {
-                console.log(candidat.nom)
                 $scope.todos = response.data;
                 $scope.resultatTrouve = 0;
                 if ($scope.todos != null) {
