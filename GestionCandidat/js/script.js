@@ -348,6 +348,30 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
             }
             /********************************************************/
 
+            /******************** Controle champ action ********************/
+            try {
+                if ($scope.action != "interne" && $scope.action != "enCours" && $scope.action != "RN" && $scope.action != "trop relance" && $scope.action != "freelance" && $scope.action != "appellerRemind" && $scope.action != "aRelancerMail" && $scope.action != "aRelancerLKD" && $scope.action != "PAERemind" && $scope.action != "HcJunior" && $scope.action != "HcLangue" && $scope.action != "HCGeo" && $scope.action != "HCSenior" && $scope.action != "HCPasDev" && $scope.action != "HCMSFT" && $scope.action != "HCBacMoins5") {
+                    $scope.erreurNormeAction = "Le champ action ne respect pas la norme d'une action";
+                    $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
+                }
+            } catch (e) {
+                $scope.erreurNormeAction = "Le champ prenom ne respect pas la norme d'un prenom";
+                $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
+            }
+            /********************************************************/
+
+            /******************** Controle champ sexe ********************/
+            try {
+                if ($scope.sexe != "H" && $scope.sexe != "F") {
+                    $scope.erreurNormeSexe = "Le champ sexe ne respect pas la norme";
+                    $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
+                }
+            } catch (e) {
+                $scope.erreurNormeSexe = "Le champ prenom ne respect pas la norme d'un prenom";
+                $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
+            }
+            /********************************************************/
+
             
             if ($scope.Name == null || $scope.Firstname == null || $scope.emailAdress == null || $scope.phone == null || $scope.sexe == null || $scope.action == null || $scope.zipcode == null || $scope.plugins == null) {
                 $scope.erreurChamps = "Tous les champs obligatoire (*) ne sont pas remplie ou les normes ne sont pas respectés";
