@@ -16,7 +16,28 @@
     <script>
         function divOnloadHidden() {
             document.getElementById("erreurChampRecherche").style.visibility = 'hidden';
-            document.getElementById("erreurChampCoord").style.visibility = 'hidden';            
+            document.getElementById("erreurChampCoord").style.visibility = 'hidden';
+            document.getElementById("erreurChampEntr").style.visibility = 'hidden';
+        }
+        function verifChampEntr() {
+
+            var note = document.getElementById("note");
+
+            if (note.value == "") {
+                note.style.borderColor = "red";
+                setTimeout(function () { note.style.borderColor = "" }, 4000);
+                i = 1;
+            } else {
+                note.style.borderColor = "";
+            }
+
+
+            if (!Boolean(i)) {
+                document.getElementById("erreurChampEntr").style.display = 'none';
+            } else {
+                document.getElementById("erreurChampEntr").style.display = 'block';
+                setTimeout(function () { document.getElementById("erreurChampEntr").style.display = 'none' }, 4000);
+            }
         }
 
         function verifChampCoord() {
@@ -32,36 +53,42 @@
             var i = 0;
             if (Name.value == "") {
                 Name.style.borderColor = "red";
+                setTimeout(function () { Name.style.borderColor = "" }, 4000);
                 i = 1;
             } else {
                 Name.style.borderColor = "";
             }
             if (Firstname.value == "") {
                 Firstname.style.borderColor = "red";
+                setTimeout(function () { Firstname.style.borderColor = "" }, 4000);
                 i = 1;
             } else {
                 Firstname.style.borderColor = "";
             }
             if (emailAdress.value == "") {
                 emailAdress.style.borderColor = "red";
+                setTimeout(function () { emailAdress.style.borderColor = "" }, 4000);
                 i = 1;
             } else {
                 emailAdress.style.borderColor = "";
             }
             if (sexe.value == "? undefined:undefined ?") {
                 sexe.style.borderColor = "red";
+                setTimeout(function () { sexe.style.borderColor = ""; }, 4000);
                 i = 1;
             } else {
                 sexe.style.borderColor = "";
             }
             if (phone.value == "") {
                 phone.style.borderColor = "red";
+                setTimeout(function () { phone.style.borderColor = ""; }, 4000);
                 i = 1;
             } else {
                 phone.style.borderColor = "";
             }
             if (cp.value == "") {
                 cp.style.borderColor = "red";
+                setTimeout(function () { cp.style.borderColor = "" }, 4000);
                 i = 1;
             } else {
                 cp.style.borderColor = "";
@@ -69,12 +96,14 @@
 
             if (actions.value == "? undefined:undefined ?") {
                 actions.style.borderColor = "red";
+                setTimeout(function () { actions.style.borderColor = "" }, 4000);
                 i = 1;
             } else {
                 actions.style.borderColor = "";
             }
             if (plugins.value == "? undefined:undefined ?") {
                 plugins.style.borderColor = "red";
+                setTimeout(function () { plugins.style.borderColor = "" }, 4000);
                 i = 1;
             } else {
                 plugins.style.borderColor = "";
@@ -84,6 +113,7 @@
                 document.getElementById("erreurChampCoord").style.display = 'none';
             } else {
                 document.getElementById("erreurChampCoord").style.display = 'block';
+                setTimeout(function () { document.getElementById("erreurChampCoord").style.display = 'none' }, 4000);
             }
         }
         function verifChampRecherche() {
@@ -219,10 +249,10 @@
             <table align="center" id="loginTableCoord" hidden="hidden">
                 <tbody>
                     <tr>
-                        <td colspan="5" align="center" ><h1>Coordonnée</h1></td>
+                        <td colspan="4" align="center" ><h1>Coordonnée</h1></td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="center" ><h2 id="rep">{{contentResponse}}</h2></td>
+                        <td colspan="4" align="center" ><h2 id="rep">{{contentResponse}}</h2></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Nom : </td>
@@ -287,16 +317,16 @@
                         <td>Note : </td>
                     </tr>
                     <tr>
-                        <td colspan="5"><textarea class="form-control" name="note" cols="100" rows="4" ng-value="NSCoor" ng-model="updateCandidate.note"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="note" cols="100" rows="4" ng-value="NSCoor" ng-model="updateCandidate.note"></textarea></td>
                     </tr>
                     <tr>
                         <td>Compte Rendu (CR) : </td>
                     </tr>
                     <tr>
-                        <td colspan="5"><textarea class="form-control" name="cr" cols="100" rows="4" ng-value="crCallCoor" ng-model="updateCandidate.cr"></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="cr" cols="100" rows="4" ng-value="crCallCoor" ng-model="updateCandidate.cr"></textarea></td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
+                        <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                     </tr>
                     <tr>
                         <td>
@@ -304,7 +334,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" onclick="verifChampCoord()" /></td>
+                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" onclick="verifChampCoord()" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -315,19 +345,22 @@
     <br />
     <section ng-controller="updateEntretien">
         <form ng-submit="sendEntry(updateEntretien)" onsubmit="return isValidForm()">
+            <div id="erreurChampEntr" hidden="hidden">
+                <center><p class="h3"><font color="red">Veuillez remplir les champs rouge</font></p></center>
+            </div>
             <table align="center" id="loginTableEntr" hidden="hidden">
                 <tbody>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h1>Entretien</h1></td>
+                        <td colspan="4" align="center" id="response"><h1>Entretien</h1></td>
                     </tr>
                     <tr>
-                        <td colspan="5" align="center" id="response"><h3 id="rep">{{contentResponseEntretien}}</h3></td>
+                        <td colspan="4" align="center" id="response"><h3 id="rep">{{contentResponseEntretien}}</h3></td>
                     </tr>
                     <tr>
                         <td>Lien Test :</td>
-                        <td><input class="form-control" type="text" name="note" ng-value="linkCoor" ng-model="updateEntretien.link" /></td>
-                        <td>Note :</td>
-                        <td><input class="form-control" type="text" name="note" ng-value="noteCoor" ng-model="updateEntretien.note" /></td>
+                        <td><input class="form-control" type="url" value="http://" name="link" ng-value="linkCoor" ng-model="updateEntretien.link" /></td>
+                        <td><font color="red">*</font>Note :</td>
+                        <td><input class="form-control" type="number" size="2" name="note" min="0" max="20" id="note" ng-value="noteCoor" ng-model="updateEntretien.note" required/></td>
                     </tr>
                     <tr>
                         <td>XP note :</td>
@@ -383,7 +416,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" /></td>
+                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-warning" value="Modifier" onclick="verifChampEntr()" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -414,7 +447,7 @@
                     <table align="center" id="loginTableMod" hidden="hidden">
                         <tbody>
                             <tr>
-                                <td colspan="5" align="center" id="response"><h3 id="rep">{{contentResponseMessage}}</h3></td>
+                                <td colspan="4" align="center" id="response"><h3 id="rep">{{contentResponseMessage}}</h3></td>
                             </tr>
                             <tr>
                                 <td>Titre du template : </td>

@@ -494,75 +494,129 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
 gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendEntry = function (updateCandidate) {
-        if ($scope.updateCandidate.nom == null) {
-            $scope.updateCandidate.nom = $scope.nomCoor;
-        }
-        if ($scope.updateCandidate.prenom == null) {
-            $scope.updateCandidate.prenom = $scope.prenomCoor;
-        }
-        if ($scope.updateCandidate.email == null) {
-            $scope.updateCandidate.email = $scope.emailCoor;
-        }
-        if ($scope.updateCandidate.telephone == null) {
-            $scope.updateCandidate.telephone = $scope.phoneCoor;
-        }
-        if ($scope.updateCandidate.sexe == null) {
-            $scope.updateCandidate.sexe = $scope.sexeCoor;
-        }
-        if ($scope.updateCandidate.action == null) {
-            $scope.updateCandidate.action = $scope.actionsCoor;
-        }
-        if ($scope.updateCandidate.anneediplome == null) {
-            $scope.updateCandidate.anneediplome = $scope.anneeCoor;
-        }
-        if ($scope.updateCandidate.url == null) {
-            $scope.updateCandidate.url = $scope.lienCoor;
-        }
-        if ($scope.updateCandidate.cr == null) {
-            $scope.updateCandidate.cr = $scope.crCallCoor;
-        }
-        if ($scope.updateCandidate.note == null) {
-            $scope.updateCandidate.note = $scope.NSCoor;
-        }
-        if ($scope.updateCandidate.cp == null) {
-            $scope.updateCandidate.cp = $scope.cpCoor;
-        }
-
-        var req = {
-            method: 'POST',
-            url: 'http://192.168.126.145:5000/api/user/update/candidat/',
-            responseType: "json",
-            data: {
-                session_id: $cookies.get('cookie'),
-                Name: updateCandidate.nom,
-                Firstname: updateCandidate.prenom,
-                emailAdress: updateCandidate.email,
-                zipcode: updateCandidate.cp,
-                phone: updateCandidate.telephone,
-                sexe: updateCandidate.sexe,
-                action: updateCandidate.action,
-                year: updateCandidate.anneediplome,
-                link: updateCandidate.url,
-                crCall: updateCandidate.cr,
-                NS: updateCandidate.note,
-                pluginType : "email"
+        try{
+            if ($scope.updateCandidate.nom == null) {
+                $scope.updateCandidate.nom = $scope.nomCoor;
             }
-        }
+            if ($scope.updateCandidate.prenom == null) {
+                $scope.updateCandidate.prenom = $scope.prenomCoor;
+            }
+            if ($scope.updateCandidate.email == null) {
+                $scope.updateCandidate.email = $scope.emailCoor;
+            }
+            if ($scope.updateCandidate.telephone == null) {
+                $scope.updateCandidate.telephone = $scope.phoneCoor;
+            }
+            if ($scope.updateCandidate.sexe == null) {
+                $scope.updateCandidate.sexe = $scope.sexeCoor;
+            }
+            if ($scope.updateCandidate.action == null) {
+                $scope.updateCandidate.action = $scope.actionsCoor;
+            }
+            if ($scope.updateCandidate.anneediplome == null) {
+                $scope.updateCandidate.anneediplome = $scope.anneeCoor;
+            }
+            if ($scope.updateCandidate.url == null) {
+                $scope.updateCandidate.url = $scope.lienCoor;
+            }
+            if ($scope.updateCandidate.cr == null) {
+                $scope.updateCandidate.cr = $scope.crCallCoor;
+            }
+            if ($scope.updateCandidate.note == null) {
+                $scope.updateCandidate.note = $scope.NSCoor;
+            }
+            if ($scope.updateCandidate.cp == null) {
+                $scope.updateCandidate.cp = $scope.cpCoor;
+            }
+            /******************** Regex champ nom ********************/
+                try {
+                    var regexNom = $scope.updateCandidate.nom.match(/[A-Za-z]+/g);
+                    if (regexNom[0] != $scope.updateCandidate.nom) {
+                        $scope.erreurNormeNom = "Le champ nom ne respect pas la norme d'un nom";
+                        $timeout(function () { $scope.erreurNormeNom = ""; }, 5000);
+                    }
+                } catch (e) {
+                    $scope.erreurNormeNom = "Le champ nom ne respect pas la norme d'un nom";
+                    $timeout(function () { $scope.erreurNormeNom = ""; }, 5000);
+                }
+            /********************************************************/
 
-        $http(req).then(function (response) {
-            $scope.contentResponse = response.data.content;
-            $timeout(function () { $scope.contentResponse = ""; }, 5000);
-            if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
-                console.log("In the error");
-                console.log(response.data.content);
-            } else {
-                console.log("En attente du cookie");
+            /******************** Regex champ prenom ********************/
+                try {
+                    var regexFirstname = updateCandidate.prenom.match(/[A-Za-z]+/g);
+                    if (regexFirstname[0] != updateCandidate.prenom) {
+                        $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                        $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
+                    }
+                } catch (e) {
+                    $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
+                }
+            /********************************************************/
+
+            /******************** Controle champ action ********************/
+                try {
+                    if ($scope.updateCandidate.action != "interne" && $scope.updateCandidate.action != "enCours" && $scope.updateCandidate.action != "RN" && $scope.updateCandidate.action != "trop relance" && $scope.updateCandidate.action != "freelance" && $scope.updateCandidate.action != "appellerRemind" && $scope.updateCandidate.action != "aRelancerMail" && $scope.updateCandidate.action != "aRelancerLKD" && $scope.updateCandidate.action != "PAERemind" && $scope.updateCandidate.action != "HcJunior" && $scope.updateCandidate.action != "HcLangue" && $scope.updateCandidate.action != "HCGeo" && $scope.updateCandidate.action != "HCSenior" && $scope.updateCandidate.action != "HCPasDev" && $scope.updateCandidate.action != "HCMSFT" && $scope.updateCandidate.action != "HCBacMoins5") {
+                        $scope.erreurNormeAction = "Le champ action ne respect pas la norme d'une action";
+                        $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
+                    }
+                } catch (e) {
+                    $scope.erreurNormeAction = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
+                }
+            /********************************************************/
+
+            /******************** Controle champ sexe ********************/
+                try {
+                    if ($scope.updateCandidate.sexe != "H" && $scope.updateCandidate.sexe != "F") {
+                        $scope.erreurNormeSexe = "Le champ sexe ne respect pas la norme";
+                        $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
+                    }
+                } catch (e) {
+                    $scope.erreurNormeSexe = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
+                }
+            /********************************************************/
+
+
+            var req = {
+                method: 'POST',
+                url: 'http://192.168.126.145:5000/api/user/update/candidat/',
+                responseType: "json",
+                data: {
+                    session_id: $cookies.get('cookie'),
+                    Name: updateCandidate.nom,
+                    Firstname: updateCandidate.prenom,
+                    emailAdress: updateCandidate.email,
+                    zipcode: updateCandidate.cp,
+                    phone: updateCandidate.telephone,
+                    sexe: updateCandidate.sexe,
+                    action: updateCandidate.action,
+                    year: updateCandidate.anneediplome,
+                    link: updateCandidate.url,
+                    crCall: updateCandidate.cr,
+                    NS: updateCandidate.note,
+                    pluginType: "email"
+                }
             }
 
+            $http(req).then(function (response) {
+                $scope.contentResponse = response.data.content;
+                $timeout(function () { $scope.contentResponse = ""; }, 5000);
+                if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
+                    console.log("In the error");
+                    console.log(response.data.content);
+                } else {
+                    console.log("En attente du cookie");
+                }
 
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
+
+            }, (err) => {
+                console.log("ceci est une erreur" + err);
+            });
+        }catch(e){
+            console.log(e.message);
+        }
     }
 }]);
 
@@ -573,76 +627,79 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
 gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendEntry = function (updateEntretien) {
-        if ($scope.updateEntretien.link == null) {
-            $scope.updateEntretien.link = $scope.linkCoor;
-        }
-        if ($scope.updateEntretien.note == null) {
-            $scope.updateEntretien.note = $scope.noteCoor;
-        }
-        if ($scope.updateEntretien.nsNote == null) {
-            $scope.updateEntretien.nsNote = $scope.nsNoteCoor;
-        }
-        if ($scope.updateEntretien.xpNote == null) {
-            $scope.updateEntretien.xpNote = $scope.xpNoteCoor;
-        }
-        if ($scope.updateEntretien.jobIdealNote == null) {
-            $scope.updateEntretien.jobIdealNote = $scope.jobIdealNoteCoor;
-        }
-        if ($scope.updateEntretien.pisteNote == null) {
-            $scope.updateEntretien.pisteNote = $scope.pisteNoteCoor;
-        }
-        if ($scope.updateEntretien.pieCouteNote == null) {
-            $scope.updateEntretien.pieCouteNote = $scope.pieCouteNoteCoor;
-        }
-        if ($scope.updateEntretien.locationNote == null) {
-            $scope.updateEntretien.locationNote = $scope.locationNoteCoor;
-        }
-        if ($scope.updateEntretien.EnglishNote == null) {
-            $scope.updateEntretien.EnglishNote = $scope.EnglishNoteCoor;
-        }
-        if ($scope.updateEntretien.nationalityNote == null) {
-            $scope.updateEntretien.nationalityNote = $scope.nationalityNoteCoor;
-        }
-        if ($scope.updateEntretien.competences == null) {
-            $scope.updateEntretien.competences = $scope.competencesCoor;
-        }
-
-        var req = {
-            method: 'POST',
-            url: 'http://192.168.126.145:5000/api/user/update/candidat/report',
-            responseType: "json",
-            data: {
-                sessionId: $cookies.get('cookie'),
-                emailCandidat: $scope.selectedCar,
-                note: updateEntretien.note,
-                link: updateEntretien.link,
-                xpNote: updateEntretien.xpNote,
-                nsNote: updateEntretien.nsNote,
-                jobIdealNote: updateEntretien.jobIdealNote,
-                pisteNote: updateEntretien.pisteNote,
-                pieCouteNote: updateEntretien.pieCouteNote,
-                locationNote: updateEntretien.locationNote,
-                EnglishNote: updateEntretien.EnglishNote,
-                nationalityNote: updateEntretien.nationalityNote,
-                competences: updateEntretien.competences
+        try{
+            if ($scope.updateEntretien.link == null) {
+                $scope.updateEntretien.link = $scope.linkCoor;
             }
-        }
-
-        $http(req).then(function (response) {
-            $scope.contentResponseEntretien = response.data.content;
-            $timeout(function () { $scope.contentResponseEntretien = ""; }, 3000);
-            if (response.data.content != "Le report a ete modifie parfaitement à votre system") {
-                console.log("In the error");
-                console.log(response.data.content);
-            } else {
-                console.log("En attente du cookie");
-                console.log(response.data.content);
+            if ($scope.updateEntretien.note == null) {
+                $scope.updateEntretien.note = $scope.noteCoor;
+            }
+            if ($scope.updateEntretien.nsNote == null) {
+                $scope.updateEntretien.nsNote = $scope.nsNoteCoor;
+            }
+            if ($scope.updateEntretien.xpNote == null) {
+                $scope.updateEntretien.xpNote = $scope.xpNoteCoor;
+            }
+            if ($scope.updateEntretien.jobIdealNote == null) {
+                $scope.updateEntretien.jobIdealNote = $scope.jobIdealNoteCoor;
+            }
+            if ($scope.updateEntretien.pisteNote == null) {
+                $scope.updateEntretien.pisteNote = $scope.pisteNoteCoor;
+            }
+            if ($scope.updateEntretien.pieCouteNote == null) {
+                $scope.updateEntretien.pieCouteNote = $scope.pieCouteNoteCoor;
+            }
+            if ($scope.updateEntretien.locationNote == null) {
+                $scope.updateEntretien.locationNote = $scope.locationNoteCoor;
+            }
+            if ($scope.updateEntretien.EnglishNote == null) {
+                $scope.updateEntretien.EnglishNote = $scope.EnglishNoteCoor;
+            }
+            if ($scope.updateEntretien.nationalityNote == null) {
+                $scope.updateEntretien.nationalityNote = $scope.nationalityNoteCoor;
+            }
+            if ($scope.updateEntretien.competences == null) {
+                $scope.updateEntretien.competences = $scope.competencesCoor;
             }
 
+            var req = {
+                method: 'POST',
+                url: 'http://192.168.126.145:5000/api/user/update/candidat/report',
+                responseType: "json",
+                data: {
+                    sessionId: $cookies.get('cookie'),
+                    emailCandidat: $scope.selectedCar,
+                    note: updateEntretien.note,
+                    link: updateEntretien.link,
+                    xpNote: updateEntretien.xpNote,
+                    nsNote: updateEntretien.nsNote,
+                    jobIdealNote: updateEntretien.jobIdealNote,
+                    pisteNote: updateEntretien.pisteNote,
+                    pieCouteNote: updateEntretien.pieCouteNote,
+                    locationNote: updateEntretien.locationNote,
+                    EnglishNote: updateEntretien.EnglishNote,
+                    nationalityNote: updateEntretien.nationalityNote,
+                    competences: updateEntretien.competences
+                }
+            }
 
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
+            $http(req).then(function (response) {
+                $scope.contentResponseEntretien = response.data.content;
+                $timeout(function () { $scope.contentResponseEntretien = ""; }, 3000);
+                if (response.data.content != "Le report a ete modifie parfaitement à votre system") {
+                    console.log("In the error");
+                    console.log(response.data.content);
+                } else {
+                    console.log("En attente du cookie");
+                    console.log(response.data.content);
+                }
+
+            }, (err) => {
+                console.log("ceci est une erreur" + err);
+            });
+        } catch (e) {
+            console.log(e.message);
+        }
     }
 }]);
 
