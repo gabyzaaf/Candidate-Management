@@ -18,7 +18,8 @@
     <PackageReference Include="xUnit" Version="2.0.0" />
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
-   
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     
     
   </ItemGroup>

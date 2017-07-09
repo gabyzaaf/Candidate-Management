@@ -9,6 +9,8 @@ using exception.ws;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Candidate_Management.CORE.Exceptions;
+using core.mlcandidat;
+using core.prediction;
 
 namespace API.wsUser
 {
@@ -270,6 +272,24 @@ namespace API.wsUser
             }
         }
 
+        [HttpPost("MlCandidate/prediction")]
+        public IActionResult predictionMlCandidate([FromBody]MlCandidat prediCandidate){
+            try{
+                if(prediCandidate == null){
+                    throw new Exception("Les informations lié au candidat pour le machine learning sont vides");
+                }
+                prediCandidate.checkCandidateProperties();
+                StringTable st = new StringTable();
+                Prediction.InvokeRequestResponseService(prediCandidate).Wait();
+                Resultat rst = Resultat.getcurrentResultat();
+                string resultaAzure = rst.valeurAzure + rst.probAzure;
+                return new ObjectResult(new State(){code=3,content=resultaAzure,success=true});
+            }catch(Exception exc){
+                new WsCustomeException(this.GetType().Name,exc.Message);
+                State state = new State(){code=1,content=exc.Message,success=false};
+                return CreatedAtRoute("GetNote", new { error = state },state);
+            }  
+        }
 
         
     }

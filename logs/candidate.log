@@ -280,3 +280,33 @@
 7/9/17 7:17:29 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/9/17 7:17:35 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
 7/9/17 7:17:39 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:17 1/9/2018  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/PAERemind.txt Cohen David 1/9/2018 ronaaaaalzaad.zaaaaafrani@gmail.com
+7/9/17 7:29:13 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/9/17 7:29:13 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/9/17 7:29:13 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/9/17 7:29:43 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 7:29:43 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 7:30:46 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:30 1/9/2018  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/PAERemind.txt Zaafrani Gabriel 1/9/2018 gabriel.zaafrani@gmail.com
+7/9/17 7:31:05 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 32 existe veuillez vous identifier
+7/9/17 7:31:05 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 32 existe veuillez vous identifier
+7/9/17 7:35:17 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/9/17 8:38:28 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 8:38:28 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 8:48:30 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 8:48:30 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 8:48:40 PM - [Error] - WsCustomeException - UserController - One or more errors occurred. (Method not found: 'Void Newtonsoft.Json.Serialization.DefaultContractResolver.set_IgnoreSerializableAttribute(Boolean)'.)
+7/9/17 8:50:03 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 8:50:03 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 8:50:22 PM - [Error] - WsCustomeException - UserController - One or more errors occurred. (Object reference not set to an instance of an object.)
+7/9/17 8:53:06 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 8:53:06 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 8:53:11 PM - [Error] - WsCustomeException - UserController - One or more errors occurred. (Object reference not set to an instance of an object.)
+7/9/17 10:18:24 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 10:18:24 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 10:20:28 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 10:20:28 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 10:20:44 PM - [Error] - WsCustomeException - UserController - Les informations lié au candidat pour le machine learning sont vides
+7/9/17 10:22:05 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 10:22:05 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 10:22:31 PM - [Error] - WsCustomeException - UserController - Les informations lié au candidat pour le machine learning sont vides
+7/9/17 10:24:07 PM - [Error] - WsCustomeException - UserController - Le choi z n'existe pas
+7/9/17 10:24:18 PM - [Error] - WsCustomeException - UserController - Le type de salaire fow n'existe pas
