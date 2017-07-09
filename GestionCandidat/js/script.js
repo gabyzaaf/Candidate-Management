@@ -769,13 +769,13 @@ gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '
 
         $http(req).then(function (response) {
             $scope.contentResponseMessage = response.data.content;
-            $timeout(function () { $scope.contentResponseMessage = ""; }, 3000);
+            $scope.contentResponseMessageGreen = "";
             if (response.data.content != "Le template d'email a bien ete modifie") {
-                console.log("In the error");
-                console.log(response.data.content);
+                $timeout(function () { $scope.contentResponseMessage = ""; }, 4000);
             } else {
-                console.log("En attente du cookie");
-                console.log(response.data.content);
+                $scope.contentResponseMessage = "";
+                $scope.contentResponseMessageGreen = response.data.content;
+                $timeout(function () { $scope.contentResponseMessageGreen = ""; }, 4000);
             }
 
         }, (err) => {
@@ -802,10 +802,11 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
         }
 
         $http(req).then(function (response) {
-            $scope.contentResponseMessage = response.data.content;
-            $timeout(function () { $scope.contentResponseMessage = ""; }, 3000);
-            console.log(response.data.content);
-
+            $scope.contentResponseMessageGreen = response.data.content;
+            $timeout(function () {
+                $scope.contentResponseMessageGreen = "";
+                window.location.reload();
+            }, 4000);
         }, (err) => {
             console.log("ceci est une erreur" + err);
         });
