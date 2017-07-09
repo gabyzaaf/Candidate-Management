@@ -201,3 +201,82 @@
 7/5/17 8:40:05 AM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 7/6/17 8:40:05 AM + the command is ./script.sh 8:40 7/6/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 14  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/appellerRemind.txt zaafrani David 7/6/2017 david.zaafrani@toto.com
 7/5/17 8:44:38 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
 7/5/17 8:44:38 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 8:54:22 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 8:54:22 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 8:54:51 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/5/17 8:55:23 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+7/5/17 8:55:23 PM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
+7/5/17 8:56:53 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 8:56:53 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 8:58:37 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/5/17 8:59:33 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 7/6/17 8:59:33 PM + the command is ./script.sh 20:59 7/6/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 1  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/appellerRemind.txt zaafrani Gabriel 7/6/2017 gabriel.zaafrani@gmail.com
+7/5/17 9:01:52 PM - [Error] - WsCustomeException - UserController - Le candidat n'est pas existant dans votre systeme, veuillez le creer
+7/5/17 9:02:06 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 7/6/17 9:02:06 PM + the command is ./script.sh 21:2 7/6/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 1  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/appellerRemind.txt zaafrani David 7/6/2017 gabriel.zaafrani@gmail.com
+7/5/17 9:03:27 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 7/6/17 9:03:27 PM + the command is ./script.sh 21:3 7/6/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 2  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/appellerRemind.txt Lapert Christian 7/6/2017 christian.lapert@gmail.com
+7/5/17 9:05:06 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 9:05:06 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/5/17 9:17:57 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/5/17 9:17:57 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/7/17 9:00:22 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/7/17 9:00:22 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/7/17 9:12:35 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/7/17 10:15:42 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/7/17 10:39:34 PM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/7/17 10:39:34 PM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/7/17 10:39:39 PM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/7/17 10:39:39 PM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/7/17 10:39:45 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/7/17 10:39:55 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/7/17 10:39:55 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/7/17 10:40:07 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/7/17 10:40:07 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:28:51 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 6:28:51 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 6:29:12 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/9/17 6:29:16 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:29:16 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:30:04 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/9/17 6:30:07 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:30:07 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:33:13 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 7/10/17 6:33:13 PM + the command is ./script.sh 18:33 7/10/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 1  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/appellerRemind.txt Zaafrani Gabriel 7/10/2017 gabriel.zaafrani@gmail.com
+7/9/17 6:33:17 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/9/17 6:33:54 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 4 existe veuillez vous identifier
+7/9/17 6:33:54 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 4 existe veuillez vous identifier
+7/9/17 6:33:59 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+7/9/17 6:33:59 PM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
+7/9/17 6:35:24 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:35:24 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:35:32 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/9/17 6:35:37 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:35:37 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:36:50 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/9/17 6:37:09 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:37:09 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/9/17 6:59:03 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 6:59:03 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 6:59:12 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 32 existe veuillez vous identifier
+7/9/17 6:59:12 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 32 existe veuillez vous identifier
+7/9/17 6:59:26 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/9/17 6:59:32 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 7/10/17 6:59:32 PM + the command is ./script.sh 18:59 7/10/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 2  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/appellerRemind.txt Cohen David 7/10/2017 david.zaafrani@gmail.com
+7/9/17 7:02:08 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 7:02:08 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 7:02:13 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/9/17 7:02:22 PM - [Error] - SqlCustomException - MysqlDb - Le nom de fichier pour les templates d'email ne peut pas etre vide
+7/9/17 7:02:22 PM - [Error] - WsCustomeException - UserController - Le nom de fichier pour les templates d'email ne peut pas etre vide
+7/9/17 7:05:30 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 7:05:30 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 7:05:38 PM - [Error] - SqlCustomException - MysqlDb - L'email du candidat passé en parametre est vide
+7/9/17 7:05:38 PM - [Error] - SqlCustomException - MysqlDb - L'email du candidat passé en parametre est vide
+7/9/17 7:05:38 PM - [Error] - WsCustomeException - UserController - L'email du candidat passé en parametre est vide
+7/9/17 7:11:52 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 7:11:52 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 7:12:16 PM - [Error] - SqlCustomException - MysqlDb - L'email du candidat passé en parametre est vide
+7/9/17 7:12:16 PM - [Error] - SqlCustomException - MysqlDb - L'email du candidat passé en parametre est vide
+7/9/17 7:12:16 PM - [Error] - WsCustomeException - UserController - L'email du candidat passé en parametre est vide
+7/9/17 7:15:13 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 7:15:13 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 7:15:23 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:15 1/9/2018  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/PAERemind.txt Cohen David 1/9/2018 ronaaaaalzaad.zaafrani@gmail.com
+7/9/17 7:17:29 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 7:17:29 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 7:17:35 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/9/17 7:17:39 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 19:17 1/9/2018  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/linkedin/linkedin.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/PAERemind.txt Cohen David 1/9/2018 ronaaaaalzaad.zaaaaafrani@gmail.com

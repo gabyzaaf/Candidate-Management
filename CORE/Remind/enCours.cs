@@ -10,7 +10,7 @@ namespace Candidate_Management.CORE.Remind
     {
          private DateTime date = new DateTime();
          public int id {get;set;}
-         private string fileName = null; 
+         
 
 
          public void add(int id,DateTime date){
@@ -19,7 +19,7 @@ namespace Candidate_Management.CORE.Remind
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
              this.date = date.AddDays(2*7);
             isql.remindType(id,this.date);
-            
+            emailCandidate = isql.getCandidateEmailFromId(id);
          }
          
          public void update(int id,DateTime date){
@@ -27,6 +27,7 @@ namespace Candidate_Management.CORE.Remind
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
             this.date = date.AddDays(2*7);
             isql.updateRemindType(id,this.date);
+            emailCandidate = isql.getCandidateEmailFromId(id);
          }
 
          public void exec(string token,DateTime meeting){

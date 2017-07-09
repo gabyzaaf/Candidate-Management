@@ -125,8 +125,10 @@ namespace API.wsUser
                 
                 int idUser = isql.getIdFromToken(candidat.session_id);
                 isql.addCandidate(candidat,idUser);
+                
                 int idCandidat = isql.getIdFromCandidateEmail(candidat.emailAdress);
                 isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"ADD",candidat.session_id);
+                
                 return new ObjectResult(new State(){code=3,content="Le candidat a ete ajoute à votre systeme",success=true});
             }catch(Exception exc){
                 if(exc.Message.Equals(specificException)){

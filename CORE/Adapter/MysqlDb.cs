@@ -1284,6 +1284,7 @@ namespace Core.Adapter{
 
         public string getPluginChoiceFromCandidate(string emailCandidat){
             try{
+                
                 if(String.IsNullOrEmpty(emailCandidat)){
                     throw new Exception("L'email du candidat passé en parametre est vide");
                 }
