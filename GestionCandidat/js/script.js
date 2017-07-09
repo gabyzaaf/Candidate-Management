@@ -12,8 +12,6 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
             if ($scope.satisfaction_level == null || prediction.last_evaluation == null || prediction.number_project == null || prediction.number_project > 356 || prediction.average_montly_hours == null || prediction.average_montly_hours > 4040 || prediction.time_spend_company == null || prediction.time_spend_company > 66 || prediction.Work_accident == null || prediction.promotion_last_5years == null || prediction.sales == null || prediction.salary == null) {
                 console.log("erreur : tous les champs ne sont pas remplie");
             } else {
-
-                console.log(prediction.satisfaction_level);
                 var req = {
                     method: 'POST',
                     url: 'http://192.168.126.145:5000/api/user/MlCandidate/prediction',
@@ -34,7 +32,6 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
                 $http(req).then(function (response) {
                     $scope.resultatAzure = response.data.content.substring(0, 1);
                     $scope.probAzure = response.data.content.substring(3) + "%";
-                    console.log($scope.resultatAzure);
                     if ($scope.resultatAzure == 1) {
                         $scope.resultatAzure = "Salarié quitte l'entreprise";
                     } else if ($scope.resultatAzure == 0) {
@@ -49,8 +46,6 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
                         $scope.probAzure = "Les données remplie sont incohérentes";
                     }
 
-
-                    console.log($scope.probAzure);
                 }, (err) => {
                     console.log("ceci est une erreur" + err);
                 });
