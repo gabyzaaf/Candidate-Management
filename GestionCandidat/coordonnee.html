@@ -2,7 +2,7 @@
 <html ng-app="gestionCandidatApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Gestion Candidat - Coordonnée</title>
+    <title>Gestion Candidat - Coordonnées</title>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-cookies.min.js"></script>
     <script src="scripts/angular-route.js"></script>
@@ -116,12 +116,12 @@
 <body ng-controller="app">
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <center><div class="bg-info text-white"><p class="h1">Fiche Coodonnée</p></div></center>
+    <center><div class="bg-info text-white"><p class="h1">Fiche Coodonnées</p></div></center>
     <br />
     <table align="center">
         <tbody>
             <tr>
-                <td><a href="coordonnee.html">Coordonnée</a></td>
+                <td><a href="coordonnee.html">Coordonnées</a></td>
                 <td>|</td>
                 <td><a href="entretien.html">Entretien</a></td>
             </tr>
@@ -152,11 +152,11 @@
                             <tr>
                                 <td><font color="red">*</font>Nom : </td>
                                 <td><input class="form-control" type="text" id="Name" name="Name" ng-model="candidat.Name" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required/></td>
-                                <td><font color="red">*</font>Prenom : </td>
+                                <td><font color="red">*</font>Prénom : </td>
                                 <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required/></td>
                             </tr>
                             <tr>
-                                <td><font color="red">*</font>Email : </td>
+                                <td><font color="red">*</font>E-mail : </td>
                                 <td><input class="form-control" type="email" id="emailAdress" name="emailAdress" ng-model="candidat.emailAdress" onkeydown="if(event.keyCode==32) return false;" required/></td>
                                 <td><font color="red">*</font>Sexe : </td>
                                 <td>
@@ -243,7 +243,7 @@
     </section>
     <br />
     <br />
-    <center><p class="h1">Modifier un template message</p></center>
+    <center><p class="h1">Modifier le contenu d'un e-mail</p></center>
     <section ng-controller="rechercheAllMessage">
         <form ng-submit="sendMessage(message)">
             <div class="form-group">
@@ -269,13 +269,13 @@
                                 <td colspan="4" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
                             </tr>
                             <tr>
-                                <td>Titre du template : </td>
+                                <td>Titre du template e-mail : </td>
                                 <td colspan="2">
                                     <input ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">Contenu du message : </td>
+                                <td colspan="3">Contenu du template e-mail : </td>
                             </tr>
                             <tr>
                                 <td colspan="3"><textarea name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>

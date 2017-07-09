@@ -109,7 +109,7 @@
     <br />
     <center><div class="bg-info text-white"><p class="h1">Prédiction</p></div></center>
     <br />
-    <center><p class="h3">Prédiction : le salarié serait-il suceptible de quitter ou non l'entreprise ?</p></center>
+    <center><p class="h3">Prédiction : le salarié serait-il susceptible de quitter ou non l'entreprise ?</p></center>
     <br />
     <div id="erreurChamp" hidden="hidden">
         <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
@@ -128,11 +128,11 @@
                         <td><input class="form-control" type="number" step="0.01" min="0" max="1" id="last_evaluation" ng-model="prediction.last_evaluation" placeholder="0 à 1" /></td>
                     </tr>
                     <tr>
-                        <td><label><font color="red">*</font>Nombre de projet réalisé</label></td>
+                        <td><label><font color="red">*</font>Nombre de projets réalisé</label></td>
                         <td><input class="form-control" type="number" id="number_project" min="0" ng-model="prediction.number_project" placeholder="Nombre de projet..." /></td>
                     </tr>
                     <tr>
-                        <td><label><font color="red">*</font>Moyenne d'heures travaillé par mois</label></td>
+                        <td><label><font color="red">*</font>Moyenne d'heures travaillée par mois</label></td>
                         <td><input class="form-control" type="number" min="0" max="4040" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
                     </tr>
                     <tr>
@@ -149,7 +149,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label><font color="red">*</font>A-t-il déjà eu au moins une promotion durant les 5 dernières anneès ?</label></td>
+                        <td><label><font color="red">*</font>A-t-il déjà eu au moins une promotion durant les 5 dernières années ?</label></td>
                         <td>
                             <select id="promotion_last_5years" class="form-control" ng-model="prediction.promotion_last_5years">
                                 <option value="0">NON</option>
@@ -195,11 +195,11 @@
     <div id="reponsetable" hidden="hidden">
         <table border="1" align="center">
             <tr>
-                <th colspan="2">Reponse prédiction</th>
+                <th colspan="2">Réponse de la prédiction</th>
             </tr>
             <tr>
-                <th>Quite ou non l'entreprise</th>
-                <th>Probabilité de la reponse</th>
+                <th>Quitte ou non l'entreprise</th>
+                <th>Probabilité de la réponse</th>
             </tr>
             <tr>
                 <td>{{resultatAzure}}</td>

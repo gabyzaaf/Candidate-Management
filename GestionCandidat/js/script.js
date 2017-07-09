@@ -10,7 +10,7 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
         try{
             $scope.satisfaction_level = prediction.satisfaction_level;
             if ($scope.satisfaction_level == null || prediction.last_evaluation == null || prediction.number_project == null || prediction.number_project > 356 || prediction.average_montly_hours == null || prediction.average_montly_hours > 4040 || prediction.time_spend_company == null || prediction.time_spend_company > 66 || prediction.Work_accident == null || prediction.promotion_last_5years == null || prediction.sales == null || prediction.salary == null) {
-                console.log("erreur : tous les champs ne sont pas remplie");
+                console.log("erreur : Tous les champs ne sont pas remplis");
             } else {
                 var req = {
                     method: 'POST',
@@ -37,13 +37,13 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
                     } else if ($scope.resultatAzure == 0) {
                         $scope.resultatAzure = "Salarié ne quitte pas l'entreprise";
                     } else {
-                        $scope.resultatAzure = "Les données remplie sont incohérentes";
-                        $scope.probAzure = "Les données remplie sont incohérentes";
+                        $scope.resultatAzure = "Les données remplies sont incohérentes";
+                        $scope.probAzure = "Les données remplies sont incohérentes";
                     }
 
                     if ($scope.probAzure == "]]%") {
-                        $scope.resultatAzure = "Les données remplie sont incohérentes";
-                        $scope.probAzure = "Les données remplie sont incohérentes";
+                        $scope.resultatAzure = "Les données remplies sont incohérentes";
+                        $scope.probAzure = "Les données remplies sont incohérentes";
                     }
 
                 }, (err) => {
@@ -116,7 +116,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
         $scope.config.type2 = $scope.typeOptions[1];
 
         $scope.showGraph = function () {
-            $scope.graph1 = "Graph 1 : Graphique sur les promotions et les nombres de projet";
+            $scope.graph1 = "Graph 1 : Graphique sur les promotions et les nombres de projets";
             $scope.config.data1 = $scope.number_project;
             $scope.config.data2 = $scope.promotion_last_5years;
             $scope.config.type1 = $scope.typeOptions[6];
@@ -152,7 +152,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
         }
 
         $scope.showGraph3 = function () {
-            $scope.graph3 = "Graph 3 : Graphique sur le nombre de projet et l'évaluation du salarié";
+            $scope.graph3 = "Graph 3 : Graphique sur le nombre de projets et l'évaluation du salarié";
             $scope.config.data1 = $scope.number_project;
             $scope.config.data2 = $scope.last_evaluation;
             $scope.config.type1 = $scope.typeOptions[6];
@@ -170,7 +170,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
         }
 
         $scope.showGraph4 = function () {
-            $scope.graph4 = "Graph 4 : Graphique sur la satisfaction du salarié et le nombre de projet qu'il a effectué";
+            $scope.graph4 = "Graph 4 : Graphique sur la satisfaction du salarié et le nombre de projets qu'il a effectué";
             $scope.config.data1 = $scope.satisfaction_level;
             $scope.config.data2 = $scope.number_project;
             $scope.config.type1 = $scope.typeOptions[6];
@@ -281,7 +281,7 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
 
         $http(req).then(function (response) {
             if (response.data.content != null) {
-                console.log("Email ou mot de passe incorrect");
+                console.log("E-mail ou mot de passe incorrect");
                 $scope.errtxt = response.data.content;
             } else {
                 console.log("En attente du cookie");
@@ -334,11 +334,11 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
             try {
                 var regexFirstname = $scope.Firstname.match(/[A-Za-z]+/g);
                 if (regexFirstname[0] != $scope.Firstname) {
-                    $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prénom";
                     $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
                 }
             } catch (e) {
-                $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                $scope.erreurNormeFirstname = "Le champ prénom ne respect pas la norme d'un prénom";
                 $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
             }
             /********************************************************/
@@ -350,7 +350,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                     $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
                 }
             } catch (e) {
-                $scope.erreurNormeAction = "Le champ prenom ne respect pas la norme d'un prenom";
+                $scope.erreurNormeAction = "Le champ action ne respect pas la norme d'une action";
                 $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
             }
             /********************************************************/
@@ -362,14 +362,14 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                     $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
                 }
             } catch (e) {
-                $scope.erreurNormeSexe = "Le champ prenom ne respect pas la norme d'un prenom";
+                $scope.erreurNormeSexe = "Le champ sexe ne respect pas la norme";
                 $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
             }
             /********************************************************/
 
             
             if ($scope.Name == null || $scope.Firstname == null || $scope.emailAdress == null || $scope.phone == null || $scope.sexe == null || $scope.action == null || $scope.zipcode == null || $scope.plugins == null) {
-                $scope.erreurChamps = "Tous les champs obligatoire (*) ne sont pas remplie ou les normes ne sont pas respectés";
+                $scope.erreurChamps = "Tous les champs obligatoires (*) ne sont pas remplis ou les normes ne sont pas respectées";
                 $timeout(function () { $scope.erreurChamps = ""; }, 5000);
                 
             } else {
@@ -428,7 +428,7 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
             $scope.emailCandidat = $scope.selectedCar;
             $scope.note = entretien.note;
             if ($scope.emailCandidat == null || $scope.note == null) {
-                $scope.erreurEntretien = "Les champs obligatoir ne sont pas remplie";
+                $scope.erreurEntretien = "Les champs obligatoires (*) ne sont pas remplie";
                 $timeout(function () { $scope.erreurEntretien = ""; }, 5000);
             } else {
                 var req = {
@@ -540,11 +540,11 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                 try {
                     var regexFirstname = updateCandidate.prenom.match(/[A-Za-z]+/g);
                     if (regexFirstname[0] != updateCandidate.prenom) {
-                        $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                        $scope.erreurNormeFirstname = "Le champ prénom ne respect pas la norme d'un prénom";
                         $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
                     }
                 } catch (e) {
-                    $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $scope.erreurNormeFirstname = "Le champ prénom ne respect pas la norme d'un prénom";
                     $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
                 }
             /********************************************************/
@@ -556,7 +556,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                         $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
                     }
                 } catch (e) {
-                    $scope.erreurNormeAction = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $scope.erreurNormeAction = "Le champ action ne respect pas la norme d'une action";
                     $timeout(function () { $scope.erreurNormeAction = ""; }, 5000);
                 }
             /********************************************************/
@@ -568,7 +568,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
                         $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
                     }
                 } catch (e) {
-                    $scope.erreurNormeSexe = "Le champ prenom ne respect pas la norme d'un prenom";
+                    $scope.erreurNormeSexe = "Le champ sexe ne respect pas la norme";
                     $timeout(function () { $scope.erreurNormeSexe = ""; }, 5000);
                 }
             /********************************************************/

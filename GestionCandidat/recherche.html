@@ -207,7 +207,7 @@
     <center><div class="bg-info text-white"><p class="h1">Recherche Candidat</p></div></center>
     <br />
     <div id="erreurChampRecherche" hidden="hidden">
-        <center><p class="h3"><font color="red">Veuillez remplir les champs rouge</font></p></center>
+        <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
     </div>
     <center><p class="h4"><font color="red">{{erreurNormeNom}}</font></p></center>
     <center><p class="h4"><font color="red">{{erreurNormeFirstname}}</font></p></center>
@@ -216,19 +216,22 @@
     <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
         <br />
         <center><h3 id="rep">{{contentResponse}}</h3></center>
-        <div class="form-group">
-            <div style="width: 50%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
-                <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" required />
-                <i class="icon icon-search"></i>
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-inverse" id="btnRecherche" onclick="verifChampRecherche()">Rechercher</button>
-                </span>
-            </div>
-        </div>
-        <br />
-        <center><p class="h4">Resultat : {{resultatTrouve}}</p></center>
         <br />
         <div class="form-group">
+            <center><label><p class="h4">Rechercher un candidat par nom :</p></label></center>
+    <div style="width: 50%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
+        <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" required />
+        <i class="icon icon-search"></i>
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-inverse" id="btnRecherche" onclick="verifChampRecherche()">Rechercher</button>
+        </span>
+    </div>
+</div>
+        <br />
+        <center><p class="h4">Candidat(s) trouvé(s) : {{resultatTrouve}}</p></center>
+        <br />
+        <div class="form-group">
+            <center><label><p class="h4">Sélectionner un candidat trouvé :</p></label></center>
             <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
                 <select class="form-control input-lg" ng-model="selectedCar" id="selectCandidat" onclick="toggleSelectCoordEntr()">
                     <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
@@ -248,12 +251,12 @@
     <section ng-controller="updateCandidate">
         <form ng-submit="sendEntry(updateCandidate)">
             <div id="erreurChampCoord" hidden="hidden">
-                <center><p class="h3"><font color="red">Veuillez remplir les champs rouge</font></p></center>
+                <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
             </div>
             <table align="center" id="loginTableCoord" hidden="hidden">
                 <tbody>
                     <tr>
-                        <td colspan="4" align="center" ><h1>Coordonnée</h1></td>
+                        <td colspan="4" align="center" ><h1>Coordonnées</h1></td>
                     </tr>
                     <tr>
                         <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponse}}</font></p></td>
@@ -264,11 +267,11 @@
                     <tr>
                         <td><font color="red">*</font>Nom : </td>
                         <td><input class="form-control" type="text" name="nomCoor" ng-value="nomCoor" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required /></td>
-                        <td><font color="red">*</font>Prenom : </td>
+                        <td><font color="red">*</font>Prénom : </td>
                         <td><input class="form-control" type="text" name="prenomCoor" ng-value="prenomCoor" id="Firstname" ng-model="updateCandidate.prenom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required /></td>
                     </tr>
                     <tr>
-                        <td><font color="red">*</font>Email : </td>
+                        <td><font color="red">*</font>E-mail : </td>
                         <td><input class="form-control" type="email" name="email" ng-value="emailCoor" id="emailAdress" ng-model="updateCandidate.email" disabled /></td>
                         <td><font color="red">*</font>Sexe : </td>
                         <td>
@@ -353,7 +356,7 @@
     <section ng-controller="updateEntretien">
         <form ng-submit="sendEntry(updateEntretien)" onsubmit="return isValidForm()">
             <div id="erreurChampEntr" hidden="hidden">
-                <center><p class="h3"><font color="red">Veuillez remplir les champs rouge</font></p></center>
+                <center><p class="h3"><font color="red">Veuillez remplir les champs rouges</font></p></center>
             </div>
             <table align="center" id="loginTableEntr" hidden="hidden">
                 <tbody>
@@ -431,7 +434,7 @@
     </section>
 
     <br />
-    <center><p class="h1">Modifier un template message</p></center>
+    <center><p class="h1">Modifier le contenu d'un e-mail</p></center>
     <section ng-controller="rechercheAllMessage">
         <form ng-submit="sendMessage(message)">
             <div class="form-group">
@@ -457,13 +460,13 @@
                                 <td colspan="4" align="center" id="response"><h3 id="rep">{{contentResponseMessage}}</h3></td>
                             </tr>
                             <tr>
-                                <td>Titre du template : </td>
+                                <td>Titre du template e-mail : </td>
                                 <td colspan="2">
                                     <input class="form-control" ng-model="updateMessage.titre_message" ng-value="titreMsg" disabled />
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">Contenu du message : </td>
+                                <td colspan="3">Contenu du template e-mail : </td>
                             </tr>
                             <tr>
                                 <td colspan="3"><textarea class="form-control" name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
@@ -481,10 +484,13 @@
                     </table>
                 </div>
             </form>
-
-
         </section>
     </section>
     <br />
+    <footer>
+        <div>
+            <center><div class="bg-info text-white"><p class="h6">GestionCandidat C17 Engineering 2017</p></div></center>
+        </div>
+    </footer>
 </body>
 </html>

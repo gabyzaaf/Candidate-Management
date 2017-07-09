@@ -2,7 +2,7 @@
 <html ng-app="gestionCandidatApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Gestion Candidat - Message</title>
+    <title>Gestion Candidat - Messages</title>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-cookies.min.js"></script>
     <script src="scripts/angular-route.js"></script>
@@ -53,7 +53,7 @@
 <body ng-controller="rechercheAllMessage">
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <center><div class="bg-info text-white"><p class="h1">Template Message</p></div></center>
+    <center><div class="bg-info text-white"><p class="h1">Template Messages</p></div></center>
     <br />
     <form ng-submit="sendMessage(message)">
         <div class="form-group">
@@ -83,13 +83,13 @@
                                     <td colspan="5" align="center" id="response"><p class="h4" id="rep"><font color="green">{{contentResponseMessageGreen}}</font></p></td>
                                 </tr>
                                 <tr>
-                                    <td>Titre du template : </td>
+                                    <td>Titre du template e-mail : </td>
                                     <td colspan="2">
                                         <input ng-model="updateMessage.titre_message" class="form-control" ng-value="titreMsg" disabled />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3">Contenu du message : </td>
+                                    <td colspan="3">Contenu du template e-mail : </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea class="form-control" name="note" cols="70" rows="7" id="ContenuMessage" ng-model="updateMessage.contenu_message" ng-value="contenuMsg"></textarea></td>
@@ -120,13 +120,13 @@
                                     <td colspan="5" align="center" id="response"><p class="h4" id="rep"><font color="green">{{contentResponseMessageGreen}}</font></p></td>
                                 </tr>
                                 <tr>
-                                    <td>Titre du template : </td>
+                                    <td>Titre du template e-mail : </td>
                                     <td colspan="2">
                                         <input ng-model="deleteMessage.titre_message" class="form-control" ng-value="titreMsg" disabled />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3">Contenu du message : </td>
+                                    <td colspan="3">Contenu du template e-mail : </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea class="form-control" cols="70" rows="7" id="ContenuMessage" ng-value="contenuMsg" disabled></textarea></td>
