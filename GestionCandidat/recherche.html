@@ -220,7 +220,7 @@
         <div class="form-group">
             <center><label><p class="h4">Rechercher un candidat par nom :</p></label></center>
     <div style="width: 50%; margin: auto;" align="center" class="input-group input-group-lg icon-addon addon-lg">
-        <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" required />
+        <input type="text" class="form-control input-lg" id="recherche" name="nom" ng-model="candidat.nom" placeholder="Nom candidat.." size="90" onkeydown="if(event.keyCode==32) return false;" required />
         <i class="icon icon-search"></i>
         <span class="input-group-btn">
             <button type="submit" class="btn btn-inverse" id="btnRecherche" onclick="verifChampRecherche()">Rechercher</button>

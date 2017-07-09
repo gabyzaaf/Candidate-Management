@@ -60,7 +60,7 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
 
 /*******************************************************************/
 
-/********************   Statistique Candidat   ********************/
+/********************   Statistiques Candidat   ********************/
 
 gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $http.get('http://192.168.126.145:5000/api/Remind/stat/mlcandidate/sales/' + $cookies.get('cookie')).then(function (response) {
@@ -194,16 +194,16 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             $scope.config.data3 = $scope.number_project;
             //$scope.config.data4 = $scope.average_montly_hours;
             $scope.config.data5 = $scope.time_spend_company;
-            $scope.config.data6 = $scope.Work_accident;
-            $scope.config.data7 = $scope.left_work;
+            //$scope.config.data6 = $scope.Work_accident;
+            //$scope.config.data7 = $scope.left_work;
             $scope.config.data8 = $scope.promotion_last_5years;
             $scope.config.type1 = $scope.typeOptions[0];
             $scope.config.type2 = $scope.typeOptions[0];
             $scope.config.type3 = $scope.typeOptions[0];
             //$scope.config.type4 = $scope.typeOptions[0];
             $scope.config.type5 = $scope.typeOptions[0];
-            $scope.config.type6 = $scope.typeOptions[0];
-            $scope.config.type7 = $scope.typeOptions[0];
+            //$scope.config.type6 = $scope.typeOptions[0];
+            //$scope.config.type7 = $scope.typeOptions[0];
             $scope.config.type8 = $scope.typeOptions[0];
             var config = {};
             config.bindto = '#chart5';
@@ -215,11 +215,11 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             config.data.json.number_project = $scope.config.data3.split(";");
             //config.data.json.average_montly_hours = $scope.config.data4.split(";");
             config.data.json.time_spend_company = $scope.config.data5.split(";");
-            config.data.json.Work_accident = $scope.config.data6.split(";");
-            config.data.json.left_work = $scope.config.data7.split(";");
+            //config.data.json.Work_accident = $scope.config.data6.split(";");
+            //config.data.json.left_work = $scope.config.data7.split(";");
             config.data.json.promotion_last_5years = $scope.config.data8.split(";");
             config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
-            config.data.types = { "satisfaction_level": $scope.config.type1, "last_evaluation": $scope.config.type2, "number_project": $scope.config.type3, /*"average_montly_hours": $scope.config.type4,*/ "time_spend_company": $scope.config.type5, "Work_accident": $scope.config.type6, "left_work": $scope.config.type7, "promotion_last_5years": $scope.config.type8 };
+            config.data.types = { "satisfaction_level": $scope.config.type1, "last_evaluation": $scope.config.type2, "number_project": $scope.config.type3, /*"average_montly_hours": $scope.config.type4,*/ "time_spend_company": $scope.config.type5, /*"Work_accident": $scope.config.type6, "left_work": $scope.config.type7,*/ "promotion_last_5years": $scope.config.type8 };
             $scope.chart5 = c3.generate(config);
         }
 
@@ -951,24 +951,29 @@ gestionCandidatApp.controller("rechercheAllMessage", ['$scope', '$cookies', '$ht
 gestionCandidatApp.controller("rechercheAllReminds", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
 
     $http.get('http://192.168.126.145:5000/api/Remind/calendar/remind/informations/' + $cookies.get('cookie')).then(function (response) {
-        $scope.todos = response.data;
-        if ($scope.todos != null) {
-            if ($scope.todos[0].content != null) {
-                $scope.contentResponse = $scope.todos[0].content;
+        try{
+            $scope.todos = response.data;
+            if ($scope.todos != null) {
+                if ($scope.todos.content != null) {
+                    $scope.contentResponse = $scope.todos.content;
+                } else {
+                    $scope.stripDay = function (dates) {
+                        return dates.substring(0, 2);
+                    }
+                    $scope.stripMonth = function (dates) {
+                        return dates.substring(3, 5);
+                    }
+                    $scope.stripYear = function (dates) {
+                        return dates.substring(6, 10);
+                    }
+                }
             } else {
-                $scope.stripDay = function (dates) {
-                    return dates.substring(0,2);
-                }
-                $scope.stripMonth = function (dates) {
-                    return dates.substring(3,5);
-                }
-                $scope.stripYear = function (dates) {
-                    return dates.substring(6,10);
-                }
+                console.log("In the error");
             }
-        } else {
-            console.log("In the error");
+        } catch (e) {
+            console.log(e.message);
         }
+        
     }, (err) => {
         console.log(err);
     });
