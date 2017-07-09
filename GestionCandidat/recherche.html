@@ -22,7 +22,7 @@
         function verifChampEntr() {
 
             var note = document.getElementById("note");
-
+            var i = 0;
             if (note.value == "") {
                 note.style.borderColor = "red";
                 setTimeout(function () { note.style.borderColor = "" }, 4000);
@@ -209,6 +209,10 @@
     <div id="erreurChampRecherche" hidden="hidden">
         <center><p class="h3"><font color="red">Veuillez remplir les champs rouge</font></p></center>
     </div>
+    <center><p class="h4"><font color="red">{{erreurNormeNom}}</font></p></center>
+    <center><p class="h4"><font color="red">{{erreurNormeFirstname}}</font></p></center>
+    <center><p class="h4"><font color="red">{{erreurNormeAction}}</font></p></center>
+    <center><p class="h4"><font color="red">{{erreurNormeSexe}}</font></p></center>
     <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
         <br />
         <center><h3 id="rep">{{contentResponse}}</h3></center>
@@ -252,7 +256,10 @@
                         <td colspan="4" align="center" ><h1>Coordonnée</h1></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center" ><h2 id="rep">{{contentResponse}}</h2></td>
+                        <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponse}}</font></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center"><p class="h4"><font color="green">{{contentResponseGreen}}</font></p></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Nom : </td>

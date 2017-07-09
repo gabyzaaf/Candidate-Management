@@ -602,12 +602,14 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
 
             $http(req).then(function (response) {
                 $scope.contentResponse = response.data.content;
+                $scope.contentResponseGreen = "";
                 $timeout(function () { $scope.contentResponse = ""; }, 5000);
-                if (response.data.content != "Le candidat a ete modifie dans votre systeme") {
-                    console.log("In the error");
-                    console.log(response.data.content);
+                if (response.data.content == "Le candidat n'est pas existant dans votre systeme, veuillez le creer" || response.data.content == "Le token n'existe pas ") {
+                    $timeout(function () { $scope.contentResponse = ""; }, 4000);
                 } else {
-                    console.log("En attente du cookie");
+                    $scope.contentResponse = "";
+                    $scope.contentResponseGreen = response.data.content;
+                    $timeout(function () { $scope.contentResponseGreen = ""; }, 4000);
                 }
 
 
@@ -685,13 +687,14 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 
             $http(req).then(function (response) {
                 $scope.contentResponseEntretien = response.data.content;
-                $timeout(function () { $scope.contentResponseEntretien = ""; }, 3000);
-                if (response.data.content != "Le report a ete modifie parfaitement à votre system") {
-                    console.log("In the error");
-                    console.log(response.data.content);
+                $scope.contentResponseEntretienGreen = "";
+                
+                if (response.data.content != "Le report a ete modifie parfaitement à votre system" || response.data.content == "Le token n'existe pas ") {
+                    $timeout(function () { $scope.contentResponseEntretien = ""; }, 4000);
                 } else {
-                    console.log("En attente du cookie");
-                    console.log(response.data.content);
+                    $scope.contentResponseEntretienGreen = response.data.content;
+                    $scope.contentResponseEntretien = "";
+                    $timeout(function () { $scope.contentResponseEntretienGreen = ""; }, 4000);
                 }
 
             }, (err) => {
