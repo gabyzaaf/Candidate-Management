@@ -310,3 +310,10 @@
 7/9/17 10:22:31 PM - [Error] - WsCustomeException - UserController - Les informations lié au candidat pour le machine learning sont vides
 7/9/17 10:24:07 PM - [Error] - WsCustomeException - UserController - Le choi z n'existe pas
 7/9/17 10:24:18 PM - [Error] - WsCustomeException - UserController - Le type de salaire fow n'existe pas
+7/9/17 10:41:28 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/9/17 10:41:28 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/9/17 10:41:28 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/9/17 10:41:51 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/9/17 10:41:51 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/9/17 10:42:04 PM - [Error] - WsCustomeException - UserController - Le type de salaire lovw n'existe pas
+7/9/17 10:42:15 PM - [Error] - WsCustomeException - UserController - Le type de salaire lozz n'existe pas

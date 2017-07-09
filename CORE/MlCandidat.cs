@@ -22,11 +22,11 @@ namespace core.mlcandidat{
         private string[] salaryChoices = {"low","middle","high"};
 
         private bool containSalesChoice(string choice){
-            return salesChoices.Any(choice.Contains);
+            return salesChoices.Any(choice.Equals);
         }
 
         private bool containSalaryChoices(string salaryType){
-            return salaryChoices.Any(salary.Contains);
+            return salaryChoices.Any(salary.Equals);
         }
 
         public void checkCandidateProperties(){
