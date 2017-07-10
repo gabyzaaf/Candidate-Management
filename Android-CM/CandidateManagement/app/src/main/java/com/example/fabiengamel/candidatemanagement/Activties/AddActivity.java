@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -233,25 +234,37 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void AddCandidat() {
+        final ProgressDialog dialog = ProgressDialog.show(AddActivity.this, "", "Chargement en cours...", true);
+
                Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("ADD :", response.toString());
                     try {
                         if(response.getBoolean("success")) {
+                            if (dialog != null)
+                                dialog.cancel();
                         AddReport();
                         }
                         else {
+                            if (dialog != null)
+                                dialog.cancel();
                             String erreur = response.getString("content");
                             AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                            builder.setMessage("json_add"+erreur)
+                            builder.setMessage(erreur)
                                     .setNegativeButton("Réessayer", null)
                                     .create()
                                     .show();
                         }
 
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        if (dialog != null)
+                            dialog.cancel();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
+                        builder.setMessage(e.toString())
+                                .setNegativeButton("Réessayer", null)
+                                .create()
+                                .show();
                     }
 
                 }
@@ -261,6 +274,8 @@ public class AddActivity extends AppCompatActivity {
             Response.ErrorListener errorListener = new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("ERREUR SERVEUR : "+error.toString())
                             .setNegativeButton("Réessayer", null)
@@ -302,12 +317,13 @@ public class AddActivity extends AppCompatActivity {
                         crCall, ns,prix, responseListener, errorListener);
 
             } catch (JSONException e) {
+                if (dialog != null)
+                    dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                 builder.setMessage(e.toString())
                         .setNegativeButton("Réessayer", null)
                         .create()
                         .show();
-                e.printStackTrace();
             }
             RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
             queue.add(addRequest);
@@ -315,6 +331,7 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void AddReport() {
+        final ProgressDialog dialog = ProgressDialog.show(AddActivity.this, "", "Chargement en cours...", true);
 
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
@@ -323,6 +340,8 @@ public class AddActivity extends AppCompatActivity {
 
                 try {
                     if(response.getBoolean("success")) {
+                        if (dialog != null)
+                            dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("Le candidat a bien été ajouté");
                         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -346,6 +365,8 @@ public class AddActivity extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                     builder.setMessage(e.toString())
                             .setNegativeButton("Réessayer", null)
@@ -360,6 +381,8 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Gestion error
+                if (dialog != null)
+                    dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
@@ -387,13 +410,13 @@ public class AddActivity extends AppCompatActivity {
             String xpnote = etXpNote.getText().toString();
             int note = Integer.parseInt(etNote.getText().toString());
 
-
              addReportRequest = new AddReportRequest(mail,sessionId, note,link,xpnote,nsnote, jobIdeal, pisteNote,
                      pieCoute, locationNote, englishNote, national, competences,  responseListener, errorListener);
 
         } catch (JSONException e) {
+            if (dialog != null)
+                dialog.cancel();
             Toast.makeText(this, "" + e, Toast.LENGTH_LONG).show();
-            e.printStackTrace();
         }
         RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
         queue.add(addReportRequest);

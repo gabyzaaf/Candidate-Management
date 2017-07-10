@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -400,6 +401,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public void getCandidatePositionByAction(){
 
+        //final ProgressDialog dialog = ProgressDialog.show(PredictSalaryActivity.this, "", "Chargement en cours...", true);
         user = User.getCurrentUser();
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.getSessionId() ;

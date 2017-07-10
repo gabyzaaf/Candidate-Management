@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -140,6 +141,7 @@ public class TimeActivity extends AppCompatActivity {
 
     public void PredictTime()
     {
+        final ProgressDialog dialog = ProgressDialog.show(TimeActivity.this, "", "Chargement en cours...", true);
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
 
             @Override
@@ -153,12 +155,10 @@ public class TimeActivity extends AppCompatActivity {
                     JSONObject output1 = Results.getJSONObject("output1");
                     JSONObject value = output1.getJSONObject("value");
                     Values = value.getJSONArray("Values").getJSONArray(0);
-
-
                     String result = (String) Values.get(0);
 
-
-
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(TimeActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("Temps restant dans l'entreprise éstimé : "+result+" an(s)")
                             .setNeutralButton("Ok", null)
@@ -166,16 +166,14 @@ public class TimeActivity extends AppCompatActivity {
                             .show();
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(TimeActivity.this, R.style.MyDialogTheme);
                     builder.setMessage(e.toString())
                             .setNeutralButton("Ok", null)
                             .create()
                             .show();
                 }
-
-
-
             }
 
         };
@@ -183,7 +181,8 @@ public class TimeActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                if (dialog != null)
+                    dialog.cancel();
                 Log.d("log2=", error.toString());
                 AlertDialog.Builder builder = new AlertDialog.Builder(TimeActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
@@ -220,9 +219,21 @@ public class TimeActivity extends AppCompatActivity {
 
             timeRequest = new TimeRequest(satisfaction, nbProject, nbHours, accident, promo, salary, responseListener, errorListener);
         } catch (JSONException e) {
-            e.printStackTrace();
+            if (dialog != null)
+                dialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(TimeActivity.this, R.style.MyDialogTheme);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            if (dialog != null)
+                dialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(TimeActivity.this, R.style.MyDialogTheme);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         }
         RequestQueue queue = Volley.newRequestQueue(TimeActivity.this);
         queue.add(timeRequest);
@@ -243,5 +254,4 @@ public class TimeActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-
 }

@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.StrictMode;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void Login() {
-
+        final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Chargement en cours...", true);
         final String mail = etMail.getText().toString();
         final String password = etPassword.getText().toString();
         Tools tool = new Tools();
@@ -99,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                             u.setEmail(response.getString("email"));
                             u.setSessionId(response.getString("sessionId"));
                             User.setCurrentUser(u);
+                            if (dialog != null)
+                                dialog.cancel();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             LoginActivity.this.startActivity(intent);
                         }

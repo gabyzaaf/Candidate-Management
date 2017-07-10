@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -153,6 +154,7 @@ public class MainActivity extends AppCompatActivity
     public void GetCandidatesByActions(String action) {
         //user = User.getCurrentUser();
         //candidates = new ArrayList<Candidate>();
+        final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Chargement en cours...", true);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/candidate/actions/" +action+"/"+user.getSessionId();
 
@@ -175,6 +177,8 @@ public class MainActivity extends AppCompatActivity
                                 if(jsonOBject.has("content"))
                                 {
                                     if(jsonOBject.getString("content").matches(errorToken)){
+                                        if (dialog != null)
+                                            dialog.cancel();
                                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
                                         builder.setMessage("Veuillez vous reconnecter");
                                         builder.setPositiveButton("Ok",
@@ -196,16 +200,19 @@ public class MainActivity extends AppCompatActivity
                                     candidate.setFirstname(jsonOBject.getString("prenom"));
                                     candidate.setLastname(jsonOBject.getString("nom"));
                                     candidate.setEmail(jsonOBject.getString("email"));
-//                                    candidates.add(candidate);
+                                    //candidates.add(candidate);
                                     tvCandidates.append(candidate.getFirstname() + " " + candidate.getLastname());
                                     tvCandidates.append("\n");
                                     tvCandidates.append(candidate.getEmail());
                                     tvCandidates.append("\n");
                                     tvCandidates.append("\n");
+                                    if (dialog != null)
+                                        dialog.cancel();
                                 }
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            if (dialog != null)
+                                dialog.cancel();
                             tvCandidates.append("Une erreur de lecture est survenue : " + e.toString());
                         }
                     }
@@ -216,6 +223,8 @@ public class MainActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        if (dialog != null)
+                            dialog.cancel();
                         tvCandidates.append("Une erreur serveur est survenue : "+error.toString());
                     }
                 }

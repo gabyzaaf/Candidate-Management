@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -140,6 +141,7 @@ public class SatisfactionActivity extends AppCompatActivity {
 
     public void PredictSatisfaction()
     {
+        final ProgressDialog dialog = ProgressDialog.show(SatisfactionActivity.this, "", "Chargement en cours...", true);
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
 
             @Override
@@ -156,6 +158,8 @@ public class SatisfactionActivity extends AppCompatActivity {
                     Double res = Values.getDouble(0) * 100;
                     String result = String.valueOf(res);
 
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("Taux de satisfaction éstimé : "+result+"%")
                             .setNeutralButton("Ok", null)
@@ -163,16 +167,14 @@ public class SatisfactionActivity extends AppCompatActivity {
                             .show();
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
                     builder.setMessage(e.toString())
                             .setNeutralButton("Ok", null)
                             .create()
                             .show();
                 }
-
-
-
             }
 
         };
@@ -180,7 +182,8 @@ public class SatisfactionActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                if (dialog != null)
+                    dialog.cancel();
                 Log.d("log2=", error.toString());
                 AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
@@ -213,9 +216,21 @@ public class SatisfactionActivity extends AppCompatActivity {
 
             satisfactionRequest = new SatisfactionRequest(nbProject, nbHours, companyTime, accident, promo, salary, responseListener, errorListener);
         } catch (JSONException e) {
-            e.printStackTrace();
+            if (dialog != null)
+                dialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            if (dialog != null)
+                dialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         }
         RequestQueue queue = Volley.newRequestQueue(SatisfactionActivity.this);
         queue.add(satisfactionRequest);

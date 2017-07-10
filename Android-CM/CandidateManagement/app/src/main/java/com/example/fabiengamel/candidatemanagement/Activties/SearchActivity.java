@@ -3,6 +3,7 @@ package com.example.fabiengamel.candidatemanagement.Activties;
 import android.Manifest;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -203,6 +204,7 @@ public class SearchActivity extends AppCompatActivity {
         //Instance a new report
         final Meeting report = Meeting.getCurrentMeeting();
         RequestQueue queue = Volley.newRequestQueue(this);
+        final ProgressDialog dialog = ProgressDialog.show(SearchActivity.this, "", "Chargement en cours...", true);
         String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.getSessionId() ;
 
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -309,11 +311,15 @@ public class SearchActivity extends AppCompatActivity {
                                             tvResult.append("NationalityNote : " + report.getNationalityNote());
                                             tvResult.append("\n");
                                             tvResult.append("Competences : " + report.getCompetences());
+                                            if (dialog != null)
+                                                dialog.cancel();
                                             showButton();
                                         }
                                     }
                                 }
                             }catch(JSONException e){
+                            if (dialog != null)
+                                dialog.cancel();
                                 tvResult.append("Erreur de lecture : ");
                                 tvResult.append("\n");
                                 tvResult.append("" + e);
@@ -328,6 +334,8 @@ public class SearchActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        if (dialog != null)
+                            dialog.cancel();
                         tvResult.append("Une erreur serveur est survenue : " + error.toString());
                         tvResult.setVisibility(View.VISIBLE);
                     }
@@ -345,6 +353,8 @@ public class SearchActivity extends AppCompatActivity {
     public void getEmail(String nom){
         user = User.getCurrentUser();
         final RequestQueue queue = Volley.newRequestQueue(this);
+        final ProgressDialog dialog = ProgressDialog.show(SearchActivity.this, "", "Chargement en cours...", true);
+
         String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/mobile/" +nom+"/"+user.getSessionId();
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
@@ -361,6 +371,8 @@ public class SearchActivity extends AppCompatActivity {
                                 //more than one candidat found, need to choice just one by his firstname
                                 final EditText edittext = new EditText(SearchActivity.this);
                                 //Ask for his firstname
+                                if (dialog != null)
+                                    dialog.cancel();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
                                     builder.setTitle("Nom similaire");
                                     builder.setMessage("Plusieurs candidats ont le même nom, veuillez préciser le prénom :");
@@ -408,6 +420,8 @@ public class SearchActivity extends AppCompatActivity {
                                                         }
                                                     }
                                                     catch(JSONException e){
+                                                        if (dialog != null)
+                                                            dialog.cancel();
                                                         tvResult.setVisibility(View.VISIBLE);
                                                         tvResult.append("Une erreur serveur est survenue : "+e.toString());
                                                         e.printStackTrace();
@@ -419,6 +433,8 @@ public class SearchActivity extends AppCompatActivity {
                             }
                             //Only one candidat found with this name
                             else if (response.length() == 1) {
+                                if (dialog != null)
+                                    dialog.cancel();
                                 JSONObject jsonOBject = response.getJSONObject(0);
                                 candidate = Candidate.getCurrentCandidate();
                                 candidate.setEmail(jsonOBject.getString("email"));
@@ -426,6 +442,8 @@ public class SearchActivity extends AppCompatActivity {
                                 SearchCandidate(etNom.getText().toString(), "");
                             }
                         }catch(JSONException e){
+                            if (dialog != null)
+                                dialog.cancel();
                             AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
                             builder.setMessage("Le candidat "+etNom.getText().toString()+" n'existe pas")
                                     .setNegativeButton("Réessayer", null)

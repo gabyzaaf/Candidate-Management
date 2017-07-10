@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -127,6 +128,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
     public void PredictSalary()
     {
+        final ProgressDialog dialog = ProgressDialog.show(PredictSalaryActivity.this, "", "Chargement en cours...", true);
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
 
             @Override
@@ -135,7 +137,6 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
                 JSONArray Values = null;
                 try {
-
                     JSONObject Results = response.getJSONObject("Results");
                     JSONObject output1 = Results.getJSONObject("output1");
                     JSONObject value = output1.getJSONObject("value");
@@ -166,7 +167,8 @@ public class PredictSalaryActivity extends AppCompatActivity {
                     String probabilityAffich = String.valueOf(res);
                     probabilityAffich = probabilityAffich.substring(0, 2);
 
-
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
                     builder.setMessage("Tranche de salaire éstimée : "+resultAffich+" avec une probabilité de : "+probabilityAffich+"%")
                             .setNeutralButton("Ok", null)
@@ -174,24 +176,22 @@ public class PredictSalaryActivity extends AppCompatActivity {
                             .show();
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
                     builder.setMessage(e.toString())
                             .setNeutralButton("Ok", null)
                             .create()
                             .show();
                 }
-
-
-
             }
-
         };
 
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                if (dialog != null)
+                    dialog.cancel();
                 Log.d("log2=", error.toString());
                 AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
@@ -224,9 +224,21 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
             salaryRequest = new PredictSalaryRequest(nbProject, nbHours, companyTime, accident, promo, responseListener, errorListener);
         } catch (JSONException e) {
-            e.printStackTrace();
+            if (dialog != null)
+                dialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            if (dialog != null)
+                dialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         }
         RequestQueue queue = Volley.newRequestQueue(PredictSalaryActivity.this);
         queue.add(salaryRequest);

@@ -1,6 +1,7 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.GravityCompat;
@@ -165,6 +166,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 year = Integer.parseInt(spYear.getSelectedItem().toString());
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
@@ -177,8 +179,7 @@ public class UpdateActivity extends AppCompatActivity {
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 action = spAction.getSelectedItem().toString();
-                if(action.matches("freelance"))
-                {
+                if (action.matches("freelance")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("Vous avez selectionné Freelance : le champs Prix obligatoire est disponible en bas de la page")
                             .setNeutralButton("Compris !", null)
@@ -186,13 +187,14 @@ public class UpdateActivity extends AppCompatActivity {
                             .show();
                     etPRix.setVisibility(View.VISIBLE);
                     tvPrix.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     etPRix.setVisibility(View.INVISIBLE);
                     tvPrix.setVisibility(View.INVISIBLE);
                 }
             }
-            public void onNothingSelected(AdapterView<?> parent) {}
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         //Initialize first spinner value (actions)
@@ -269,6 +271,7 @@ public class UpdateActivity extends AppCompatActivity {
 
 
     public void UpdateCandidate(){
+        final ProgressDialog dialog = ProgressDialog.show(UpdateActivity.this, "", "Chargement en cours...", true);
 
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
@@ -276,18 +279,24 @@ public class UpdateActivity extends AppCompatActivity {
                 Log.d("UPDATE :", response.toString());
                 try {
                     if(response.getBoolean("success")) {
+                        if (dialog != null)
+                            dialog.cancel();
                         UpdateReport();
                     }
                     else {
+                        if (dialog != null)
+                            dialog.cancel();
                         String erreur = response.getString("content");
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
-                        builder.setMessage("json_add"+erreur)
+                        builder.setMessage(erreur)
                                 .setNegativeButton("Réessayer", null)
                                 .create()
                                 .show();
                     }
 
                 } catch (JSONException e) {
+                    if (dialog != null)
+                        dialog.cancel();
                     e.printStackTrace();
                 }
             }
@@ -297,6 +306,8 @@ public class UpdateActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (dialog != null)
+                    dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
@@ -339,6 +350,8 @@ public class UpdateActivity extends AppCompatActivity {
                     crCall, ns, prix, responseListener, errorListener);
 
         } catch (JSONException e) {
+            if (dialog != null)
+                dialog.cancel();
             AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
             builder.setMessage(e.toString())
                     .setNegativeButton("Réessayer", null)
@@ -351,6 +364,7 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     public void UpdateReport() {
+        final ProgressDialog dialog = ProgressDialog.show(UpdateActivity.this, "", "Chargement en cours...", true);
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -358,6 +372,8 @@ public class UpdateActivity extends AppCompatActivity {
 
                 try {
                     if(response.getBoolean("success")) {
+                        if (dialog != null)
+                            dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("Le candidat a bien été modifié");
                         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -373,6 +389,8 @@ public class UpdateActivity extends AppCompatActivity {
                     }
                     else {
                         //erreur
+                        if (dialog != null)
+                            dialog.cancel();
                         String erreur = response.getString("content");
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                         builder.setMessage("json_report"+erreur)
@@ -382,6 +400,8 @@ public class UpdateActivity extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
+                    if (dialog != null)
+                        dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                     builder.setMessage(e.toString())
                             .setNegativeButton("Réessayer", null)
@@ -395,6 +415,8 @@ public class UpdateActivity extends AppCompatActivity {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (dialog != null)
+                    dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                 builder.setMessage("ERREUR SERVEUR : "+error.toString())
                         .setNegativeButton("Réessayer", null)
@@ -425,6 +447,8 @@ public class UpdateActivity extends AppCompatActivity {
                     pieCoute, locationNote, englishNote, national, competences, responseListener, errorListener);
 
         } catch (JSONException e) {
+            if (dialog != null)
+                dialog.cancel();
             Toast.makeText(this, "" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
