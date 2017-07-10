@@ -4,11 +4,11 @@
 
 2. The url is : 
 
-***http://localhost:5000/api/candidate/actions/{action}/{token}***
+***http://localhost:5000/api/candidate/actions/{candidateaction}/{token}***
 
 3. The parameters are : 
 
-|  actions | token   |
+|  candidateaction | token   |
 |---|---| 
 |  string |  string |
 
@@ -16,28 +16,20 @@
 4. Sample result : 
 
 ``` json
-{
-    "nom": "Zaafrani",
-    "prenom": "David",
-    "phone": "0699822435",
-    "email": "ga@gmail.com",
-    "actions": "enCours",
-    "annee": "2016",
-    "lien": "http://google.com",
-    "crCall": "callSpeedly",
-    "NS": "NsTest"
-  },
-  {
-    "nom": "Zaafrani",
-    "prenom": "David",
-    "phone": "0699822435",
-    "email": "gaz@gmail.com",
-    "actions": "enCours",
-    "annee": "2016",
-    "lien": "http://google.com",
-    "crCall": "callSpeedly",
-    "NS": "NsTest"
-  }
+[
+    {
+        "nom": "zaafrani",
+        "prenom": "Gabriel",
+        "phone": "065434563",
+        "email": "chr.tot@gmail.com",
+        "actions": "aRelancerLKD",
+        "annee": "2015",
+        "lien": "http://google.com",
+        "crCall": "cr call",
+        "zipcode": "75018",
+        "NS": "NS"
+    }
+]
 ```
 
 5. If it's token error : 
@@ -63,6 +55,5 @@
 ]
 ```
 
-7. For know the action type you need to read the specification.
 
 
