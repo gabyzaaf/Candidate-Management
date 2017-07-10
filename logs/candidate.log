@@ -424,3 +424,16 @@
 7/10/17 3:14:21 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
 7/10/17 3:14:21 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/10/17 3:14:42 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 15:14 7/12/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/12/2017 chr.tot@gmail.com
+7/10/17 5:07:10 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 5:07:10 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/10/17 5:10:04 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 5:10:04 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 5:10:36 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 17:10 7/12/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/12/2017 chr.tot@gmail.com
+7/10/17 5:11:08 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 5:11:08 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 5:11:09 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 5:11:09 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 5:12:46 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 49 existe veuillez vous identifier
+7/10/17 5:12:46 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 49 existe veuillez vous identifier
+7/10/17 5:17:06 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 5:17:06 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage

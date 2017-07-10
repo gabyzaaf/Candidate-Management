@@ -275,7 +275,7 @@ namespace Core.Adapter{
                 results.AddLast("lien");
                 results.AddLast("crCall");
                 results.AddLast("NS");
-                results.AddLast("approche_email");
+                results.AddLast("pluginType");
                 results.AddLast("email");
                 results.AddLast("note");
                 results.AddLast("link");
@@ -791,6 +791,7 @@ namespace Core.Adapter{
                 results.AddLast("annee");
                 results.AddLast("lien");
                 results.AddLast("crCall");
+                results.AddLast("zipcode");
                 results.AddLast("NS");
                 output = queryExecute(sql,dico,results);
                 if(output == null || output.Count==0){
