@@ -1,6 +1,8 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.TimeRequest;
 
@@ -93,7 +96,10 @@ public class TimeActivity extends AppCompatActivity {
 
                 if (!CheckEmptyField()) {
                     Toast.makeText(TimeActivity.this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
-                } else {
+                }  else if(!checkCoherentValues()) {
+                    Toast.makeText(TimeActivity.this, "Veuillez remplir avec des valeurs cohérentes", Toast.LENGTH_LONG).show();
+                }
+                else {
 
                     PredictTime();
                 }
@@ -125,6 +131,12 @@ public class TimeActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean checkCoherentValues(){
+        if(Integer.parseInt(etNbNbHours.getText().toString()) > 260 ){
+            return false;
+        }
+        return true;
+    }
 
     public void PredictTime()
     {
@@ -187,6 +199,7 @@ public class TimeActivity extends AppCompatActivity {
             String nbHours = etNbNbHours.getText().toString();
             String accident = "";
             String promo = "";
+
             if(rdAccidentTrue.isChecked()){
                 accident = "1";
             }
@@ -213,6 +226,22 @@ public class TimeActivity extends AppCompatActivity {
         }
         RequestQueue queue = Volley.newRequestQueue(TimeActivity.this);
         queue.add(timeRequest);
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimeActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(TimeActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }

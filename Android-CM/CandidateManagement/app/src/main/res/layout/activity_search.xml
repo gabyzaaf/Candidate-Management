@@ -28,6 +28,8 @@
         android:orientation="horizontal"
         android:id="@+id/linearLayout">
         <EditText
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwvxyz"
+            android:inputType="textFilter"
             android:id="@+id/etName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

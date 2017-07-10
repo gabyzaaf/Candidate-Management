@@ -14,6 +14,7 @@
         android:id="@+id/etMailAdd"
         android:hint="Mail"
         android:text="juliec17@gmail.com"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwvxyz1234567890@."
         android:textColorHint="@color/textEditable"
         android:textColor="@color/textEditable"
         android:inputType="textEmailAddress"
@@ -26,6 +27,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwvxyz1234567890"
         android:id="@+id/etPassword"
         android:hint="Mot de passe"
         android:textColorHint="@color/textEditable"

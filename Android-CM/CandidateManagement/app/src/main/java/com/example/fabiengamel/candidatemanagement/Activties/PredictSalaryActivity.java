@@ -2,6 +2,7 @@ package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.PredictSalaryRequest;
 import com.example.fabiengamel.candidatemanagement.Requests.SalaryRequest;
@@ -82,14 +84,11 @@ public class PredictSalaryActivity extends AppCompatActivity {
                     int nbhours = Integer.valueOf(etNbNbHours.getText().toString());
                     if (nbhours < 100) {
                         Toast.makeText(PredictSalaryActivity.this, "Veuillez saisir un nombre d'heures correct", Toast.LENGTH_LONG).show();
+                    } else if (!checkCoherentValues()) {
+                        Toast.makeText(PredictSalaryActivity.this, "Veuillez remplir avec des valeurs cohérentes", Toast.LENGTH_LONG).show();
                     } else {
                         PredictSalary();
                     }
-                   /* try {
-                        TestJsonBody();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }*/
                 }
             }
         });
@@ -119,6 +118,12 @@ public class PredictSalaryActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean checkCoherentValues(){
+        if(Integer.parseInt(etNbNbHours.getText().toString()) > 260 || Integer.parseInt(etNbYears.getText().toString()) > 20){
+            return false;
+        }
+        return true;
+    }
 
     public void PredictSalary()
     {
@@ -159,6 +164,8 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
                     Double res = Double.valueOf(probability) * 100;
                     String probabilityAffich = String.valueOf(res);
+                    probabilityAffich = probabilityAffich.substring(0, 2);
+
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
                     builder.setMessage("Tranche de salaire éstimée : "+resultAffich+" avec une probabilité de : "+probabilityAffich+"%")
@@ -224,5 +231,19 @@ public class PredictSalaryActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(PredictSalaryActivity.this);
         queue.add(salaryRequest);
     }
-
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(PredictSalaryActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }

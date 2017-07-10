@@ -41,12 +41,9 @@ public class AddActivity extends AppCompatActivity {
     RadioButton rdHomme;
     RadioButton rdFemme;
     Spinner spAction;
-    EditText etYear;
     EditText etLink;
     EditText etCrCall;
     EditText etNs;
-    RadioButton rdEmailyes;
-    RadioButton rdEmailNo;
     EditText etJobIdeal;
     EditText etPiste;
     EditText etPisteCoute;
@@ -61,6 +58,8 @@ public class AddActivity extends AppCompatActivity {
     String action = "";
     EditText etPRix;
     TextView tvPrix;
+    int year;
+    Spinner spYear;
 
 
     @Override
@@ -70,14 +69,13 @@ public class AddActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         InitContent();
-
     }
 
     public void InitContent() {
         etName = (EditText)findViewById(R.id.etNom);
         etFirstname = (EditText)findViewById(R.id.etPrenom);
         etPhone = (EditText)findViewById(R.id.etPhone);
-        etYear = (EditText)findViewById(R.id.etYear);
+        spYear = (Spinner)findViewById(R.id.spYearsAdd);
         etLink = (EditText)findViewById(R.id.etLink);
         etCrCall = (EditText)findViewById(R.id.etcrCall);
         etNs = (EditText)findViewById(R.id.etNs);
@@ -85,8 +83,6 @@ public class AddActivity extends AppCompatActivity {
         spAction = (Spinner)findViewById(R.id.spActionAdd);
         rdHomme = (RadioButton)findViewById(R.id.rbMasculin);
         rdFemme = (RadioButton)findViewById(R.id.rbFeminin);
-        rdEmailyes = (RadioButton)findViewById(R.id.rbTrue);
-        rdEmailNo = (RadioButton)findViewById(R.id.rbFalse);
         etJobIdeal = (EditText)findViewById(R.id.etLocationNoteAdd);
         etPisteCoute = (EditText)findViewById(R.id.etPicouteNoteAdd);
         etPiste = (EditText)findViewById(R.id.etPisteNoteAdd);
@@ -102,11 +98,29 @@ public class AddActivity extends AppCompatActivity {
         tvPrix = (TextView)findViewById(R.id.tvPrixAdd);
         etZipcode = (EditText)findViewById(R.id.etZipcodeAdd);
 
+        //set values for actions
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
         spAction.setAdapter(adapter);
 
+        //set values for years
+        ArrayAdapter<CharSequence> adapterYear = ArrayAdapter.createFromResource(this,
+                R.array.years_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
+        spYear.setAdapter(adapterYear);
+
+        //set on item select year
+        //Set item changed listener for years
+        spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                year = Integer.parseInt(spYear.getSelectedItem().toString());
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                year = 2017;
+            }
+        });
+        //set on item selected actions
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 action = spAction.getSelectedItem().toString();
@@ -141,7 +155,7 @@ public class AddActivity extends AppCompatActivity {
                 }
                 else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                    builder.setTitle("Ajouter le candidat ?");
+                    builder.setMessage("Ajouter le candidat ?");
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -179,7 +193,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-        builder.setTitle("Quitter l'ajout ?");
+        builder.setMessage("Quitter l'ajout ?");
         builder.setPositiveButton("Oui",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -208,7 +222,7 @@ public class AddActivity extends AppCompatActivity {
     public boolean CheckEmptyField() {
         if(etName.getText().toString().matches("") || etFirstname.getText().toString().matches("") ||
                 etMail.getText().toString().matches("") || etPhone.getText().toString().matches("") ||
-                etYear.getText().toString().matches("") || etNote.getText().toString().matches("")) {
+                etNote.getText().toString().matches("")) {
             return false;
         }
         else if (!rdFemme.isChecked() && !rdHomme.isChecked()) {
@@ -217,7 +231,6 @@ public class AddActivity extends AppCompatActivity {
 
         return true;
     }
-
 
     public void AddCandidat() {
                Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
@@ -259,7 +272,7 @@ public class AddActivity extends AppCompatActivity {
             AddRequest addRequest = null;
             try {
                 User user = User.getCurrentUser();
-                String sessionId = user.sessionId;
+                String sessionId = user.getSessionId();
 
                 //valeurs champs
                 String mail = etMail.getText().toString();
@@ -273,19 +286,11 @@ public class AddActivity extends AppCompatActivity {
                 } else if(rdFemme.isChecked()){
                     sexe = "F";
                 }
-                int year = Integer.parseInt(etYear.getText().toString());
 
                 //champs facultatifs
                 String link = etLink.getText().toString();
                 String crCall = etCrCall.getText().toString();
                 String ns = etNs.getText().toString();
-                boolean email = false;
-                if(rdEmailyes.isChecked()) {
-                    email = true;
-                } else if(rdEmailNo.isChecked()){
-                    email = false;
-                }
-
                 String prix;
                 if(action.matches("freelance")) {
                     prix = etPRix.getText().toString();
@@ -294,7 +299,7 @@ public class AddActivity extends AppCompatActivity {
                     prix = "0";
                 }
                 addRequest = new AddRequest(sessionId,name,firstname, mail, phone, zipcode, sexe, action, year, link,
-                        crCall, ns, email, prix, responseListener, errorListener);
+                        crCall, ns,prix, responseListener, errorListener);
 
             } catch (JSONException e) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
@@ -319,7 +324,7 @@ public class AddActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                        builder.setTitle("Le candidat a bien été ajouté");
+                        builder.setMessage("Le candidat a bien été ajouté");
                         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
@@ -366,12 +371,11 @@ public class AddActivity extends AppCompatActivity {
         AddReportRequest addReportRequest = null;
         try {
             User user = User.getCurrentUser();
-            String sessionId = user.sessionId;
+            String sessionId = user.getSessionId();
             String mail = etMail.getText().toString();
 
             //champs facultatifs
             String link = etLink.getText().toString();
-            String crCall = etCrCall.getText().toString();
             String jobIdeal = etJobIdeal.getText().toString() ;
             String pisteNote = etPiste.getText().toString();
             String pieCoute = etPisteCoute.getText().toString();
@@ -388,14 +392,29 @@ public class AddActivity extends AppCompatActivity {
                      pieCoute, locationNote, englishNote, national, competences,  responseListener, errorListener);
 
         } catch (JSONException e) {
-            Toast.makeText(this, ""+e, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
         RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
         queue.add(addReportRequest);
-
     }
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(AddActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
+
+
 

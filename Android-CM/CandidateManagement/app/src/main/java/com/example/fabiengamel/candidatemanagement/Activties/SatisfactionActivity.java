@@ -1,6 +1,8 @@
 package com.example.fabiengamel.candidatemanagement.Activties;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 import com.example.fabiengamel.candidatemanagement.Requests.SatisfactionRequest;
 
@@ -93,7 +96,10 @@ public class SatisfactionActivity extends AppCompatActivity {
 
                 if (!CheckEmptyField()) {
                     Toast.makeText(SatisfactionActivity.this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
-                } else {
+                }else if(!checkCoherentValues()) {
+                    Toast.makeText(SatisfactionActivity.this, "Veuillez remplir avec des valeurs cohérentes", Toast.LENGTH_LONG).show();
+                }
+                else {
 
                     PredictSatisfaction();
                 }
@@ -125,6 +131,12 @@ public class SatisfactionActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean checkCoherentValues(){
+        if(Integer.parseInt(etNbNbHours.getText().toString()) > 260 || Integer.parseInt(etNbYears.getText().toString()) > 20){
+            return false;
+        }
+        return true;
+    }
 
     public void PredictSatisfaction()
     {
@@ -136,17 +148,13 @@ public class SatisfactionActivity extends AppCompatActivity {
 
                 JSONArray Values = null;
                 try {
-
                     JSONObject Results = response.getJSONObject("Results");
                     JSONObject output1 = Results.getJSONObject("output1");
                     JSONObject value = output1.getJSONObject("value");
                     Values = value.getJSONArray("Values").getJSONArray(0);
 
-
                     Double res = Values.getDouble(0) * 100;
                     String result = String.valueOf(res);
-
-
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("Taux de satisfaction éstimé : "+result+"%")
@@ -212,6 +220,20 @@ public class SatisfactionActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(SatisfactionActivity.this);
         queue.add(satisfactionRequest);
     }
-
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(SatisfactionActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(SatisfactionActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
 }

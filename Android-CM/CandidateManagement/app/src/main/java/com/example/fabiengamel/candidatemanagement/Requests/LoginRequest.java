@@ -23,9 +23,6 @@ import java.util.Map;
  */
 public class LoginRequest extends JsonObjectRequest {
 
- /*   MyDbContext myDb = new MyDbContext();
-    String serverAdress = myDb.getServerAdress();*/
-
     private static final String LOGIN_REQUEST_URL = APIConstants.BASE_URL+"/api/user/admin/auth/";
     Map<String, String> headers;
     JSONObject jsonBody;

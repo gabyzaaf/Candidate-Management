@@ -23,6 +23,8 @@ import android.content.pm.PackageManager;
 import android.telephony.SmsManager;
 
 
+import com.example.fabiengamel.candidatemanagement.Models.Remind;
+import com.example.fabiengamel.candidatemanagement.Models.User;
 import com.example.fabiengamel.candidatemanagement.R;
 
 
@@ -72,6 +74,15 @@ public class SMSActivity extends AppCompatActivity {
         }
         if(!action.matches("")){
             tvAction.setText(action);
+            if(action.matches("aRelancerLKD")){
+                etContentSMS.setText("Bonjour "+prenom+" "+candidateName+", \n"+Remind.aRelancerLKD);
+            }
+            else if(action.matches("PAERemind")){
+                etContentSMS.setText("Bonjour "+prenom+" "+candidateName+", \n"+Remind.PAERemind);
+            }
+            else if(action.matches("appellerRemind")){
+                etContentSMS.setText("Bonjour "+prenom+" "+candidateName+", \n"+Remind.appellerRemind);
+            }
         }
         if(!prenom.matches("")){
             tvFirstname.setText(prenom);
@@ -91,12 +102,13 @@ public class SMSActivity extends AppCompatActivity {
         etContentSMS = (EditText)findViewById(R.id.etContentSMS);
         bSend = (Button)findViewById(R.id.bSendSMS);
 
+
         bSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!tvPhone.getText().toString().matches("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SMSActivity.this, R.style.MyDialogTheme);
-                    builder.setTitle("Envoyer : "+etContentSMS.getText().toString());
+                    builder.setMessage("Envoyer : "+etContentSMS.getText().toString());
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -185,5 +197,20 @@ public class SMSActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(SMSActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(SMSActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
 }

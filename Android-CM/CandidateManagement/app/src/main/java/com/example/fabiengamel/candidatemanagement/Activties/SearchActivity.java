@@ -68,10 +68,9 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         InitContent();
 
-
+        //Get the name if it's come from another activity
         String candidateName;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -83,6 +82,7 @@ public class SearchActivity extends AppCompatActivity {
                 tvInfo.setVisibility(View.INVISIBLE);
             } else {
                 candidateName= extras.getString("candidateName");
+                getEmail(candidateName);
             }
         } else {
             candidateName= (String) savedInstanceState.getSerializable("candidateName");
@@ -105,67 +105,68 @@ public class SearchActivity extends AppCompatActivity {
         bSMS = (Button)findViewById(R.id.bSMS);
         tvInfo = (TextView)findViewById(R.id.textView2);
 
-
+        //Go to location activity
         bLocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 Intent i = new Intent(SearchActivity.this, MapActivity.class);
-                i.putExtra("candidateName", candidate.lastname);
+                i.putExtra("candidateName", candidate.getLastname());
                 startActivity(i);
             }
         });
-
+        //Go to update activity
         bModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 startActivity(new Intent(SearchActivity.this, UpdateActivity.class));
             }
         });
-
+        //Search candidate
         bRecherche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //hide keyboard
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
+                //Set textview result and get name in edittext
                 tvResult.setText("");
                 String nom = etNom.getText().toString();
-
-                getEmail(nom);
+                //Get candidate datas
+                if(!nom.matches("")) {
+                    getEmail(nom);
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
+                    builder.setMessage("Veuillez saisir un nom")
+                            .setNegativeButton("OK", null)
+                            .create()
+                            .show();
+                }
             }
         });
-
+        //Go to SMS activity
         bSMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                //Pass datas needed for sms
                 Intent i = new Intent(SearchActivity.this, SMSActivity.class);
-                i.putExtra("candidatePhone", candidate.phone);
-                i.putExtra("candidateName", candidate.lastname);
-                i.putExtra("candidateFirstname", candidate.firstname);
-                i.putExtra("candidateAction", candidate.actions);
+                i.putExtra("candidatePhone", candidate.getPhone());
+                i.putExtra("candidateName", candidate.getLastname());
+                i.putExtra("candidateFirstname", candidate.getFirstname());
+                i.putExtra("candidateAction", candidate.getActions());
                 startActivity(i);
             }
         });
-
+        //hide buttons on text changed
         etNom.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {}
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 bModify.setVisibility(View.INVISIBLE);
                 bLocate.setVisibility(View.INVISIBLE);
@@ -175,12 +176,12 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-
+    //When press back navigation button
     public void onBackPressed() {
         Intent i = new Intent(SearchActivity.this, MainActivity.class);
         startActivity(i);
     }
-
+    //When press Action bar return button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -190,7 +191,6 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -198,10 +198,12 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
+    //Search candidate datas (after getting his email adress)
     public void SearchCandidate(String nom, final String prenom) {
+        //Instance a new report
         final Meeting report = Meeting.getCurrentMeeting();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
+        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.getSessionId() ;
 
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
@@ -210,7 +212,7 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("Response", response.toString());
-                        String errorToken = "Aucun token ayant ce numero "+user.sessionId+" existe veuillez vous identifier";
+                        String errorToken = "Aucun token ayant ce numero "+user.getSessionId()+" existe veuillez vous identifier";
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonOBject = response.getJSONObject(i);
@@ -218,13 +220,11 @@ public class SearchActivity extends AppCompatActivity {
                                     {
                                         if(jsonOBject.getString("content").matches(errorToken)){
                                             AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
-                                            builder.setTitle("Veuillez vous reconnecter");
+                                            builder.setMessage("Veuillez vous reconnecter");
                                             builder.setPositiveButton("Ok",
                                                     new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            User u = new User();
-                                                            User.setCurrentUser(u);
                                                             startActivity(new Intent(SearchActivity.this, LoginActivity.class));
                                                         }
                                                     });
@@ -237,99 +237,86 @@ public class SearchActivity extends AppCompatActivity {
                                     }
                                 else if(candidate != null) {
                                         if (jsonOBject.getString("prenom").matches(prenom) || prenom.matches("")) {
-                                            candidate.firstname = jsonOBject.getString("prenom");
-                                            candidate.lastname = jsonOBject.getString("nom");
-                                            candidate.phone = jsonOBject.getString("phone");
-                                            candidate.zipcode = jsonOBject.getString("zipcode");
-                                            candidate.lien = jsonOBject.getString("lien");
-                                            candidate.actions = jsonOBject.getString("actions");
-                                            candidate.sexe = jsonOBject.getString("sexe");
-                                            candidate.crCall = jsonOBject.getString("crCall");
-                                            candidate.annee = Integer.parseInt(jsonOBject.getString("annee"));
-                                            candidate.approche_email = Boolean.valueOf(jsonOBject.getString("approche_email"));
-                                            report.note = jsonOBject.getString("note");
-                                            report.xpNote = jsonOBject.getString("xpNote");
-                                            report.pisteNote = jsonOBject.getString("pisteNote");
-                                            report.pieCouteNote = jsonOBject.getString("pieCouteNote");
-                                            report.locationNote = jsonOBject.getString("locationNote");
-                                            report.nationalityNote = jsonOBject.getString("nationalityNote");
-                                            report.EnglishNote = jsonOBject.getString("EnglishNote");
-                                            report.competences = jsonOBject.getString("competences");
+                                            candidate.setFirstname(jsonOBject.getString("prenom"));
+                                            candidate.setLastname(jsonOBject.getString("nom"));
+                                            candidate.setPhone(jsonOBject.getString("phone"));
+                                            candidate.setZipcode(jsonOBject.getString("zipcode"));
+                                            candidate.setLien(jsonOBject.getString("lien"));
+                                            candidate.setActions(jsonOBject.getString("actions"));
+                                            candidate.setSexe(jsonOBject.getString("sexe"));
+                                            candidate.setCrCall(jsonOBject.getString("crCall"));
+                                            candidate.setAnnee(Integer.parseInt(jsonOBject.getString("annee")));
+                                            report.setNote(jsonOBject.getString("note"));
+                                            report.setXpNote(jsonOBject.getString("xpNote"));
+                                            report.setPisteNote(jsonOBject.getString("pisteNote"));
+                                            report.setPieCouteNote(jsonOBject.getString("pieCouteNote"));
+                                            report.setLocationNote(jsonOBject.getString("locationNote"));
+                                            report.setNationalityNote(jsonOBject.getString("nationalityNote"));
+                                            report.setEnglishNote(jsonOBject.getString("EnglishNote"));
+                                            report.setCompetences(jsonOBject.getString("competences"));
 
                                             Candidate.setCurrentCandidate(candidate);
                                             Meeting.setCurrentMeeting(report);
 
                                             tvResult.append("\n");
                                             tvResult.append("\n");
-                                            tvResult.append("Nom : " + candidate.lastname);
+                                            tvResult.append("Nom : " + candidate.getLastname());
                                             tvResult.append("\n");
-                                            tvResult.append("Prénom : " + candidate.firstname);
+                                            tvResult.append("Prénom : " + candidate.getFirstname());
                                             tvResult.append("\n");
-                                            tvResult.append("Sexe : " + candidate.sexe);
+                                            tvResult.append("Sexe : " + candidate.getSexe());
                                             tvResult.append("\n");
-                                            tvResult.append("Email : " + candidate.email);
+                                            tvResult.append("Email : " + candidate.getEmail());
                                             tvResult.append("\n");
-                                            tvResult.append("N°Phone : " + candidate.phone);
+                                            tvResult.append("N°Phone : " + candidate.getPhone());
                                             tvResult.append("\n");
-                                            tvResult.append("Code postal : " + candidate.zipcode);
+                                            tvResult.append("Code postal : " + candidate.getZipcode());
                                             tvResult.append("\n");
-                                            tvResult.append("Année : " + candidate.annee);
+                                            tvResult.append("Année : " + candidate.getAnnee());
                                             tvResult.append("\n");
-                                            tvResult.append("Lien : " + candidate.lien);
+                                            tvResult.append("Lien : " + candidate.getLien());
                                             tvResult.append("\n");
-                                            tvResult.append("Action : " + candidate.actions);
+                                            tvResult.append("Action : " + candidate.getActions());
                                             tvResult.append("\n");
 
-                                            if (candidate.actions.matches("freelance")) {
-                                                tvResult.append("Prix : " + candidate.prix);
+                                            if (candidate.getActions().matches("freelance")) {
+                                                tvResult.append("Prix : " + candidate.getPrix());
                                                 tvResult.append("\n");
                                             }
 
-                                            tvResult.append("crCall : " + candidate.crCall);
-                                            tvResult.append("\n");
-                                            tvResult.append("Approche_email : " + String.valueOf(candidate.approche_email));
+                                            tvResult.append("crCall : " + candidate.getCrCall());
                                             tvResult.append("\n");
                                             tvResult.append("\n");
                                             tvResult.append("Entretien du candidat : ");
                                             tvResult.append("\n");
                                             tvResult.append("\n");
-                                            tvResult.append("Note : " + report.note);
+                                            tvResult.append("Note : " + report.getNote());
                                             tvResult.append("\n");
-                                            tvResult.append("XpNote : " + report.xpNote);
+                                            tvResult.append("XpNote : " + report.getXpNote());
                                             tvResult.append("\n");
-                                            tvResult.append("NSNote : " + report.nsNote);
+                                            tvResult.append("NSNote : " + report.getNsNote());
                                             tvResult.append("\n");
-                                            tvResult.append("JobIdealNote : " + report.jobIdealNote);
+                                            tvResult.append("JobIdealNote : " + report.getJobIdealNote());
                                             tvResult.append("\n");
-                                            tvResult.append("PisteNote : " + report.pisteNote);
+                                            tvResult.append("PisteNote : " + report.getPisteNote());
                                             tvResult.append("\n");
-                                            tvResult.append("PieCouteNote : " + report.pieCouteNote);
+                                            tvResult.append("PieCouteNote : " + report.getPieCouteNote());
                                             tvResult.append("\n");
-                                            tvResult.append("LocationNote : " + report.locationNote);
+                                            tvResult.append("LocationNote : " + report.getLocationNote());
                                             tvResult.append("\n");
-                                            tvResult.append("EnglishNote : " + report.EnglishNote);
+                                            tvResult.append("EnglishNote : " + report.getEnglishNote());
                                             tvResult.append("\n");
-                                            tvResult.append("NationalityNote : " + report.nationalityNote);
+                                            tvResult.append("NationalityNote : " + report.getNationalityNote());
                                             tvResult.append("\n");
-                                            tvResult.append("Competences : " + report.competences);
-
-
-                                            try {
-                                                showButton();
-                                            } catch (InterruptedException e) {
-                                                tvResult.append("Erreur système : ");
-                                                tvResult.append("\n");
-                                                tvResult.append("" + e);
-                                                e.printStackTrace();
-                                            }
+                                            tvResult.append("Competences : " + report.getCompetences());
+                                            showButton();
                                         }
                                     }
-
                                 }
                             }catch(JSONException e){
                                 tvResult.append("Erreur de lecture : ");
                                 tvResult.append("\n");
-                                tvResult.append(""+e);
+                                tvResult.append("" + e);
                                 e.printStackTrace();
                             }
                     }
@@ -358,7 +345,7 @@ public class SearchActivity extends AppCompatActivity {
     public void getEmail(String nom){
         user = User.getCurrentUser();
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/mobile/" +nom+"/"+user.sessionId ;
+        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/mobile/" +nom+"/"+user.getSessionId();
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
                 {
@@ -392,7 +379,7 @@ public class SearchActivity extends AppCompatActivity {
                                                             if (jsonOBject.getString("prenom").matches(firstname[0]) && found == false) {
                                                                 found = true;
                                                                 candidate = Candidate.getCurrentCandidate();
-                                                                candidate.email = jsonOBject.getString("email");
+                                                                candidate.setEmail(jsonOBject.getString("email"));
                                                                 Candidate.setCurrentCandidate(candidate);
                                                                 SearchCandidate(etNom.getText().toString(), firstname[0]);
                                                                 break outerloop;
@@ -401,7 +388,7 @@ public class SearchActivity extends AppCompatActivity {
                                                         //If it doesn't exist : try with another or dismiss
                                                         if(!found){
                                                             AlertDialog.Builder dialogFalse = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
-                                                            dialogFalse.setTitle("Le candidat "+firstname[0]+" "+etNom.getText().toString()+" n'existe pas");
+                                                            dialogFalse.setMessage("Le candidat "+firstname[0]+" "+etNom.getText().toString()+" n'existe pas");
                                                             dialogFalse.setNeutralButton("Réessayer",
                                                                     new DialogInterface.OnClickListener() {
                                                                         @Override
@@ -434,13 +421,16 @@ public class SearchActivity extends AppCompatActivity {
                             else if (response.length() == 1) {
                                 JSONObject jsonOBject = response.getJSONObject(0);
                                 candidate = Candidate.getCurrentCandidate();
-                                candidate.email = jsonOBject.getString("email");
+                                candidate.setEmail(jsonOBject.getString("email"));
                                 Candidate.setCurrentCandidate(candidate);
                                 SearchCandidate(etNom.getText().toString(), "");
                             }
                         }catch(JSONException e){
-                            tvResult.setVisibility(View.VISIBLE);
-                            tvResult.append("Une erreur serveur est survenue : "+e.toString());
+                            AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this, R.style.MyDialogTheme);
+                            builder.setMessage("Le candidat "+etNom.getText().toString()+" n'existe pas")
+                                    .setNegativeButton("Réessayer", null)
+                                    .create()
+                                    .show();
                             e.printStackTrace();
                         }
                     }
@@ -453,7 +443,7 @@ public class SearchActivity extends AppCompatActivity {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
                         tvResult.setVisibility(View.VISIBLE);
-                        tvResult.append("Une erreur serveur est survenue : "+error.toString());
+                        tvResult.append("Une erreur serveur est survenue : " + error.toString());
                     }
                 }
         ) {
@@ -465,14 +455,11 @@ public class SearchActivity extends AppCompatActivity {
         };
         queue.add(searchRequest);
     }
-
-    public void showButton() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+    public void showButton(){
         bModify.setVisibility(View.VISIBLE);
         bLocate.setVisibility(View.VISIBLE);
         bSMS.setVisibility(View.VISIBLE);
         tvInfo.setVisibility(View.VISIBLE);
         tvResult.setVisibility(View.VISIBLE);
     }
-
 }

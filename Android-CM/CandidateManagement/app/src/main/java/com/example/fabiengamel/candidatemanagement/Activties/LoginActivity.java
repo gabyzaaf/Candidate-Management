@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         InitContent();
-
     }
 
     public void InitContent() {
@@ -50,9 +49,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Login();
                 // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                //LoginActivity.this.startActivity(intent);
+                // LoginActivity.this.startActivity(intent);
             }
         });
+    }
+
+    public void onBackPressed() {
+        Intent i = new Intent(LoginActivity.this, LoginActivity.class);
+        startActivity(i);
     }
 
     private void Login() {
@@ -91,9 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                                     .show();
                         }
                         else {
-                            User u = new User();
-                            u.email = response.getString("email");
-                            u.sessionId = response.getString("sessionId");
+                            User u = User.getCurrentUser();
+                            u.setEmail(response.getString("email"));
+                            u.setSessionId(response.getString("sessionId"));
                             User.setCurrentUser(u);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             LoginActivity.this.startActivity(intent);

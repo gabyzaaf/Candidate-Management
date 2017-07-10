@@ -36,6 +36,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nom"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwvxyz"
+                android:inputType="textFilter"
                 android:textColorHint="@color/textEditable"
                 android:textColor="@color/textEditable"
                 android:layout_weight="1"
@@ -55,6 +57,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="Prénom"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwvxyz"
+                android:inputType="textFilter"
                 android:textColorHint="@color/textEditable"
                 android:textColor="@color/textEditable"
                 android:layout_weight="1"
@@ -115,6 +119,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="Code postal"
+                android:maxLength="5"
                 android:textColorHint="@color/textEditable"
                 android:textColor="@color/textEditable"
                 android:inputType="number"
@@ -182,17 +187,11 @@
                 android:textStyle="bold"
                 android:textColor="@color/textInfo"
                 />
-            <EditText
-                android:id="@+id/etYearUpdate"
-                android:layout_width="fill_parent"
+            <Spinner
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Année"
-                android:textColorHint="@color/textEditable"
-                android:textColor="@color/textEditable"
-                android:inputType="number"
-                android:layout_weight="1"
-                android:singleLine="true"
-                />
+                android:id="@+id/spYearsUpdate"
+                android:singleLine="true"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -251,44 +250,6 @@
                 android:singleLine="true"
                 />
         </TableRow>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  Approche Email "
-                android:textStyle="bold"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="9dp"
-                android:textColor="@color/textInfo"
-                />
-            <RadioGroup
-                android:id="@+id/rgEmailUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkedButton="@+id/radio2"
-                android:orientation="horizontal"
-                >
-                <RadioButton
-                    android:id="@+id/rbTrueUpdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Oui"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:textColor="@color/textInfo"
-                    android:checked="false" />
-                <RadioButton
-                    android:id="@+id/rbFalseUpdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non"
-                    android:textColor="@color/textInfo"
-                    />
-            </RadioGroup>
-        </LinearLayout>
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"

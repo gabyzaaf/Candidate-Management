@@ -8,16 +8,15 @@ import java.util.List;
  */
 public class User {
 
-    public String email;
-    public String name;
-    public String sessionId;
+    private String email;
+    private String name;
+    private String sessionId;
 
-    public User()
+    private User()
     {
-
     }
-    private  static User currentUser = null;
 
+    private  static User currentUser = null;
     public static User getCurrentUser()
     {
         if(currentUser == null)
@@ -30,5 +29,29 @@ public class User {
     public static void setCurrentUser(User user)
     {
         currentUser = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

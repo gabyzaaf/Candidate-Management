@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     Spinner spActions;
     String action ="";
     List<Candidate> candidates;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void InitContent() {
-        User user = User.getCurrentUser();
+        user = User.getCurrentUser();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         tvCandidates = (TextView)findViewById(R.id.tvCandidates);
         ivLogo = (ImageView)findViewById(R.id.imageView);
         spActions = (Spinner)findViewById(R.id.spActions);
-        tvWelcome.setText("Bonjour " + user.email);
+        tvWelcome.setText("Bonjour " + user.getEmail());
         tvCandidates.setMovementMethod(new ScrollingMovementMethod());
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -96,7 +97,6 @@ public class MainActivity extends AppCompatActivity
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                action = "aRelancerMail";
             }
         });
     }
@@ -151,10 +151,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void GetCandidatesByActions(String action) {
-        final User user = User.getCurrentUser();
-        candidates = new ArrayList<Candidate>();
+        //user = User.getCurrentUser();
+        //candidates = new ArrayList<Candidate>();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.sessionId ;
+        String url = APIConstants.BASE_URL+"/api/candidate/actions/" +action+"/"+user.getSessionId();
 
         tvCandidates.setText("Liste des candidats "+action+"(s) :");
         tvCandidates.append("\n");
@@ -166,8 +166,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("Response", response.toString());
-                        String errorToken = "Aucun token ayant ce numero "+user.sessionId+" existe veuillez vous identifier";
-                       // String errorTokenNull = "Aucun token ayant ce numero"+user.sessionId+"existe veuillez vous identifier";
+                        String errorToken = "Aucun token ayant ce numero "+user.getSessionId()+" existe veuillez vous identifier";
                         try {
                             for(int i=0; i<response.length();i++) {
                                 JSONObject jsonOBject = response.getJSONObject(i);
@@ -177,35 +176,30 @@ public class MainActivity extends AppCompatActivity
                                 {
                                     if(jsonOBject.getString("content").matches(errorToken)){
                                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
-                                        builder.setTitle("Veuillez vous reconnecter");
+                                        builder.setMessage("Veuillez vous reconnecter");
                                         builder.setPositiveButton("Ok",
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        User u = new User();
-                                                        User.setCurrentUser(u);
                                                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                                                     }
                                                 });
                                         AlertDialog alert = builder.create();
                                         alert.show();
-
                                     }
                                     else{
                                     tvCandidates.append(jsonOBject.getString("content"));
                                     }
                                 }
                                 else {
-                                    Candidate candidate = new Candidate();
-                                    candidate.firstname = jsonOBject.getString("prenom");
-                                    candidate.lastname = jsonOBject.getString("nom");
-                                    candidate.email = jsonOBject.getString("email");
-
-                                    candidates.add(candidate);
-
-                                    tvCandidates.append(candidate.firstname + " " + candidate.lastname);
+                                    Candidate candidate = Candidate.getCurrentCandidate();
+                                    candidate.setFirstname(jsonOBject.getString("prenom"));
+                                    candidate.setLastname(jsonOBject.getString("nom"));
+                                    candidate.setEmail(jsonOBject.getString("email"));
+//                                    candidates.add(candidate);
+                                    tvCandidates.append(candidate.getFirstname() + " " + candidate.getLastname());
                                     tvCandidates.append("\n");
-                                    tvCandidates.append(candidate.email);
+                                    tvCandidates.append(candidate.getEmail());
                                     tvCandidates.append("\n");
                                     tvCandidates.append("\n");
                                 }
@@ -237,14 +231,12 @@ public class MainActivity extends AppCompatActivity
 
     public void deconnect() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
-        builder.setTitle("Se déconnecter ?");
+        builder.setMessage("Se déconnecter ?");
         builder.setPositiveButton("Oui",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        User u = new User();
-                        User.setCurrentUser(u);
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     }
                 });
@@ -260,5 +252,11 @@ public class MainActivity extends AppCompatActivity
         alert.show();
     }
 
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        user = User.getCurrentUser();
+    }
 
 }

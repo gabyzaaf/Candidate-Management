@@ -58,6 +58,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public String nom = "";
     String town;
     String nameRetour;
+    String action;
+    String prenom;
+    User user;
 
 
     @Override
@@ -72,17 +75,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         InitContent();
 
         String candidateName;
+        String candidateFirstname;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 candidateName= null;
+                candidateFirstname = null;
             } else {
                 candidateName= extras.getString("candidateName");
+                candidateFirstname = extras.getString("candidateFirstname");
                 GetCandidateZipCode(candidateName);
             }
         } else {
             candidateName= (String) savedInstanceState.getSerializable("candidateName");
+            candidateFirstname= (String) savedInstanceState.getSerializable("candidateFirstname");
         }
+        prenom = candidateFirstname;
         nameRetour = candidateName;
         etNom.setText(candidateName);
     }
@@ -142,13 +150,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LatLng latLng = new LatLng(lat,lng);
         Candidate candidate = Candidate.getCurrentCandidate();
 
-
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title(candidate.firstname + " " + candidate.lastname)
-                .snippet(candidate.phone+" "+candidate.zipcode+" "+town));
-
-
+                .title(candidate.getFirstname() + " " + candidate.getLastname())
+                .snippet(candidate.getPhone()+" "+candidate.getZipcode()+" "+town));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
     }
 
@@ -163,7 +168,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     String[] parts = arg0.getTitle().split(" ");
                     name = parts[parts.length-1];
                     AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                    builder.setTitle("Accéder à la fiche candidat");
+                    builder.setMessage("Accéder à la fiche candidat");
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -190,12 +195,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     public void GetCandidateZipCode(String nom) {
-        User user = User.getCurrentUser();
-        final Candidate candidate = new Candidate();
+        user = User.getCurrentUser();
+        final Candidate candidate = Candidate.getCurrentCandidate();
         final String[] firstname = {""};
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.sessionId ;
+        String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.getSessionId();
 
         JsonArrayRequest searchRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
@@ -235,17 +240,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                                 JSONObject jsonOBject = response.getJSONObject(i);
                                                                 if (jsonOBject.getString("prenom").matches(firstname[0]) && found == false) {
                                                                     found = true;
-                                                                    candidate.zipcode = jsonOBject.getString("zipcode");
-                                                                    candidate.firstname = jsonOBject.getString("prenom");
-                                                                    candidate.lastname = jsonOBject.getString("nom");
-                                                                    candidate.phone =  jsonOBject.getString("phone");
-                                                                    candidate.lien = jsonOBject.getString("lien");
-                                                                    candidate.actions = jsonOBject.getString("actions");
+                                                                    candidate.setZipcode(jsonOBject.getString("zipcode"));
+                                                                    candidate.setFirstname(jsonOBject.getString("prenom"));
+                                                                    candidate.setLastname(jsonOBject.getString("nom"));
+                                                                    candidate.setPhone(jsonOBject.getString("phone"));
+                                                                    candidate.setLien(jsonOBject.getString("lien"));
+                                                                    candidate.setActions(jsonOBject.getString("actions"));
 
                                                                     Candidate.setCurrentCandidate(candidate);
 
-                                                                    if(!candidate.zipcode.matches("")) {
-                                                                        GetCandidatePosition(candidate.zipcode);
+                                                                    if(!candidate.getZipcode().matches("")) {
+                                                                        GetCandidatePosition(candidate.getZipcode());
                                                                     } else {
                                                                         Toast.makeText(MapActivity.this, "Code postal non renseigné pour ce candidat", Toast.LENGTH_LONG).show();
                                                                     }
@@ -255,7 +260,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                             //If it doesn't exist : try with another or dismiss
                                                             if(!found){
                                                                 AlertDialog.Builder dialogFalse = new AlertDialog.Builder(MapActivity.this, R.style.MyDialogTheme);
-                                                                dialogFalse.setTitle("Le candidat "+firstname[0]+" "+etNom.getText().toString()+" n'existe pas");
+                                                                dialogFalse.setMessage("Le candidat "+firstname[0]+" "+etNom.getText().toString()+" n'existe pas");
                                                                 dialogFalse.setNeutralButton("Réessayer",
                                                                         new DialogInterface.OnClickListener() {
                                                                             @Override
@@ -285,17 +290,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                     }
                                     //Only one candidat found with this name
                                     else if (response.length() == 1) {
-                                        candidate.zipcode = jsonOBject.getString("zipcode");
-                                        candidate.firstname = jsonOBject.getString("prenom");
-                                        candidate.lastname = jsonOBject.getString("nom");
-                                        candidate.phone =  jsonOBject.getString("phone");
-                                        candidate.lien = jsonOBject.getString("lien");
-                                        candidate.actions = jsonOBject.getString("actions");
+                                        candidate.setZipcode(jsonOBject.getString("zipcode"));
+                                        candidate.setFirstname(jsonOBject.getString("prenom"));
+                                        candidate.setLastname(jsonOBject.getString("nom"));
+                                        candidate.setPhone(jsonOBject.getString("phone"));
+                                        candidate.setLien(jsonOBject.getString("lien"));
+                                        candidate.setActions(jsonOBject.getString("actions"));
 
                                         Candidate.setCurrentCandidate(candidate);
 
-                                        if(!candidate.zipcode.matches("")) {
-                                            GetCandidatePosition(candidate.zipcode);
+                                        if(!candidate.getZipcode().matches("")) {
+                                            GetCandidatePosition(candidate.getZipcode());
                                         } else {
                                             Toast.makeText(MapActivity.this, "Code postal non renseigné pour ce candidat", Toast.LENGTH_LONG).show();
                                         }
@@ -328,7 +333,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     public void GetCandidatePosition(String zipcode){
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://maps.googleapis.com/maps/api/geocode/json?address="+zipcode+"&sensor=false&components=country:FR" ;
 
@@ -377,7 +381,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
-                        //  Toast.makeText(MapActivity.this, "Erreur serveur: " + error.toString(), Toast.LENGTH_LONG).show();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
                         builder.setMessage("Erreur serveur: " + error.toString())
                                 .setNeutralButton("Réessayer", null)
@@ -393,8 +396,112 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         };
         queue.add(LatLngRequest);
-
-
     }
 
+    public void getCandidatePositionByAction(){
+
+        user = User.getCurrentUser();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.getSessionId() ;
+
+        JsonArrayRequest getCandidatesRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>()
+                {
+                    public static final String TAG ="Recherche action : " ;
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("Response", response.toString());
+                        String errorToken = "Aucun token ayant ce numero "+user.getSessionId()+" existe veuillez vous identifier";
+                        try {
+                            for(int i=0; i<response.length();i++) {
+                                JSONObject jsonOBject = response.getJSONObject(i);
+                                Log.d(TAG, "GET ACTION " + jsonOBject.toString()) ;
+
+                                if(jsonOBject.has("content"))
+                                {
+                                    if(jsonOBject.getString("content").matches(errorToken)){
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this, R.style.MyDialogTheme);
+                                        builder.setMessage("Veuillez vous reconnecter");
+                                        builder.setPositiveButton("Ok",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        startActivity(new Intent(MapActivity.this, LoginActivity.class));
+                                                    }
+                                                });
+                                        AlertDialog alert = builder.create();
+                                        alert.show();
+
+                                    }
+                                    else{
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                                        builder.setMessage("Erreur : " +jsonOBject.getString("content"))
+                                                .setNeutralButton("Réessayer", null)
+                                                .create()
+                                                .show();
+                                    }
+                                }
+                                else {
+                                    if(!jsonOBject.getString("email").matches(""))
+                                    {
+                                        //addmarkerposition for each ones
+                                        Candidate candidate = Candidate.getCurrentCandidate();
+                                        candidate.setFirstname(jsonOBject.getString("prenom"));
+                                        candidate.setLastname(jsonOBject.getString("nom"));
+                                        candidate.setEmail(jsonOBject.getString("email"));
+                                        candidate.setZipcode(jsonOBject.getString("zipcode"));
+
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                            builder.setMessage("Erreur : " +e)
+                                    .setNeutralButton("Réessayer", null)
+                                    .create()
+                                    .show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Log.d("ERROR", "error => " + error.toString());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                        builder.setMessage("Erreur : " +error.toString())
+                                .setNeutralButton("Réessayer", null)
+                                .create()
+                                .show();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+        queue.add(getCandidatesRequest);
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(MapActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
+
+

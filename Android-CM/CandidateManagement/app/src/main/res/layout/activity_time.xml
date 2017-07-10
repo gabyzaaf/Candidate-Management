@@ -71,7 +71,7 @@
                 android:id="@+id/etNbHoursByMonthTime"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="(100-999)"
+                android:hint="(100-260)"
                 android:textColorHint="@color/textEditable"
                 android:textColor="@color/textEditable"
                 android:layout_weight="1"

@@ -47,12 +47,10 @@ public class UpdateActivity extends AppCompatActivity {
     RadioButton rdHomme;
     RadioButton rdFemme;
     Spinner spAction;
-    EditText etYear;
+    Spinner spYear;
     EditText etLink;
     EditText etCrCall;
     EditText etNs;
-    RadioButton rdEmailyes;
-    RadioButton rdEmailNo;
     EditText etJobIdeal;
     EditText etPiste;
     EditText etPisteCoute;
@@ -64,6 +62,7 @@ public class UpdateActivity extends AppCompatActivity {
     EditText etXpNote;
     EditText etNsNote;
     String action = "";
+    int year;
     Button bUpdate;
     RadioGroup sexes;
     RadioGroup approche_emaill;
@@ -95,16 +94,14 @@ public class UpdateActivity extends AppCompatActivity {
         etName = (EditText)findViewById(R.id.etNomUpdate);
         etFirstname = (EditText)findViewById(R.id.etPrenomUpdate);
         etPhone = (EditText)findViewById(R.id.etPhoneUpdate);
-        etYear = (EditText)findViewById(R.id.etYearUpdate);
         etLink = (EditText)findViewById(R.id.etLinkUpdate);
         etCrCall = (EditText)findViewById(R.id.etcrCallUpdate);
         etNs = (EditText)findViewById(R.id.etNsUpdate);
         etMail = (EditText)findViewById(R.id.etMailUpdate);
         spAction = (Spinner)findViewById(R.id.spActionAddUpdate);
+        spYear = (Spinner)findViewById(R.id.spYearsUpdate);
         rdHomme = (RadioButton)findViewById(R.id.rbMasculinUpdate);
         rdFemme = (RadioButton)findViewById(R.id.rbFemininUpdate);
-        rdEmailyes = (RadioButton)findViewById(R.id.rbTrueUpdate);
-        rdEmailNo = (RadioButton)findViewById(R.id.rbFalseUpdate);
         etJobIdeal = (EditText)findViewById(R.id.etJobIdealNoteUpdate);
         etPisteCoute = (EditText)findViewById(R.id.etPicouteNoteUpdate);
         etPiste = (EditText)findViewById(R.id.etPisteNoteUpdate);
@@ -117,7 +114,6 @@ public class UpdateActivity extends AppCompatActivity {
         etNote = (EditText)findViewById(R.id.etNoteUpdate);
         bUpdate = (Button)findViewById(R.id.bUpdate);
         sexes = (RadioGroup)findViewById(R.id.rgSexeUpdate);
-        approche_emaill = (RadioGroup)findViewById(R.id.rgEmailUpdate);
         etPRix = (EditText)findViewById(R.id.etPrixUpdate);
         tvPrix = (TextView)findViewById(R.id.tvPrixUpdate);
         etZipcode = (EditText)findViewById(R.id.etZipcodeUpdate);
@@ -130,7 +126,7 @@ public class UpdateActivity extends AppCompatActivity {
                     Toast.makeText(UpdateActivity.this, "Email non valide", Toast.LENGTH_LONG).show();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
-                    builder.setTitle("Modifier le candidat ?");
+                    builder.setMessage("Modifier le candidat ?");
                     builder.setPositiveButton("Oui",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -153,12 +149,31 @@ public class UpdateActivity extends AppCompatActivity {
 
             }
         });
-
+        //set values for actions
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
         spAction.setAdapter(adapter);
+        //set  values for years
+        ArrayAdapter<CharSequence> adapterYear = ArrayAdapter.createFromResource(this,
+                R.array.years_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
+        spYear.setAdapter(adapterYear);
 
+        //Set item changed listener for years
+        spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                year = Integer.parseInt(spYear.getSelectedItem().toString());
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Initialize first spinner value (years)
+        spYear.setSelection(Tools.getIndexSpinner(spYear, String.valueOf(candidate.getAnnee())));
+
+        //Set item changed listener for actions
         spAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 action = spAction.getSelectedItem().toString();
@@ -177,41 +192,37 @@ public class UpdateActivity extends AppCompatActivity {
                     tvPrix.setVisibility(View.INVISIBLE);
                 }
             }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-                action = "interne";
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        etName.setText(candidate.lastname);
-        etFirstname.setText(candidate.firstname);
-        etMail.setText(candidate.email);
-        if(candidate.sexe.matches("M")){
+        //Initialize first spinner value (actions)
+        spAction.setSelection(Tools.getIndexSpinner(spAction, candidate.getActions()));
+
+        etName.setText(candidate.getLastname());
+        etFirstname.setText(candidate.getFirstname());
+        etMail.setText(candidate.getEmail());
+        if(candidate.getSexe().matches("M")){
             sexes.check(rdHomme.getId());
-        } else if (candidate.sexe.matches("F")) {
+        } else if (candidate.getSexe().matches("F")) {
             sexes.check(rdFemme.getId());
         }
-        etYear.setText(String.valueOf(candidate.annee));
-        etLink.setText(candidate.lien);
-        etCrCall.setText(candidate.crCall);
-        etNs.setText(candidate.NS);
-        etPhone.setText(candidate.phone);
-        etZipcode.setText(candidate.zipcode);
-        if(candidate.approche_email){
-            approche_emaill.check(rdEmailyes.getId());
-        }else {
-            approche_emaill.check(rdEmailNo.getId());
-        }
-        etNote.setText(report.note);
-        etXpNote.setText(report.xpNote);
-        etNsNote.setText(report.nsNote);
-        etJobIdeal.setText(report.jobIdealNote);
-        etPiste.setText(report.pisteNote);
-        etPisteCoute.setText(report.pieCouteNote);
-        etLocation.setText(report.locationNote);
-        etEnglish.setText(report.EnglishNote);
-        etNational.setText(report.nationalityNote);
-        etCompetences.setText((report.competences));
+        etLink.setText(candidate.getLien());
+        etCrCall.setText(candidate.getCrCall());
+        etNs.setText(candidate.getNS());
+        etPhone.setText(candidate.getPhone());
+        etZipcode.setText(candidate.getZipcode());
+
+        //partie report
+        etNote.setText(report.getNote());
+        etXpNote.setText(report.getXpNote());
+        etNsNote.setText(report.getNsNote());
+        etJobIdeal.setText(report.getJobIdealNote());
+        etPiste.setText(report.getPisteNote());
+        etPisteCoute.setText(report.getPieCouteNote());
+        etLocation.setText(report.getLocationNote());
+        etEnglish.setText(report.getEnglishNote());
+        etNational.setText(report.getNationalityNote());
+        etCompetences.setText((report.getCompetences()));
     }
 
     @Override
@@ -232,7 +243,7 @@ public class UpdateActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
-        builder.setTitle("Quitter la modification ?");
+        builder.setMessage("Quitter la modification ?");
         builder.setPositiveButton("Oui",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -279,7 +290,6 @@ public class UpdateActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
         };
@@ -298,7 +308,7 @@ public class UpdateActivity extends AppCompatActivity {
         UpdateRequest updateRequest = null;
         try {
             user = User.getCurrentUser();
-            String sessionId = user.sessionId;
+            String sessionId = user.getSessionId();
 
             String mail = etMail.getText().toString();
             String name = etName.getText().toString();
@@ -312,17 +322,11 @@ public class UpdateActivity extends AppCompatActivity {
             } else if(rdFemme.isChecked()){
                 sexe = "F";
             }
-            int year = Integer.parseInt(etYear.getText().toString());
 
             String link = etLink.getText().toString();
             String crCall = etCrCall.getText().toString();
             String ns = etNs.getText().toString();
-            boolean email = false;
-            if(rdEmailyes.isChecked()) {
-                email = true;
-            } else if(rdEmailNo.isChecked()){
-                email = false;
-            }
+
             String prix;
             if(action.matches("freelance")) {
                 prix = etPRix.getText().toString();
@@ -332,7 +336,7 @@ public class UpdateActivity extends AppCompatActivity {
             }
 
             updateRequest = new UpdateRequest(sessionId,name,firstname, mail, phone,zipcode, sexe, action, year, link,
-                    crCall, ns, email, prix, responseListener, errorListener);
+                    crCall, ns, prix, responseListener, errorListener);
 
         } catch (JSONException e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
@@ -344,8 +348,6 @@ public class UpdateActivity extends AppCompatActivity {
         }
         RequestQueue queue = Volley.newRequestQueue(UpdateActivity.this);
         queue.add(updateRequest);
-
-
     }
 
     public void UpdateReport() {
@@ -357,7 +359,7 @@ public class UpdateActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
-                        builder.setTitle("Le candidat a bien été modifié");
+                        builder.setMessage("Le candidat a bien été modifié");
                         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
@@ -404,7 +406,7 @@ public class UpdateActivity extends AppCompatActivity {
         UpdateReportRequest updateReportRequest = null;
         try {
             user = User.getCurrentUser();
-            String sessionId = user.sessionId;
+            String sessionId = user.getSessionId();
             String mail = etMail.getText().toString();
 
             String link = etLink.getText().toString();
@@ -426,9 +428,23 @@ public class UpdateActivity extends AppCompatActivity {
             Toast.makeText(this, "" + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
         RequestQueue queue = Volley.newRequestQueue(UpdateActivity.this);
         queue.add(updateReportRequest);
+    }
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
+        builder.setMessage("Veuillez vous reconnecter");
+        builder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(UpdateActivity.this, LoginActivity.class));
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

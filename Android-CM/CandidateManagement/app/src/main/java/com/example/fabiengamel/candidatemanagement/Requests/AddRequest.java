@@ -25,7 +25,7 @@ public class AddRequest extends JsonObjectRequest {
 
 
     public AddRequest(String sessionId, String Name, String Firstname, String mail,String phone, String zipcode, String sexe, String action,
-                      int year, String link, String crCall, String ns, Boolean email,String prix, Response.Listener<JSONObject> listener,
+                      int year, String link, String crCall, String ns, String prix, Response.Listener<JSONObject> listener,
                       Response.ErrorListener errorListener) throws JSONException {
         super(Request.Method.POST, ADD_REQUEST_URL, null, listener, errorListener);
 
@@ -42,8 +42,8 @@ public class AddRequest extends JsonObjectRequest {
         jsonBody.put("link", link);
         jsonBody.put("crCall", crCall);
         jsonBody.put("ns", ns);
-        jsonBody.put("email", email);
         jsonBody.put("independant", prix);
+        jsonBody.put("pluginType", "email");
         requestBody = jsonBody.toString();
 
         headers = new HashMap<>();
@@ -56,7 +56,7 @@ public class AddRequest extends JsonObjectRequest {
     }
 
     @Override
-    public byte[] getBody() /*throws AuthFailureError */{
+    public byte[] getBody() {
         try {
             return requestBody == null ? null : requestBody.getBytes("utf-8");
         } catch (UnsupportedEncodingException uee) {
