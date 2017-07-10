@@ -317,3 +317,110 @@
 7/9/17 10:41:51 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/9/17 10:42:04 PM - [Error] - WsCustomeException - UserController - Le type de salaire lovw n'existe pas
 7/9/17 10:42:15 PM - [Error] - WsCustomeException - UserController - Le type de salaire lozz n'existe pas
+7/10/17 9:29:55 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/10/17 9:29:55 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/10/17 9:29:55 AM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/10/17 9:30:23 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 9:30:23 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/10/17 9:31:49 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:31:54 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:31:54 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:35:06 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:35:09 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:35:09 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:35:13 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:35:13 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:35:19 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:35:19 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:36:30 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:36:30 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:36:35 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:36:35 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:36:39 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:36:39 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:36:53 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:36:53 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:08 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:08 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:19 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:19 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:19 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:19 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:19 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:19 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:20 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:37:34 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:37:34 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:38:16 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:38:46 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:39:14 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:39:14 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:39:18 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:39:23 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:39:23 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:39:26 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:47:14 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:14 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:16 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:17 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:17 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:17 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:17 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:29 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:29 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:35 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:47:39 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/10/17 9:47:39 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/10/17 9:47:43 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:48:02 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:48:02 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:48:30 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:48:30 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:48:32 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:48:32 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:52:49 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 9:53:13 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:53:13 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:53:17 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:53:17 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:53:19 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 9:53:19 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 11:50:01 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 11:50:01 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/10/17 11:52:13 AM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 11:52:19 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 11:52:19 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 12:36:13 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 12:36:17 PM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/10/17 12:36:17 PM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/10/17 2:07:27 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 2:08:34 PM - [Information] - WsCustomeInfoException - DC01 - The user with the email juliec17@gmail.com is connected
+7/10/17 3:09:20 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 3:09:20 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/10/17 3:12:08 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 29 existe veuillez vous identifier
+7/10/17 3:12:08 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 29 existe veuillez vous identifier
+7/10/17 3:12:22 PM - [Error] - SqlCustomException - MysqlDb - L'email du candidat passé en parametre est vide
+7/10/17 3:12:22 PM - [Error] - SqlCustomException - MysqlDb - L'email du candidat passé en parametre est vide
+7/10/17 3:12:22 PM - [Error] - WsCustomeException - UserController - L'email du candidat passé en parametre est vide
+7/10/17 3:13:32 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 3:13:32 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/10/17 3:13:42 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 15:13 7/12/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/12/2017 gabriel.zaafaarani@sample.com
+7/10/17 3:14:21 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/10/17 3:14:21 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/10/17 3:14:42 PM - [Information] - WsCustomeInfoException - SendRemind - The message was sent on time 1/1/01 12:00:00 AM + the command is ./script.sh 15:14 7/12/2017  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/pluginsTest/email/email.dll 0  /Users/zaafranigabriel/Documents/5A/Projet Annuel/final/Candidate-Management/template/aRelancerLKD.txt zaafrani Gabriel 7/12/2017 chr.tot@gmail.com
