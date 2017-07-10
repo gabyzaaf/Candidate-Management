@@ -15,8 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -53,17 +56,20 @@ import java.util.Map;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    /****************************Variables ********************************************************************************/
     private GoogleMap mMap;
     EditText etNom;
     Button bSearch;
+    Spinner spActions;
     public String nom = "";
     String town;
     String nameRetour;
     String action;
     String prenom;
     User user;
+    String name;
 
-
+    /******************************* On activity create *****************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +81,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         InitContent();
 
+        /******************************** Candidate searched before ************************************************/
         String candidateName;
         String candidateFirstname;
         if (savedInstanceState == null) {
@@ -96,9 +103,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         etNom.setText(candidateName);
     }
 
+    /******************************Initialize content ***************************************************************/
     public void InitContent() {
         bSearch = (Button)findViewById(R.id.bLocateMap);
         etNom = (EditText)findViewById(R.id.etNameMap);
+        spActions = (Spinner)findViewById(R.id.spActionMap);
+
+        /*************** Initialize button search listener *********************************************************/
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +125,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
+
+        /***************** Initialize spinner *********************************************************************/
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.actions_array, R.layout.spinner_custom);
+        adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
+        spActions.setAdapter(adapter);
+     /*   spActions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                if (etNom.getText().toString().matches("")) {
+                    getCandidatePositionByAction(spActions.getSelectedItem().toString());
+                } else {
+                    etNom.setText("");
+                    getCandidatePositionByAction(spActions.getSelectedItem().toString());
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                builder.setTitle("Aïe !")
+                        .setMessage("Fonction bientôt disponible !")
+                        .setNeutralButton("Compris !", null)
+                        .create()
+                        .show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {}
+        });*/
     }
 
-
+    /************************ On press return (action bar) **************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -133,7 +170,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
-
+    /************************* on back (navigation) press ***************************************************/
     @Override
     public void onBackPressed() {
         Intent i = new Intent(MapActivity.this, SearchActivity.class);
@@ -146,7 +183,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             startActivity(i);
         }
     }
-
+    /***************************** add marker *****************************************************************/
     public void addMarker(Double lat, Double lng){
         LatLng latLng = new LatLng(lat,lng);
         Candidate candidate = Candidate.getCurrentCandidate();
@@ -158,12 +195,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
     }
 
-    String name;
+    /*************************** Clear markers *****************************************************************/
+    public void clearMarkers(){
+        mMap.clear();
+    }
+
+    /***************************** Create Map *******************************************************************/
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            /****************** Initialize text info on marker ********************************/
             @Override
             public void onInfoWindowClick(final Marker arg0) {
                     String[] parts = arg0.getTitle().split(" ");
@@ -194,11 +237,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
+/************************** Get zipCode ********************************************************************/
+// First method called to get zipcode from candidate
 
     public void GetCandidateZipCode(String nom) {
         user = User.getCurrentUser();
         final Candidate candidate = Candidate.getCurrentCandidate();
         final String[] firstname = {""};
+        final ProgressDialog dialog = ProgressDialog.show(MapActivity.this, "", "Chargement en cours...", true);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/user/Candidates/recherche/" +nom+"/"+user.getSessionId();
@@ -207,7 +253,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 new Response.Listener<JSONArray>()
                 {
                     public static final String TAG ="Recherche map :" ;
-
                     @Override
                     public void onResponse(final JSONArray response) {
                         Log.d("Response", response.toString());
@@ -221,9 +266,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 //IF not
                                 else {
                                     if(response.length() > 1){
-                                        //more than one candidat found, need to choice just one by his firstname
+                                        /***more than one candidat found, need to choice just one by his firstname*****/
                                         final EditText edittext = new EditText(MapActivity.this);
-                                        //Ask for his firstname
+                                        /****** Ask for his firstname **************/
+                                        if (dialog != null)
+                                            dialog.cancel();
                                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this, R.style.MyDialogTheme);
                                         builder.setTitle("Nom similaire");
                                         builder.setMessage("Plusieurs candidats ont le même nom, veuillez préciser le prénom :");
@@ -240,6 +287,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                             for (int i = 0; i < response.length(); i++) {
                                                                 JSONObject jsonOBject = response.getJSONObject(i);
                                                                 if (jsonOBject.getString("prenom").matches(firstname[0]) && found == false) {
+                                                                    if (dialog != null)
+                                                                        dialog.cancel();
                                                                     found = true;
                                                                     candidate.setZipcode(jsonOBject.getString("zipcode"));
                                                                     candidate.setFirstname(jsonOBject.getString("prenom"));
@@ -260,6 +309,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                             }
                                                             //If it doesn't exist : try with another or dismiss
                                                             if(!found){
+                                                                if (dialog != null)
+                                                                    dialog.cancel();
                                                                 AlertDialog.Builder dialogFalse = new AlertDialog.Builder(MapActivity.this, R.style.MyDialogTheme);
                                                                 dialogFalse.setMessage("Le candidat "+firstname[0]+" "+etNom.getText().toString()+" n'existe pas");
                                                                 dialogFalse.setNeutralButton("Réessayer",
@@ -301,15 +352,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         Candidate.setCurrentCandidate(candidate);
 
                                         if(!candidate.getZipcode().matches("")) {
+                                            if (dialog != null)
+                                                dialog.cancel();
                                             GetCandidatePosition(candidate.getZipcode());
                                         } else {
+                                            if (dialog != null)
+                                                dialog.cancel();
                                             Toast.makeText(MapActivity.this, "Code postal non renseigné pour ce candidat", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
                         }catch(JSONException e){
+                            if (dialog != null)
+                                dialog.cancel();
                             Toast.makeText(MapActivity.this, "Erreur : " +e, Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
                         }
                     }
 
@@ -332,8 +388,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         };
         queue.add(searchRequest);
     }
+    /*************************************** Get Position *****************************************************************/
+    //Second method called to get lat and lng from google
+    //and then call addMarker with datas position
 
     public void GetCandidatePosition(String zipcode){
+        final ProgressDialog dialog = ProgressDialog.show(MapActivity.this, "", "Chargement en cours...", true);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://maps.googleapis.com/maps/api/geocode/json?address="+zipcode+"&sensor=false&components=country:FR" ;
 
@@ -359,19 +419,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                             if(lat != null || lng != null) {
                                 Toast.makeText(MapActivity.this, town, Toast.LENGTH_LONG).show();
-
+                                if (dialog != null)
+                                    dialog.cancel();
                                 addMarker(lat, lng);
                             }else {
+                                if (dialog != null)
+                                    dialog.cancel();
                                 Toast.makeText(MapActivity.this, "La position n'a pas été trouvée", Toast.LENGTH_LONG).show();
                             }
 
                         }catch(JSONException e){
+                            if (dialog != null)
+                                dialog.cancel();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
                             builder.setMessage("Erreur : " +e)
                                     .setNeutralButton("Réessayer", null)
                                     .create()
                                     .show();
-                            e.printStackTrace();
                         }
                     }
 
@@ -382,6 +446,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        if (dialog != null)
+                            dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
                         builder.setMessage("Erreur serveur: " + error.toString())
                                 .setNeutralButton("Réessayer", null)
@@ -399,9 +465,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         queue.add(LatLngRequest);
     }
 
-    public void getCandidatePositionByAction(){
-
-        //final ProgressDialog dialog = ProgressDialog.show(PredictSalaryActivity.this, "", "Chargement en cours...", true);
+    /************************** Get candidate by action *************************************************/
+    public void getCandidatePositionByAction(String action){
+        final ProgressDialog dialog = ProgressDialog.show(MapActivity.this, "", "Chargement en cours...", true);
         user = User.getCurrentUser();
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = APIConstants.BASE_URL+"/api/candidate/actions/" + action +"/"+user.getSessionId() ;
@@ -419,9 +485,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                 JSONObject jsonOBject = response.getJSONObject(i);
                                 Log.d(TAG, "GET ACTION " + jsonOBject.toString()) ;
 
+                                /************** There is an error *********************************************************/
                                 if(jsonOBject.has("content"))
                                 {
+                                    /***** if error is a token error ******************************************************/
                                     if(jsonOBject.getString("content").matches(errorToken)){
+                                        if (dialog != null)
+                                            dialog.cancel();
                                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this, R.style.MyDialogTheme);
                                         builder.setMessage("Veuillez vous reconnecter");
                                         builder.setPositiveButton("Ok",
@@ -433,11 +503,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                 });
                                         AlertDialog alert = builder.create();
                                         alert.show();
-
                                     }
                                     else{
+                                        if (dialog != null)
+                                            dialog.cancel();
+                                        /********** get the error name **********************************************/
                                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                                        builder.setMessage("Erreur : " +jsonOBject.getString("content"))
+                                        builder.setMessage(jsonOBject.getString("content"))
                                                 .setNeutralButton("Réessayer", null)
                                                 .create()
                                                 .show();
@@ -452,17 +524,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         candidate.setLastname(jsonOBject.getString("nom"));
                                         candidate.setEmail(jsonOBject.getString("email"));
                                         candidate.setZipcode(jsonOBject.getString("zipcode"));
-
+                                        if(!candidate.getZipcode().matches("")) {
+                                            if (dialog != null)
+                                                dialog.cancel();
+                                            GetCandidatePosition(candidate.getZipcode());
+                                        }
                                     }
                                 }
                             }
                         } catch (JSONException e) {
+                            if (dialog != null)
+                                dialog.cancel();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                            builder.setMessage("Erreur : " +e)
+                            builder.setMessage(e.toString())
                                     .setNeutralButton("Réessayer", null)
                                     .create()
                                     .show();
-                            e.printStackTrace();
                         }
                     }
                 },
@@ -472,8 +549,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        if (dialog != null)
+                            dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                        builder.setMessage("Erreur : " +error.toString())
+                        builder.setMessage(error.toString())
                                 .setNeutralButton("Réessayer", null)
                                 .create()
                                 .show();
@@ -489,6 +568,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         queue.add(getCandidatesRequest);
     }
 
+    /******************* When app restart ***************************************************************/
     @Override
     protected void onRestart(){
         super.onRestart();

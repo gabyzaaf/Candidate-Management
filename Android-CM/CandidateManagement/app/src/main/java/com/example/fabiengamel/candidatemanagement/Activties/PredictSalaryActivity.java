@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 
 public class PredictSalaryActivity extends AppCompatActivity {
 
+    /***************** Variables *******************************************************/
     EditText etNbProject;
     EditText etNbNbHours;
     EditText etNbYears;
@@ -47,7 +48,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
     RadioGroup radioGroupAccident;
     RadioGroup radioGroupPromo;
 
-
+    /******************** on create activity *********************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
         InitContent();
     }
 
-
+    /****************** Initialize content ************************************************/
     public void InitContent() {
 
         etNbProject = (EditText)findViewById(R.id.etNbProjectSalary);
@@ -74,6 +75,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
         radioGroupAccident.check(R.id.rbaccidentFalseSalary);
         radioGroupPromo.check(R.id.rbPromoFalseSalary);
 
+        /************************* On click predict ******************************************************************/
         bPredict.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +98,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
     }
 
+    /************************* On back press (action bar)*******************************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -106,11 +109,11 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
 
+    /********************* check if values are corrects ****************************************************************************/
     public boolean CheckEmptyField() {
         if(etNbProject.getText().toString().matches("") || etNbNbHours.getText().toString().matches("") ||
                 etNbYears.getText().toString().matches("")) {
@@ -125,7 +128,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
         }
         return true;
     }
-
+/***************************  function wich called azure prediction service **********************************************************/
     public void PredictSalary()
     {
         final ProgressDialog dialog = ProgressDialog.show(PredictSalaryActivity.this, "", "Chargement en cours...", true);
@@ -243,6 +246,8 @@ public class PredictSalaryActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(PredictSalaryActivity.this);
         queue.add(salaryRequest);
     }
+
+    /************** on restart after a crash ********************************************************************************/
     @Override
     protected void onRestart(){
         super.onRestart();

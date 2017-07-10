@@ -75,7 +75,7 @@ public class TimeActivity extends AppCompatActivity {
 
         radioGroupAccident.check(R.id.rbaccidentFalseTime);
         radioGroupPromo.check(R.id.rbPromoFalseTime);
-
+        /*************** initialize spinner ******************************************/
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.salaire_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
@@ -90,7 +90,7 @@ public class TimeActivity extends AppCompatActivity {
                 salary = "low";
             }
         });
-
+        /*************** on button predict click ***********************************************************************************************************/
         bPredict.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,7 @@ public class TimeActivity extends AppCompatActivity {
         });
 
     }
-
+    /******************************************** on back press (action bar) ************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -123,7 +123,7 @@ public class TimeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
-
+    /********************* check if values are coherent *********************************************************************************/
     public boolean CheckEmptyField() {
         if(etNbProject.getText().toString().matches("") || etNbNbHours.getText().toString().matches("") ||
                 etSatisfaction.getText().toString().matches("")) {
@@ -138,7 +138,7 @@ public class TimeActivity extends AppCompatActivity {
         }
         return true;
     }
-
+    /***************************  function wich called azure prediction service **********************************************************/
     public void PredictTime()
     {
         final ProgressDialog dialog = ProgressDialog.show(TimeActivity.this, "", "Chargement en cours...", true);
@@ -238,7 +238,7 @@ public class TimeActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(TimeActivity.this);
         queue.add(timeRequest);
     }
-
+    /************** on restart after a crash ********************************************************************************/
     @Override
     protected void onRestart(){
         super.onRestart();

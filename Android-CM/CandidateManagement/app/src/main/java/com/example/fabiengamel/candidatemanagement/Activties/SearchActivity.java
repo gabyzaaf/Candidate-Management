@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class SearchActivity extends AppCompatActivity {
-
+    /**************** variables ***************************************************************************/
     EditText etNom;
     Button bRecherche;
     TextView tvResult;
@@ -62,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
     Button bSMS;
     Candidate candidate;
     User user;
-
+    /****************** on activity create ***************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
 
         InitContent();
 
-        //Get the name if it's come from another activity
+        /**Get the name if it's come from another activity**/
         String candidateName;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -95,7 +95,7 @@ public class SearchActivity extends AppCompatActivity {
         }
         etNom.setText(candidateName);
     }
-
+    /*************** initalize content *****************************************************************************/
     public void InitContent() {
         etNom = (EditText)findViewById(R.id.etName);
         bRecherche = (Button)findViewById(R.id.bSearchSingle);
@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
         bSMS = (Button)findViewById(R.id.bSMS);
         tvInfo = (TextView)findViewById(R.id.textView2);
 
-        //Go to location activity
+        /** on locate click **/
         bLocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,14 +115,14 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //Go to update activity
+        /** on update click **/
         bModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SearchActivity.this, UpdateActivity.class));
             }
         });
-        //Search candidate
+        /** on search click **/
         bRecherche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +147,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-        //Go to SMS activity
+        /** on SMS click **/
         bSMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +160,7 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //hide buttons on text changed
+        /** when text change **/
         etNom.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
             }
@@ -177,12 +177,12 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-    //When press back navigation button
+    /********************** on back press (navigation bar) ***************************************************************/
     public void onBackPressed() {
         Intent i = new Intent(SearchActivity.this, MainActivity.class);
         startActivity(i);
     }
-    //When press Action bar return button
+    /*********************** on back press (action bar) *****************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -199,7 +199,9 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    //Search candidate datas (after getting his email adress)
+    /****************** Seaarch all informations from candidate ****************************************************************/
+    // called instantly after getEmail()
+
     public void SearchCandidate(String nom, final String prenom) {
         //Instance a new report
         final Meeting report = Meeting.getCurrentMeeting();
@@ -350,6 +352,7 @@ public class SearchActivity extends AppCompatActivity {
         queue.add(searchRequest);
     }
 
+    /********************* get email allow to search a candidate a get his id (email) before called search *******************************************/
     public void getEmail(String nom){
         user = User.getCurrentUser();
         final RequestQueue queue = Volley.newRequestQueue(this);
@@ -473,6 +476,7 @@ public class SearchActivity extends AppCompatActivity {
         };
         queue.add(searchRequest);
     }
+    /********************** make buttons visibles ************************************************/
     public void showButton(){
         bModify.setVisibility(View.VISIBLE);
         bLocate.setVisibility(View.VISIBLE);

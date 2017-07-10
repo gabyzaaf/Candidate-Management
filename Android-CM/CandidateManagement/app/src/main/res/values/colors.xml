@@ -6,6 +6,7 @@
     <color name ="textInfo">#7BC5F7</color>
     <color name="textEditable">#141918</color>
     <color name="textTitle">#4899F6</color>
+    <color name ="colorHint">#8F9B99</color>
     <color name="textButton">#F8F9F9</color>
     <color name="backgroundButton">#4EDBC8</color>
     <color name="barColor">#4EDBC8</color>

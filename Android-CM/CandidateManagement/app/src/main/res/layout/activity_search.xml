@@ -34,7 +34,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Nom"
-            android:textColorHint="@color/textEditable"
+            android:textColorHint="@color/colorHint"
             android:textColor="@color/textEditable"
             android:layout_weight="1"
             />

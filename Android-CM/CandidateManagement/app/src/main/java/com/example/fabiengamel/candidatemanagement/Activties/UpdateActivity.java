@@ -40,7 +40,7 @@ import org.json.JSONObject;
 import java.util.concurrent.TimeUnit;
 
 public class UpdateActivity extends AppCompatActivity {
-
+    /******************** Variables ****************************************************/
     EditText etName;
     EditText etFirstname;
     EditText etMail;
@@ -66,7 +66,6 @@ public class UpdateActivity extends AppCompatActivity {
     int year;
     Button bUpdate;
     RadioGroup sexes;
-    RadioGroup approche_emaill;
     EditText etPRix;
     TextView tvPrix;
     EditText etZipcode;
@@ -74,6 +73,7 @@ public class UpdateActivity extends AppCompatActivity {
     Candidate candidate;
     Meeting report;
 
+    /******************* On activity create ******************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,11 +83,14 @@ public class UpdateActivity extends AppCompatActivity {
         try {
             InitContent();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
+            builder.setMessage(e.toString())
+                    .setNegativeButton("Réessayer", null)
+                    .create()
+                    .show();
         }
-
     }
-
+    /*************************Initialize content ***********************************************************/
     public void InitContent() throws InterruptedException {
 
         candidate = Candidate.getCurrentCandidate();
@@ -119,13 +122,17 @@ public class UpdateActivity extends AppCompatActivity {
         tvPrix = (TextView)findViewById(R.id.tvPrixUpdate);
         etZipcode = (EditText)findViewById(R.id.etZipcodeUpdate);
 
+        /****************** Initialize button update **************************************/
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Tools tool = new Tools();
                 if (!tool.isEmailValid(etMail.getText())) {
                     Toast.makeText(UpdateActivity.this, "Email non valide", Toast.LENGTH_LONG).show();
-                } else {
+                }
+                else if(!CheckEmptyField()) {
+                    Toast.makeText(UpdateActivity.this, "Veuillez remplir les champs obligatoires", Toast.LENGTH_LONG).show();
+                }else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
                     builder.setMessage("Modifier le candidat ?");
                     builder.setPositiveButton("Oui",
@@ -147,10 +154,9 @@ public class UpdateActivity extends AppCompatActivity {
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
-
             }
         });
-        //set values for actions
+        /********************  set values for actions and years ******************************************/
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
@@ -196,10 +202,9 @@ public class UpdateActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        //Initialize first spinner value (actions)
         spAction.setSelection(Tools.getIndexSpinner(spAction, candidate.getActions()));
 
+        /************** fill edit text *************************************************************/
         etName.setText(candidate.getLastname());
         etFirstname.setText(candidate.getFirstname());
         etMail.setText(candidate.getEmail());
@@ -226,7 +231,7 @@ public class UpdateActivity extends AppCompatActivity {
         etNational.setText(report.getNationalityNote());
         etCompetences.setText((report.getCompetences()));
     }
-
+    /************** on back press (action bar) *****************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -242,6 +247,7 @@ public class UpdateActivity extends AppCompatActivity {
         return true;
     }
 
+    /***************************** on back press (navigation bar **************************************************/
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
@@ -268,8 +274,20 @@ public class UpdateActivity extends AppCompatActivity {
         alert.show();
     }
 
+    /********************** check content before update ***********************************************************************/
 
-
+    public boolean CheckEmptyField() {
+        if(etName.getText().toString().matches("") || etFirstname.getText().toString().matches("") ||
+                etMail.getText().toString().matches("") || etPhone.getText().toString().matches("") ||
+                etNote.getText().toString().matches("")) {
+            return false;
+        }
+        else if (!rdFemme.isChecked() && !rdHomme.isChecked()) {
+            return false;
+        }
+        return true;
+    }
+    /************************ update candidate ******************************************************************************/
     public void UpdateCandidate(){
         final ProgressDialog dialog = ProgressDialog.show(UpdateActivity.this, "", "Chargement en cours...", true);
 
@@ -363,6 +381,9 @@ public class UpdateActivity extends AppCompatActivity {
         queue.add(updateRequest);
     }
 
+    /**************** update candidate report *********************************************************************/
+    //called instantatly after update candidate
+
     public void UpdateReport() {
         final ProgressDialog dialog = ProgressDialog.show(UpdateActivity.this, "", "Chargement en cours...", true);
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
@@ -455,7 +476,7 @@ public class UpdateActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(UpdateActivity.this);
         queue.add(updateReportRequest);
     }
-
+    /***************************** when activity restart after crash *************************************************/
     @Override
     protected void onRestart(){
         super.onRestart();

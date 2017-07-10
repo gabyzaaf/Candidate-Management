@@ -34,7 +34,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 public class SatisfactionActivity extends AppCompatActivity {
-
+    /*************************** variables *****************************************************************/
     EditText etNbProject;
     EditText etNbNbHours;
     EditText etNbYears;
@@ -48,7 +48,7 @@ public class SatisfactionActivity extends AppCompatActivity {
     Spinner spSalaire;
     String salary;
 
-
+    /******************************* on activity create *********************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class SatisfactionActivity extends AppCompatActivity {
         InitContent();
     }
 
-
+    /*************************** initialize content **************************************************************/
     public void InitContent() {
 
         etNbProject = (EditText)findViewById(R.id.etNbProjectSatisfaction);
@@ -75,7 +75,7 @@ public class SatisfactionActivity extends AppCompatActivity {
 
         radioGroupAccident.check(R.id.rbaccidentFalseSatisfaction);
         radioGroupPromo.check(R.id.rbPromoFalseSatisfaction);
-
+        /************** set spinner values **********************************************/
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.salaire_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
@@ -108,7 +108,7 @@ public class SatisfactionActivity extends AppCompatActivity {
         });
 
     }
-
+    /**************************** on back press (action bar) ***************************************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -124,6 +124,7 @@ public class SatisfactionActivity extends AppCompatActivity {
         return true;
     }
 
+    /***************** check if values are coherent **********************************************************************************/
     public boolean CheckEmptyField() {
         if(etNbProject.getText().toString().matches("") || etNbNbHours.getText().toString().matches("") ||
                 etNbYears.getText().toString().matches("")) {
@@ -138,7 +139,7 @@ public class SatisfactionActivity extends AppCompatActivity {
         }
         return true;
     }
-
+    /***************************  function wich called azure prediction service **********************************************************/
     public void PredictSatisfaction()
     {
         final ProgressDialog dialog = ProgressDialog.show(SatisfactionActivity.this, "", "Chargement en cours...", true);
@@ -235,6 +236,7 @@ public class SatisfactionActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(SatisfactionActivity.this);
         queue.add(satisfactionRequest);
     }
+    /************** on restart after a crash ********************************************************************************/
     @Override
     protected void onRestart(){
         super.onRestart();

@@ -27,10 +27,12 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /********************** variables ******************************************************************************/
     EditText etMail;
     EditText etPassword;
     Button bLogin;
 
+    /********************* on activity create ************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,27 +41,28 @@ public class LoginActivity extends AppCompatActivity {
         InitContent();
     }
 
+    /*****************************Initialize content *******************************************************************/
     public void InitContent() {
         etMail = (EditText) findViewById(R.id.etMailAdd);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
 
-
+     /******************** on click login **********************************************************************************/
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Login();
-                // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                // LoginActivity.this.startActivity(intent);
             }
         });
     }
 
+    /******************* On back press (navigation bar) *********************************************************************/
     public void onBackPressed() {
         Intent i = new Intent(LoginActivity.this, LoginActivity.class);
         startActivity(i);
     }
 
+    /*************************** login activity ****************************************************************************/
     private void Login() {
         final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Chargement en cours...", true);
         final String mail = etMail.getText().toString();
@@ -68,13 +71,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if(mail.matches(""))
         {
+            if (dialog != null)
+                dialog.cancel();
             Toast.makeText(this, "Renseignez votre email", Toast.LENGTH_LONG).show();
         }
         else if(password.matches(""))
         {
+            if (dialog != null)
+                dialog.cancel();
             Toast.makeText(this, "Renseignez votre mot de passe", Toast.LENGTH_LONG).show();
         }
         else if(!tool.isEmailValid(mail)){
+            if (dialog != null)
+                dialog.cancel();
             Toast.makeText(this, "Email non valide", Toast.LENGTH_LONG).show();
         }
 
@@ -89,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(response.has("content"))
                         {
+                            if (dialog != null)
+                                dialog.cancel();
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyDialogTheme);
                             builder.setMessage(""+response.getString("content"))
                                     .setNeutralButton("Réessayer", null)
@@ -100,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                             u.setEmail(response.getString("email"));
                             u.setSessionId(response.getString("sessionId"));
                             User.setCurrentUser(u);
+
                             if (dialog != null)
                                 dialog.cancel();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -107,7 +119,13 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        if (dialog != null)
+                            dialog.cancel();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Erreur de connexion au serveur")
+                                .setNegativeButton("Réessayer", null)
+                                .create()
+                                .show();
                     }
 
                 }
@@ -117,7 +135,8 @@ public class LoginActivity extends AppCompatActivity {
             Response.ErrorListener errorListener = new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
+                    if (dialog != null)
+                        dialog.cancel();
                     Log.d("log2=", error.toString());
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setMessage("Erreur de connexion au serveur")
@@ -131,7 +150,14 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 loginRequest = new LoginRequest(mail, password, responseListener, errorListener);
             } catch (JSONException e) {
-                e.printStackTrace();
+                if (dialog != null)
+                    dialog.cancel();
+                Log.d("log2=", e.toString());
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage("Erreur de connexion au serveur")
+                        .setNegativeButton("Réessayer", null)
+                        .create()
+                        .show();
             }
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginRequest);

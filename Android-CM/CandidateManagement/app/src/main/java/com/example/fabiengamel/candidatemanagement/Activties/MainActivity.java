@@ -49,15 +49,17 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    /*********************** Variables ***********************************************************/
     NavigationView navigationView;
     TextView tvCandidates;
     TextView tvWelcome;
     ImageView ivLogo;
     Spinner spActions;
     String action ="";
-    List<Candidate> candidates;
+   // List<Candidate> candidates;
     User user;
 
+    /**************************** On activity create *********************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         InitContent();
     }
 
+    /*************** Initialize content *************************************************/
     private void InitContent() {
         user = User.getCurrentUser();
 
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity
         spActions = (Spinner)findViewById(R.id.spActions);
         tvWelcome.setText("Bonjour " + user.getEmail());
         tvCandidates.setMovementMethod(new ScrollingMovementMethod());
+
+        /************************** Initialize spinner *************************************************/
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
@@ -102,6 +107,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    /******************* On return (navigation bar) press ******************************/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,6 +118,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /******************** Create action bar ***********************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {return true;}
     @Override
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /*********************** Initialize navigation menu ************************************************/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -151,8 +159,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /************************ Request server to have candidates by actions *******************************************/
     public void GetCandidatesByActions(String action) {
-        //user = User.getCurrentUser();
         //candidates = new ArrayList<Candidate>();
         final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Chargement en cours...", true);
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -161,6 +169,7 @@ public class MainActivity extends AppCompatActivity
         tvCandidates.setText("Liste des candidats "+action+"(s) :");
         tvCandidates.append("\n");
         tvCandidates.append("\n");
+
                 JsonArrayRequest getCandidatesRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
                 {
@@ -192,6 +201,8 @@ public class MainActivity extends AppCompatActivity
                                         alert.show();
                                     }
                                     else{
+                                        if (dialog != null)
+                                            dialog.cancel();
                                     tvCandidates.append(jsonOBject.getString("content"));
                                     }
                                 }
@@ -238,6 +249,7 @@ public class MainActivity extends AppCompatActivity
         queue.add(getCandidatesRequest);
     }
 
+    /******************************** Deconnect user *********************************************************/
     public void deconnect() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
         builder.setMessage("Se déconnecter ?");
@@ -261,7 +273,7 @@ public class MainActivity extends AppCompatActivity
         alert.show();
     }
 
-
+    /*********************** on Activity resume **********************************************/
     @Override
     protected void onResume(){
         super.onResume();

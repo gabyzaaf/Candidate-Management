@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 public class AddActivity extends AppCompatActivity {
 
+    /*************************** Variables ****************************************************/
     EditText etName;
     EditText etFirstname;
     EditText etMail;
@@ -62,7 +63,7 @@ public class AddActivity extends AppCompatActivity {
     int year;
     Spinner spYear;
 
-
+    /******************** on activity create ***************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class AddActivity extends AppCompatActivity {
 
         InitContent();
     }
-
+  /*************************** Initialize content ***********************************************/
     public void InitContent() {
         etName = (EditText)findViewById(R.id.etNom);
         etFirstname = (EditText)findViewById(R.id.etPrenom);
@@ -99,7 +100,7 @@ public class AddActivity extends AppCompatActivity {
         tvPrix = (TextView)findViewById(R.id.tvPrixAdd);
         etZipcode = (EditText)findViewById(R.id.etZipcodeAdd);
 
-        //set values for actions
+        /******* initialize spinners actions and years **********************************************/
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.actions_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown_custom);
@@ -144,7 +145,7 @@ public class AddActivity extends AppCompatActivity {
                 action = "interne";
             }
         });
-
+        /************** on click add candidate ******************************************************************************************/
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +181,7 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
+    /***************** on back press action bar ******************************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -190,7 +192,7 @@ public class AddActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    /*********************** on back press navigation bar *********************************************************************/
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
@@ -220,6 +222,7 @@ public class AddActivity extends AppCompatActivity {
         return true;
     }
 
+    /************************ check if values are corrects *******************************************************************/
     public boolean CheckEmptyField() {
         if(etName.getText().toString().matches("") || etFirstname.getText().toString().matches("") ||
                 etMail.getText().toString().matches("") || etPhone.getText().toString().matches("") ||
@@ -233,6 +236,7 @@ public class AddActivity extends AppCompatActivity {
         return true;
     }
 
+    /************************************* add candidate function ************************************************************************************/
     public void AddCandidat() {
         final ProgressDialog dialog = ProgressDialog.show(AddActivity.this, "", "Chargement en cours...", true);
 
@@ -329,6 +333,8 @@ public class AddActivity extends AppCompatActivity {
             queue.add(addRequest);
 
     }
+    /********************************* add candidate report function *********************************************************************/
+    // called instantly after add candidate
 
     public void AddReport() {
         final ProgressDialog dialog = ProgressDialog.show(AddActivity.this, "", "Chargement en cours...", true);
@@ -422,6 +428,7 @@ public class AddActivity extends AppCompatActivity {
         queue.add(addReportRequest);
     }
 
+    /******************** on restart after a crash ****************************************************/
     @Override
     protected void onRestart(){
         super.onRestart();

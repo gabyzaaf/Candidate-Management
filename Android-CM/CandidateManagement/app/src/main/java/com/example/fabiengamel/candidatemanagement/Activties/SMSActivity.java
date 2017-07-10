@@ -29,7 +29,7 @@ import com.example.fabiengamel.candidatemanagement.R;
 
 
 public class SMSActivity extends AppCompatActivity {
-
+    /**************** variables **************************************************************/
     EditText etContentSMS;
     TextView tvName;
     TextView tvFirstname;
@@ -39,14 +39,14 @@ public class SMSActivity extends AppCompatActivity {
     String phoneNo;
     String message;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0;
-
+    /************************ on activity create *********************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Récupération du nom lors de l'activity recherche
+        /**Récupération du nom lors de l'activity recherche**/
         String candidateName= "";
         String phone= "";
         String prenom = "";
@@ -92,7 +92,7 @@ public class SMSActivity extends AppCompatActivity {
         }
 
     }
-
+    /************************** initialize content **********************************************************************/
     public void InitContent() {
 
         tvAction = (TextView)findViewById(R.id.tvActionSMS);
@@ -143,6 +143,7 @@ public class SMSActivity extends AppCompatActivity {
 
     }
 
+    /************** on back press (action bar) *****************************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -158,7 +159,7 @@ public class SMSActivity extends AppCompatActivity {
         return true;
     }
 
-
+    /************** function called on click ***********************************************************************/
     protected void sendSMS() {
 
         if (ContextCompat.checkSelfPermission(this,
@@ -173,7 +174,7 @@ public class SMSActivity extends AppCompatActivity {
             SendTextMsg();
         }
     }
-
+    /*************************** get permission from the device ****************************************************/
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -189,6 +190,7 @@ public class SMSActivity extends AppCompatActivity {
         }
     }
 
+    /************ send the sms ***********************************************************************************/
     private void SendTextMsg() {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(phoneNo, null, message, null, null);
