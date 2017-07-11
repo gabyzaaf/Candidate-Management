@@ -1,4 +1,8 @@
 using System;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace exceptions
 {
     public class LogNotExistException : System.Exception {

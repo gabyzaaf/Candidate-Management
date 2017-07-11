@@ -8,7 +8,10 @@ using conf;
 using MailKit.Security;
 namespace actionUser{
 
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
     public class ActionUser{
 
         private UserFeature user;
@@ -31,14 +34,14 @@ namespace actionUser{
             return content.Replace("<prenom>",user.candidateFirstname).Replace("<pnom>",user.candidateName).Replace("<pemail>",user.candidateEmail);
         }
        
-         // string email,  string emailBody, string firstName
+        
          public void sendEmail(string email, string message,string firstName)
         {
             try 
             { 
-                //From Address 
+                
                 string FromAddress = conf.email; 
-                //string FromAdressTitle = "Email from ASP.NET Core 1.1"; 
+                 
                 //To Address 
                 string ToAddress = email; 
                 //string toAdressTitle = "Microsoft ASP.NET Core"; 
@@ -59,13 +62,10 @@ namespace actionUser{
                     Text = BodyContent 
     
                 }; 
-    
                 using (var client = new SmtpClient()) 
                 { 
     
                     client.Connect(SmtpServer, SmtpPortNumber, false); 
-                    // Note: only needed if the SMTP server requires authentication 
-                    // Error 5.5.1 Authentication  
                     client.Authenticate(conf.email, conf.password); 
                     client.Send(mimeMessage); 
                     Console.WriteLine("The mail has been sent successfully !!"); 

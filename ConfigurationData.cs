@@ -2,6 +2,10 @@ using Newtonsoft.Json;
 using System.IO;
 using System;
 using exceptions;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace conf{
 
     public class ConfigurationData{
@@ -14,9 +18,12 @@ namespace conf{
         public string fromAdressTitle {get;set;}
         public string toAdressTitle {get;set;}
         public string subject {get;set;}
-
+        
         private static ConfigurationData conf = null;
-
+        /// <summary>
+        /// Sigleton pattern
+        /// </summary>
+        /// <returns></returns>
         public static ConfigurationData getInstance()
         {
             if(conf == null){
@@ -33,7 +40,10 @@ namespace conf{
         private ConfigurationData(){
 
         }
-
+        /// <summary>
+        /// Extract the Email Template PAth
+        /// </summary>
+        /// <returns></returns>
         public string getEmailTemplatePath(){
             if(String.IsNullOrEmpty(emailTemplatePath)){
                 throw new EmailCustomException("Vous n'avez pas renseigné le chemin pour les templates");
@@ -44,6 +54,10 @@ namespace conf{
             return emailTemplatePath;
         }
 
+        /// <summary>
+        /// Extract the Log path
+        /// </summary>
+        /// <returns></returns>
         public string getLogPath(){
             if(String.IsNullOrEmpty(logFile)){
                 throw new LogNotExistException("Le fichier de log a mal été renseigné");

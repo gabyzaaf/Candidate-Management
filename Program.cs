@@ -25,7 +25,7 @@ namespace email
 
         static void Main(string[] args)
         {
-            // "/Users/zaafranigabriel/Documents/5A/Projet Annuel/final/plugins/email/sample.txt"
+            
             /*
                 Data enter : 
                 jobId [0]
@@ -49,7 +49,7 @@ namespace email
             }catch(LogNotExistException logException){
                 Console.WriteLine(logException.Message);
             }catch(Exception exc){
-                // /Users/zaafranigabriel/Documents/logs/log.txt
+               
                 new EmailCustomException(exc.Message).writeLog(conf.getLogPath());
             }
              
@@ -58,9 +58,10 @@ namespace email
 
         public static void POST(string url, string jsonContent) 
         {
+            ConfigurationData conf = null;
+            conf = ConfigurationData.getInstance();
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
-
             System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
             Byte[] byteArray = encoding.GetBytes(jsonContent);
 
@@ -86,7 +87,7 @@ namespace email
                 }
             }
             catch (WebException ex) {
-                // Log exception and throw as for GET example above
+                throw ex;
             }
         }
 
