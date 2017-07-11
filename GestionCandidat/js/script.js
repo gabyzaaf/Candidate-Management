@@ -2,7 +2,7 @@
 
 var gestionCandidatApp = angular.module('gestionCandidatApp', ['ngRoute', 'ngCookies']);
 
-var adresseIP = "192.168.126.145:5000";
+var adresseIP = "192.168.126.146:5000";
 
 /********************   Prediction machine learning azure   ********************/
 
@@ -704,6 +704,45 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 
 /****************************************************************/
 
+/*********************  supprimer un candidat  ********************/
+
+gestionCandidatApp.controller("deleteCandidate", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
+
+    $scope.sendCandidateDel = function (deleteMessage) {
+        var req = {
+            method: 'POST',
+            url: 'http://' + adresseIP + '/api/candidate/delete/byEmail',
+            responseType: "json",
+            data: {
+                token: $cookies.get('cookie'),
+                email: $scope.selectedCand.email
+            }
+        }
+
+        $http(req).then(function (response) {
+            $scope.contentResponseMessage = response.data.content;
+            $scope.contentResponseMessageGreen = "";
+            if (response.data.content != "Le Candidat a bien été supprimé") {
+                $timeout(function () {
+                    $scope.contentResponseMessage = "";
+                }, 4000);
+            } else {
+                $scope.contentResponseMessage = "";
+                $scope.contentResponseMessageGreen = response.data.content;
+                $timeout(function () {
+                    $scope.contentResponseMessageGreen = "";
+                    window.location.reload();
+                }, 3000);
+            }
+        }, (err) => {
+            console.log("ceci est une erreur" + err);
+        });
+    }
+}]);
+
+/****************************************************************/
+
+
 /*********************  Ajouter un message  ********************/
 /*
 gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
@@ -872,7 +911,28 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
 
 /*************************************************************************/
 
-/*********************  Recherche tous les candidats  ********************/
+/*********************  Recherche tous les candidats ********************/
+
+gestionCandidatApp.controller("rechercheAllCand", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
+
+    $http.get('http://' + adresseIP + '/api/candidate/list/0/200/' + $cookies.get('cookie')).then(function (response) {
+        try {
+            $scope.todos = response.data;
+            if ($scope.todos[0].content != null) {
+                $scope.erreurRechercheAll = "Aucun aucun candidat n'existe";
+                $scope.todos = "";
+            }
+        } catch (e) {
+            $scope.erreurRechercheAll = "Aucun aucun candidat n'existe";
+        }
+    }, (err) => {
+        console.log(err);
+    });
+}]);
+
+/********************************************************************/
+
+/*********************  Recherche tous les candidats qui n'ont pas de fiche entretien ********************/
 
 gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
@@ -907,7 +967,7 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
         });
 }]);
 
-/*************************************************************************/
+/***************************************************************************************************/
 
 /*********************  Recherche tous les messages  ********************/
 

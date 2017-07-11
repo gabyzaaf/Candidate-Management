@@ -14,39 +14,7 @@
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <meta charset="utf-8" />
     <script>
-        
-        function toggleTableCoord() {
-            var lTable = document.getElementById("loginTableCoord");
-            lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
-            /*
-            var lSelect = document.getElementById("selectCandidat").value;
-            if (lSelect == "? undefined:undefined ?" || lSelect == "" || lSelect == null) {
-                alert("Selectionner un candidat !")
-            } else {
-                var lTable = document.getElementById("loginTableCoord");
-                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
-            }*/
-        }
-
-        function toggleTableEntr() {
-            var lTable = document.getElementById("loginTableEntr");
-            lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
-            /*
-            var lSelect = document.getElementById("selectCandidat").value;
-            if (lSelect == "? undefined:undefined ?" || lSelect == "" || lSelect == null) {
-                alert("Selectionner un candidat !")
-            } else {
-                var lTable = document.getElementById("loginTableEntr");
-                lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
-            }*/
-        }
-
-        function toggleSelectCoordEntr() {
-            var lTable = document.getElementById("loginTableCoord");
-            var lTable2 = document.getElementById("loginTableEntr");
-            lTable.style.display = (lTable.style.display == "table") ? "none" : "none";
-            lTable2.style.display = (lTable.style.display == "table") ? "none" : "none";
-        }
+      
 
         function myFunction() {
             var myWindow = window.open("agenda.html", "", "width=800,height=800");
@@ -77,7 +45,7 @@
 </head>
 
 
-<body ng-controller="rechercheCandidat">
+<body ng-controller="rechercheAllCand">
     <div ng-include="'barreMenu.html'"></div>
     <br />
     <center><div class="bg-info text-white"><p class="h1">Supprimer Candidat</p></div></center>
@@ -94,56 +62,45 @@
         </tbody>
     </table>
     <br />
-    <center><p class="h4"><font color="red">{{erreurNormeNom}}</font></p></center>
-    <center><p class="h4"><font color="red">{{erreurNormeFirstname}}</font></p></center>
-    <center><p class="h4"><font color="red">{{erreurNormeAction}}</font></p></center>
-    <center><p class="h4"><font color="red">{{erreurNormeSexe}}</font></p></center>
+    <center><p class="h4"><font color="red">{{erreurRechercheAll}}</font></p></center>
     <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
         <br />
         <center><h3 id="rep">{{contentResponse}}</h3></center>
         <br />
         <div class="form-group">
-            <center><label><p class="h4">Sélectionner un candidat à supprimer :</p></label></center>
+            <center><p class="h4">Sélectionner un candidat à supprimer :</p></center>
             <div style="width: 50%; margin: auto;" class="icon-addon addon-lg">
-                <select class="form-control input-lg" ng-model="selectedCar" id="selectCandidat" onclick="toggleSelectCoordEntr()">
-                    <option ng-repeat="todo in todos" value="{{todo.email}}">{{todo.nom}} {{todo.prenom}} {{todo.phone}} {{todo.email}} </option>
+                <select class="form-control input-lg" id="selectedCand" ng-model="selectedCand" ng-options="x.email for x in todos">
                 </select>
                 <i class="icon icon-search"></i>
-                <br />
-                <center>
-                    <input type="submit" class="btn btn-lg" value="Coordonnée : Afficher/Cacher" onclick="toggleTableCoord()" />
-                </center>
             </div>
         </div>
     </form>
 
     <br />
 
-    <section ng-controller="updateCandidate">
-        <form ng-submit="sendEntry(updateCandidate)">
-            <table align="center" id="loginTableCoord" hidden="hidden">
+    <section ng-controller="deleteCandidate">
+        <form ng-submit="sendCandidateDel(deleteMessage)">
+            <table align="center">
                 <tbody>
                     <tr>
-                        <td colspan="4" align="center"><h1>Coordonnées</h1></td>
+                        <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponseMessage}}</font></p></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponse}}</font></p></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="center"><p class="h4"><font color="green">{{contentResponseGreen}}</font></p></td>
+                        <td colspan="4" align="center"><p class="h4"><font color="green">{{contentResponseMessageGreen}}</font></p></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Nom : </td>
-                        <td><input class="form-control" type="text" name="nomCoor" ng-value="nomCoor" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
+                        <td><input class="form-control" type="text" name="nomCoor" ng-value="selectedCand.nom" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
                         <td><font color="red">*</font>Prénom : </td>
-                        <td><input class="form-control" type="text" name="prenomCoor" ng-value="prenomCoor" id="Firstname" ng-model="updateCandidate.prenom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
+                        <td><input class="form-control" type="text" name="prenomCoor" ng-value="selectedCand.prenom" id="Firstname" ng-model="updateCandidate.prenom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>E-mail : </td>
-                        <td><input class="form-control" type="email" name="email" ng-value="emailCoor" id="emailAdress" ng-model="updateCandidate.email" disabled /></td>
+                        <td><input class="form-control" type="email" name="email" ng-value="selectedCand.email" id="emailAdress" ng-model="updateCandidate.email" disabled /></td>
                         <td><font color="red">*</font>Sexe : </td>
                         <td>
-                            <select class="form-control" name="sexe" ng-value="sexeCoor" id="sexe" ng-model="updateCandidate.sexe" onkeydown="if(event.keyCode==32) return false;" disabled>
+                            <select class="form-control" name="sexe" ng-value="selectedCand.sexe" id="sexe" ng-model="updateCandidate.sexe" onkeydown="if(event.keyCode==32) return false;" disabled>
                                 <option value="H" selected>Homme</option>
                                 <option value="F">Femme</option>
                             </select>
@@ -151,45 +108,62 @@
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Téléphone :</td>
-                        <td><input class="form-control" type="tel" name="telephone" ng-value="phoneCoor" id="phone" ng-model="updateCandidate.telephone" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" disabled /></td>
+                        <td><input class="form-control" type="tel" name="telephone" ng-value="selectedCand.phone" id="phone" ng-model="updateCandidate.telephone" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" disabled /></td>
                         <td><font color="red">*</font>Code postal : </td>
-                        <td><input class="form-control" type="number" id="cp" size="5" name="cp" ng-value="cpCoor" ng-model="updateCandidate.cp" onkeydown="if(event.keyCode==32) return false;" disabled/></td>
+                        <td><input class="form-control" type="number" id="cp" size="5" name="cp" ng-value="selectedCand.zipcode" ng-model="updateCandidate.cp" onkeydown="if(event.keyCode==32) return false;" disabled/></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Action : </td>
                         <td>
-                            <select class="form-control" name="action" ng-value="actionsCoor" id="actions" ng-model="updateCandidate.action" disabled />
+                            <select class="form-control" id="actions" name="action" ng-value="selectedCand.actions" ng-model="candidat.action" disabled required>
+                                <option value="interne">Interne</option>
+                                <option value="enCours">En cours</option>
+                                <option value="RN">RN</option>
+                                <option value="trop relance">Trop relancé</option>
+                                <option value="etranger">Etranger</option>
+                                <option value="appellerRemind">A appeler</option>
+                                <option value="aRelancerLKD">A relancer LKD</option>
+                                <option value="aRelancerMail">A relancer MAIL</option>
+                                <option value="PAERemind">PAE</option>
+                                <option value="HcJunior">HC junior</option>
+                                <option value="HCSenior">HC senior</option>
+                                <option value="HcLangue">HC Langue</option>
+                                <option value="HCPasDev">HC pas Dev</option>
+                                <option value="HCMSFT">HC pas MSFT</option>
+                                <option value="HCGeo">HC Géo</option>
+                                <option value="HCBacMoins5">HC BAC-5</option>
+                            </select>
                         </td>
                         <td><font color="red">*</font>Type e-mail : </td>
                         <td>
-                            <select class="form-control" name="sexe" id="plugins" disabled>
+                            <select class="form-control" ng-value="selectedCand.pluginType" name="sexe" id="plugins" disabled>
                                 <option value="email" selected>Email</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Année de diplôme : </td>
-                        <td><input class="form-control" type="text" size="4" min="1995" max="2017" name="anneediplome" ng-value="anneeCoor" ng-model="updateCandidate.anneediplome" disabled/></td>
+                        <td><input class="form-control" type="text" size="4" min="1995" max="2017" name="anneediplome" ng-value="selectedCand.annee" ng-model="updateCandidate.anneediplome" disabled/></td>
                         <td>Source : </td>
-                        <td><input class="form-control" type="url" name="url" ng-value="lienCoor" ng-model="updateCandidate.url" disabled/></td>
+                        <td><input class="form-control" type="url" name="url" ng-value="selectedCand.lien" ng-model="updateCandidate.url" disabled/></td>
                     </tr>
                     <tr>
                         <td>Note : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea class="form-control" name="note" cols="100" rows="4" ng-value="NSCoor" ng-model="updateCandidate.note" disabled></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="note" cols="100" rows="4" ng-value="selectedCand.NS" ng-model="updateCandidate.note" disabled></textarea></td>
                     </tr>
                     <tr>
                         <td>Compte Rendu (CR) : </td>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea class="form-control" name="cr" cols="100" rows="4" ng-value="crCallCoor" ng-model="updateCandidate.cr" disabled></textarea></td>
+                        <td colspan="4"><textarea class="form-control" name="cr" cols="100" rows="4" ng-value="selectedCand.CrCall" ng-model="updateCandidate.cr" disabled></textarea></td>
                     </tr>
                     <tr>
                         <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="right"><input type="submit" name="enregistrer" class="btn btn-danger" value="Supprimer" onclick="verifChampCoord()" /></td>
+                        <td colspan="4" align="right"><input type="submit" name="supprimer" class="btn btn-danger" value="Supprimer" onClick="return confirm('êtes-vous sûre de vouloir supprimer le candidat ' + document.getElementById('selectedCand').value + '?')" /></td>
                     </tr>
                 </tbody>
             </table>
