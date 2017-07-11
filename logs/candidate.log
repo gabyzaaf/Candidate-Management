@@ -490,3 +490,22 @@
 7/11/17 9:34:13 AM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
 7/11/17 9:34:13 AM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
 7/11/17 9:34:19 AM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/11/17 12:00:07 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/11/17 12:00:07 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 12:19:27 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/11/17 12:19:27 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 12:19:47 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 3 existe veuillez vous identifier
+7/11/17 12:19:47 PM - [Error] - WsCustomeException - CandidateController - Aucun token ayant ce numero 3 existe veuillez vous identifier
+7/11/17 12:20:01 PM - [Error] - SqlCustomException - MysqlDb - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,2' at line 1
+7/11/17 12:20:01 PM - [Error] - SqlCustomException - MysqlDb - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,2' at line 1
+7/11/17 12:20:01 PM - [Error] - WsCustomeException - CandidateController - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,2' at line 1
+7/11/17 12:20:25 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/11/17 12:20:25 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 12:20:50 PM - [Error] - SqlCustomException - MysqlDb - La limite1 ne peux pas etre supérieur à la limite 2
+7/11/17 12:20:50 PM - [Error] - WsCustomeException - CandidateController - La limite1 ne peux pas etre supérieur à la limite 2
+7/11/17 12:20:54 PM - [Error] - SqlCustomException - MysqlDb - Vous n'avez aucun candidat entre les limites 12 et 22
+7/11/17 12:20:54 PM - [Error] - WsCustomeException - CandidateController - Vous n'avez aucun candidat entre les limites 12 et 22
+7/11/17 12:24:52 PM - [Error] - SqlCustomException - MysqlDb - La limite1 ne peux pas etre supérieur à la limite 2
+7/11/17 12:24:52 PM - [Error] - WsCustomeException - CandidateController - La limite1 ne peux pas etre supérieur à la limite 2
+7/11/17 12:25:27 PM - [Error] - SqlCustomException - MysqlDb - Vous n'avez aucun candidat entre les limites 10 et 200
+7/11/17 12:25:27 PM - [Error] - WsCustomeException - CandidateController - Vous n'avez aucun candidat entre les limites 10 et 200

@@ -12,7 +12,7 @@ namespace Core.Adapter.Inteface
 {
 
     public interface IsqlMethod{
-        void TokenExist(string token);
+         void TokenExist(string token);
          bool UserCanRead(string token);
          
          bool UserCanUpdate(string token);
@@ -111,6 +111,8 @@ namespace Core.Adapter.Inteface
           void deleteCandidateById(int id);
 
           ArrayList searchCandidateWithSpecificEmail(string emailCandidat);
+
+          ArrayList getCandidatesListWithLimite(int limite1,int limite2);
     }
 
 } 

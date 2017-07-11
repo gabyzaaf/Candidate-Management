@@ -182,7 +182,33 @@ namespace Candidate_Management.API
                 return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
             } 
         }
-          
+
+        [HttpGet("list/{limite1}/{limite2}/{token}")]
+        public IActionResult deleteCandidateById(int limite1,int limite2,string token){
+            try{
+                if(limite1 < 0){
+                    throw new Exception("La limite1 ne peux etre inférrieur  à 0");
+                }
+                if(limite2 <= 0){
+                    throw new Exception("La limite2 ne peux etre inférrieur ou égale à 0");
+                }
+                
+                if(String.IsNullOrEmpty(token)){
+                    throw new Exception("Le token ne peut pas etre vide");
+                }
+                IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                isql.UserCanRead(token);
+                ArrayList candidateList = isql.getCandidatesListWithLimite(limite1,limite2);
+                return new ObjectResult(candidateList);
+            }catch(Exception exc){
+                new WsCustomeException(this.GetType().Name,exc.Message);
+                ArrayList errorList = new ArrayList();
+                errorList.Add(new State(){code=5,content=exc.Message,success=false});
+                return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
+            } 
+        } 
+
+
 
        [HttpGet("{error}", Name = "GetErrorsCandidate")]
         public IActionResult ErrorList(ArrayList errors)

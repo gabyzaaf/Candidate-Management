@@ -1359,6 +1359,33 @@ namespace Core.Adapter{
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
-        }   
+        }
+
+        public ArrayList getCandidatesListWithLimite(int limite1,int limite2){
+            try{
+                if(limite1 > limite2){
+                    throw new Exception("La limite1 ne peux pas etre supérieur à la limite 2");
+                }
+                ArrayList output = null;
+                string sql = "select * from candidate  limit @limite1,@limite2";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@limite1",limite1);
+                dico.Add("@limite2",limite2);
+                LinkedList<String> results = new LinkedList<String>();  
+                results.AddLast("nom");
+                results.AddLast("prenom");
+                results.AddLast("sexe");
+                results.AddLast("phone");
+                results.AddLast("email");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Vous n'avez aucun candidat entre les limites {limite1} et {limite2}");
+                }   
+                return output;
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }
+
     }
 }
