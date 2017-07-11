@@ -17,7 +17,12 @@ namespace Candidate_Management.API
     public class CandidateController:Controller
     {
         
- 
+        /// <summary>
+        /// This method will search the candidate by Action
+        /// </summary>
+        /// <param name="candidateaction">action type</param>
+        /// <param name="token">user token</param>
+        /// <returns></returns>
         [HttpGet("actions/{candidateaction}/{token}")]
         public IActionResult UserActionFromCandidate(string candidateaction,string token){
             ArrayList candidatListe = null;
@@ -31,7 +36,7 @@ namespace Candidate_Management.API
                 }
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 if(!isql.UserCanRead(token)){
-                    throw new Exception("Erreur vous n'avez pas les droits necessaire pour lire");
+                    throw new Exception("Erreur vous n'avez pas les droits necessaires pour lire");
                 }
                 candidatListe = isql.searchCandidateByAction(candidateaction,token);
                 return new ObjectResult(candidatListe);
@@ -42,7 +47,14 @@ namespace Candidate_Management.API
                 return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
             }
         }
-
+        /// <summary>
+        /// Send the template title.
+        /// I am using this this method the optimisation
+        /// </summary>
+        /// <param name="token">User token</param>
+        /// <param name="lim1">limite 1</param>
+        /// <param name="lim2">limite 2</param>
+        /// <returns></returns>
         [HttpGet("email/template/titles/{token}/{lim1}/{lim2}")]
         public IActionResult titleCandidate(string token,int lim1,int lim2){
             ArrayList emailTitles = null;
@@ -52,7 +64,7 @@ namespace Candidate_Management.API
                 }
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 if(!isql.UserCanRead(token)){
-                    throw new Exception("Erreur vous n'avez pas les droits necessaire pour lire");
+                    throw new Exception("Erreur vous n'avez pas les droits necessaires pour lire");
                 }
                 emailTitles = isql.emailTemplateTiltes(lim1,lim2);
                 return new ObjectResult(emailTitles);
@@ -63,9 +75,14 @@ namespace Candidate_Management.API
                 return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
             }
         }
-
+        /// <summary>
+        /// You can get the Email template content from the title
+        /// </summary>
+        /// <param name="token">userToken</param>
+        /// <param name="title">Template Title</param>
+        /// <returns></returns>
         [HttpGet("template/email/{token}/{title}")]
-        public IActionResult contentEmail(string token,string title){
+        public IActionResult contentTemplateEmail(string token,string title){
             
              ArrayList emailContent = null;
              try{
@@ -74,7 +91,7 @@ namespace Candidate_Management.API
                 }
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 if(!isql.UserCanRead(token)){
-                        throw new Exception("Erreur vous n'avez pas les droits necessaire pour lire");
+                        throw new Exception("Erreur vous n'avez pas les droits necessaires pour lire");
                 }
                 emailContent = isql.emailTemplateContentFromTitle(title);
                 return new ObjectResult(emailContent);
@@ -85,7 +102,11 @@ namespace Candidate_Management.API
                 return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
              }
         }
-
+        /// <summary>
+        /// Update the email content.
+        /// </summary>
+        /// <param name="emailTemplate">Template class</param>
+        /// <returns></returns>
         [HttpPost("template/email/update")]
         public IActionResult updateContentEmailFromTitle([FromBody]Template emailTemplate){
             
@@ -104,7 +125,7 @@ namespace Candidate_Management.API
                 }
                 
                 if(String.IsNullOrEmpty(emailTemplate.title)){
-                    throw new Exception("Le titre du fichier template email n'existe pas ");
+                    throw new Exception("Le titre du fichier template email n'existe pas");
                 }
                 
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -124,7 +145,11 @@ namespace Candidate_Management.API
                 return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
             } 
         }
-
+        /// <summary>
+        /// Delete the content Email
+        /// </summary>
+        /// <param name="emailTemplate">Template type</param>
+        /// <returns></returns>
         [HttpPost("template/email/delete")]
         public IActionResult deleteContentEmailFromTitle([FromBody]Template emailTemplate){
            
@@ -154,7 +179,12 @@ namespace Candidate_Management.API
             } 
         }
 
-         
+        
+        /// <summary>
+        /// Delete Candidat by Email
+        /// </summary>
+        /// <param name="candidateDelete">CandidateDelete class </param>
+        /// <returns></returns>
         [HttpPost("delete/byEmail")]
         public IActionResult deleteCandidateById([FromBody]CandidateDelete candidateDelete){
             try{
@@ -182,15 +212,21 @@ namespace Candidate_Management.API
                 return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
             } 
         }
-
+        /// <summary>
+        /// List all the candidate with limit for optimisation
+        /// </summary>
+        /// <param name="limite1">limit begin</param>
+        /// <param name="limite2">limit end</param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         [HttpGet("list/{limite1}/{limite2}/{token}")]
         public IActionResult deleteCandidateById(int limite1,int limite2,string token){
             try{
                 if(limite1 < 0){
-                    throw new Exception("La limite1 ne peux etre inférrieur  à 0");
+                    throw new Exception("La limite1 ne peut etre inférrieur à 0");
                 }
                 if(limite2 <= 0){
-                    throw new Exception("La limite2 ne peux etre inférrieur ou égale à 0");
+                    throw new Exception("La limite2 ne peut etre inférrieur ou égale à 0");
                 }
                 
                 if(String.IsNullOrEmpty(token)){
@@ -209,7 +245,11 @@ namespace Candidate_Management.API
         } 
 
 
-
+        /// <summary>
+        /// Handle the error exit for the final User.
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
        [HttpGet("{error}", Name = "GetErrorsCandidate")]
         public IActionResult ErrorList(ArrayList errors)
         {

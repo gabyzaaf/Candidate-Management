@@ -23,7 +23,7 @@ namespace Candidate_Management.CORE.Loading
             try{
                 containAllTheFiles =  JsonConfiguration.getInstance().getEmailTemplateFiles();
                 if(containAllTheFiles.Length == 0){
-                     new NotFileContentFolderException("c01","Aucun template d'email n'existe actuellement, veuillez en créer");
+                     new NotFileContentFolderException("c01","Aucun template d'email n'existe actuellement, veuillez en creer");
                 }
             }catch(IOException exc){
                 
@@ -61,7 +61,7 @@ namespace Candidate_Management.CORE.Loading
                 getFilesFromTheFolder(); // get the file for the folder
                 filterWithTextExtension(); // add the files with extension inside the array list
                 addTheFileInsideTheSystem(); // add files in the database
-                new WsCustomeInfoException("EmailTemplate","Les templates d'emails ont bien été chargé au démarrage");
+                new WsCustomeInfoException("EmailTemplate","Les templates d'emails ont bien ete charge au demarrage");
             }catch(NotFileContentFolderException notFile){
                 throw notFile;
             }

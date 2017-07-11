@@ -7,7 +7,7 @@ namespace exception.configuration{
     public class ConfigurationCustomException : System.Exception{
         LogManager log = new LogManager(Directory.GetCurrentDirectory()+"/configuration.log");
         public ConfigurationCustomException():base(){
-            log.Write("[Error]",$"{this.GetType().Name} - Le fichier appsettings.json n'est pas présent dans votre system ou est non conforme");   
+            log.Write("[Error]",$"{this.GetType().Name} - Le fichier appsettings.json n'est pas present dans votre systeme ou est non conforme");   
         }
 
         public ConfigurationCustomException(string code,string message){

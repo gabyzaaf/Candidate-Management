@@ -3,10 +3,7 @@ using System.Linq;
 namespace core.mlcandidat{
 
     public class MlCandidat{
-        /*
-        public string session_id{get;set;}
-        public int id{get;set;}
-         */
+        
         public double satisfaction_level{get;set;} // 0 - 1
         public double last_evaluation{get;set;} // 0 - 1
         public int number_project{get;set;} // 0 - Infini
@@ -47,16 +44,16 @@ namespace core.mlcandidat{
                 throw new Exception("Le nombre de temps resté en entreprise ne peut etre inférieur à 0 ou suppérieur à 50");
             }
             if(Work_accident < 0 || Work_accident > 1){
-                throw new Exception("Le choi doit etre 0 si il n'ya jammais eu d'accident ou 1 si il ya eu un accident");
+                throw new Exception("Le choix doit etre 0 si il n'ya jammais eu d'accident ou 1 si il ya eu un accident");
             }
             if(left_work < 0 || left_work > 1){
                 throw new Exception("Soit 0 (le candidat a quitté l'entreprise) ou 1 (Le candidat n'a pas quitté l'entreprise)");
             }
             if(promotion_last_5years < 0 || promotion_last_5years > 1){
-                throw new Exception("Le choi est soit 0 ou 1 ");
+                throw new Exception("Le choix est soit 0 ou 1 ");
             }
             if(!containSalesChoice(sales)){
-                throw new Exception($"Le choi {sales} n'existe pas");
+                throw new Exception($"Le choix {sales} n'existe pas");
             }
             if(!containSalaryChoices(salary)){
                 throw new Exception($"Le type de salaire {salary} n'existe pas");

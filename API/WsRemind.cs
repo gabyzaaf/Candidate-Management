@@ -17,6 +17,11 @@ namespace Candidate_Management.API
     [Route("api/[controller]")]
     public class RemindController:Controller
     {
+            /// <summary>
+            /// Extract the candidate Without Report.
+            /// </summary>
+            /// <param name="token">User token</param>
+            /// <returns></returns>
             [HttpGet("candidate/withoutRapport/{token}")]
             public IActionResult getCandidateWithoutReport(string token){
                 try{
@@ -34,7 +39,11 @@ namespace Candidate_Management.API
                 }
             }
 
-
+            /// <summary>
+            /// Extract the Reminds Information.
+            /// </summary>
+            /// <param name="token">User token</param>
+            /// <returns></returns>
             [HttpGet("calendar/remind/informations/{token}")]
             public IActionResult getTheRemindsInformations(string token){
                 try{
@@ -50,7 +59,13 @@ namespace Candidate_Management.API
                     return CreatedAtRoute("SendRemindsError", new { error = state },state);
                 }
             }
-
+            /// <summary>
+            /// This method will get Candidate Information by work type.
+            /// The dataset was in Kaggle.
+            /// </summary>
+            /// <param name="choice"></param>
+            /// <param name="token"></param>
+            /// <returns></returns>
             [HttpGet("stat/mlcandidate/{choice}/{token}")]
             public IActionResult getMlCandidateInformationByWorkChoice(string choice,string token){
                 try{
@@ -71,7 +86,11 @@ namespace Candidate_Management.API
                 }
                 
             }
-
+            /// <summary>
+            /// Update the Job state for the Remind.
+            /// </summary>
+            /// <param name="user">Feature for the User</param>
+            /// <returns></returns>
             [HttpPost("change/job/state/")]
             public IActionResult changeJobState([FromBody]UserFeature user){
                 try{
@@ -99,7 +118,10 @@ namespace Candidate_Management.API
                     return CreatedAtRoute("SendRemindsError", new { error = state },state);
                 }
             }
-
+            /// <summary>
+            /// You get the plugin list available, this method is load when the System Start.
+            /// </summary>
+            /// <returns></returns>
             [HttpGet("display/plugins/list")]
             public IActionResult changeJobState(){
                ArrayList pluginList = new ArrayList();

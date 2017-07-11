@@ -39,7 +39,7 @@ namespace API.wsUser
                 }else{
                     throw new Exception("Le token de l'utilisateur existe deja");
                 }
-                new WsCustomeInfoException("DC01",$"The user with the email {newUser.email} is connected");
+                new WsCustomeInfoException("DC01",$"L'utilisateur avec l'email : {newUser.email} est connecté");
                 return new ObjectResult(newUser);
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
@@ -187,13 +187,13 @@ namespace API.wsUser
         }
         private void checkCandidat(Candidat candidat){
             if(candidat==null){
-                throw new Exception("Vous devez creer votre candidat convenablement prealablement");
+                throw new Exception("Vous devez creer votre candidat convenablement");
             }
         }
 
         private void checkReport(Report report){
             if(report==null){
-                throw new Exception("Vous devez creer votre report convenablement prealablement");
+                throw new Exception("Vous devez creer votre report convenablement ");
             }
 
         }
@@ -201,7 +201,7 @@ namespace API.wsUser
         private void checkUser(User user){
             if(user==null){
                 
-                throw new Exception("Vous devez creer votre utilisateur convenablement prealablement");
+                throw new Exception("Vous devez creer votre utilisateur convenablement");
             }
         }
 
@@ -225,7 +225,7 @@ namespace API.wsUser
                 }
                 
                 isql.addReport(report,idCandidat);
-                return new ObjectResult(new State(){code=3,content="Le report a ete ajoute parfaitement à votre system",success=true});
+                return new ObjectResult(new State(){code=3,content="Le report a ete ajoute parfaitement à votre systeme",success=true});
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
@@ -250,7 +250,7 @@ namespace API.wsUser
                     throw new Exception("Le report n'existe pas, vous devez le creer au prealable");
                 }
                 isql.updateReport(report,idCandidat);
-                return new ObjectResult(new State(){code=3,content="Le report a ete modifie parfaitement à votre system",success=true});
+                return new ObjectResult(new State(){code=3,content="Le report a ete modifie parfaitement dans votre systeme",success=true});
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
@@ -301,7 +301,7 @@ namespace API.wsUser
                 int id = isql.getIdFromToken(token);
                 string emailForLogTheUser = isql.getUserEmailFromId(id);
                 isql.disconnectUser(id);
-                new WsCustomeInfoException("DC02",$"The user with the email {emailForLogTheUser} is disconnected");
+                new WsCustomeInfoException("DC02",$"L'utilisateur avec l'email :  {emailForLogTheUser} est deconnecte");
                 return new ObjectResult(new User(null,null,null,null));
             }catch(Exception exception){
                  new WsCustomeException(this.GetType().Name,exception.Message);
@@ -311,16 +311,17 @@ namespace API.wsUser
             }
         }
 
+        
 
         
         [HttpPost("MlCandidate/prediction")]
         public IActionResult predictionMlCandidate([FromBody]MlCandidat prediCandidate){
             try{
                 if(prediCandidate == null){
-                    throw new Exception("Les informations lié au candidat pour le machine learning sont vides");
+                    throw new Exception("Les informations liees au candidat pour le machine learning sont vides");
                 }
                 prediCandidate.checkCandidateProperties();
-                StringTable st = new StringTable();
+                
                 Prediction.InvokeRequestResponseService(prediCandidate).Wait();
                 Resultat rst = Resultat.getcurrentResultat();
                 string resultaAzure = rst.valeurAzure + rst.probAzure;
@@ -332,6 +333,7 @@ namespace API.wsUser
             }  
         }
 
+       
         
     }
 

@@ -93,7 +93,7 @@ namespace Core.Adapter{
                  ArrayList liste = queryExecute("SELECT count(*) as nb FROM user where email=@email and mdp=md5(@pass)",param,element);
                  Dictionary<String,String> dico = (Dictionary<String,String>)liste[0];
                  if(dico==null || dico.Count==0){
-                     throw new Exception("Vos identifiants sont incorrect");
+                     throw new Exception("Vos identifiants sont incorrects");
                  }
                   if(int.Parse(dico["nb"])==0){
                       throw new Exception("Email ou mot de passe incorrect");
@@ -117,7 +117,7 @@ namespace Core.Adapter{
                 listes.AddLast("nb");
                 ArrayList liste =queryExecute(sql,param,listes);
                 if(liste.Count==0){
-                    throw new Exception("Aucun elements n'a ete retourné");
+                    throw new Exception("Aucun element n'a ete retourne");
                 }
                 Dictionary<String,String> dico = (Dictionary<String,String>)liste[0];
                 if(dico==null || dico.Count==0){
@@ -153,7 +153,7 @@ namespace Core.Adapter{
                     throw new Exception(" Votre token ne vous permet pas de lire");
                 }
                 if(!bool.Parse(element["regle_lecture"])){
-                    throw new Exception(" Vous n'avez pas les droits necessaire pour effectuer un ajout ou une modification sur un candidat");
+                    throw new Exception(" Vous n'avez pas les droits necessaires pour effectuer un ajout ou une modification sur un candidat");
                 }
                 return Boolean.Parse(element["regle_lecture"]);
             }catch(Exception exc){
@@ -189,7 +189,7 @@ namespace Core.Adapter{
                     throw new Exception("Votre token ne vous permet pas de modifier");
                 }
                 if(!bool.Parse(element["regle_modification"])){
-                    throw new Exception(" Vous n'avez pas les droits necessaire pour effectuer un ajout ou une modification sur un candidat");
+                    throw new Exception(" Vous n'avez pas les droits necessaires pour effectuer un ajout ou une modification sur un candidat");
                 }
                  
             }catch(Exception exc){
@@ -217,7 +217,7 @@ namespace Core.Adapter{
                     throw new Exception("Votre token ne vous permet pas de supprimer");
                 }
                 if(!bool.Parse(element["regle_suppression"])){
-                    throw new Exception(" Vous n'avez pas les droits necessaire pour effectuer une suppression");
+                    throw new Exception(" Vous n'avez pas les droits necessaires pour effectuer une suppression");
                 }
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
@@ -331,10 +331,10 @@ namespace Core.Adapter{
         public void addCandidate(Candidat candidat,int id)
         {
             if(candidat==null){
-                throw new Exception(" Vous devez renseigner les informations du candidat");
+                throw new Exception("Vous devez renseigner les informations du candidat");
             }
             if(id == 0){
-                throw new Exception("Vous devez avoir un id  valide");
+                throw new Exception("Vous devez avoir un identifiant valide");
             }
             Dictionary<String,Object> dico = new Dictionary<String,Object>();
             try{
@@ -353,7 +353,7 @@ namespace Core.Adapter{
                 dico.Add("@userId",id);
                 queryExecute("insert into candidate (nom,prenom,phone,email,zipcode,sexe,actions,annee,lien,crCall,NS,pluginType,fid_user_candidate) values (@nom,@prenom,@num,@emailAdress,@zipcode,@sexe,@etat,@annee,@lien,@crcall,@ns,@pluginType,@userId)",dico,null);
             }catch(Exception exc){
-                throw new SqlCustomException(this.GetType().Name,$"In addCandidate function {exc.Message}");
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
             }
           
         }
@@ -375,11 +375,11 @@ namespace Core.Adapter{
                     throw new Exception("Votre token de session n'est pas conforme");
                 }
                 if(output.Count>1){
-                    throw new Exception(" Votre token a ete usurpé, veuillez vous reconnecter ou contacter l'administrateur ");
+                    throw new Exception("Votre token a ete usurpe, veuillez vous reconnecter ou contacter l'administrateur");
                 }
                 element = (Dictionary<String,String>)output[0];
                 if(!element.ContainsKey("id")){
-                    throw new Exception(" - Votre session id est incorrect");
+                    throw new Exception("Votre session id est incorrect");
                 }
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
@@ -394,10 +394,10 @@ namespace Core.Adapter{
         {
             try{
             if(candidat == null){
-                throw new Exception("Vos Parametres ne sont pas conforme");
+                throw new Exception("Vos parametres ne sont pas conformes");
             }
             if(String.IsNullOrEmpty(candidat.emailAdress)){
-                throw new Exception("L'adresse email saisit du candidat n'est pas conforme");
+                throw new Exception("L'adresse email saisie du candidat n'est pas conforme");
             }
             
             Dictionary<String,Object> param = new Dictionary<String,Object>();
@@ -423,7 +423,7 @@ namespace Core.Adapter{
 
         private void checkPrice(int prix){
             if(prix <= 0){
-                throw new Exception("Le prix saisit n'est pas conforme");
+                throw new Exception("Le prix saisi n'est pas conforme");
             }
         }
         public void addFreeLance(int prix,int id)
@@ -457,10 +457,10 @@ namespace Core.Adapter{
                 liste.AddLast("id");
                 ArrayList output = queryExecute("SELECT id  from candidate where email=@email",dico,liste);
                 if(output == null || output.Count==0){
-                    throw new Exception("Aucun candidat ne possède cet email");
+                    throw new Exception("Aucun candidat ne possede cet email");
                 }
                 if(output.Count>1){
-                    throw new Exception("Votre candidat est présent plusieurs fois dans la base de donnée ");
+                    throw new Exception("Votre candidat est présent plusieurs fois dans la base de données");
                 }
                 Dictionary<String,String> element = (Dictionary<String,String>)output[0];
                 if(!element.ContainsKey("id")){
@@ -474,13 +474,13 @@ namespace Core.Adapter{
 
         private void checkId(int id){
             if(id<=0){
-                throw new Exception("L'id n'est pas conforme");
+                throw new Exception("L'identifiant n'est pas conforme");
             }
         }
 
         private void checkDate(DateTime date){
             if(date == null){
-                throw new Exception("La date mis en paramtre n'est pas conforme");
+                throw new Exception("La date mise en parametre n'est pas conforme");
             }
         }
         public void remindType(int id,DateTime date)
@@ -546,7 +546,6 @@ namespace Core.Adapter{
                     
                         if ("freelance".Equals(actionType)){
                             
-                        // Add inside the numeric table
                             if("ADD".Equals(type)){
                                 addFreeLance(prix,id);
                                 
@@ -562,7 +561,7 @@ namespace Core.Adapter{
                             }else if("UPDATE".Equals(type)){
                                 remindExecution.executeUpdate(id,date);
                             }
-                            // (token,DateTime.Now)
+                            
                             remindExecution.execTheAtCommand(token,DateTime.Now); 
                         }
                 }catch(Exception exc){
@@ -577,17 +576,10 @@ namespace Core.Adapter{
                 }
                 if(String.IsNullOrEmpty(candidat.session_id)){
                     // loguer l'information
-                    throw new Exception("Vous n'avez pas les droits associe a la modification du candidat");
+                    throw new Exception("Vous n'avez pas les droits associes a la modification du candidat");
                 }
             }
-            /**
-            1) Verifier si le candidat est pas null et que la session_id est renseigne.
-            2) Verifier si l'id de l'utilisateur existe (int id)
-            3) Creer la connexion (methode connect())
-            4) Faire la modification.
-            5) Sauvegarder qui a fait la modification (sauvegarder l'id dans une table modification avec l'id du candidat)
-            6) Fermer la connexion
-             */
+            
             public void updateCandidate(Candidat candidat,int id){
                 try{
                     
@@ -609,8 +601,6 @@ namespace Core.Adapter{
                 
                 }catch(Exception exc){
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
-                }finally{
-                    disconnect();
                 }
             }
 
@@ -652,7 +642,7 @@ namespace Core.Adapter{
                 dico.Add("@fid",idCandidat);
                 ArrayList listeReturn = queryExecute(sql,dico,results);
                 if(listeReturn == null || listeReturn.Count==0){
-                    throw new Exception("Aucun element n'est retourné est lié au report");
+                    throw new Exception("Aucun element retourné est lié a la fiche candidat");
                 }
                 Dictionary<String,String> returnData = (Dictionary<String,String>)listeReturn[0];
                 return Convert.ToBoolean(int.Parse(returnData["nb"]));
@@ -663,10 +653,10 @@ namespace Core.Adapter{
 
         private void checkReport(Report report){
             if(report==null){
-                throw new Exception("Veuillez tous les champs de votre report");
+                throw new Exception("Veuillez inserer tous les champs de votre fiche candidat");
             }
             if(String.IsNullOrEmpty(report.sessionId)){
-                throw new Exception("Vous n'avez pas les droits necessaire pour ajouter ou modifier un report");
+                throw new Exception("Vous n'avez pas les droits necessaires pour ajouter ou modifier une fiche candidat");
             }
         }
 
@@ -877,7 +867,7 @@ namespace Core.Adapter{
                 results.AddLast("contenu_message");
                 output = queryExecute(sql,dico,results);
                 if(output.Count == 0){
-                     throw new Exception($"Vous ne possédez aucun contenu d'email ayant ce titre : {title}");
+                     throw new Exception($"Vous ne possedez aucun contenu d'email ayant ce titre : {title}");
                 }
              }catch(Exception exc){
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
@@ -943,7 +933,7 @@ namespace Core.Adapter{
             ArrayList output = null;
             try{
                 if(id == 0){
-                throw new SqlCustomException(this.GetType().Name,"L'id ne peut etre egale a 0");
+                throw new SqlCustomException(this.GetType().Name,"L'identifiant ne peut etre egale a 0");
                 }
                 string sql = "select count(*) as nb from remind where fid_candidate_remind=@id";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
@@ -952,7 +942,7 @@ namespace Core.Adapter{
                 results.AddLast("nb");
                 output = queryExecute(sql,dico,results);
                 if(output.Count == 0){
-                    throw new Exception($"Aucun remind n'existe avec l'id suivant : {id}");
+                    throw new Exception($"Aucun remind n'existe avec l'identifiant suivant : {id}");
                 }
                 Dictionary<string,string> datas = (Dictionary<string,string>)output[0];
                 int existe = Int32.Parse(datas["nb"]);
@@ -988,7 +978,7 @@ namespace Core.Adapter{
                 output = queryExecute(sql,dico,results);
                 int numberDatasReturned = output.Count;
                 if(numberDatasReturned == 0){
-                     throw new Exception($"Toutes les fiches candidat ont étés lié à une fiche entretiens");
+                     throw new Exception($"Toutes les fiches candidat ont été liées à une fiche entretien");
                 }
                
                 for(int i = 0;i<numberDatasReturned;i++){
@@ -1101,7 +1091,7 @@ namespace Core.Adapter{
                 results.AddLast("email");
                 output = queryExecute(sql,dico,results);
                 if(output.Count == 0){
-                    throw new Exception("Aucun utilisateur ne possède cet identifiant");
+                    throw new Exception("Aucun utilisateur ne possede cet identifiant");
                 }
                 Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
                 return userEmailData["email"];
@@ -1114,7 +1104,7 @@ namespace Core.Adapter{
             try{
                 ArrayList output = null;
                 if(id <= 0){
-                    throw new Exception("Votre job n'est pas conforme car il est inférrieur ou égale à 0");
+                    throw new Exception("Votre job n'est pas conforme car il est inferieur ou égale à 0");
                 }
                 string sql = "update remind set finish = true where id = @id";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
@@ -1129,7 +1119,7 @@ namespace Core.Adapter{
             try{
                 ArrayList output = null;
                 if(id <= 0){
-                    throw new Exception("Votre job n'est pas conforme car il est inférrieur ou égale à 0");
+                    throw new Exception("Votre job n'est pas conforme car il est inferieur ou égale à 0");
                 }
                 string sql = "select count(*) as nb from remind where id = @id";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
@@ -1158,7 +1148,7 @@ namespace Core.Adapter{
             try{
                 ArrayList output = null;
                 if(id <= 0){
-                    throw new Exception("Votre job n'est pas conforme car il est inférrieur ou égale à 0");
+                    throw new Exception("Votre job n'est pas conforme car il est inferieur ou égale à 0");
                 }
                 string sql = "select count(*) as nb from remind where id = @id and finish = 1";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
@@ -1197,7 +1187,7 @@ namespace Core.Adapter{
                 Dictionary<string,string> userEmailData = (Dictionary<string,string>) output[0];
                 int nbValue = Int32.Parse(userEmailData["total"]);
                 if(nbValue == 0){
-                    throw new Exception($"Votre utilisateur avec l'identifiant ({userId}) ne possède aucun remind");
+                    throw new Exception($"Votre utilisateur avec l'identifiant ({userId}) ne possede aucun remind");
                 }
                 return nbValue;
             }catch(Exception exc){
@@ -1246,7 +1236,7 @@ namespace Core.Adapter{
                 }
                 return true;
             }catch(Exception exc){
-                throw new SqlCustomException(this.GetType().Name,$"{exc.Message} - Dans la fonction PluginExist");
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
             }
         }
 
@@ -1257,7 +1247,7 @@ namespace Core.Adapter{
                 param.Add("@name",plugin.name);
                 queryExecute("insert into pluginsInfo (pluginName) values (@name)",param,null);
             }catch(Exception exc){
-                throw new SqlCustomException(this.GetType().Name,$"{exc.Message} - Dans la fonction addPlugin");
+                throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
             }
             
 
@@ -1265,7 +1255,7 @@ namespace Core.Adapter{
 
         private void pluginIsNullOrNameIsEmpty(Plugin plugin){
             if(plugin == null){
-                throw new Exception("Les informations lié au plugin ne peuvent pas etre vide ");
+                throw new Exception("Les informations lie au plugin ne peuvent pas etre vides ");
             }
             if(String.IsNullOrEmpty(plugin.name)){
                 throw new Exception("Le nom du plugin ne peut etre vide");
@@ -1294,7 +1284,7 @@ namespace Core.Adapter{
             try{
                 
                 if(String.IsNullOrEmpty(emailCandidat)){
-                    throw new Exception("L'email du candidat passé en parametre est vide");
+                    throw new Exception("L'email du candidat passe en parametre est vide");
                 }
                 ArrayList output = null;
                 string sql = "select pluginType from candidate where email = @email";
@@ -1308,7 +1298,7 @@ namespace Core.Adapter{
                 }
                 Dictionary<string,string> datas = (Dictionary<string,string>)output[0];
                 if(String.IsNullOrEmpty(datas["pluginType"])){
-                    throw new Exception("L'email du candidat passé en parametre est vide");
+                    throw new Exception("L'email du candidat passe en parametre est vide");
                 }
                 return datas["pluginType"];
             }catch(Exception exc){
@@ -1332,7 +1322,7 @@ namespace Core.Adapter{
         public ArrayList searchCandidateWithSpecificEmail(string emailCandidat){
               try{    
                 if(String.IsNullOrEmpty(emailCandidat)){
-                    throw new Exception("L'email du candidat passé en parametre est vide");
+                    throw new Exception("L'email du candidat passe en parametre est vide");
                 }
                 ArrayList output = null;
                 string sql = "select * from candidate where email = @email";
@@ -1353,7 +1343,7 @@ namespace Core.Adapter{
                 results.AddLast("pluginType");
                 output = queryExecute(sql,dico,results);
                 if(output.Count == 0){
-                    throw new Exception($"Vous ne possedez aucun critere de recherche pour l'adress {emailCandidat}");
+                    throw new Exception($"Vous ne possedez aucun critere de recherche pour l'adresse email : {emailCandidat}");
                 }   
                 return output;
             }catch(Exception exc){
@@ -1364,7 +1354,7 @@ namespace Core.Adapter{
         public ArrayList getCandidatesListWithLimite(int limite1,int limite2){
             try{
                 if(limite1 > limite2){
-                    throw new Exception("La limite1 ne peux pas etre supérieur à la limite 2");
+                    throw new Exception("La limite1 ne peut pas etre superieur à la limite 2");
                 }
                 ArrayList output = null;
                 string sql = "select * from candidate  limit @limite1,@limite2";
