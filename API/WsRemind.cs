@@ -18,7 +18,7 @@ namespace Candidate_Management.API
     public class RemindController:Controller
     {
             [HttpGet("candidate/withoutRapport/{token}")]
-            public IActionResult getTheRemindsForTheCalendar(string token){
+            public IActionResult getCandidateWithoutReport(string token){
                 try{
                    
                     if(String.IsNullOrEmpty(token)){
@@ -52,7 +52,7 @@ namespace Candidate_Management.API
             }
 
             [HttpGet("stat/mlcandidate/{choice}/{token}")]
-            public IActionResult getTheRemindsInformations(string choice,string token){
+            public IActionResult getMlCandidateInformationByWorkChoice(string choice,string token){
                 try{
                     if(String.IsNullOrEmpty(token)){
                         throw new Exception("Le token ne peut etre vide");

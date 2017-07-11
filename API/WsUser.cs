@@ -20,6 +20,11 @@ namespace API.wsUser
 
         private static readonly string specificException = "Object reference not set to an instance of an object.";
 
+         /// <summary>
+        /// This method will authentificate the User inside the System
+        /// </summary>
+        /// <param name="user">Is a User class with email and password</param>
+        /// <returns>An User Object with a Token</returns>
         [HttpPost("admin/auth/")]
         public IActionResult  GetAuthentification([FromBody]User user){
             try{
@@ -38,20 +43,18 @@ namespace API.wsUser
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
-                return CreatedAtRoute("GetNote", new { error = state },state);
+                return CreatedAtRoute("GetErrors", new { error = state },state);
                 
             }  
         }
        
 
 
-        [HttpGet("{error}", Name = "GetNote")]
-        public IActionResult GetById(State error)
-        {
-            Console.WriteLine("In GetNote function");
-            return new ObjectResult(error);
-        }
-
+        /// <summary>
+        /// Manage the errors for the final Users
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
         [HttpGet("{error}", Name = "GetErrors")]
         public IActionResult ErrorList(ArrayList errors)
         {
@@ -59,6 +62,12 @@ namespace API.wsUser
             return new ObjectResult(errors);
         }
 
+        /// <summary>
+        /// Search candidate information by name 
+        /// </summary>
+        /// <param name="name">candidate name</param>
+        /// <param name="token">user token</param>
+        /// <returns></returns>
         [HttpGet("Candidates/recherche/{name}/{token}")]
          public IActionResult searchCandidate(string name,string token){
             try{
@@ -81,6 +90,12 @@ namespace API.wsUser
             }
             
          }
+         /// <summary>
+         /// Search candidate information for Mobile.
+         /// </summary>
+         /// <param name="name">candidate Name</param>
+         /// <param name="token">user Token</param>
+         /// <returns>The search result or Error</returns>
          [HttpGet("Candidates/recherche/mobile/{name}/{token}")]
           public IActionResult searchCandidateMobile(string name,string token){
             try{
@@ -104,15 +119,12 @@ namespace API.wsUser
             
          }
          
-
-          [HttpPost("add/candidat/")]
-          /** 
-            1) Verifier si l'utilisateur à le droit de modification.
-            2) Verifier si le candidat existe deja.
-            3) Recuperer l'id de l'utilisateur afilié au candidat
-            4) Ajouter le candidat
-            5) Ajoute le type d'action [FromBody]
-          */
+         /// <summary>
+         /// Add candidate inside the System
+         /// </summary>
+         /// <param name="candidat">Candidate class</param>
+         /// <returns>Information if the user had been add</returns>
+        [HttpPost("add/candidat/")]
         public IActionResult addCandidat([FromBody] Candidat candidat){
             try{
                 
@@ -143,6 +155,11 @@ namespace API.wsUser
             }  
         }
 
+        /// <summary>
+        /// Update the Candidate information 
+        /// </summary>
+        /// <param name="candidat">Candidate Class</param>
+        /// <returns></returns>
         [HttpPost("update/candidat/")]
         public IActionResult updateCandidat([FromBody]Candidat candidat){
             try{
@@ -185,7 +202,11 @@ namespace API.wsUser
                 throw new Exception("Vous devez creer votre utilisateur convenablement prealablement");
             }
         }
-
+        /// <summary>
+        /// Add report for the candidate
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
         [HttpPost("add/candidat/report")]
         public IActionResult addReportCandidat([FromBody]Report report){
             try{
@@ -209,7 +230,11 @@ namespace API.wsUser
                 
             }  
         }
-
+        /// <summary>
+        /// Update the candidate Information
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns>Information for the final User</returns>
          [HttpPost("update/candidat/report")]
         public IActionResult UpdateReportCandidat([FromBody]Report report){
             try{
@@ -230,9 +255,14 @@ namespace API.wsUser
                 
             }  
         }
-
-         [HttpGet("Candidates/search/{email}/{token}")]
-        public IActionResult UpdateReportCandidat(string email,string token){
+        /// <summary>
+        /// Search candidate By email.
+        /// </summary>
+        /// <param name="email">Candidate Email</param>
+        /// <param name="token">User Token</param>
+        /// <returns>results for the candidate</returns>
+        [HttpGet("Candidates/search/{email}/{token}")]
+        public IActionResult searchCandidateByEmail(string email,string token){
              try{
                
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -252,6 +282,11 @@ namespace API.wsUser
             
         }
 
+        /// <summary>
+        /// Disconnect the Candidate for the system.
+        /// </summary>
+        /// <param name="token">the User token</param>
+        /// <returns>User object null</returns>
         [HttpGet("Disconnect/{token}")]
         public IActionResult disconnectTheUser(string token){
             try{
