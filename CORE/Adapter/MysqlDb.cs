@@ -1377,6 +1377,12 @@ namespace Core.Adapter{
                 results.AddLast("sexe");
                 results.AddLast("phone");
                 results.AddLast("email");
+                results.AddLast("zipcode");
+                results.AddLast("actions");
+                results.AddLast("annee");
+                results.AddLast("lien");
+                results.AddLast("CrCall");
+                results.AddLast("NS");
                 output = queryExecute(sql,dico,results);
                 if(output.Count == 0){
                     throw new Exception($"Vous n'avez aucun candidat entre les limites {limite1} et {limite2}");

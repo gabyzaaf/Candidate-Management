@@ -16,14 +16,26 @@ The web service type is ***GET***
         "prenom": "Gabriel",
         "sexe": "M",
         "phone": "065434563",
-        "email": "chr.totoz@gmail.com"
+        "email": "chr.totoz@gmail.com",
+        "zipcode": "75018",
+        "actions": "interne",
+        "annee": "2015",
+        "lien": "http://google.com",
+        "CrCall": "cr call",
+        "NS": "NS"
     },
     {
         "nom": "zaafrani",
         "prenom": "Gabriel",
         "sexe": "M",
         "phone": "065434563",
-        "email": "chris.totoz@gmail.com"
+        "email": "chris.totoz@gmail.com",
+        "zipcode": "75018",
+        "actions": "interne",
+        "annee": "2015",
+        "lien": "http://google.com",
+        "CrCall": "cr call",
+        "NS": "NS"
     }
 ]
 ```

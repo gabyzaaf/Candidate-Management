@@ -509,3 +509,8 @@
 7/11/17 12:24:52 PM - [Error] - WsCustomeException - CandidateController - La limite1 ne peux pas etre supérieur à la limite 2
 7/11/17 12:25:27 PM - [Error] - SqlCustomException - MysqlDb - Vous n'avez aucun candidat entre les limites 10 et 200
 7/11/17 12:25:27 PM - [Error] - WsCustomeException - CandidateController - Vous n'avez aucun candidat entre les limites 10 et 200
+7/11/17 1:14:32 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/11/17 1:14:32 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/11/17 1:14:32 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/11/17 1:14:57 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/11/17 1:14:57 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
