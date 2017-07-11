@@ -155,7 +155,7 @@ namespace Candidate_Management.API
         }
 
          
-        [HttpPost("delete/byId")]
+        [HttpPost("delete/byEmail")]
         public IActionResult deleteCandidateById([FromBody]CandidateDelete candidateDelete){
             try{
                 if(candidateDelete == null){
