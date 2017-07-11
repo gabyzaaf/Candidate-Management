@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /************************ Request server to have candidates by actions *******************************************/
+
     public void GetCandidatesByActions(String action) {
         //candidates = new ArrayList<Candidate>();
         final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Chargement en cours...", true);

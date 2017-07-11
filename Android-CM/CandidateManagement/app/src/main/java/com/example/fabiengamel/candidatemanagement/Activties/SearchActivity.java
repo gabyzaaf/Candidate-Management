@@ -83,7 +83,9 @@ public class SearchActivity extends AppCompatActivity {
                 tvInfo.setVisibility(View.INVISIBLE);
             } else {
                 candidateName= extras.getString("candidateName");
-                getEmail(candidateName);
+                if(!candidateName.matches("")) {
+                    getEmail(candidateName);
+                }
             }
         } else {
             candidateName= (String) savedInstanceState.getSerializable("candidateName");
@@ -336,10 +338,10 @@ public class SearchActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        tvResult.append("Erreur serveur");
+                        tvResult.setVisibility(View.VISIBLE);
                         if (dialog != null)
                             dialog.cancel();
-                        tvResult.append("Une erreur serveur est survenue : " + error.toString());
-                        tvResult.setVisibility(View.VISIBLE);
                     }
                 }
         ) {
@@ -423,11 +425,10 @@ public class SearchActivity extends AppCompatActivity {
                                                         }
                                                     }
                                                     catch(JSONException e){
+                                                        tvResult.setVisibility(View.VISIBLE);
+                                                        tvResult.append("Une erreur serveur est survenue");
                                                         if (dialog != null)
                                                             dialog.cancel();
-                                                        tvResult.setVisibility(View.VISIBLE);
-                                                        tvResult.append("Une erreur serveur est survenue : "+e.toString());
-                                                        e.printStackTrace();
                                                     }
                                                 }
                                             });
@@ -463,8 +464,10 @@ public class SearchActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
+                        if (dialog != null)
+                            dialog.cancel();
                         tvResult.setVisibility(View.VISIBLE);
-                        tvResult.append("Une erreur serveur est survenue : " + error.toString());
+                        tvResult.append("Une erreur serveur est survenue");
                     }
                 }
         ) {
