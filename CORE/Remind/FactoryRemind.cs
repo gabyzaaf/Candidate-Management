@@ -2,7 +2,10 @@ using System;
 using Candidate_Management.CORE.Exceptions;
 
 namespace Candidate_Management.CORE.Remind
-{
+{   
+    /// <summary>
+    /// Create the factory with reflexion
+    /// </summary>
     public class FactoryRemind
     {
         private static readonly string className = "FactoryRemind";

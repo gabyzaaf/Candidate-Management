@@ -13,6 +13,9 @@ namespace CORE.LogManager{
             this.file = path;
         }
 
+        /// <summary>
+        /// Verify the File existing.
+        /// </summary>
         private void checkFileExist(){
             try{
                 if(!File.Exists(this.file)){
@@ -26,6 +29,11 @@ namespace CORE.LogManager{
             
         }
 
+        /// <summary>
+        /// Write the content inside the log.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="content"></param>
         public void Write(string type,string content){
             if(string.IsNullOrEmpty(content)){
                 throw new Exception();

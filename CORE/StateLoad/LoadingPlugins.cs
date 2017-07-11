@@ -16,7 +16,10 @@ namespace Candidate_Management.CORE.Loading
         private ArrayList pathWithPugin = new ArrayList();
         private IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
 
-
+        /// <summary>
+        /// Extract the directories From the plugin path
+        /// </summary>
+        /// <returns>string array</returns>
         private string[] getDirectoriesFromPluginPath(){
             string folderPluginPath = JsonConfiguration.getInstance().getPluginFolder();
             string[] directories = Directory.GetDirectories(folderPluginPath);

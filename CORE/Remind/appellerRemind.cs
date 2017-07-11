@@ -10,10 +10,14 @@ namespace Candidate_Management.CORE.Remind
     public class appellerRemind : LegacyRemind ,Iremind
     {
        
-        public int id {get;set;} // Is the candidat ID  
+        public int id {get;set;} 
         private string choiceType =null;
 
-
+        /// <summary>
+        /// Create the date + 1 Day and add in the DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
         public void add(int id,DateTime date){
             this.id = id;
             checkFileNameIsNull();
@@ -23,6 +27,11 @@ namespace Candidate_Management.CORE.Remind
             emailCandidate = isql.getCandidateEmailFromId(id);
         }
         
+        /// <summary>
+        /// Create the date + 1 Day and update in the DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
         public void update(int id,DateTime date){
            this.id = id;
            checkFileNameIsNull();

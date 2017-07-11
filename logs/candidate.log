@@ -6,3 +6,18 @@
 7/11/17 9:21:46 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/11/17 9:27:01 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
 7/11/17 9:27:01 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 10:18:04 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/11/17 10:18:04 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 10:18:20 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 39 existe veuillez vous identifier
+7/11/17 10:18:20 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 39 existe veuillez vous identifier
+7/11/17 10:18:40 PM - [Error] - SqlCustomException - MysqlDb - Object reference not set to an instance of an object.
+7/11/17 10:18:40 PM - [Information] - WsCustomeInfoException - UserController - Le candidat modifie ne possede pas de remind associe a cette action interne
+7/11/17 10:18:43 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/11/17 10:18:43 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/11/17 10:18:43 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/11/17 10:18:44 PM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme
+7/11/17 10:19:11 PM - [Error] - SqlCustomException - MysqlDb - Aucun token ayant ce numero 39 existe veuillez vous identifier
+7/11/17 10:19:11 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 39 existe veuillez vous identifier
+7/11/17 10:32:00 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/11/17 10:32:00 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 10:33:01 PM - [Information] - WsCustomeInfoException - DC02 - L'utilisateur avec l'email :  juliec17@gmail.com est deconnecte

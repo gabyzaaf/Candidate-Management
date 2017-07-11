@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace core.configuration{
     /* 
-    Tous les champs du fichier appsettings ne doivent pas etre vide 
+    All the attributes can't be empty
     */
     public class JsonConfiguration{
 
@@ -31,7 +31,10 @@ namespace core.configuration{
         private static IConfigurationRoot configuration = null ;
 
         
-
+        /// <summary>
+        /// Create a Single Instance for JsonConfiguration
+        /// </summary>
+        /// <returns></returns>
         public static JsonConfiguration getInstance(){
              if(configuration==null || conf == null){
                 return new JsonConfiguration();
@@ -51,7 +54,10 @@ namespace core.configuration{
             }
             
         
-
+        /// <summary>
+        /// Get Log path.
+        /// </summary>
+        /// <returns></returns>
         public string getLogPath(){
             settingsExist();
             if(String.IsNullOrEmpty(configuration[configurationLog])){
@@ -60,6 +66,10 @@ namespace core.configuration{
             return configuration[configurationLog];
         }
 
+        /// <summary>
+        /// Get plugin Folder.
+        /// </summary>
+        /// <returns></returns>
         public string getPluginFolder(){
             settingsExist();
             if(String.IsNullOrEmpty(configuration[configurationPluginFolder])){
@@ -71,6 +81,12 @@ namespace core.configuration{
             return replaceSlashFolderIfNotExist(configuration[configurationPluginFolder]);
         }
         
+
+        /// <summary>
+        /// Extract the errors.
+        /// </summary>
+        /// <param name="country"></param>
+        /// <returns></returns>
         public Dictionary<string,string> getErrors(string country){
             settingsExist();
             bool found = false;
@@ -105,6 +121,10 @@ namespace core.configuration{
             return errorDico;
         }
          
+         /// <summary>
+         /// get the email from the administrator
+         /// </summary>
+         /// <returns></returns>
          public string getEmail(){
              try{
                 settingsExist();
@@ -122,6 +142,11 @@ namespace core.configuration{
              }
          }
          
+
+         /// <summary>
+         /// Extract the SQL connection.
+         /// </summary>
+         /// <returns></returns>
          public string getConnectionSql(){
             string connectionString = null;
             try{
@@ -148,6 +173,10 @@ namespace core.configuration{
             }
          }
 
+         /// <summary>
+         /// get the email Path
+         /// </summary>
+         /// <returns></returns>
          public string getEmailTemplatePath(){
              try{
                 settingsExist();
@@ -160,6 +189,10 @@ namespace core.configuration{
              }
          }
 
+         /// <summary>
+         /// extract the URL or IP adress
+         /// </summary>
+         /// <returns>By Default http://localhost:5000 </returns>
          public string getUrlOrIpAdressWithPort(){
              try{
                 settingsExist();
@@ -172,6 +205,10 @@ namespace core.configuration{
              }
          }
 
+         /// <summary>
+         /// Extract the Bash Script Path
+         /// </summary>
+         /// <returns></returns>
          public string getTheBashScriptPath(){
             try{
                 settingsExist();
@@ -196,6 +233,10 @@ namespace core.configuration{
             return directory;
          }
 
+         /// <summary>
+         /// Extract the Email tempate Files
+         /// </summary>
+         /// <returns></returns>
          public string[] getEmailTemplateFiles(){ 
              try{
                 

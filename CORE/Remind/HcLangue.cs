@@ -13,16 +13,23 @@ namespace Candidate_Management.CORE.Remind
          public int id {get;set;}
          
 
-
+         /// <summary>
+         /// add the current date of 6 months.
+         /// </summary>
+         /// <param name="id"></param>
+         /// <param name="date"></param>
          public void add(int id,DateTime date){
-            // remind toutes les 6 mois
             this.id = id;
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
             this.date = date.AddMonths(6);
             isql.remindType(id,this.date);
             emailCandidate = isql.getCandidateEmailFromId(id);
          }
-         
+         /// <summary>
+         /// Update the current date of 6 months.
+         /// </summary>
+         /// <param name="id"></param>
+         /// <param name="date"></param>
          public void update(int id,DateTime date){
             this.id = id;
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");

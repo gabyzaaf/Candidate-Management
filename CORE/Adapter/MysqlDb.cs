@@ -36,7 +36,14 @@ namespace Core.Adapter{
             }
         } 
 
-      
+      /// <summary>
+      /// Execute the SQL queries with all the parameters.
+      /// All the parameters are protected again the SQL Injection
+      /// </summary>
+      /// <param name="query">SQL query</param>
+      /// <param name="dico">Key value parameters</param>
+      /// <param name="results">The result present in the select</param>
+      /// <returns></returns>
         private ArrayList queryExecute(string query,Dictionary<String,Object> dico,LinkedList<String> results){
             ArrayList listeHash= null;
             try{
@@ -77,7 +84,11 @@ namespace Core.Adapter{
             }
             return listeHash;
         }
-
+        /// <summary>
+         /// Create the Authentification in the system 
+         /// </summary>
+         /// <param name="email">User email</param>
+         /// <param name="password">password email</param>
         public void Authentification(string email, string password)
         {
             
@@ -103,7 +114,10 @@ namespace Core.Adapter{
             }
             
         }
-
+        /// <summary>
+         /// Verify if the User token Exist
+         /// </summary>
+         /// <param name="token">User token</param>
         public void TokenExist(string token)
         {
            try{
@@ -132,7 +146,11 @@ namespace Core.Adapter{
         }
 
         
-
+         /// <summary>
+         /// Check the permission for User can Read inside the Database
+         /// </summary>
+         /// <param name="token"></param>
+         /// <returns></returns>
         public bool UserCanRead(string token)
         {
             try{
@@ -163,7 +181,11 @@ namespace Core.Adapter{
             
             
         }
-
+        /// <summary>
+         /// Check the permission for User can Update inside the Database
+         /// </summary>
+         /// <param name="token">User Token</param>
+         /// <returns></returns>
         public bool UserCanUpdate(string token)
         {
             Dictionary<String,String> element;
@@ -198,6 +220,11 @@ namespace Core.Adapter{
             return bool.Parse(element["regle_modification"]);
         }
 
+         /// <summary>
+         /// Check the permission for User can Delete inside the Database
+         /// </summary>
+         /// <param name="token"></param>
+         /// <returns></returns>
        public bool UserCanDelete(string token){
         Dictionary<String,String> element;
             try{
@@ -225,14 +252,21 @@ namespace Core.Adapter{
             return bool.Parse(element["regle_suppression"]);
        }
 
-
+        /// <summary>
+         /// Generate Token
+         /// </summary>
+         /// <returns></returns>
         public User GenerateToken()
         {
             Random rnd = new Random();
             int nb = rnd.Next(1,100);
             return new User(){sessionId=nb.ToString()};
         }
-
+        /// <summary>
+         /// Insert token to the User connecting
+         /// </summary>
+         /// <param name="token">User token</param>
+         /// <param name="email">User email</param>
         public void addTokenToUser(string token,string email)
         {
               try{
@@ -261,6 +295,12 @@ namespace Core.Adapter{
                 
         }
 
+         /// <summary>
+         /// Extract candidat with report.
+         /// </summary>
+         /// <param name="nom">candidate name</param>
+         /// <param name="token">User token</param>
+         /// <returns></returns>
         public ArrayList searchCandidate(string nom, string token)
         {
             ArrayList output=null;
@@ -303,7 +343,11 @@ namespace Core.Adapter{
             }
             return output;
         }
-
+        /// <summary>
+         /// Verify if the Token Exist
+         /// </summary>
+         /// <param name="token"></param>
+         /// <returns></returns>
         public bool verifyTheTokenExist(string token)
         {
             try{
@@ -327,7 +371,11 @@ namespace Core.Adapter{
             }
             return true;
         }
-
+        /// <summary>
+         /// Add the Candidate inside the system.
+         /// </summary>
+         /// <param name="candidat"></param>
+         /// <param name="id"></param>
         public void addCandidate(Candidat candidat,int id)
         {
             if(candidat==null){
@@ -358,7 +406,11 @@ namespace Core.Adapter{
           
         }
 
-       
+        /// <summary>
+         /// Extract the User ID from the Token
+         /// </summary>
+         /// <param name="token">User Token</param>
+         /// <returns></returns>
         public int getIdFromToken(string token)
         {
             Dictionary<String,String> element;
@@ -389,7 +441,11 @@ namespace Core.Adapter{
         }
 
 
-    
+        /// <summary>
+         /// Verify if the Candidate already exist in the system.
+         /// </summary>
+         /// <param name="candidat"></param>
+         /// <returns></returns>
         public bool CandidatAlreadyExist(Candidat candidat)
         {
             try{
@@ -426,6 +482,12 @@ namespace Core.Adapter{
                 throw new Exception("Le prix saisi n'est pas conforme");
             }
         }
+
+        /// <summary>
+         /// Add candidate FreeLance in the System.
+         /// </summary>
+         /// <param name="prix"></param>
+         /// <param name="id"></param>
         public void addFreeLance(int prix,int id)
         {
            
@@ -444,7 +506,11 @@ namespace Core.Adapter{
 
 
 
-
+        // <summary>
+         /// get the Id from the Candidate Email
+         /// </summary>
+         /// <param name="email">Candidate Email</param>
+         /// <returns></returns>
         public int getIdFromCandidateEmail(string email)
         {
             try{
@@ -483,6 +549,12 @@ namespace Core.Adapter{
                 throw new Exception("La date mise en parametre n'est pas conforme");
             }
         }
+
+        /// <summary>
+         /// create the job remind for ADD or Update.
+         /// </summary>
+         /// <param name="id">User id</param>
+         /// <param name="date">Current time</param>
         public void remindType(int id,DateTime date)
         {
 
@@ -497,14 +569,17 @@ namespace Core.Adapter{
                  queryExecute("insert into remind (dates,fid_candidate_remind,finish) values (@date,@fid,@finish)",param,null);
             }catch(Exception exception){
                 throw new SqlCustomException(this.GetType().Name,exception.Message);
-            }finally{
-                disconnect();
             }
+
         
         }
 
 
-
+        /// <summary>
+         /// Update the Remind Job
+         /// </summary>
+         /// <param name="id">User Id</param>
+         /// <param name="date">Current time</param>
         public void updateRemindType(int id,DateTime date){
             try{
                 
@@ -520,8 +595,6 @@ namespace Core.Adapter{
                 }
                }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
-            }finally{
-                disconnect();
             }
         }
         public void updateFreeLance(int prix,int id){
@@ -535,12 +608,18 @@ namespace Core.Adapter{
                 queryExecute("update internNumeric set contentType=@price where fid_candidate_internNumeric=@id",param,null);
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
-            }finally{
-                disconnect();
             }
         }
 
-
+        /// <summary>
+         /// This method are created for Factoring the remind Add and the remind Update and FreeLance
+         /// </summary>
+         /// <param name="actionType">Freelance or not</param>
+         /// <param name="prix">Freelance price</param>
+         /// <param name="date">Date add</param>
+         /// <param name="id">User Id</param>
+         /// <param name="type">ADD or UPDATE</param>
+         /// <param name="token">User token</param>
         public void typeAction(string actionType,int prix,DateTime date,int id,string type,string token){
                 try{
                     
@@ -579,7 +658,12 @@ namespace Core.Adapter{
                     throw new Exception("Vous n'avez pas les droits associes a la modification du candidat");
                 }
             }
-            
+
+            /// <summary>
+            /// Update the candidate Information
+            /// </summary>
+            /// <param name="candidat">candidate class</param>
+            /// <param name="id">Token </param>
             public void updateCandidate(Candidat candidat,int id){
                 try{
                     
@@ -603,7 +687,12 @@ namespace Core.Adapter{
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
                 }
             }
-
+        /// <summary>
+         /// Extract the candidate for the mobile.
+         /// </summary>
+         /// <param name="nom">Candidate Name</param>
+         /// <param name="token">Token User</param>
+         /// <returns>Only 3 values by Candidate</returns>
         public ArrayList searchCandidateMobile(string nom, string token)
         {
             //
@@ -628,7 +717,11 @@ namespace Core.Adapter{
             }
             return output;
         }
-
+        /// <summary>
+          /// Verify if the report Already Exist.
+          /// </summary>
+          /// <param name="idCandidat">Candidate Id</param>
+          /// <returns></returns>
         public bool reportAlreadyExist(int idCandidat)
         {
             try{
@@ -659,7 +752,11 @@ namespace Core.Adapter{
                 throw new Exception("Vous n'avez pas les droits necessaires pour ajouter ou modifier une fiche candidat");
             }
         }
-
+          /// <summary>
+          /// Create new report inside the System.
+          /// </summary>
+          /// <param name="report">Report class</param>
+          /// <param name="idCandidat">Candidate Id</param>
         public void addReport(Report report,int idCandidat)
         {
          try{
@@ -683,7 +780,11 @@ namespace Core.Adapter{
             throw new SqlCustomException(this.GetType().Name,exc.Message);
          }
         }
-
+          /// <summary>
+          /// Update the report Content
+          /// </summary>
+          /// <param name="report"></param>
+          /// <param name="idCandidat"></param>
         public void updateReport(Report report, int idCandidat)
         {
            try{ 
@@ -724,7 +825,12 @@ namespace Core.Adapter{
             
 
         }
-
+          /// <summary>
+          /// Extract the candidate By Email
+          /// </summary>
+          /// <param name="email">Candidate Email</param>
+          /// <param name="token">User token</param>
+          /// <returns></returns>
          public ArrayList searchCandidateFromEmail(string email, string token)
         {
             ArrayList output;
@@ -770,6 +876,12 @@ namespace Core.Adapter{
             return output;
         }
 
+          /// <summary>
+          /// Extract the Candidate List By Action
+          /// </summary>
+          /// <param name="actions">Candidate Action</param>
+          /// <param name="token">User Token</param>
+          /// <returns></returns>
         public ArrayList searchCandidateByAction(string actions,string token){
             ArrayList output;
             try{
@@ -800,6 +912,10 @@ namespace Core.Adapter{
             return output;
         }
 
+         /// <summary>
+          /// Add Email template Inside the System.
+          /// </summary>
+          /// <param name="emailTemplate"></param>
         public void addEmailTemplates(Template emailTemplate){
           
             try{
@@ -813,7 +929,11 @@ namespace Core.Adapter{
             }
              
         }
-
+          /// <summary>
+          /// Email template Exist inside the System
+          /// </summary>
+          /// <param name="title"></param>
+          /// <returns></returns>
         public bool emailTemplateExist(string title){
             ArrayList output;
             try{
@@ -837,7 +957,12 @@ namespace Core.Adapter{
             }
            
         }
-
+         /// <summary>
+          /// Extract Email Template Beetween limite
+          /// </summary>
+          /// <param name="limite1">limit 1</param>
+          /// <param name="limite2">limit 2</param>
+          /// <returns></returns>
         public ArrayList emailTemplateTiltes(int limite1,int limite2){
             ArrayList output;
             try{
@@ -853,7 +978,12 @@ namespace Core.Adapter{
             }
             return output;
         }
-       
+
+          /// <summary>
+          /// get Template Content from the Title
+          /// </summary>
+          /// <param name="title"></param>
+          /// <returns></returns>
         public ArrayList emailTemplateContentFromTitle(string title){
              ArrayList output;
              try{
@@ -874,7 +1004,11 @@ namespace Core.Adapter{
              }
              return output;
         }
-
+         /// <summary>
+          /// Update Template Email From Title.
+          /// </summary>
+          /// <param name="title"></param>
+          /// <param name="content"></param>
         public void updateTemplateEmailFromTitle(string title,string content){
              try{
                 if(String.IsNullOrEmpty(title)){
@@ -893,6 +1027,10 @@ namespace Core.Adapter{
              }
         }
 
+          /// <summary>
+          /// Dete template email from the title file
+          /// </summary>
+          /// <param name="title">File Title</param>
         public void deleteTemplateEmailFromTitle(string title){
             try{
                 if(String.IsNullOrEmpty(title)){
@@ -906,7 +1044,11 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
-
+        /// <summary>
+         /// Extract the candidate by this Id
+         /// </summary>
+         /// <param name="id"></param>
+         /// <returns></returns>
         public ArrayList searchCandidateById(int id){
             ArrayList output = null;
             try{
@@ -929,6 +1071,11 @@ namespace Core.Adapter{
             }
         }
 
+         /// <summary>
+          /// The candidate have already a remind.
+          /// </summary>
+          /// <param name="id"></param>
+          /// <returns></returns>
         public bool remindExistByCandidate(int id){
             ArrayList output = null;
             try{
@@ -952,7 +1099,10 @@ namespace Core.Adapter{
             }
             
         }
-
+          /// <summary>
+          /// Extract the candidate list without report.
+          /// </summary>
+          /// <returns></returns>
         public LinkedList<Candidat> getCandidatWithoutReport()
         {
             ArrayList output = null;
@@ -993,7 +1143,10 @@ namespace Core.Adapter{
             }
          
         }
-
+          /// <summary>
+          /// Get the remind Informations from the Calendar
+          /// </summary>
+          /// <returns></returns>
         public ArrayList getRemindInformationForCalendar(){
                 ArrayList output = null;
                 try{
@@ -1016,7 +1169,10 @@ namespace Core.Adapter{
                     throw new SqlCustomException(this.GetType().Name,exc.Message);
                 }
         }
-
+        /// <summary>
+          /// Verify if the choice exist Inside the System.
+          /// </summary>
+          /// <param name="choice">choice Name</param>
         public void stateChoiceExist(string choice){
             ArrayList output = null;
             try{
@@ -1035,7 +1191,11 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
-
+         /// <summary>
+          /// Extract Datas from the Choice.
+          /// </summary>
+          /// <param name="choice">choice from the kaggle Dataset</param>
+          /// <returns></returns>
         public ArrayList getDatasFromChoice(string choice){
             ArrayList output = null;
             try{
@@ -1062,7 +1222,10 @@ namespace Core.Adapter{
             }
             
         }
-
+           /// <summary>
+          /// Disconnect the User
+          /// </summary>
+          /// <param name="id"></param>
         public void disconnectUser(int id){
             try{
                 if(id == 0){
@@ -1078,6 +1241,11 @@ namespace Core.Adapter{
             
         }
 
+          /// <summary>
+          /// Extract the UserEmail from the Id
+          /// </summary>
+          /// <param name="id">UserID</param>
+          /// <returns></returns>
         public string getUserEmailFromId(int id){
             try{
                 ArrayList output = null;
@@ -1099,12 +1267,15 @@ namespace Core.Adapter{
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
-
+          /// <summary>
+          /// Change the JobState.
+          /// </summary>
+          /// <param name="id">JobId</param>
         public void changeJobState(int id){
             try{
                 ArrayList output = null;
                 if(id <= 0){
-                    throw new Exception("Votre job n'est pas conforme car il est inferieur ou égale à 0");
+                    throw new Exception("Votre job n'est pas conforme car l'identifiant est inferieur ou egale à 0");
                 }
                 string sql = "update remind set finish = true where id = @id";
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
@@ -1114,7 +1285,11 @@ namespace Core.Adapter{
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
-
+          /// <summary>
+          /// Verify if the Remind exist for a specific JobId
+          /// </summary>
+          /// <param name="id">JobId</param>
+          /// <returns></returns>
         public bool remindExistByJob(int id){
             try{
                 ArrayList output = null;
@@ -1144,6 +1319,10 @@ namespace Core.Adapter{
             }
         }
 
+          /// <summary>
+          /// Verify if the remind had already update
+          /// </summary>
+          /// <param name="id">Remind ID</param>
         public void remindAlreadyUpdated(int id){
             try{
                 ArrayList output = null;
@@ -1169,6 +1348,11 @@ namespace Core.Adapter{
             }
         }
 
+          /// <summary>
+          /// Get The Candidat Id From the remind list
+          /// </summary>
+          /// <param name="userId">UserID</param>
+          /// <returns></returns>
         public int getLastCandidateIdFromRemind(int userId){
             try{
                 ArrayList output = null;
@@ -1195,6 +1379,11 @@ namespace Core.Adapter{
             }
         }
 
+         /// <summary>
+          /// Extract the candidate Email from The candidate ID
+          /// </summary>
+          /// <param name="candidateId">Candidate Id</param>
+          /// <returns></returns>
         public string getCandidateEmailFromId(int candidateId){
             try{
                 
@@ -1218,7 +1407,11 @@ namespace Core.Adapter{
                  throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
-
+         /// <summary>
+          /// Verify if the plugin exist
+          /// </summary>
+          /// <param name="plugin"></param>
+          /// <returns></returns>
         public bool pluginExist(Plugin plugin){
             try{
                 ArrayList output = null;
@@ -1240,6 +1433,10 @@ namespace Core.Adapter{
             }
         }
 
+         /// <summary>
+          /// Add plugin in the system (This feature is load when start the system)
+          /// </summary>
+          /// <param name="plugin"></param>
         public void addPlugin(Plugin plugin){
             try{
                 pluginIsNullOrNameIsEmpty(plugin);
@@ -1261,7 +1458,10 @@ namespace Core.Adapter{
                 throw new Exception("Le nom du plugin ne peut etre vide");
             }
         }
-
+          /// <summary>
+          /// Extract the plugin List
+          /// </summary>
+          /// <returns></returns>
         public ArrayList getPluginList(){
             try{
                 ArrayList output = null;
@@ -1280,6 +1480,11 @@ namespace Core.Adapter{
             }
         }
 
+          /// <summary>
+          /// Get the plugin choice from the candidate
+          /// </summary>
+          /// <param name="emailCandidat"></param>
+          /// <returns></returns>
         public string getPluginChoiceFromCandidate(string emailCandidat){
             try{
                 
@@ -1305,6 +1510,10 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
             }
         }
+          /// <summary>
+          /// Delete the candidate by Id
+          /// </summary>
+          /// <param name="id">Candidate ID</param>
         public void deleteCandidateById(int id){
              try{
                 if(id == 0){
@@ -1319,6 +1528,11 @@ namespace Core.Adapter{
             }
         }
 
+          /// <summary>
+          /// Extract Candidate By specific Email
+          /// </summary>
+          /// <param name="emailCandidat"></param>
+          /// <returns></returns>
         public ArrayList searchCandidateWithSpecificEmail(string emailCandidat){
               try{    
                 if(String.IsNullOrEmpty(emailCandidat)){
@@ -1351,6 +1565,14 @@ namespace Core.Adapter{
             }
         }
 
+
+          /// <summary>
+          /// Get Candidate With or Without report.
+          /// I am using the limite for not add all the Candidate in the CLR.
+          /// </summary>
+          /// <param name="limite1"></param>
+          /// <param name="limite2"></param>
+          /// <returns></returns>
         public ArrayList getCandidatesListWithLimite(int limite1,int limite2){
             try{
                 if(limite1 > limite2){

@@ -12,6 +12,9 @@ namespace scheduler{
             this.cmd = command;
         }
 
+        /// <summary>
+        /// Execute commmand outside the System.
+        /// </summary>
         public void executeTask(){
             try{
                 ProcessStartInfo _processStartInfo = new ProcessStartInfo();

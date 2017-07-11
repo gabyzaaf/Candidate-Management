@@ -5,7 +5,10 @@ using System;
 using core.configuration;
 using Candidate_Management.CORE.Exceptions;
 namespace Candidate_Management.CORE.Remind
-{
+{   
+    /// <summary>
+    /// This class contains the methods can be use in others class.
+    /// </summary>
     public abstract class LegacyRemind
     {
 

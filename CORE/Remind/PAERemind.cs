@@ -11,7 +11,11 @@ namespace Candidate_Management.CORE.Remind
          private DateTime date = new DateTime();
          public int id {get;set;}
         
-
+         /// <summary>
+         /// ADD the current date of 6 months.
+         /// </summary>
+         /// <param name="id"></param>
+         /// <param name="date"></param>
         public void add(int id,DateTime date){
             this.id = id;
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -20,6 +24,11 @@ namespace Candidate_Management.CORE.Remind
             emailCandidate = isql.getCandidateEmailFromId(id);
         }
         
+         /// <summary>
+         /// ADD the current date of 6 months.
+         /// </summary>
+         /// <param name="id"></param>
+         /// <param name="date"></param>
         public void update(int id,DateTime date){
            this.id = id;
            IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");

@@ -11,7 +11,11 @@ namespace Candidate_Management.CORE.Remind
          private DateTime date = new DateTime();
          public int id {get;set;}
         
-        
+        /// <summary>
+        /// Add 2 Day from the current Date and add in the database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
         public void add(int id,DateTime date){
             this.id = id;
             IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -20,6 +24,12 @@ namespace Candidate_Management.CORE.Remind
             emailCandidate = isql.getCandidateEmailFromId(id);
         }
         
+
+        /// <summary>
+        /// Add 2 days.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
         public void update(int id,DateTime date){
            this.id = id;
            IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
@@ -29,7 +39,11 @@ namespace Candidate_Management.CORE.Remind
         }
 
       
-
+        /// <summary>
+        /// Execute this command outside the System with the AT command
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="meeting"></param>
         public void exec(string token,DateTime meeting){
            
            checkFileNameIsNull();
