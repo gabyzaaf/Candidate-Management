@@ -437,3 +437,6 @@
 7/10/17 5:12:46 PM - [Error] - WsCustomeException - UserController - Aucun token ayant ce numero 49 existe veuillez vous identifier
 7/10/17 5:17:06 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
 7/10/17 5:17:06 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 8:01:48 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien été chargé au démarrage
+7/11/17 8:01:48 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 8:01:58 AM - [Error] - WsCustomeException - UserController - Le candidat est deja existant dans votre systeme

@@ -107,6 +107,8 @@ namespace Core.Adapter.Inteface
           ArrayList getPluginList();
 
           string getPluginChoiceFromCandidate(string emailCandidat);
+          
+          void deleteCandidateById(int id);
     }
 
 } 

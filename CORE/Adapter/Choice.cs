@@ -1,5 +1,5 @@
 using Core.Adapter.Inteface;
-
+using System;
 namespace Core.Adapter{
 
     
@@ -10,6 +10,8 @@ namespace Core.Adapter{
         public ChoiceTypeDb(string type){
             if("mysql".Equals(type)){
                 isql = new MysqlDb();
+            }else{
+                throw new Exception($"Le choix demandé {type} n'a pas été implémenté");
             }
         }    
 

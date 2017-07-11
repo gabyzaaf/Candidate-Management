@@ -8,6 +8,7 @@ using exception.ws;
 using Candidate_Management.CORE.LoadingTemplates;
 using System.Collections.Generic;
 using core.user;
+using Candidate_Management.CORE;
 
 namespace Candidate_Management.API
 {
@@ -154,6 +155,34 @@ namespace Candidate_Management.API
         }
 
          
+        [HttpPost("delete/byId")]
+        public IActionResult deleteCandidateById([FromBody]CandidateDelete candidateDelete){
+            try{
+                if(candidateDelete == null){
+                    throw new Exception("Les informations de l'utilisateur passé en paramètre sont vides");
+                }
+                if(String.IsNullOrEmpty(candidateDelete.token)){
+                    throw new Exception("Le token de l'utilisateur ne peut etre vide");
+                }
+                if(String.IsNullOrEmpty(candidateDelete.email)){
+                    throw new Exception("L'email du candidat ne peut etre vide");
+                }
+                IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                isql.UserCanDelete(candidateDelete.token);
+                ArrayList CandidatesInformations = isql.searchCandidateFromEmail(candidateDelete.email,candidateDelete.token);
+                Dictionary<string,string> CandidateInformation = (Dictionary<string,string>)CandidatesInformations[0];
+                int candidateId = Int32.Parse(CandidateInformation["id"]);
+                isql.deleteCandidateById(candidateId);
+                return new ObjectResult(new State(){code=4,content=$"Le Candidat a bien été supprimé",success=true});
+            return new ObjectResult(candidateDelete);
+            }catch(Exception exc){
+                new WsCustomeException(this.GetType().Name,exc.Message);
+                ArrayList errorList = new ArrayList();
+                errorList.Add(new State(){code=5,content=exc.Message,success=false});
+                return CreatedAtRoute("GetErrorsCandidate", new { error = errorList },errorList);
+            } 
+        }
+          
 
        [HttpGet("{error}", Name = "GetErrorsCandidate")]
         public IActionResult ErrorList(ArrayList errors)

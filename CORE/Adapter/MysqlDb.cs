@@ -741,6 +741,7 @@ namespace Core.Adapter{
                 Dictionary<String,Object> dico = new Dictionary<String,Object>();
                 dico.Add("@email",email);
                 LinkedList<String> results = new LinkedList<String>(); 
+                results.AddLast("id");
                 results.AddLast("nom");
                 results.AddLast("prenom");
                 results.AddLast("sexe");
@@ -1306,6 +1307,19 @@ namespace Core.Adapter{
                 return datas["pluginType"];
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,$"{exc.Message}");
+            }
+        }
+        public void deleteCandidateById(int id){
+             try{
+                if(id == 0){
+                    throw new Exception("L'identifiant de l'utilisateur n'est pas conforme");
+                }
+                string sql = "delete from candidate where id = @id";
+                Dictionary<String,Object> param = new Dictionary<String,Object>();
+                param.Add("@id",id);
+                queryExecute(sql,param,null); 
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
     }
