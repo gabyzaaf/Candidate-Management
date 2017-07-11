@@ -1,5 +1,9 @@
 using System;
 using System.IO;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE
 {
     public class UserFeature

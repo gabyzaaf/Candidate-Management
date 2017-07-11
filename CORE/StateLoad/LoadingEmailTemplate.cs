@@ -9,7 +9,10 @@ using Core.Adapter.Inteface;
 using System.Collections;
 using Candidate_Management.CORE.Loading;
 using Candidate_Management.CORE.Exceptions;
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Loading
 {
     public class LoadingEmailTemplate : Iloading
@@ -18,7 +21,9 @@ namespace Candidate_Management.CORE.Loading
         private string[] containAllTheFiles;
         private ArrayList containFileOnlyWithExtension = new ArrayList();
         private IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
-
+        /// <summary>
+        /// Get the files from folder.
+        /// </summary>
         private void getFilesFromTheFolder(){
             try{
                 containAllTheFiles =  JsonConfiguration.getInstance().getEmailTemplateFiles();
@@ -55,7 +60,9 @@ namespace Candidate_Management.CORE.Loading
 
         
         
-
+        /// <summary>
+        /// Load the files in the system.
+        /// </summary>
         public void loading(){
             try{
                 getFilesFromTheFolder(); // get the file for the folder

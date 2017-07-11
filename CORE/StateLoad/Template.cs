@@ -2,6 +2,10 @@ using System;
 using System.IO;
 using exception.loading;
 using core.configuration;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.LoadingTemplates
 {
     public class Template
@@ -23,10 +27,7 @@ namespace Candidate_Management.CORE.LoadingTemplates
 
        
 
-        public override string ToString()
-        {
-            return $"Le chemin est {path} le titre est {title}";
-        }
+        
 
     }
 }

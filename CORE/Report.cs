@@ -1,3 +1,7 @@
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace core.report{
 
     public class Report{

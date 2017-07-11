@@ -9,7 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace core.prediction{
-
+/*
+    Author : LAPERT Christian
+    Version : 1.0
+ */
 public class StringTable
     {
         public string[] ColumnNames { get; set; }

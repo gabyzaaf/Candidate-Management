@@ -1,3 +1,7 @@
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Load
 {
     public class Plugin

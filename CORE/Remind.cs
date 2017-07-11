@@ -1,3 +1,7 @@
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace core.remind{
 
     public class Remind{
@@ -6,9 +10,7 @@ namespace core.remind{
         public int candidateId {get;set;}
         public bool finish{get;set;}
 
-        public override string ToString(){
-            return $"the date is {date} - the id is {candidateId} - finish {finish} ";
-        }
+        
 
     }
 

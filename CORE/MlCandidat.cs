@@ -1,5 +1,9 @@
 using System;
 using System.Linq;
+/*
+    Author : LAPERT Christian
+    Version : 1.0
+ */
 namespace core.mlcandidat{
 
     public class MlCandidat{

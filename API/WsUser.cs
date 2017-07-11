@@ -12,6 +12,10 @@ using Candidate_Management.CORE.Exceptions;
 using core.mlcandidat;
 using core.prediction;
 
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace API.wsUser
 {
     [EnableCors("SiteCorsPolicy")]

@@ -21,3 +21,24 @@
 7/11/17 10:32:00 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
 7/11/17 10:32:00 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/11/17 10:33:01 PM - [Information] - WsCustomeInfoException - DC02 - L'utilisateur avec l'email :  juliec17@gmail.com est deconnecte
+7/11/17 11:58:14 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/11/17 11:58:14 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/11/17 11:58:14 PM - [Error] - SqlCustomException - MysqlDb - Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+7/11/17 11:59:11 PM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/11/17 11:59:11 PM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/11/17 11:59:55 PM - [Information] - WsCustomeInfoException - DC01 - L'utilisateur avec l'email : juliec17@gmail.com est connecté
+7/12/17 12:00:49 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/12/17 12:00:49 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/12/17 12:00:52 AM - [Error] - SqlCustomException - MysqlDb - Aucun candidat ne possede vos criteres de recherche
+7/12/17 12:00:52 AM - [Error] - WsCustomeException - UserController - Aucun candidat ne possede vos criteres de recherche
+7/12/17 12:33:44 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 12:33:44 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 12:34:07 AM - [Error] - SqlCustomException - MysqlDb - Email ou mot de passe incorrect
+7/12/17 12:34:07 AM - [Error] - WsCustomeException - UserController - Email ou mot de passe incorrect
+7/12/17 12:34:14 AM - [Information] - WsCustomeInfoException - DC01 - L'utilisateur avec l'email : juliec17@gmail.com est connecté
+7/12/17 12:47:39 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 12:47:39 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 12:49:02 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 12:49:02 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 12:49:30 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 12:49:30 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage

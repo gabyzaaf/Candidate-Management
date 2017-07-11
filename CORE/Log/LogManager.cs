@@ -1,7 +1,10 @@
 using System;
 using System.IO;
 using exception.configuration;
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace CORE.LogManager{
 
 

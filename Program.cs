@@ -13,8 +13,10 @@ using Candidate_Management.CORE.LoadingTemplates;
 using Candidate_Management.CORE.Remind;
 using Candidate_Management.CORE.Loading;
 using System.Collections;
-
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace ConsoleApplication
 {
     public class Program

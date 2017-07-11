@@ -1,7 +1,10 @@
 using System;
 using System.Diagnostics;
-
 using core.configuration;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace scheduler{
 
     public class Schedule{

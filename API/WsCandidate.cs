@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using core.user;
 using Candidate_Management.CORE;
 
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.API
 {
     [EnableCors("SiteCorsPolicy")]

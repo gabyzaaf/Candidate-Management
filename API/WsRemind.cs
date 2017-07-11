@@ -11,8 +11,13 @@ using Candidate_Management.CORE;
 using Candidate_Management.CORE.Exceptions;
 using core.remind;
 
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.API
 {
+
     [EnableCors("SiteCorsPolicy")]
     [Route("api/[controller]")]
     public class RemindController:Controller

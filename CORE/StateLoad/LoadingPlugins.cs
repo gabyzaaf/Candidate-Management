@@ -6,7 +6,10 @@ using core.configuration;
 using Core.Adapter.Inteface;
 using Candidate_Management.CORE.Load;
 using Candidate_Management.CORE.Exceptions;
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Loading
 {
     public class LoadingPlugins : Iloading

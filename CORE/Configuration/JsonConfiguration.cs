@@ -6,6 +6,10 @@ using System.Text.RegularExpressions;
 using exception.configuration;
 using Microsoft.Extensions.Configuration;
 
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace core.configuration{
     /* 
     All the attributes can't be empty

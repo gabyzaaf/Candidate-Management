@@ -1,6 +1,9 @@
 using Core.Adapter;
 using Core.Adapter.Inteface;
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Factory{
 
     public class Factory{

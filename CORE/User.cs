@@ -1,3 +1,7 @@
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace core.user{
 
     public class User{
@@ -18,10 +22,7 @@ namespace core.user{
             this.password = _password;
         }
 
-        public override string ToString()
-        {
-            return $"the sessionId is {sessionId} - name {name} - email {email} - {password}";
-        }
+       
     }
 
 }

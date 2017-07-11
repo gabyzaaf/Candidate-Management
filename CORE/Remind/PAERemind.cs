@@ -4,6 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using core.configuration;
 using scheduler;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Remind
 {
     public class PAERemind : LegacyRemind ,Iremind
