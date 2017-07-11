@@ -20,6 +20,7 @@ namespace API.wsUser
 
         private static readonly string specificException = "Object reference not set to an instance of an object.";
 
+         
          /// <summary>
         /// This method will authentificate the User inside the System
         /// </summary>
@@ -49,7 +50,6 @@ namespace API.wsUser
         }
        
 
-
         /// <summary>
         /// Manage the errors for the final Users
         /// </summary>
@@ -58,7 +58,7 @@ namespace API.wsUser
         [HttpGet("{error}", Name = "GetErrors")]
         public IActionResult ErrorList(ArrayList errors)
         {
-            Console.WriteLine("In GetNote function");
+            
             return new ObjectResult(errors);
         }
 
@@ -90,7 +90,8 @@ namespace API.wsUser
             }
             
          }
-         /// <summary>
+         
+          /// <summary>
          /// Search candidate information for Mobile.
          /// </summary>
          /// <param name="name">candidate Name</param>
@@ -131,6 +132,7 @@ namespace API.wsUser
                 checkCandidat(candidat);
                 
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
+                
                 isql.UserCanUpdate(candidat.session_id);
                 
                 if(isql.CandidatAlreadyExist(candidat)){
@@ -144,14 +146,14 @@ namespace API.wsUser
                 isql.typeAction(candidat.action,candidat.independant,DateTime.Now,idCandidat,"ADD",candidat.session_id);
                 
                 return new ObjectResult(new State(){code=3,content="Le candidat a ete ajoute à votre systeme",success=true});
-            }catch(Exception exc){
+            }catch(Exception exc){               
                 if(exc.Message.Equals(specificException)){
                     new WsCustomeInfoException(this.GetType().Name,$"Le candidat modifie ne possede pas de remind associe a cette action {candidat.action}");
                     return new ObjectResult(new State(){code=4,content=$"Le candidat a ete ajoute à votre systeme mais ne possede pas de remind avec l'action {candidat.action}",success=true});
                 }
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
-                return CreatedAtRoute("GetNote", new { error = state },state);
+                return CreatedAtRoute("GetErrors", new { error = state },state);
             }  
         }
 
@@ -180,7 +182,7 @@ namespace API.wsUser
                 }
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
-                return CreatedAtRoute("GetNote", new { error = state },state);
+                return CreatedAtRoute("GetErrors", new { error = state },state);
             }
         }
         private void checkCandidat(Candidat candidat){
@@ -202,6 +204,7 @@ namespace API.wsUser
                 throw new Exception("Vous devez creer votre utilisateur convenablement prealablement");
             }
         }
+
         /// <summary>
         /// Add report for the candidate
         /// </summary>
@@ -226,7 +229,7 @@ namespace API.wsUser
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
-                return CreatedAtRoute("GetNote", new { error = state },state);
+                return CreatedAtRoute("GetErrors", new { error = state },state);
                 
             }  
         }
@@ -251,10 +254,11 @@ namespace API.wsUser
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
-                return CreatedAtRoute("GetNote", new { error = state },state);
+                return CreatedAtRoute("GetErrors", new { error = state },state);
                 
             }  
         }
+        
         /// <summary>
         /// Search candidate By email.
         /// </summary>
@@ -307,6 +311,8 @@ namespace API.wsUser
             }
         }
 
+
+        
         [HttpPost("MlCandidate/prediction")]
         public IActionResult predictionMlCandidate([FromBody]MlCandidat prediCandidate){
             try{
@@ -322,7 +328,7 @@ namespace API.wsUser
             }catch(Exception exc){
                 new WsCustomeException(this.GetType().Name,exc.Message);
                 State state = new State(){code=1,content=exc.Message,success=false};
-                return CreatedAtRoute("GetNote", new { error = state },state);
+                return CreatedAtRoute("GetErrors", new { error = state },state);
             }  
         }
 

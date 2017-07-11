@@ -169,7 +169,7 @@ namespace Candidate_Management.API
                 }
                 IsqlMethod isql = Factory.Factory.GetSQLInstance("mysql");
                 isql.UserCanDelete(candidateDelete.token);
-                ArrayList CandidatesInformations = isql.searchCandidateFromEmail(candidateDelete.email,candidateDelete.token);
+                ArrayList CandidatesInformations = isql.searchCandidateWithSpecificEmail(candidateDelete.email);
                 Dictionary<string,string> CandidateInformation = (Dictionary<string,string>)CandidatesInformations[0];
                 int candidateId = Int32.Parse(CandidateInformation["id"]);
                 isql.deleteCandidateById(candidateId);

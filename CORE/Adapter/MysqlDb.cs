@@ -168,15 +168,20 @@ namespace Core.Adapter{
         {
             Dictionary<String,String> element;
             try{
+                
                 if(String.IsNullOrEmpty(token)){
                     throw new Exception("Le token n'existe pas ");
                 }
+                
                 Dictionary<String,Object> input = new Dictionary<String,Object>();
                 input.Add("@token",token);
+                
                 LinkedList<String> results = new LinkedList<String>();
                 results.AddLast("regle_modification");
+                
                 ArrayList dicos =  queryExecute("SELECT regle_modification from user where session_id=@token",input,results);
-                if(dicos.Count==0){
+                if(dicos.Count == 0){
+                        
                         throw new Exception("Aucun token ayant ce numero "+token+" existe veuillez vous identifier");
                 }
                 element = (Dictionary<String,String>) dicos[0];
@@ -186,6 +191,7 @@ namespace Core.Adapter{
                 if(!bool.Parse(element["regle_modification"])){
                     throw new Exception(" Vous n'avez pas les droits necessaire pour effectuer un ajout ou une modification sur un candidat");
                 }
+                 
             }catch(Exception exc){
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
@@ -1322,5 +1328,37 @@ namespace Core.Adapter{
                 throw new SqlCustomException(this.GetType().Name,exc.Message);
             }
         }
+
+        public ArrayList searchCandidateWithSpecificEmail(string emailCandidat){
+              try{    
+                if(String.IsNullOrEmpty(emailCandidat)){
+                    throw new Exception("L'email du candidat passé en parametre est vide");
+                }
+                ArrayList output = null;
+                string sql = "select * from candidate where email = @email";
+                Dictionary<String,Object> dico = new Dictionary<String,Object>();
+                dico.Add("@email",emailCandidat);
+                LinkedList<String> results = new LinkedList<String>();
+                results.AddLast("id");
+                results.AddLast("nom");
+                results.AddLast("prenom");
+                results.AddLast("phone");
+                results.AddLast("email");
+                results.AddLast("zipcode");
+                results.AddLast("sexe");
+                results.AddLast("actions");
+                results.AddLast("annee");
+                results.AddLast("lien");
+                results.AddLast("crCall");
+                results.AddLast("pluginType");
+                output = queryExecute(sql,dico,results);
+                if(output.Count == 0){
+                    throw new Exception($"Vous ne possedez aucun critere de recherche pour l'adress {emailCandidat}");
+                }   
+                return output;
+            }catch(Exception exc){
+                throw new SqlCustomException(this.GetType().Name,exc.Message);
+            }
+        }   
     }
 }

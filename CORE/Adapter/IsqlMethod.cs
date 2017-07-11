@@ -109,6 +109,8 @@ namespace Core.Adapter.Inteface
           string getPluginChoiceFromCandidate(string emailCandidat);
           
           void deleteCandidateById(int id);
+
+          ArrayList searchCandidateWithSpecificEmail(string emailCandidat);
     }
 
 } 
