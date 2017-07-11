@@ -2,6 +2,10 @@ body {
 	background: #eee !important;	
 }
 
+td{
+    padding: 5px;
+}
+
 .wrapper {	
 	margin-top: 80px;
   margin-bottom: 80px;

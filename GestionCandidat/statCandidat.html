@@ -32,7 +32,7 @@
 <body ng-controller="GraphCtrl" ng-init="showGraph()">
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <center><div class="bg-info text-white"><p class="h1">Statistique</p></div></center>
+    <center><div class="bg-info text-white"><p class="h1">Statistiques</p></div></center>
     <br />
     <!--    <div class="form-group">
             <div style="width: 40%; margin: auto;" class="icon-addon addon-lg">
@@ -54,8 +54,10 @@
                 </form>
             </div>
         </div>
-        {{selectedSect}}
+
     -->
+    <center><p class="h3">Appuyé sur l'un des boutons suivants pour afficher un graphique : </p></center>
+    <br />
         <center>
             <button class="btn btn-primary" onclick="toggle_visibility('divChart');" ng-click="showGraph()">Graph 1</button>
             <button class="btn btn-primary" onclick="toggle_visibility('divChart2');" ng-click="showGraph2()">Graph 2</button>

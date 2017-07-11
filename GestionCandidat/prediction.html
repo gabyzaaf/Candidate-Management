@@ -128,16 +128,16 @@
                         <td><input class="form-control" type="number" step="0.01" min="0" max="1" id="last_evaluation" ng-model="prediction.last_evaluation" placeholder="0 à 1" /></td>
                     </tr>
                     <tr>
-                        <td><label><font color="red">*</font>Nombre de projets réalisé</label></td>
+                        <td><label><font color="red">*</font>Nombre de projets réalisés</label></td>
                         <td><input class="form-control" type="number" id="number_project" min="0" ng-model="prediction.number_project" placeholder="Nombre de projet..." /></td>
                     </tr>
                     <tr>
-                        <td><label><font color="red">*</font>Moyenne d'heures travaillée par mois</label></td>
-                        <td><input class="form-control" type="number" min="0" max="4040" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
+                        <td><label><font color="red">*</font>Moyenne d'heures travaillées par mois</label></td>
+                        <td><input class="form-control" type="number" min="0" max="720" id="average_montly_hours" ng-model="prediction.average_montly_hours" placeholder="Nombre d'heures..." /></td>
                     </tr>
                     <tr>
                         <td><label><font color="red">*</font>Temps passé à l'entreprise (en année)</label></td>
-                        <td><input class="form-control" type="number" min="0" max="66" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
+                        <td><input class="form-control" type="number" min="0" max="50" id="time_spend_company" ng-model="prediction.time_spend_company" placeholder="Nombre d'année..." /></td>
                     </tr>
                     <tr>
                         <td><label><font color="red">*</font>A-t-il déjà eu au moins un accident de travail ?</label></td>
@@ -158,12 +158,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label><font color="red">*</font>Secteur</label></td>
+                        <td><label><font color="red">*</font>Secteur d'activité</label></td>
                         <td>
                             <select id="sales" class="form-control" ng-model="prediction.sales">
                                 <option value="sales" selected>Vente</option>
                                 <option value="accounting">Comptabilité</option>
-                                <option value="hr">Ressource Humaine</option>
+                                <option value="hr">Ressources Humaines</option>
                                 <option value="technical">Technique</option>
                                 <option value="management">Management</option>
                                 <option value="IT">IT</option>
@@ -185,7 +185,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="Prediction" class="btn btn-success" onclick="verifChamp()" />
+                            <input type="submit" value="Prédiction" class="btn btn-success" onclick="verifChamp()" />
                         </td>
                     </tr>
                 </tbody>
@@ -199,7 +199,7 @@
             </tr>
             <tr>
                 <th>Quitte ou non l'entreprise</th>
-                <th>Probabilité de la réponse</th>
+                <th>Niveau de probabilité</th>
             </tr>
             <tr>
                 <td>{{resultatAzure}}</td>
@@ -208,5 +208,6 @@
         </table>
     </div>
     </section>
+    <br />
 </body>
 </html>

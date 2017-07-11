@@ -58,6 +58,8 @@
                 <td><a href="coordonnee.html">Coordonnées</a></td>
                 <td>|</td>
                 <td><a href="entretien.html">Entretien</a></td>
+                <td>|</td>
+                <td><a href="supprimerCandidat.html">Supprimer Candidat</a></td>
             </tr>
         </tbody>
     </table>
@@ -67,8 +69,6 @@
     </div>
     <center><p class="h4"><font color="red">{{erreurRechercheAll}}</font></p></center>
     <center><p class="h4"><font color="red">{{erreurEntretien}}</font></p></center>
-    <center><p class="h4"><font color="red">{{contentResponse}}</font></p></center>
-    <center><p class="h4"><font color="green">{{contentResponseGreen}}</font></p></center>
     <br />
     <center><p class="h4"><font color="red">*</font>Sélectionner un candidat qui n'est pas relié à une fiche entretien : </p></center>
     <br />
@@ -86,13 +86,16 @@
                 <table align="center">
                     <tbody>
                         <tr>
-                            <td colspan="4" align="center" id="response"><h2 id="rep">{{contentResponse}}</h2></td>
+                            <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponse}}</font></p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center"><p class="h4"><font color="green">{{contentResponseGreen}}</font></p></td>
                         </tr>
                         <tr>
                             <td>Lien du test technique : </td>
                             <td><input class="form-control" type="url" value="http://" name="link" ng-model="entretien.link" /></td>
                             <td><font color="red">*</font>Note test technique : </td>
-                            <td><input class="form-control" type="number" size="2" min="0" max="20"  id="note" name="note" ng-model="entretien.note" onkeydown="if(event.keyCode==32) return false;" required/></td>
+                            <td><input class="form-control" string-to-number type="number" size="2" min="0" max="20" maxlength="2"  id="note" name="note" ng-model="entretien.note" onkeydown="if(event.keyCode==32) return false;" required/></td>
                         </tr>
                         <tr>
                             <td>XP note :</td>
@@ -142,11 +145,6 @@
                         </tr>
                         <tr>
                             <td colspan="4"><textarea class="form-control" name="competences" cols="100" rows="4" ng-model="entretien.competences" ></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
                         </tr>
                         <tr>
                             <td colspan="2" align="left"><input type="reset" name="enregistrer" class="btn btn-danger" value="Reset" /></td>
