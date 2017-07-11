@@ -87,11 +87,14 @@
                         <td colspan="4" align="center"><p class="h4"><font color="red">{{contentResponseMessage}}</font></p></td>
                     </tr>
                     <tr>
+                        <td colspan="4" align="center"><p class="h4"><font color="red">{{erreurSupp}}</font></p></td>
+                    </tr>
+                    <tr>
                         <td colspan="4" align="center"><p class="h4"><font color="green">{{contentResponseMessageGreen}}</font></p></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Nom : </td>
-                        <td><input class="form-control" type="text" name="nomCoor" ng-value="selectedCand.nom" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
+                        <td><input class="form-control" type="text" name="nom" id="nom" ng-value="selectedCand.nom" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
                         <td><font color="red">*</font>Prénom : </td>
                         <td><input class="form-control" type="text" name="prenomCoor" ng-value="selectedCand.prenom" id="Firstname" ng-model="updateCandidate.prenom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" disabled /></td>
                     </tr>
@@ -163,7 +166,7 @@
                         <td colspan="4" align="center"><a href="" onclick="myFunction()">Visualiser votre agenda</a></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="right"><input type="submit" name="supprimer" class="btn btn-danger" value="Supprimer" onClick="return confirm('êtes-vous sûre de vouloir supprimer le candidat ' + document.getElementById('selectedCand').value + '?')" /></td>
+                        <td colspan="4" align="right"><input type="submit" name="supprimer" class="btn btn-danger" value="Supprimer" onClick="return confirm('êtes-vous sûre de vouloir supprimer le candidat ' + document.getElementById('nom').value + '?')" /></td>
                     </tr>
                 </tbody>
             </table>

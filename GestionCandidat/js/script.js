@@ -709,34 +709,42 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
 gestionCandidatApp.controller("deleteCandidate", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendCandidateDel = function (deleteMessage) {
-        var req = {
-            method: 'POST',
-            url: 'http://' + adresseIP + '/api/candidate/delete/byEmail',
-            responseType: "json",
-            data: {
-                token: $cookies.get('cookie'),
-                email: $scope.selectedCand.email
+        try{
+            var req = {
+                method: 'POST',
+                url: 'http://' + adresseIP + '/api/candidate/delete/byEmail',
+                responseType: "json",
+                data: {
+                    token: $cookies.get('cookie'),
+                    email: $scope.selectedCand.email
+                }
             }
-        }
 
-        $http(req).then(function (response) {
-            $scope.contentResponseMessage = response.data.content;
-            $scope.contentResponseMessageGreen = "";
-            if (response.data.content != "Le Candidat a bien été supprimé") {
-                $timeout(function () {
+            $http(req).then(function (response) {
+                $scope.contentResponseMessage = response.data.content;
+                $scope.contentResponseMessageGreen = "";
+                if (response.data.content != "Le Candidat a bien été supprimé") {
+                    $timeout(function () {
+                        $scope.contentResponseMessage = "";
+                    }, 4000);
+                } else {
                     $scope.contentResponseMessage = "";
-                }, 4000);
-            } else {
-                $scope.contentResponseMessage = "";
-                $scope.contentResponseMessageGreen = response.data.content;
-                $timeout(function () {
-                    $scope.contentResponseMessageGreen = "";
-                    window.location.reload();
-                }, 3000);
-            }
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
+                    $scope.contentResponseMessageGreen = response.data.content;
+                    $timeout(function () {
+                        $scope.contentResponseMessageGreen = "";
+                        window.location.reload();
+                    }, 3000);
+                }
+            }, (err) => {
+                console.log("ceci est une erreur" + err);
+            });
+        } catch (e) {
+            $scope.erreurSupp = "Impossible de supprimer un candidat qui n'existe pas";
+            $timeout(function () {
+                $scope.erreurSupp = "";
+            }, 3000);
+            console.log("Impossible de supprimer un candidat qui n'existe pas");
+        }
     }
 }]);
 
