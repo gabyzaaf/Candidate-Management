@@ -9,6 +9,10 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 using Candidate_Management.Core;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace email
 {
     class Program
@@ -22,19 +26,18 @@ namespace email
                 sw.WriteLine(content);
             }
         }
-
+        /// <summary>
+        ///     Data enter : 
+        ///        jobId [0]
+       ///         FileName [2].
+        ///        Candidate Name [3].
+        ///        Candidate Firstname [4].
+        ///        Meetings Optionnal [5].
+        ///        Candidate email [6].
+        /// </summary>
+        /// <param name="args">parameters array</param>
         static void Main(string[] args)
         {
-            
-            /*
-                Data enter : 
-                jobId [0]
-                FileName [2].
-                Candidate Name [3].
-                Candidate Firstname [4].
-                Meetings Optionnal [5].
-                Candidate email [6].
-            */
              ConfigurationData conf = null;
             try{
                 conf = ConfigurationData.getInstance();
