@@ -243,7 +243,6 @@ public class AddActivity extends AppCompatActivity {
                Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Log.d("ADD :", response.toString());
                     try {
                         if(response.getBoolean("success")) {
                             if (dialog != null)
@@ -265,7 +264,7 @@ public class AddActivity extends AppCompatActivity {
                         if (dialog != null)
                             dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                        builder.setMessage(e.toString())
+                        builder.setMessage("Une erreur est survenue")
                                 .setNegativeButton("Réessayer", null)
                                 .create()
                                 .show();
@@ -324,7 +323,7 @@ public class AddActivity extends AppCompatActivity {
                 if (dialog != null)
                     dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                builder.setMessage(e.toString())
+                builder.setMessage("Une erreur est survenue")
                         .setNegativeButton("Réessayer", null)
                         .create()
                         .show();
@@ -342,8 +341,6 @@ public class AddActivity extends AppCompatActivity {
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("REPORT :", response.toString());
-
                 try {
                     if(response.getBoolean("success")) {
                         if (dialog != null)
@@ -374,11 +371,10 @@ public class AddActivity extends AppCompatActivity {
                     if (dialog != null)
                         dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                    builder.setMessage(e.toString())
+                    builder.setMessage("Une erreur est survenue")
                             .setNegativeButton("Réessayer", null)
                             .create()
                             .show();
-                    e.printStackTrace();
                 }
             }
         };
@@ -390,7 +386,7 @@ public class AddActivity extends AppCompatActivity {
                 if (dialog != null)
                     dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this, R.style.MyDialogTheme);
-                builder.setMessage("ERREUR SERVEUR : "+error.toString())
+                builder.setMessage("Erreur de connexion serveur")
                         .setNegativeButton("Réessayer", null)
                         .create()
                         .show();

@@ -217,7 +217,6 @@ public class SearchActivity extends AppCompatActivity {
                     public static final String TAG ="Recherche candidat : " ;
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("Response", response.toString());
                         String errorToken = "Aucun token ayant ce numero "+user.getSessionId()+" existe veuillez vous identifier";
                         try {
                             for (int i = 0; i < response.length(); i++) {
@@ -324,10 +323,9 @@ public class SearchActivity extends AppCompatActivity {
                             }catch(JSONException e){
                             if (dialog != null)
                                 dialog.cancel();
-                                tvResult.append("Erreur de lecture : ");
+                                tvResult.append("Erreur de lecture  ");
                                 tvResult.append("\n");
                                 tvResult.append("" + e);
-                                e.printStackTrace();
                             }
                     }
 
@@ -336,8 +334,6 @@ public class SearchActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
                         tvResult.append("Erreur serveur");
                         tvResult.setVisibility(View.VISIBLE);
                         if (dialog != null)
@@ -368,7 +364,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(final JSONArray response) {
-                        Log.d("Response", response.toString());
+
                         try {
                             final String[] firstname = {""};
 
@@ -453,7 +449,6 @@ public class SearchActivity extends AppCompatActivity {
                                     .setNegativeButton("Réessayer", null)
                                     .create()
                                     .show();
-                            e.printStackTrace();
                         }
                     }
 
@@ -462,8 +457,6 @@ public class SearchActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
                         if (dialog != null)
                             dialog.cancel();
                         tvResult.setVisibility(View.VISIBLE);

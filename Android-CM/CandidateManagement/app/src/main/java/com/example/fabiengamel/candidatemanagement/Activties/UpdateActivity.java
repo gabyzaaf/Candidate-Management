@@ -294,7 +294,6 @@ public class UpdateActivity extends AppCompatActivity {
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("UPDATE :", response.toString());
                 try {
                     if(response.getBoolean("success")) {
                         if (dialog != null)
@@ -315,7 +314,11 @@ public class UpdateActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     if (dialog != null)
                         dialog.cancel();
-                    e.printStackTrace();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
+                    builder.setMessage("Une erreur est survenue")
+                            .setNegativeButton("Réessayer", null)
+                            .create()
+                            .show();
                 }
             }
 
@@ -327,7 +330,7 @@ public class UpdateActivity extends AppCompatActivity {
                 if (dialog != null)
                     dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
-                builder.setMessage("ERREUR SERVEUR : "+error.toString())
+                builder.setMessage("ERREUR SERVEUR")
                         .setNegativeButton("Réessayer", null)
                         .create()
                         .show();
@@ -375,7 +378,6 @@ public class UpdateActivity extends AppCompatActivity {
                     .setNegativeButton("Réessayer", null)
                     .create()
                     .show();
-            e.printStackTrace();
         }
         RequestQueue queue = Volley.newRequestQueue(UpdateActivity.this);
         queue.add(updateRequest);
@@ -389,8 +391,6 @@ public class UpdateActivity extends AppCompatActivity {
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("REPORT :", response.toString());
-
                 try {
                     if(response.getBoolean("success")) {
                         if (dialog != null)
@@ -428,7 +428,6 @@ public class UpdateActivity extends AppCompatActivity {
                             .setNegativeButton("Réessayer", null)
                             .create()
                             .show();
-                    e.printStackTrace();
                 }
             }
         };
@@ -439,7 +438,7 @@ public class UpdateActivity extends AppCompatActivity {
                 if (dialog != null)
                     dialog.cancel();
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this, R.style.MyDialogTheme);
-                builder.setMessage("ERREUR SERVEUR : "+error.toString())
+                builder.setMessage("ERREUR SERVEUR")
                         .setNegativeButton("Réessayer", null)
                         .create()
                         .show();
@@ -471,7 +470,6 @@ public class UpdateActivity extends AppCompatActivity {
             if (dialog != null)
                 dialog.cancel();
             Toast.makeText(this, "" + e, Toast.LENGTH_LONG).show();
-            e.printStackTrace();
         }
         RequestQueue queue = Volley.newRequestQueue(UpdateActivity.this);
         queue.add(updateReportRequest);

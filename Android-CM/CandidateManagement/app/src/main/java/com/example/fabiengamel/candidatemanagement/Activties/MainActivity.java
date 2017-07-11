@@ -177,12 +177,11 @@ public class MainActivity extends AppCompatActivity
                     public static final String TAG ="Recherche action : " ;
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("Response", response.toString());
                         String errorToken = "Aucun token ayant ce numero "+user.getSessionId()+" existe veuillez vous identifier";
                         try {
                             for(int i=0; i<response.length();i++) {
+
                                 JSONObject jsonOBject = response.getJSONObject(i);
-                                Log.d(TAG, "GET ACTION " + jsonOBject.toString()) ;
 
                                 if(jsonOBject.has("content"))
                                 {
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity
                         } catch (JSONException e) {
                             if (dialog != null)
                                 dialog.cancel();
-                            tvCandidates.append("Une erreur de lecture est survenue : " + e.toString());
+                            tvCandidates.append("Une erreur de lecture est survenue");
                         }
                     }
                 },
@@ -234,10 +233,9 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
                         if (dialog != null)
                             dialog.cancel();
-                        tvCandidates.append("Une erreur serveur est survenue : "+error.toString());
+                        tvCandidates.append("Une erreur serveur est survenue");
                     }
                 }
         ) {

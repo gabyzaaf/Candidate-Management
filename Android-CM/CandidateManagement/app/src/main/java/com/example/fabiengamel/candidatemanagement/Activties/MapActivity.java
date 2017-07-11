@@ -259,7 +259,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                  public static final String TAG ="Recherche map :" ;
                   @Override
                   public void onResponse(final JSONArray response) {
-                  Log.d("Response", response.toString());
                      try {
                           JSONObject jsonOBject = response.getJSONObject(0);
                           //if there is an error
@@ -345,7 +344,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                                             if (dialog != null)
                                                                 dialog.cancel();
                                                             Toast.makeText(MapActivity.this, "Erreur : " +e, Toast.LENGTH_LONG).show();
-                                                            e.printStackTrace();
                                                         }
                                                     }
                                                 });
@@ -388,8 +386,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         // TODO Auto-generated method stub
                         if (dialog != null)
                             dialog.cancel();
-                        Log.d("ERROR", "error => " + error.toString());
-                        Toast.makeText(MapActivity.this, "Erreur serveur: " + error.toString(), Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(MapActivity.this, "Erreur serveur", Toast.LENGTH_LONG).show();
                     }
                 }
         ) {
@@ -419,7 +417,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Response", response.toString());
                         try {
 
                             JSONArray  results = response.getJSONArray("results");
@@ -458,12 +455,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
                         if (dialog != null)
                             dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                        builder.setMessage("Erreur serveur: " + error.toString())
+                        builder.setMessage("Erreur serveur")
                                 .setNeutralButton("Réessayer", null)
                                 .create()
                                 .show();
@@ -490,11 +485,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         JsonObjectRequest LatLngRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()
                 {
-                    public static final String TAG ="Recherche map :" ;
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Response", response.toString());
                         try {
 
                             JSONArray  results = response.getJSONArray("results");
@@ -540,12 +533,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
                         if (dialog != null)
                             dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                        builder.setMessage("Erreur serveur: " + error.toString())
+                        builder.setMessage("Erreur serveur")
                                 .setNeutralButton("Réessayer", null)
                                 .create()
                                 .show();
@@ -577,13 +568,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public static final String TAG ="Recherche action : " ;
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("Response", response.toString());
                         String errorToken = "Aucun token ayant ce numero "+user.getSessionId()+" existe veuillez vous identifier";
                         try {
                             int count = 0;
                             for(int i=0; i<response.length();i++) {
                                 JSONObject jsonOBject = response.getJSONObject(i);
-                                Log.d(TAG, "GET ACTION " + jsonOBject.toString()) ;
 
                                 /************** There is an error *********************************************************/
                                 if(jsonOBject.has("content"))
@@ -657,12 +646,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
                         if (dialog != null)
                             dialog.cancel();
                         AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                        builder.setMessage(error.toString())
+                        builder.setMessage("Une erreur est survenue")
                                 .setNeutralButton("Réessayer", null)
                                 .create()
                                 .show();

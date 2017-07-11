@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(JSONObject response) {
-                    Log.d("LOGIN :", response.toString());
 
                     try {
 
@@ -137,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     if (dialog != null)
                         dialog.cancel();
-                    Log.d("log2=", error.toString());
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setMessage("Erreur de connexion au serveur")
                             .setNegativeButton("Réessayer", null)
@@ -152,7 +150,6 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 if (dialog != null)
                     dialog.cancel();
-                Log.d("log2=", e.toString());
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                 builder.setMessage("Erreur de connexion au serveur")
                         .setNegativeButton("Réessayer", null)

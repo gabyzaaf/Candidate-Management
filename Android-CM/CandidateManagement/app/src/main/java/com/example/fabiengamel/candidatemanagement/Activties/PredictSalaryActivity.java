@@ -136,7 +136,6 @@ public class PredictSalaryActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("LOGIN :", response.toString());
 
                 JSONArray Values = null;
                 try {
@@ -182,7 +181,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
                     if (dialog != null)
                         dialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
-                    builder.setMessage(e.toString())
+                    builder.setMessage("Une erreur est survenue")
                             .setNeutralButton("Ok", null)
                             .create()
                             .show();
@@ -195,9 +194,8 @@ public class PredictSalaryActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 if (dialog != null)
                     dialog.cancel();
-                Log.d("log2=", error.toString());
                 AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
-                builder.setMessage("ERREUR SERVEUR : "+error.toString())
+                builder.setMessage("ERREUR SERVEUR ")
                         .setNegativeButton("Réessayer", null)
                         .create()
                         .show();
@@ -230,7 +228,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
             if (dialog != null)
                 dialog.cancel();
             AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
-            builder.setMessage(e.toString())
+            builder.setMessage("Une erreur est survenue")
                     .setNegativeButton("Réessayer", null)
                     .create()
                     .show();
@@ -238,7 +236,7 @@ public class PredictSalaryActivity extends AppCompatActivity {
             if (dialog != null)
                 dialog.cancel();
             AlertDialog.Builder builder = new AlertDialog.Builder(PredictSalaryActivity.this);
-            builder.setMessage(e.toString())
+            builder.setMessage("Une erreur est survenue")
                     .setNegativeButton("Réessayer", null)
                     .create()
                     .show();
