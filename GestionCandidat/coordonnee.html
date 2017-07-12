@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!--
+    Auteur : LAPERT Christian
+    Version : 1.0
+-->
+<!DOCTYPE html>
 <html ng-app="gestionCandidatApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -116,7 +120,7 @@
 <body ng-controller="app">
     <div ng-include="'barreMenu.html'"></div>
     <br />
-    <center><div class="bg-info text-white"><p class="h1">Fiche Coodonnées</p></div></center>
+    <center><div class="bg-info text-white"><p class="h1">Fiche Coordonnées</p></div></center>
     <br />
     <table align="center">
         <tbody>
@@ -153,9 +157,9 @@
                             </tr>
                             <tr>
                                 <td><font color="red">*</font>Nom : </td>
-                                <td><input class="form-control" type="text" id="Name" name="Name" ng-model="candidat.Name" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required/></td>
+                                <td><input class="form-control" type="text" id="Name" name="Name" ng-model="candidat.Name" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]*[a-zA-Z-]{1}[a-zA-Z]{1}[a-zA-Z]*" required/></td>
                                 <td><font color="red">*</font>Prénom : </td>
-                                <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required/></td>
+                                <td><input class="form-control" type="text" id="Firstname" name="Firstname" ng-model="candidat.Firstname" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]*[a-zA-Z-]{1}[a-zA-Z]{1}[a-zA-Z]*" required/></td>
                             </tr>
                             <tr>
                                 <td><font color="red">*</font>E-mail : </td>
@@ -196,7 +200,7 @@
                                         <option value="HCBacMoins5">HC BAC-5</option>
                                     </select>
                                 </td>
-                                <td><font color="red">*</font>Type e-mail : </td>
+                                <td><font color="red">*</font>Type : </td>
                                 <td>
                                     <select class="form-control" name="plugins" id="plugins" ng-model="candidat.plugins" required>
                                         <option ng-repeat="todo in todos" value="{{todo.pluginName}}">{{todo.pluginName}}</option>
@@ -267,7 +271,10 @@
                     <table align="center" id="loginTableMod" hidden="hidden">
                         <tbody>
                             <tr>
-                                <td colspan="4" align="center" id="response"><h2 id="rep">{{contentResponseMessage}}</h2></td>
+                                <td colspan="4" align="center" id="response"><p class="h4"><font color="red">{{contentResponseMessage}}</font></p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="center" id="response"><p class="h4"><font color="green">{{contentResponseMessageGreen}}</font></p></td>
                             </tr>
                             <tr>
                                 <td>Titre du template e-mail : </td>

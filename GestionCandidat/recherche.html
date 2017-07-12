@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!--
+    Auteur : LAPERT Christian
+    Version : 1.0
+-->
+<!DOCTYPE html>
 <html ng-app="gestionCandidatApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -215,7 +219,7 @@
     <center><p class="h4"><font color="red">{{erreurNormeSexe}}</font></p></center>
     <form id="formRecherche" ng-submit="sendCandidat(candidat)" method="get">
         <br />
-        <center><h3 id="rep">{{contentResponse}}</h3></center>
+        <center><h4>{{contentResponse}}</h4></center>
         <br />
         <div class="form-group">
             <center><label><p class="h4">Rechercher un candidat par nom :</p></label></center>
@@ -239,7 +243,7 @@
                 <i class="icon icon-search"></i>
                 <br />
                 <center>
-                    <input type="submit" class="btn btn-lg" value="Coordonnée : Afficher/Cacher" onclick="toggleTableCoord()" />
+                    <input type="submit" class="btn btn-lg" value="Coordonnées : Afficher/Cacher" onclick="toggleTableCoord()" />
                     <input type="submit" class="btn btn-lg" value="Entretien : Afficher/Cacher" onclick="toggleTableEntr()" />
                 </center>
             </div>
@@ -266,9 +270,9 @@
                     </tr>
                     <tr>
                         <td><font color="red">*</font>Nom : </td>
-                        <td><input class="form-control" type="text" name="nomCoor" ng-value="nomCoor" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required /></td>
+                        <td><input class="form-control" type="text" name="nomCoor" ng-value="nomCoor" id="Name" ng-model="updateCandidate.nom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]*[a-zA-Z-]{1}[a-zA-Z]{1}[a-zA-Z]*" required /></td>
                         <td><font color="red">*</font>Prénom : </td>
-                        <td><input class="form-control" type="text" name="prenomCoor" ng-value="prenomCoor" id="Firstname" ng-model="updateCandidate.prenom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]+" required /></td>
+                        <td><input class="form-control" type="text" name="prenomCoor" ng-value="prenomCoor" id="Firstname" ng-model="updateCandidate.prenom" onkeydown="if(event.keyCode==32) return false;" pattern="[a-zA-Z]*[a-zA-Z-]{1}[a-zA-Z]{1}[a-zA-Z]*" required /></td>
                     </tr>
                     <tr>
                         <td><font color="red">*</font>E-mail : </td>
@@ -358,10 +362,10 @@
                         <td colspan="4" align="center" id="response"><h1>Entretien</h1></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center" id="response"><p class="h4" id="rep"><font color="red">{{contentResponseEntretien}}</font></p></td>
+                        <td colspan="4" align="center" id="response"><p class="h4"><font color="red">{{contentResponseEntretien}}</font></p></td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center" id="response"><p class="h4" id="rep"><font color="green">{{contentResponseEntretienGreen}}</font></p></td>
+                        <td colspan="4" align="center" id="response"><p class="h4"><font color="green">{{contentResponseEntretienGreen}}</font></p></td>
                     </tr>
                     <tr>
                         <td>Lien Test :</td>
@@ -454,7 +458,10 @@
                     <table align="center" id="loginTableMod" hidden="hidden">
                         <tbody>
                             <tr>
-                                <td colspan="4" align="center" id="response"><h3 id="rep">{{contentResponseMessage}}</h3></td>
+                                <td colspan="4" align="center" id="response"><p class="h4"><font color="red">{{contentResponseMessage}}</font></p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="center" id="response"><p class="h4"><font color="green">{{contentResponseMessageGreen}}</font></p></td>
                             </tr>
                             <tr>
                                 <td>Titre du template e-mail : </td>

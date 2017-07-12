@@ -4,13 +4,21 @@ var gestionCandidatApp = angular.module('gestionCandidatApp', ['ngRoute', 'ngCoo
 
 var adresseIP = "192.168.126.146:5000";
 
-/********************   Prediction machine learning azure   ********************/
+/*
+    Auteur : LAPERT Christian
+    Version : 1.0
+
+ */
+
+/********************   Prédiction machine learning azure   ********************/
 
 gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $scope.sendValueForAzure = function (prediction) {
         try {
             $scope.resultatAzure = "";
             $scope.probAzure = "";
+
+            //Vérifie si une des données entrées est "null"
             $scope.satisfaction_level = prediction.satisfaction_level;
             if ($scope.satisfaction_level == null || prediction.last_evaluation == null || prediction.number_project == null  || prediction.average_montly_hours == null || prediction.time_spend_company == null || prediction.Work_accident == null || prediction.promotion_last_5years == null || prediction.sales == null || prediction.salary == null) {
                 console.log("erreur : Tous les champs ne sont pas remplis");
@@ -32,6 +40,7 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
                     }
                 }
 
+                //Réponse du web service
                 $http(req).then(function (response) {
                     $scope.resultatAzure = response.data.content.substring(0, 1);
                     $scope.probAzure = response.data.content.substring(3);
@@ -73,11 +82,6 @@ gestionCandidatApp.controller('predictionAzure', ['$scope', '$cookies', '$http',
 
 gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
     $http.get('http://' + adresseIP + '/api/Remind/stat/mlcandidate/sales/' + $cookies.get('cookie')).then(function (response) {
-        /*$scope.selectedSect = "ko";
-        $scope.sendSect = function () {
-            $scope.selectedSect = selectedSect;
-            console.log($scope.selectedSect);
-        }*/
         $scope.todos = response.data;
         for (var i = 0; i < 500; i++) {
             if ($scope.todos[0].content != null) {
@@ -143,7 +147,7 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
         }
 
         $scope.showGraph2 = function () {
-            $scope.graph2 = "Graph 2 : Graphique sur les niveaux de satisfaction du salarié et des promotions affectés durant les 5 dernières années";
+            $scope.graph2 = "Graph 2 : Graphique sur les niveaux de satisfaction du salarié et des promotions affectées durant les 5 dernières années";
             $scope.config.data1 = $scope.satisfaction_level;
             $scope.config.data2 = $scope.promotion_last_5years;
             $scope.config.type1 = $scope.typeOptions[6];
@@ -201,18 +205,12 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             $scope.config.data1 = $scope.satisfaction_level;
             $scope.config.data2 = $scope.last_evaluation;
             $scope.config.data3 = $scope.number_project;
-            //$scope.config.data4 = $scope.average_montly_hours;
             $scope.config.data5 = $scope.time_spend_company;
-            //$scope.config.data6 = $scope.Work_accident;
-            //$scope.config.data7 = $scope.left_work;
             $scope.config.data8 = $scope.promotion_last_5years;
             $scope.config.type1 = $scope.typeOptions[0];
             $scope.config.type2 = $scope.typeOptions[0];
             $scope.config.type3 = $scope.typeOptions[0];
-            //$scope.config.type4 = $scope.typeOptions[0];
             $scope.config.type5 = $scope.typeOptions[0];
-            //$scope.config.type6 = $scope.typeOptions[0];
-            //$scope.config.type7 = $scope.typeOptions[0];
             $scope.config.type8 = $scope.typeOptions[0];
             var config = {};
             config.bindto = '#chart5';
@@ -222,13 +220,10 @@ gestionCandidatApp.controller('GraphCtrl', ['$scope', '$cookies', '$http', '$win
             config.data.json.satisfaction_level = $scope.config.data1.split(";");
             config.data.json.last_evaluation = $scope.config.data2.split(";");
             config.data.json.number_project = $scope.config.data3.split(";");
-            //config.data.json.average_montly_hours = $scope.config.data4.split(";");
             config.data.json.time_spend_company = $scope.config.data5.split(";");
-            //config.data.json.Work_accident = $scope.config.data6.split(";");
-            //config.data.json.left_work = $scope.config.data7.split(";");
             config.data.json.promotion_last_5years = $scope.config.data8.split(";");
             config.axis = { "y": { "label": { "text": "Number of items", "position": "outer-middle" } } };
-            config.data.types = { "satisfaction_level": $scope.config.type1, "last_evaluation": $scope.config.type2, "number_project": $scope.config.type3, /*"average_montly_hours": $scope.config.type4,*/ "time_spend_company": $scope.config.type5, /*"Work_accident": $scope.config.type6, "left_work": $scope.config.type7,*/ "promotion_last_5years": $scope.config.type8 };
+            config.data.types = { "satisfaction_level": $scope.config.type1, "last_evaluation": $scope.config.type2, "number_project": $scope.config.type3, "time_spend_company": $scope.config.type5, "promotion_last_5years": $scope.config.type8 };
             $scope.chart5 = c3.generate(config);
         }
 
@@ -290,10 +285,8 @@ gestionCandidatApp.controller("verifAuth", ['$scope', '$cookies', '$http', '$win
 
         $http(req).then(function (response) {
             if (response.data.content != null) {
-                //console.log("E-mail ou mot de passe incorrect");
                 $scope.errtxt = response.data.content;
             } else {
-                //console.log("En attente du cookie");
                 $cookies.put('cookie', response.data.sessionId);
                 $scope.sessionId = response.data.sessionId;
                 $scope.name = response.data.name;
@@ -328,7 +321,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
             /******************** Regex champ nom ********************/
             try{
-                var regexNom = $scope.Name.match(/[A-Za-z]+/g);
+                var regexNom = $scope.Name.match(/[a-zA-Z]*[a-zA-Z-]{1}[a-zA-Z]{1}[a-zA-Z]*/g);
                 if (regexNom[0] != $scope.Name) {
                     $scope.erreurNormeNom = "Le champ nom ne respect pas la norme d'un nom";
                     $timeout(function () { $scope.erreurNormeNom = ""; }, 5000);
@@ -341,7 +334,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
 
             /******************** Regex champ prenom ********************/
             try {
-                var regexFirstname = $scope.Firstname.match(/[A-Za-z]+/g);
+                var regexFirstname = $scope.Firstname.match(/[a-zA-Z]*[a-zA-Z-]{1}[a-zA-Z]{1}[a-zA-Z]*/g);
                 if (regexFirstname[0] != $scope.Firstname) {
                     $scope.erreurNormeFirstname = "Le champ prenom ne respect pas la norme d'un prénom";
                     $timeout(function () { $scope.erreurNormeFirstname = ""; }, 5000);
@@ -407,7 +400,7 @@ gestionCandidatApp.controller("addCandidate", ['$scope', '$cookies', '$http', '$
                 $http(req).then(function (response) {
                     $scope.contentResponse = response.data.content;
                     $scope.contentResponseGreen = "";
-                    if (response.data.content == "Le candidat est deja existant dans votre systeme" || response.data.content == "Le token n'existe pas ") {
+                    if (response.data.success == false) {
                         $timeout(function () { $scope.contentResponse = ""; }, 5000);
                     } else {
                         $scope.contentResponseGreen = $scope.contentResponse;
@@ -463,12 +456,12 @@ gestionCandidatApp.controller("addEntretien", ['$scope', '$cookies', '$http', '$
                     $http(req).then(function (response) {
                         $scope.contentResponse = response.data.content;
                         $scope.contentResponseGreen = "";
-                        if (response.data.content != "Le report a ete ajoute parfaitement à votre system" || response.data.content == "Le token n'existe pas ") {
+                        if (response.data.success == false) {
                         $timeout(function () { $scope.contentResponse = ""; }, 5000);
                     } else {
                             $scope.contentResponseGreen = $scope.contentResponse;
                             $scope.contentResponse = "";
-                            $timeout(function () { $scope.contentResponseGreen = ""; window.location.reload();}, 3000);
+                            $timeout(function () { $scope.contentResponseGreen = ""; window.location.reload();}, 2000);
                     }
 
 
@@ -600,7 +593,7 @@ gestionCandidatApp.controller("updateCandidate", ['$scope', '$cookies', '$http',
             $http(req).then(function (response) {
                 $scope.contentResponse = response.data.content;
                 $scope.contentResponseGreen = "";
-                if (response.data.content == "Le candidat n'est pas existant dans votre systeme, veuillez le creer" || response.data.content == "Le token n'existe pas ") {
+                if (response.data.success == false) {
                     $timeout(function () { $scope.contentResponse = ""; }, 4000);
                 } else {
                     $scope.contentResponse = "";
@@ -685,7 +678,7 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
                 $scope.contentResponseEntretien = response.data.content;
                 $scope.contentResponseEntretienGreen = "";
                 
-                if (response.data.content != "Le report a ete modifie parfaitement à votre system" || response.data.content == "Le token n'existe pas ") {
+                if (response.data.success == false) {
                     $timeout(function () { $scope.contentResponseEntretien = ""; }, 4000);
                 } else {
                     $scope.contentResponseEntretienGreen = response.data.content;
@@ -697,7 +690,7 @@ gestionCandidatApp.controller("updateEntretien", ['$scope', '$cookies', '$http',
                 console.log("ceci est une erreur" + err);
             });
         } catch (e) {
-            console.log(e.message);
+            console.log("Aucun champ n'a été modifié");
         }
     }
 }]);
@@ -723,7 +716,7 @@ gestionCandidatApp.controller("deleteCandidate", ['$scope', '$cookies', '$http',
             $http(req).then(function (response) {
                 $scope.contentResponseMessage = response.data.content;
                 $scope.contentResponseMessageGreen = "";
-                if (response.data.content != "Le Candidat a bien été supprimé") {
+                if (response.data.success == false) {
                     $timeout(function () {
                         $scope.contentResponseMessage = "";
                     }, 4000);
@@ -742,7 +735,7 @@ gestionCandidatApp.controller("deleteCandidate", ['$scope', '$cookies', '$http',
             $scope.erreurSupp = "Impossible de supprimer un candidat qui n'existe pas";
             $timeout(function () {
                 $scope.erreurSupp = "";
-            }, 3000);
+            }, 2000);
             console.log("Impossible de supprimer un candidat qui n'existe pas");
         }
     }
@@ -750,80 +743,46 @@ gestionCandidatApp.controller("deleteCandidate", ['$scope', '$cookies', '$http',
 
 /****************************************************************/
 
-
-/*********************  Ajouter un message  ********************/
-/*
-gestionCandidatApp.controller("addMessage", ['$scope', '$cookies', '$http', '$window', '$timeout', function ($scope, $cookies, $http, $window, $timeout) {
-    $scope.sendEntry = function (message) {
-        var req = {
-            method: 'POST',
-            url: 'http://' + adresseIP + '/api/user/add/message/',
-            responseType: "json",
-            data: {
-                session_id: $cookies.get('cookie'),
-                titre: message.titre,
-                contenu: message.contenu,
-            }
-        }
-
-        $http(req).then(function (response) {
-            $scope.contentResponse = response.data.content;
-            $timeout(function () { $scope.contentResponse = ""; }, 3000);
-            if (response.data.content != "Le message a ete ajoute à votre systeme") {
-                console.log("In the error");
-
-            } else {
-                console.log("En attente du cookie baby");
-                console.log(response.data.content);
-            }
-
-
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
-    }
-}]);
-*/
-/****************************************************************/
-
 /*********************  modifier un message  ********************/
 
 gestionCandidatApp.controller("updateMessage", ['$scope', '$cookies', '$http', '$window', "$timeout", function ($scope, $cookies, $http, $window, $timeout) {
 
     $scope.sendEntry = function (updateMessage) {
-        if ($scope.updateMessage.titre_message == null) {
-            $scope.updateMessage.titre_message = $scope.titreMsg;
-        }
-        if ($scope.updateMessage.contenu_message == null) {
-            $scope.updateMessage.contenu_message = $scope.contenuMsg;
-        }
-
-
-        var req = {
-            method: 'POST',
-            url: 'http://' + adresseIP + '/api/candidate/template/email/update',
-            responseType: "json",
-            data: {
-                token: $cookies.get('cookie'),
-                title: updateMessage.titre_message,
-                content: updateMessage.contenu_message,
-            }
-        }
-
-        $http(req).then(function (response) {
-            $scope.contentResponseMessage = response.data.content;
-            $scope.contentResponseMessageGreen = "";
-            if (response.data.content != "Le template d'email a bien ete modifie") {
-                $timeout(function () { $scope.contentResponseMessage = ""; }, 4000);
-            } else {
-                $scope.contentResponseMessage = "";
-                $scope.contentResponseMessageGreen = response.data.content;
-                $timeout(function () { $scope.contentResponseMessageGreen = ""; }, 4000);
+        try{
+                $scope.updateMessage.titre_message = $scope.titreMsg;
+            if ($scope.updateMessage.contenu_message == null) {
+                $scope.updateMessage.contenu_message = $scope.contenuMsg;
             }
 
-        }, (err) => {
-            console.log("ceci est une erreur" + err);
-        });
+
+            var req = {
+                method: 'POST',
+                url: 'http://' + adresseIP + '/api/candidate/template/email/update',
+                responseType: "json",
+                data: {
+                    token: $cookies.get('cookie'),
+                    title: updateMessage.titre_message,
+                    content: updateMessage.contenu_message,
+                }
+            }
+
+            $http(req).then(function (response) {
+                $scope.contentResponseMessage = response.data.content;
+                $scope.contentResponseMessageGreen = "";
+                if (response.data.success == false) {
+                    $timeout(function () { $scope.contentResponseMessage = ""; }, 4000);
+                } else {
+                    $scope.contentResponseMessage = "";
+                    $scope.contentResponseMessageGreen = response.data.content;
+                    $timeout(function () { $scope.contentResponseMessageGreen = ""; }, 4000);
+                }
+            }, (err) => {
+                console.log("ceci est une erreur" + err);
+            });
+        } catch (e) {
+            console.log("Aucune modification n'a été effectuée");
+        }
+       
     }
 }]);
 
@@ -849,7 +808,7 @@ gestionCandidatApp.controller("deleteMessage", ['$scope', '$cookies', '$http', '
             $timeout(function () {
                 $scope.contentResponseMessageGreen = "";
                 window.location.reload();
-            }, 4000);
+            }, 2000);
         }, (err) => {
             console.log("ceci est une erreur" + err);
         });
@@ -880,7 +839,6 @@ gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http
                         for (var i = 0; i < $scope.todos.length; i++) {
                             if ($scope.todos[i].email == $scope.selectedCar) {
                                 nbSelect = i;
-                                //console.log($scope.todos[i].email);
                             }
                         }
                         $scope.nomCoor = $scope.todos[nbSelect].nom;
@@ -927,11 +885,11 @@ gestionCandidatApp.controller("rechercheAllCand", ['$scope', '$cookies', '$http'
         try {
             $scope.todos = response.data;
             if ($scope.todos[0].content != null) {
-                $scope.erreurRechercheAll = "Aucun aucun candidat n'existe";
+                $scope.erreurRechercheAll = "Aucun candidat n'existe";
                 $scope.todos = "";
             }
         } catch (e) {
-            $scope.erreurRechercheAll = "Aucun aucun candidat n'existe";
+            $scope.erreurRechercheAll = "Aucun candidat n'existe";
         }
     }, (err) => {
         console.log(err);
@@ -968,7 +926,7 @@ gestionCandidatApp.controller("rechercheAllCandidat", ['$scope', '$cookies', '$h
                 console.log("In the error");
             }
         } catch (e) {
-            $scope.erreurRechercheAll = "Tous les candidats possède déjà une fiche entretien";
+            $scope.erreurRechercheAll = "Tous les candidats possèdent déjà une fiche entretien";
         }
     }, (err) => {
             console.log(err);
@@ -1081,191 +1039,3 @@ gestionCandidatApp.directive('stringToNumber', function () {
         }
     };
 });
-
-
-/*
-gestionCandidatApp.controller("rechercheCandidat", ['$scope', '$cookies', '$http', '$window', function ($scope, $cookies, $http, $window) {
-
-    var req = {
-        method: 'GET',
-        url: 'http://' + adresseIP + '/api/user/Candidates/recherche/',
-        responseType: "json",
-    }
-
-    $http(req).then(function (response) {
-        console.log(response);
-        $scope.contentResponse = response.data.content;
-        if (response.data.content != "Le message a ete ajoute à votre systeme") {
-            console.log("In the error");
-
-        } else {
-            console.log("En attente du cookie baby");
-            console.log(response.data.content);
-        }
-    });
-}]);
-*/
-/******************************************************************/
-
-/*********************  Test afficher template message avec fichier json  ********************/
-/*
-gestionCandidatApp.controller('rechercheJsonMessage', function ($scope, $http, $cookies, $window) {
-    $http.get('json/responseMessage.json')
-         .then(function (response) {
-             //$scope.selectedCar = $cookies.get('emailCandidat');
-             $scope.todos = response.data;
-             if (response.data != null) {
-                 $scope.todos = response.data;
-             } else {
-                 console.log("In the error");
-             }
-         });
-    $scope.sendMessage = function () {
-        console.log("alloMessage");
-        var nbSelect = 0;
-        for (var i = 0; i < $scope.todos.length; i++) {
-            if ($scope.todos[i].id == $scope.selectMessage) {
-                nbSelect = i;
-            }
-        }
-        $scope.idMsg = $scope.todos[nbSelect].id;
-        $scope.titreMsg = $scope.todos[nbSelect].titre;
-        $scope.contenuMsg = $scope.todos[nbSelect].contenu;
-    }
-});
-*/
-/******************************************************************************************/
-
-/*********************  Test recherche un candidat avec fichier json  ********************/
-/*
-gestionCandidatApp.controller('rechercheJson', function ($scope, $http, $cookies, $window) {
-    $http.get('json/responseRecherche.json')
-         .then(function (response) {
-             $scope.selectedCar = $cookies.get('emailCandidat');
-             $scope.todos = response.data;
-             if (response.data != null) {
-                 $scope.todos = response.data;
-             } else {
-                 console.log("In the error");
-             }
-         });
-    $scope.sendCoordonnee = function () {
-        console.log("alloRecherche");
-        var nbSelect = 0;
-        for (var i = 0; i < $scope.todos.length; i++) {
-            if ($scope.todos[i].email == $scope.selectedCar) {
-                nbSelect = i;
-            }
-        }
-        $scope.nomCoor = $scope.todos[nbSelect].nom;
-        $scope.prenomCoor = $scope.todos[nbSelect].prenom;
-        $scope.phoneCoor = $scope.todos[nbSelect].phone;
-        $scope.emailCoor = $scope.todos[nbSelect].email;
-        $scope.cpCoor = $scope.todos[nbSelect].cp;
-        $scope.actionsCoor = $scope.todos[nbSelect].actions;
-        $scope.anneeCoor = $scope.todos[nbSelect].annee;
-        $scope.lienCoor = $scope.todos[nbSelect].lien;
-        $scope.crCallCoor = $scope.todos[nbSelect].crCall;
-        $scope.NSCoor = $scope.todos[nbSelect].NS;
-        $scope.approche_emailCoor = $scope.todos[nbSelect].approche_email;
-        $scope.noteCoor = $scope.todos[nbSelect].note;
-        $scope.linkCoor = $scope.todos[nbSelect].link;
-        $scope.xpNoteCoor = $scope.todos[nbSelect].xpNote;
-        $scope.nsNoteCoor = $scope.todos[nbSelect].nsNote;
-        $scope.jobIdealNoteCoor = $scope.todos[nbSelect].jobIdealNote;
-        $scope.pisteNoteCoor = $scope.todos[nbSelect].pisteNote;
-        $scope.pieCouteNoteCoor = $scope.todos[nbSelect].pieCouteNote;
-        $scope.locationNoteCoor = $scope.todos[nbSelect].locationNote;
-        $scope.EnglishNoteCoor = $scope.todos[nbSelect].EnglishNote;
-        $scope.nationalityNoteCoor = $scope.todos[nbSelect].nationalityNote;
-        $scope.competencesCoor = $scope.todos[nbSelect].competences;
-      
-    }
-});
-*/
-/**************************************************************************************/
-
-/*
-gestionCandidatApp.controller("verifRecherche", ['$scope', '$http', '$window', function ($scope, $http, $window) {
-
-    $scope.sendCandidat = function (candidat) {
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:55404/authentificationWebService.asmx/rechercheValue',
-            responseType: "json",
-            data: { nom: candidat.nom, prenom: candidat.prenom, telephone: candidat.telephone, email: candidat.email }
-        }
-
-        $http(req).then(function (response) {
-            if (response.data.content != null) {
-                console.log("In the error");
-                $scope.errtxt = response.data.content;
-            } else {
-
-                console.log("En attente du cookie");
-                if (candidat.email == $scope.selectedCar) {
-                    console.log("c'est ok")
-                    console.log($scope.selectedCar)
-                    console.log($scope.todos.length)
-                } else {
-                    console.log($scope.selectedCar)
-                    console.log("c'est pas ok")
-                }
-                $scope.sessionId = response.data.sessionId;
-                $scope.name = response.data.name;
-                $scope.email = response.data.email;
-                $scope.password = response.data.password;
-                $scope.nom = response.data.nom;
-                $scope.prenom = response.data.prenom;
-                $scope.sexe = response.data.sexe;
-                $scope.phone = response.data.phone;
-                $scope.actions = response.data.actions;
-                $scope.annee = response.data.annee;
-                $scope.lien = response.data.lien;
-                $scope.crCall = response.data.crCall;
-                $scope.NS = response.data.NS;
-                $scope.approche_email = response.data.approche_email;
-                $scope.note = response.data.note;
-                $scope.link = response.data.link;
-                $scope.xpNote = response.data.xpNote;
-                $scope.nsNote = response.data.nsNote;
-                $scope.jobIdealNote = response.data.jobIdealNote;
-                $scope.pisteNote = response.data.pisteNote;
-                $scope.pieCouteNote = response.data.pieCouteNote;
-                $scope.locationNote = response.data.locationNote;
-                $scope.EnglishNote = response.data.EnglishNote;
-                $scope.nationalityNote = response.data.nationalityNote;
-                $scope.competences = response.data.competences;
-            }
-        }, (err) => {
-            console.log(err);
-        });
-
-    }
-}]);
-*/
-
-/*
-gestionCandidatApp.controller("afficherCoordonnee", ['$scope', '$http', '$window', $cookies, function ($scope, $http, $window, $cookies) {
-    
-    for (var i = 0; $scope.todos.length < i; i++)
-    {
-        if ($scope.todos[i].email == $scope.selectedCar)
-        {
-            $scope.nomCoor = $scope.todos[i].nom;
-            console.log(i)
-            console.log($scope.todos[i].nom)
-        }
-        
-    }
-    console.log("En attente du cookie");
-    
-    if (candidat.nom == $scope.selectedCar) {
-        console.log("c'est ok")
-        console.log($scope.selectedCar)
-    } else {
-        console.log($scope.selectedCar)
-        console.log("c'est pas ok")
-    }
-    //$window.location.href = 'coordonnee.html';
-}]);*/
