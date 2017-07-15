@@ -4,6 +4,10 @@ using System.Collections;
 using System;
 using core.configuration;
 using Candidate_Management.CORE.Exceptions;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Remind
 {   
     /// <summary>

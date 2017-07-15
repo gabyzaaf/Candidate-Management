@@ -5,6 +5,10 @@ using Core.Adapter.Inteface;
 using core.configuration;
 using scheduler;
 using System.Globalization;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Remind
 {
     public class appellerRemind : LegacyRemind ,Iremind

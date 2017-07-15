@@ -42,3 +42,14 @@
 7/12/17 12:49:02 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
 7/12/17 12:49:30 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
 7/12/17 12:49:30 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 9:22:00 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 9:22:00 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 9:23:00 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 9:23:00 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 9:26:56 AM - [Information] - WsCustomeInfoException - DC01 - L'utilisateur avec l'email : juliec17@gmail.com est connecté
+7/12/17 11:50:17 AM - [Information] - WsCustomeInfoException - EmailTemplate - Les templates d'emails ont bien ete charge au demarrage
+7/12/17 11:50:17 AM - [Information] - WsCustomeInfoException - Plugins - Les plugins ont bien été chargé au démarrage
+7/12/17 11:54:15 AM - [Information] - WsCustomeInfoException - DC01 - L'utilisateur avec l'email : juliec17@gmail.com est connecté
+7/12/17 12:05:00 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+7/12/17 12:05:00 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.
+7/12/17 12:05:00 PM - [Error] - SqlCustomException - MysqlDb - Unable to connect to any of the specified MySQL hosts.

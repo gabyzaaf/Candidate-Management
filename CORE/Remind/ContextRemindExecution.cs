@@ -1,6 +1,13 @@
 using System;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Remind
 {
+    /// <summary>
+    /// This class is use for create the context for the DESIGN PATTERN Strategy
+    /// </summary>
     public class ContextRemindExecution
     {
         public Iremind iremind{get;set;}

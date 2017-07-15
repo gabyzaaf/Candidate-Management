@@ -4,6 +4,10 @@ using scheduler;
 using System.Collections;
 using System.Collections.Generic;
 using core.configuration;
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Remind
 {
     public class enCours : LegacyRemind , Iremind

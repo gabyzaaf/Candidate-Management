@@ -1,6 +1,9 @@
 using System;
 using Candidate_Management.CORE.Exceptions;
-
+/*
+    Author : ZAAFRANI Gabriel
+    Version : 1.0
+ */
 namespace Candidate_Management.CORE.Remind
 {   
     /// <summary>
